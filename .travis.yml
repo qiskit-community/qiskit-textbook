@@ -2,11 +2,16 @@ language: python
 python: "3.7"
 install:
   - pip install -r requirements.txt
+  - pip install -r requirements-dev.txt
+  - gem install bundler
+  - make install
 script:
-  - bash gen-html.sh
+  - make runall
+before_deploy:
+  - make book
+  - make build
 deploy:
   provider: script
-  skip_cleanup: true
   script: bash deploy.sh
   on:
     branch: master

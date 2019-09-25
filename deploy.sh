@@ -7,18 +7,18 @@ repo=community.qiskit.org
 download_repo () {
   root=$1
   mkdir -p $root
-  cd $root
+  pushd $root || return
   git clone --depth 1 "https://${user}:${GITHUB_TOKEN}@github.com/${org}/${repo}.git"
-  cd -
+  popd || return
 }
 
 push_repo () {
   root=$1
-  cd $root/$repo
+  pushd $root/$repo || return
   git add static/textbook
   git commit -am"Updating textbook to ${TRAVIS_REPO_SLUG}@${TRAVIS_COMMIT}"
   git push origin master
-  cd -
+  popd || return
 }
 
 main () {
