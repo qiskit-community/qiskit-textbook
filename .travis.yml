@@ -1,0 +1,18 @@
+language: minimal
+install:
+  - pip install -r requirements.txt
+  - pip install -r requirements-dev.txt
+  - make install
+script:
+  - make runall
+after_success:
+  - make book
+  - make build
+deploy:
+  provider: pages
+  local_dir: _site
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  on:
+    branch: master 
