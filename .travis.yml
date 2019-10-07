@@ -5,10 +5,10 @@ install:
   - gem install bundler
   - make install
 script:
-  - make runall
+        #- make runall
+  - make build
 after_success:
   - make book
-  - make build
 deploy:
   provider: pages
   local_dir: _site
