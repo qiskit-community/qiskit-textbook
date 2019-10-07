@@ -2,6 +2,7 @@ language: python
 install:
   - pip install -r requirements.txt
   - pip install -r requirements-dev.txt
+  - gem install bundler
   - make install
 script:
   - make runall
