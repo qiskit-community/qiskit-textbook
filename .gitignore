@@ -6,6 +6,5 @@ _repo
 _build
 __pycache__
 .idea/
-/index.ipynb
 */.ipynb_checkpoints
 cliffords2.pickle
