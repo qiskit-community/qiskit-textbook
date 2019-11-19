@@ -33,12 +33,7 @@ cp_to () {
 }
 
 add_analytics () {
-	analytics_snippet=$(<analytics.html.part)
-	# escape the multi-line string to be used as a replacement string in SED
-	# https://stackoverflow.com/questions/29613304/is-it-possible-to-escape-regex-metacharacters-reliably-with-sed
-	IFS= read -d '' -r < <(sed -e ':a' -e '$!{N;ba' -e '}' -e 's/[&/\]/\\&/g; s/\n/\\&/g' <<<"$analytics_snippet")
-	analytics_snippet_escaped=${REPLY%$'\n'}
-	find $1 -name '*.html' -exec sed -i '' -e "s#</head>#${analytics_snippet_escaped}</head>#" {} \;
+  python3 scripts/add_analytics.py $1
 }
 
 main () {
