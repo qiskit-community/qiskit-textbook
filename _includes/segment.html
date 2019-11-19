@@ -1,11 +1,19 @@
-{% if site.google_analytics.mytrackingcode %}
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics.mytrackingcode }}"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', '{{ site.google_analytics.mytrackingcode }}');
+(function () {
+  'use strict'
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        productTitle: 'IBM Q Experience',
+        analytics: {
+          category: 'Qiskit.org'
+        }
+      }
+    }
+  }
+  window._analytics = {
+    segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
+  }
+}());
 </script>
-{% endif %}
+<script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
