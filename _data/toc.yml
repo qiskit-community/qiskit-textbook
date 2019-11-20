@@ -70,10 +70,13 @@
 - header: Problems
 - title: Set 1. Classical Logic Gates with Quantum Circuits
   url: /chEx/Ex1
+  not_numbered: true
 - title: Set 2. Basic Synthesis of Single-Qubit Gates
   url: /chEx/Ex2
+  not_numbered: true
 - title: Set 3. Building the Best AND Gate
   url: /chEx/Ex3
+  not_numbered: true
 
 - header: Quantum Algorithms
 - title: Quantum Teleportation
