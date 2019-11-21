@@ -6,8 +6,6 @@ install:
   - gem install bundler
   - make install
 script:
-  - make runall
-before_deploy:
   - make book
   - make build
 deploy:
