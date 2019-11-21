@@ -24,7 +24,7 @@ push_repo () {
 main () {
   download_repo _repo
   mkdir -p _repo/$repo/static/textbook
-  rsync -r --delete _build/ _repo/$repo/static/textbook
+  rsync -r --delete _site/ _repo/$repo/static/textbook
   push_repo _repo
 }
 
