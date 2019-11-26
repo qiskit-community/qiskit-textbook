@@ -27,8 +27,10 @@
 
 
 - title: Preface
+  not_numbered: true
   url: /preface
 - title: Upcoming
+  not_numbered: true
   url: /upcoming
 
 - title: Prerequisites
