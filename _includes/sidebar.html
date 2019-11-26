@@ -11,9 +11,11 @@ chapter's sections. Otherwise, we hide the sections to keep the sidebar short.
 
 We also prefix the sidebar entries with the chapter/section number. We assume
 a 1-level nesting; we will label 1.2, but not 1.2.1.
+
+Textbook numbering starts in Chapter 0.
 {% endcomment %}
 
-{% assign chapter_num = 1 %}
+{% assign chapter_num = 0 %}
 
 <nav id="js-sidebar" class="c-textbook__sidebar">
   {% if site.textbook_logo %}<a href="{{ site.textbook_logo_link }}"><img src="{{ site.textbook_logo | relative_url }}" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/></a>{% endif %}
