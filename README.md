@@ -2,7 +2,7 @@
 
 This is the repository for the open-source [Learn Quantum Computation using Qiskit](http://community.qiskit.org/textbook) textbook. The textbook is intended for use as a university quantum algorithms course supplement as well as a guide for self-learners who are interested in learning quantum programming.
 
-The Jupyter notebooks corresponding to each section of the textbook can be found in the folders. The code in these notebooks will constantly be updated to the latest version of Qiskit.
+The Jupyter notebooks corresponding to each section of the textbook can be found in the [`contents` folder](contents/). The code in these notebooks will constantly be updated to the latest version of Qiskit.
 
 The notebooks are compiled into html and exported to [the website](http://community.qiskit.org/textbook).
 
