@@ -1,3 +1,2 @@
-nbconvert
-notebook
-jupyterthemes
+qiskit
+matplotlib
