@@ -16,7 +16,8 @@ push_repo () {
   root=$1
   pushd $root/$repo || return
   git add static/textbook
-  git commit -am"Updating textbook to ${TRAVIS_REPO_SLUG}@${TRAVIS_COMMIT}"
+  git add .
+  git commit -m"Updating textbook to ${TRAVIS_REPO_SLUG}@${TRAVIS_COMMIT}"
   git push origin master
   popd || return
 }
