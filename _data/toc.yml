@@ -79,18 +79,18 @@
       url: /ch-gates/basic-circuit-identities
 
 - title: Problems
-  url: /chEx/Ex1
+  url: /ch-ex/ex1
   not_numbered: true
   expand_sections: true
   sections:
     - title: Set 1. Classical Logic Gates with Quantum Circuits
-      url: /chEx/Ex1
+      url: /ch-ex/ex1
       not_numbered: true
     - title: Set 2. Basic Synthesis of Single-Qubit Gates
-      url: /chEx/Ex2
+      url: /ch-ex/ex2
       not_numbered: true
     - title: Set 3. Building the Best AND Gate
-      url: /chEx/Ex3
+      url: /ch-ex/ex3
       not_numbered: true
 
 - title: Quantum Algorithms
