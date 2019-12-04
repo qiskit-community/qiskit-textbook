@@ -34,6 +34,7 @@
   url: /upcoming
 
 - title: Prerequisites
+  url: /ch-prerequisites/python-and-jupyter-notebooks
   expand_sections: true
   sections:
     - title: Python and Jupyter Notebooks
@@ -44,6 +45,7 @@
       url: /ch-prerequisites/linear_algebra
 
 - title: Quantum States and Qubits
+  url: /ch-states/introduction
   expand_sections: true
   sections:
     - title: Introduction
@@ -60,6 +62,7 @@
       url: /ch-states/states-many-qubits
 
 - title: Single Qubits and Multi-Qubits gates
+  url: /ch-gates/introduction
   expand_sections: true
   sections:
     - title: Introduction
@@ -76,6 +79,7 @@
       url: /ch-gates/basic-circuit-identities
 
 - title: Problems
+  url: /chEx/Ex1
   not_numbered: true
   expand_sections: true
   sections:
@@ -90,6 +94,7 @@
       not_numbered: true
 
 - title: Quantum Algorithms
+  url: /ch-algorithms/teleportation
   expand_sections: true
   sections:
     - title: Quantum Teleportation
@@ -108,6 +113,7 @@
       url: /ch-algorithms/grover
 
 - title: Quantum Algorithms for Applications
+  url: /ch-applications/vqe-molecules
   expand_sections: true
   sections:
     - title: Simulating Molecules using VQE
@@ -116,6 +122,7 @@
       url: /ch-applications/satisfiability-grover
 
 - title: Investigating Quantum Hardware Using Qiskit
+  url: /ch-quantum-hardware/calibrating-qubits-openpulse
   expand_sections: true
   sections:
     - title: Calibrating Qubits with OpenPulse
@@ -130,6 +137,7 @@
       url: /ch-quantum-hardware/measuring-quantum-volume
 
 - title: Implementations of Recent Quantum Algorithms
+  url: /ch-paper-implementations/vqls
   expand_sections: true
   sections:
     - title: Variational Quantum Linear Solver
