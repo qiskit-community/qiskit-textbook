@@ -10,7 +10,7 @@ script:
   - make build
 deploy:
   provider: script
-  script: bash deploy.sh
+  script: bash deploy.sh $(TRAVIS_BRANCH)
   skip_cleanup: true
   on:
     branch: master
