@@ -3,6 +3,12 @@
 user=delapuente
 org=qiskit-community
 repo=community.qiskit.org
+path=textbook
+
+if [[ "$1" != "stable" ]] && [[ "$1" != "" ]]
+then
+    path="${path}-${1}"
+fi
 
 download_repo () {
   root=$1
@@ -23,9 +29,10 @@ push_repo () {
 }
 
 main () {
+  echo "Deploy in ${path}"
   download_repo _repo
-  mkdir -p _repo/$repo/static/textbook
-  rsync -r --delete _site/ _repo/$repo/static/textbook
+  mkdir -p _repo/$repo/static/${path}
+  rsync -r --delete _site/ _repo/$repo/static/${path}
   push_repo _repo
 }
 
