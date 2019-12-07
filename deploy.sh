@@ -21,9 +21,9 @@ download_repo () {
 push_repo () {
   root=$1
   pushd $root/$repo || return
-  git add static/textbook
+  git add static/${path}
   git add .
-  git commit -m"Updating textbook to ${TRAVIS_REPO_SLUG}@${TRAVIS_COMMIT}"
+  git commit -m "Updating textbook to ${TRAVIS_REPO_SLUG}@${TRAVIS_COMMIT}"
   git push origin master
   popd || return
 }
