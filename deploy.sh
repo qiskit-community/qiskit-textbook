@@ -7,7 +7,7 @@ path=textbook
 
 if [[ $TRAVIS_BRANCH != "stable" ]] && [[ $TRAVIS_BRANCH != "" ]]
 then
-    path="${path}-${1}"
+    path="${path}-${TRAVIS_BRANCH}"
 fi
 
 download_repo () {
