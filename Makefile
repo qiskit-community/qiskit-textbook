@@ -30,5 +30,4 @@ serve:
 	bundle exec guard
 
 build:
-	bundle exec jekyll build
-	touch _site/.nojekyll
+	bash build.sh
