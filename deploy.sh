@@ -5,7 +5,7 @@ org=qiskit-community
 repo=community.qiskit.org
 path=textbook
 
-if [[ "$1" != "stable" ]] && [[ "$1" != "" ]]
+if [[ "$TRAVIS_BRANCH" != "stable" ]] && [[ $TRAVIS_BRANCH" != "" ]]
 then
     path="${path}-${1}"
 fi
