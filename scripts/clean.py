@@ -5,7 +5,8 @@ import os.path as op
 path_root = op.join(op.dirname(op.abspath(__file__)), '..')
 
 paths = [op.join(path_root, '_site'),
-         op.join(path_root, '_build')]
+         op.join(path_root, '_build'),
+         op.join(path_root, '_repo')]
 for path in paths:
     print('Removing {}...'.format(path))
     sh.rmtree(path, ignore_errors=True)
