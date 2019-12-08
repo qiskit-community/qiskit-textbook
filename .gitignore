@@ -149,6 +149,7 @@ ipython_config.py
 
 ## Jupyter Book
 _build/
+_repo/
 
 ## IDEs
 .vscode
