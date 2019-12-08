@@ -14,3 +14,4 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
+    branch: stable
