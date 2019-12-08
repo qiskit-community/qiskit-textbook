@@ -118,6 +118,8 @@
   sections:
     - title: Simulating Molecules using VQE
       url: /ch-applications/vqe-molecules
+    - title: Solving combinatorial optimization problems using QAOA
+      url: /ch-applications/qaoa
     - title: Solving Satisfiability Problems using Grover's Algorithm
       url: /ch-applications/satisfiability-grover
 
