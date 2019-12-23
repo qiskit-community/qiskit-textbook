@@ -1,8 +1,8 @@
 #!/bin/bash
 
 user=delapuente
-org=qiskit-community
-repo=community.qiskit.org
+org=qiskit
+repo=qiskit.org
 path=textbook
 
 if [[ $TRAVIS_BRANCH != "stable" ]] && [[ $TRAVIS_BRANCH != "" ]]
