@@ -13,7 +13,7 @@ The notebooks are compiled into html and exported to [the website](http://commun
 # Contributions
 Contributions of all types are always welcome. Please [start a pull request](https://help.github.com/en/articles/creating-a-pull-request) to submit changes, or create an issue to request updates.
 
-For a list of contributors, see the [.bib](https://github.com/Qiskit/qiskit-textbook/blob/master/qiskit-textbook.bib) file.
+For a list of contributors, see the [.bib](https://github.com/Qiskit/qiskit-textbook/blob/master/content/qiskit-textbook.bib) file.
 
 # License
 The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
