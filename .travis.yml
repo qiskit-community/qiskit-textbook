@@ -8,6 +8,8 @@ install:
 script:
   - make book
   - make build
+before_deploy:
+  - git config --global user.email salva@unoyunodiez.com
 deploy:
   provider: script
   script: bash deploy.sh
