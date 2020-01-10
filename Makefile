@@ -13,7 +13,7 @@ help:
 install:
 	# Check to see whether bundler is already installed. If not, install it.
 	if [ hash bundler 2>/dev/null ]; then \
-	gem install bundler;\
+		gem install bundler -v 2.1.2;\
 	fi
 	bundle install
 

@@ -4,7 +4,7 @@ install:
   - pip install -r requirements.txt
   - pip install -r requirements-dev.txt
   - gem update --system
-  - gem install bundler
+  - gem install bundler -v 2.1.2
   - make install
 script:
   - make book
