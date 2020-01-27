@@ -1,8 +1,8 @@
-## Description of Issue
+## Description of Issue (if Applicable)
 
 Fixes #your_issue_number_here
 
-## How Was This Issue Fixed?
+## What Changes Were Made?
 
 ## How Was This Tested?
 
