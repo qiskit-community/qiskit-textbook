@@ -103,6 +103,8 @@
   sections:
     - title: Quantum Teleportation
       url: /ch-algorithms/teleportation
+    - title: Superdense Coding
+      url: /ch-algorithms/superdense-coding
     - title: Deutsch-Josza Algorithm
       url: /ch-algorithms/deutsch-josza
     - title: Bernstein-Vazirani Algorithm
@@ -115,6 +117,8 @@
       url: /ch-algorithms/quantum-phase-estimation
     - title: Grover's Algorithm
       url: /ch-algorithms/grover
+    - title: Quantum Counting
+      url: /ch-algorithms/quantum-counting
 
 - title: Quantum Algorithms for Applications
   url: /ch-applications/vqe-molecules.html
