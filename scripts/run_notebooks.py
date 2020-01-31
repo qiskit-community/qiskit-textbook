@@ -17,6 +17,7 @@ import os
 import time
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
+from datetime import datetime
 filepath = "../content/"
 
 def run_notebook(filename):
@@ -27,7 +28,7 @@ def run_notebook(filename):
             ep = ExecutePreprocessor(timeout=None, kernel_name='python3')
             ep.preprocess(nb, {'metadata': {'path': './'}})
         except Exception as e:
-            print("** Error in file '", filename, "': ", str(e).split('\n')[-2])
+            print("[" + datetime.now().time().strftime('%H:%M') + "] " + "Error in file '", filename, "': ", str(e).split('\n')[-2])
             execution_failed = True
     
     if not execution_failed:
@@ -43,7 +44,7 @@ for directory in os.listdir(filepath):
     if os.path.isdir(filepath + directory):
         for file in os.listdir(filepath + directory):
             if str(file)[-6:] == ".ipynb":
-                print(filepath + directory + "/" + file)
+                print("[" + datetime.now().time().strftime('%H:%M') + "] " + filepath + directory + "/" + file)
                 total_files += 1
                 if run_notebook(filepath + directory + "/" + file) == 1:
                     working_files += 1
