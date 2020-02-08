@@ -1,3 +1,6 @@
+Single Qubits and Multi-Qubits gates
+====================================
+
 .. toctree::
   :hidden:
 
@@ -6,9 +9,6 @@
   The Standard Gate Set. <standard-gate-set>
   Proving Universality. <proving-universality>
   Basic Circuit Identities. <basic-circuit-identities>
-
-Introduction
-============
 
 Just having some qubits is not enough: We also need to manipulate them.
 All possible ways of doing this can be compiled down to a basic set of

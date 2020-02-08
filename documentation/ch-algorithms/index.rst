@@ -1,3 +1,6 @@
+Quantum Algorithms
+==================
+
 .. toctree::
    :hidden:
 

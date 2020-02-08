@@ -1,3 +1,6 @@
+Problem sets
+============
+
 .. toctree::
   :hidden:
 

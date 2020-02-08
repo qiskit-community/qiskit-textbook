@@ -1,11 +1,11 @@
+Introduction to Python and Jupyter notebooks
+============================================
+
 .. toctree::
   :hidden:
 
-  Qiskit <qiskit>
-  Linear Algebra <linear_algebra>
-
-Introduction to Python and Jupyter notebooks
-============================================
+   Qiskit <qiskit>
+   Linear Algebra <linear_algebra>
 
 Python is a programming language where you don’t need to compile. You
 can just run it line by line (which is how we can use it in a notebook).

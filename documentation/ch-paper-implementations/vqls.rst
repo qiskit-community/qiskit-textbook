@@ -1,12 +1,5 @@
-.. raw:: html
-
-   <h1>
-
 The Variational Quantum Linear Solver
-
-.. raw:: html
-
-   </h1>
+=====================================
 
 .. code:: python
 
@@ -19,7 +12,8 @@ The Variational Quantum Linear Solver
    from scipy.optimize import minimize
    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
 
-**Introduction**
+Introduction
+------------
 
 The Variational Quantum Linear Solver, or the VQLS is a variational
 quantum algorithm that utilizes VQE in order to solve systems of linear
@@ -38,7 +32,8 @@ algorithm allows for it to be performed on NISQ quantum computers, while
 HHL would require much more robust quantum hardware, and many more
 qubits.
 
-**The Algorithm**
+The Algorithm
+-------------
 
 To begin, the inputs into this algorithm are evidently the matrix
 :math:`\textbf{A}`, which we have to decompose into a linear combination
@@ -224,9 +219,9 @@ control-ancilla qubit for the unitary matrices :math:`A_m^{\dagger}` and
        for ie in range (0, len(gate_type[1])):
            if (gate_type[1][ie] == 1):
                circ.cz(ancilla_index, qubits[ie])
-       
+
        circ.h(ancilla_index)
-       
+
    circ = QuantumCircuit(4)
    had_test([[0, 0, 0], [0, 0, 1]], [1, 2, 3], 0, [[1, 1, 1], [1, 1, 1], [1, 1, 1]])
    circ.draw(output='mpl')
@@ -345,7 +340,7 @@ Finally, we construct our new Hadamard test:
 
 
        control_b(ancilla_index, qubits)
-       
+
        circ.h(ancilla_index)
 
    q_reg = QuantumRegister(5)
@@ -370,11 +365,11 @@ previously!
    #Implements the entire cost function on the quantum circuit
 
    def calculate_cost_function(parameters):
-       
+
        global opt
 
        overall_sum_1 = 0
-       
+
        parameters = [parameters[0:3], parameters[3:6], parameters[6:9]]
 
        for i in range(0, len(gate_set)):
@@ -387,7 +382,7 @@ previously!
                circ = QuantumCircuit(qctl, qc)
 
                backend = Aer.get_backend('statevector_simulator')
-               
+
                multiply = coefficient_set[i]*coefficient_set[j]
 
                had_test([gate_set[i], gate_set[j]], [1, 2, 3], 0, parameters)
@@ -441,7 +436,7 @@ previously!
                    mult = mult*(1-(2*m_sum))
 
                overall_sum_2+=multiply*mult
-               
+
        print(1-float(overall_sum_2/overall_sum_1))
 
        return 1-float(overall_sum_2/overall_sum_1)
@@ -574,7 +569,7 @@ sampling for our second value of :math:`A`, with the same matrix
        global opt
 
        overall_sum_1 = 0
-       
+
        parameters = [parameters[0:3], parameters[3:6], parameters[6:9]]
 
        for i in range(0, len(gate_set)):
@@ -587,7 +582,7 @@ sampling for our second value of :math:`A`, with the same matrix
                circ = QuantumCircuit(qctl, qc)
 
                backend = Aer.get_backend('qasm_simulator')
-               
+
                multiply = coefficient_set[i]*coefficient_set[j]
 
                had_test([gate_set[i], gate_set[j]], [1, 2, 3], 0, parameters)
@@ -618,7 +613,7 @@ sampling for our second value of :math:`A`, with the same matrix
 
                    qctl = QuantumRegister(5)
                    qc = ClassicalRegister(1)
-                   
+
                    circ = QuantumCircuit(qctl, qc)
 
                    backend = Aer.get_backend('qasm_simulator')
@@ -641,9 +636,9 @@ sampling for our second value of :math:`A`, with the same matrix
                        m_sum = 0
 
                    mult = mult*(1-2*m_sum)
-               
+
                overall_sum_2+=multiply*mult
-               
+
        print(1-float(overall_sum_2/overall_sum_1))
 
        return 1-float(overall_sum_2/overall_sum_1)
@@ -686,7 +681,8 @@ update to this Notebook once I figure out how to correct this problem
 (likely with the introduction of a noisy optimizer, as I previously
 mentioned).
 
-**Acknowledgements**
+Acknowledgements
+----------------
 
 This implementation is based off of the work presented in the research
 paper “Variational Quantum Linear Solver: A Hybrid Algorithm for Linear

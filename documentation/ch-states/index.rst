@@ -1,3 +1,6 @@
+Quantum States and Qubits
+=========================
+
 .. toctree::
   :hidden:
 
@@ -6,9 +9,6 @@
   Writing Down Qubit States. <writing-down-qubit-states>
   Pauli Matrices and the Bloch Sphere. <pauli-matrices-bloch-sphere>
   States for Many Qubits. <states-many-qubits>
-
-Introduction
-============
 
 If you think quantum mechanics sounds challenging, you are not alone.
 All of our intuitions are based on day-to-day experiences, and so are

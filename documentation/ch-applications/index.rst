@@ -1,3 +1,6 @@
+Quantum Algorithms for Applications
+===================================
+
 .. toctree::
    :hidden:
 
