@@ -1,0 +1,9 @@
+
+applications:
+  - name: ((name))
+    routes:
+      - route: ((route))
+    memory: 512M
+    docker:
+      image: ((image))
+      username: token

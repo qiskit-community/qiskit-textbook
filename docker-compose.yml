@@ -1,0 +1,34 @@
+version: '3.4'
+
+services:
+  elasticsearch:
+    image: "docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.2"
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+    logging:
+      driver: none
+
+  server:
+    image: "sw-iqx-documentation"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - 3000:3000
+    depends_on:
+      - elasticsearch
+    environment:
+      - PORT=3000
+      - ELASTIC_URL=http://elasticsearch:9200
+      - BASE_URL=http://localhost:3000
+      - LIVE_RELOAD=true
+    volumes:
+      - ./documentation:/app/documentation:consistent
+      - ./external:/app/external:consistent
+      - ./src:/app/src:consistent
+      - ./sphinx_theme:/app/sphinx_theme:consistent
+      - ./tsconfig.json:/app/tsconfig.json:consistent
+      - ./dist:/app/dist:consistent

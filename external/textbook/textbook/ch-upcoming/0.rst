@@ -1,0 +1,15 @@
+Upcoming topics
+===============
+
+The following topics are currently being developed for addition to the
+textbook.
+
+1. Shor’s Algorithm
+2. Overview of Quantum Algorithms for NISQ Hardware
+3. Mapping the Ising Model onto a Superconducting Quantum Computer
+4. Solving Combinatorial Optimization Problems using QAOA
+5. Solving Linear Systems of Equations using HHL
+6. Securing Communications using BB84
+7. Decoherence and Energy Relaxation: Measuring T2 and T1
+8. Optimizing Microwave Pulses for High-Fidelity Qubit Operations
+9. State and Process Tomography

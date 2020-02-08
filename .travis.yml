@@ -1,0 +1,17 @@
+language: python
+
+addons:
+  apt_packages:
+    - pandoc
+    - yarn
+
+install:
+  - pip install -r requirements
+  - yarn
+
+script:
+  - npm run build
+
+branches:
+  only:
+    - a-la-iqx

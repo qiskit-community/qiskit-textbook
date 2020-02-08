@@ -1,0 +1,414 @@
+@import 'plex';
+@import 'reset';
+@import 'code-highlight';
+
+@import '@carbon/elements/scss/type/type';
+@import '@carbon/elements/scss/layout/convert';
+@import '@carbon/elements/scss/type/font-family';
+@import '@carbon/elements/scss/type/styles';
+
+$base-font-size: $carbon--base-font-size;
+$body-font-family: carbon--font-family('sans');
+$mono-font-family: carbon--font-family('mono');
+
+.iqx-documentation {
+  @include reset();
+  @include code-highlight();
+
+  font-size: $base-font-size;
+  font-family: $body-font-family;
+  @include carbon--font-weight('regular');
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @include carbon--default-type();
+
+  .instructions {
+    padding: 12px;
+    line-height: 24px;
+    margin-bottom: 24px;
+    background: #e7f2fa;
+  }
+
+  .instructions .admonition-title {
+    background: #6ab0de;
+    font-weight: bold;
+    color: #fff;
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 2rem;
+    margin-top: 1em;
+  }
+
+  h1 {
+    font-size: 3.052rem;
+    letter-spacing: -0.15rem;
+    line-height: 1;
+  }
+
+  h2 {
+    font-size: 2.441rem;
+    letter-spacing: -0.12rem;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: 1.953rem;
+    letter-spacing: -0.09rem;
+    line-height: 1.2;
+  }
+
+  h4 {
+    font-size: 1.563rem;
+    letter-spacing: -0.06rem;
+    line-height: 1.3;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+    letter-spacing: -0.03rem;
+    line-height: 1.4;
+  }
+
+  h6 {
+    font-size: 1rem;
+    letter-spacing: 0;
+    line-height: 1.5;
+  }
+
+  p {
+    margin-bottom: 1.563rem;
+    color: #262626;
+  }
+
+  p > *:last-child {
+    margin-bottom: 0;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  small {
+    font-size: 0.888rem;
+  }
+
+  strong {
+    @include carbon--font-weight('semibold');
+  }
+
+  hr {
+    border: 1px solid #343334;
+    margin: 3.052rem 0;
+  }
+
+  // Tables
+  table {
+    width: 100%;
+    border-spacing: 0;
+    margin-bottom: 1.563rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  th,
+  td {
+    padding: 0.5rem 0.5rem 0.5rem 0;
+    margin: 0;
+  }
+
+  th {
+    font-weight: bold;
+    text-align: left;
+    border-bottom: 2px solid #d8d8d8;
+    color: #171717;
+  }
+
+  th > p {
+    margin: 0;
+  }
+
+  td {
+    border-bottom: 2px solid #d8d8d8;
+  }
+
+  /* Code
+––––––––––––––––––––––––––––––––– */
+  code {
+    font-family: $mono-font-family;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    background: #f6f6f6;
+    padding: 0 0.328rem;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 10px;
+  }
+
+  pre {
+    font-family: $mono-font-family;
+  }
+
+  p > code {
+    white-space: normal;
+  }
+
+  pre > code {
+    line-height: 1.563em;
+    display: block;
+    padding: 1rem;
+    white-space: pre;
+    margin-bottom: 1.563rem;
+    overflow: scroll;
+  }
+
+  /* Forces a new-line at the end of a code block for layout purposes. */
+  pre > code::after {
+    content: ' ';
+  }
+
+  /* Blockquote
+––––––––––––––––––––––––––––––––– */
+  blockquote {
+    border-left: 0.25rem solid #f6f6f6;
+    padding: 0 1rem;
+    margin-bottom: 1.563rem;
+  }
+
+  /* List
+––––––––––––––––––––––––––––––––– */
+  ul {
+    margin: 0;
+    padding: 0 1rem;
+    list-style: disc outside;
+    font-variant-numeric: tabular-nums;
+  }
+
+  ol {
+    list-style: decimal outside;
+  }
+
+  ol,
+  ul {
+    margin-top: 0;
+    margin-bottom: 1.563rem;
+  }
+
+  li > p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    position: relative;
+
+    &:hover .headerlink {
+      opacity: 1;
+    }
+  }
+
+  .headerlink {
+    opacity: 0;
+    transition: opacity 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+    position: absolute;
+    left: -25px;
+    padding: 4px;
+    top: 50%;
+    transform: translate(0, -50%);
+
+    content: url('data:image/svg+xml;base64,PHN2ZyBmb2N1c2FibGU9J2ZhbHNlJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBtZWV0JyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyMCcgaGVpZ2h0PScyMCcgdmlld0JveD0nMCAwIDMyIDMyJz4gPHBhdGggZmlsbD0nIzAwNjJmZicgZD0nTTI5LjI1IDYuNzZhNiA2IDAgMCAwLTguNSAwbDEuNDIgMS40MmE0IDQgMCAxIDEgNS42NyA1LjY3bC04IDhhNCA0IDAgMSAxLTUuNjctNS42NmwxLjQxLTEuNDItMS40MS0xLjQyLTEuNDIgMS40MmE2IDYgMCAwIDAgMCA4LjVBNiA2IDAgMCAwIDE3IDI1YTYgNiAwIDAgMCA0LjI3LTEuNzZsOC04YTYgNiAwIDAgMC0uMDItOC40OHonPjwvcGF0aD4gPHBhdGggZmlsbD0nIzAwNjJmZicgZD0nTTQuMTkgMjQuODJhNCA0IDAgMCAxIDAtNS42N2w4LThhNCA0IDAgMCAxIDUuNjcgMEEzLjk0IDMuOTQgMCAwIDEgMTkgMTRhNCA0IDAgMCAxLTEuMTcgMi44NUwxNS43MSAxOWwxLjQyIDEuNDIgMi4xMi0yLjEyYTYgNiAwIDAgMC04LjUxLTguNTFsLTggOGE2IDYgMCAwIDAgMCA4LjUxQTYgNiAwIDAgMCA3IDI4YTYuMDcgNi4wNyAwIDAgMCA0LjI4LTEuNzZsLTEuNDItMS40MmE0IDQgMCAwIDEtNS42NyAweic+PC9wYXRoPiA8L3N2Zz4=');
+  }
+
+  .two-column {
+    display: inline-flex;
+    flex-direction: column;
+    width: 45%;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  .three-column {
+    display: inline-flex;
+    flex-direction: column;
+    width: 33%;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .home-hero-text {
+    background: #161616;
+    background-image: url('../images/home-background-bottom.png');
+    background-repeat: no-repeat;
+    background-position: top right;
+
+    padding: 0px 40px 40px;
+    margin: 0px -40px;
+
+    p {
+      margin: 0;
+      padding: 0;
+      color: #c6c6c6;
+      width: 60%;
+      min-width: 500px;
+    }
+  }
+
+  .hero-heading {
+
+    h1 {
+      background: #161616;
+      padding: 40px 40px 20px 40px;
+      margin: 0px -40px;
+      color: #f4f4f4;
+      background-image: url('../images/home-background-top.png');
+      background-repeat: no-repeat;
+      background-position: bottom right;
+      line-height: 1.16;
+
+      .headerlink {
+        left: 10px;
+        top: 60%;
+        transform: translate(0, -60%);
+      }
+    }
+
+
+
+    h2 {
+      font-size: 24px;
+      letter-spacing: 0;
+      margin-top: 2rem;
+    }
+
+    .section-with-subheading h2 {
+      margin-bottom: 0;
+    }
+
+    .sub-heading {
+      margin-top: 7px;
+    }
+
+    .section {
+      border-top: 1px solid #dde1e6;
+      margin-top: 64px;
+    }
+
+  }
+
+  .prompt {
+    display: none;
+  }
+
+  .reference.external:after {
+    content: ' ';
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBmb2N1c2FibGU9ImZhbHNlIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIKICAgICB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJ3aWxsLWNoYW5nZTogdHJhbnNmb3JtOyI+CiAgICA8ZyA+CiAgICAgICAgPHBhdGggZmlsbD0iIzAwNjJmZiIgZD0iTTI2IDI4SDZhMiAyIDAgMCAxLTItMlY2YTIgMiAwIDAgMSAyLTJoOXYySDZ2MjBoMjB2LTloMnY5YTIgMiAwIDAgMS0yIDJ6Ij48L3BhdGg+CiAgICAgICAgPHBhdGggZmlsbD0iIzAwNjJmZiIgZD0iTTIxIDJ2Mmg1LjU5TDE4IDEyLjU5IDE5LjQxIDE0IDI4IDUuNDFWMTFoMlYyaC05eiI+PC9wYXRoPgogICAgPC9nPgo8L3N2Zz4K");
+    background-size: contain;
+    margin-left: 4px;
+    margin-right: 6px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+  }
+
+  .reference.external[href^="mailto:"]:after {
+    content: ' ';
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBmb2N1c2FibGU9ImZhbHNlIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIKICAgICB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJ3aWxsLWNoYW5nZTogdHJhbnNmb3JtOyI+CiAgICA8cGF0aCBkPSJNMjgsNkg0QTIsMiwwLDAsMCwyLDhWMjRhMiwyLDAsMCwwLDIsMkgyOGEyLDIsMCwwLDAsMi0yVjhBMiwyLDAsMCwwLDI4LDZaTTI1LjgsOCwxNiwxNC43OCw2LjIsOFpNNCwyNFY4LjkxbDExLjQzLDcuOTFhMSwxLDAsMCwwLDEuMTQsMEwyOCw4LjkxVjI0WiIKICAgICAgICAgIGZpbGw9IiMwMDYyZmYiPjwvcGF0aD4KPC9zdmc+Cg==");
+    background-size: contain;
+    margin-left: 4px;
+    margin-right: 6px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+  }
+
+  .reference.external[href^="/composer"] {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: inherit;
+    vertical-align: baseline;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.125rem;
+    letter-spacing: .16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 3px) 60px calc(.875rem - 3px) 12px;
+    border-radius: 0;
+    text-align: left;
+    text-decoration: none;
+    -webkit-transition: all 70ms cubic-bezier(0,0,.38,.9);
+    transition: all 70ms cubic-bezier(0,0,.38,.9);
+    outline: 1px solid transparent;
+    outline-offset: -4px;
+    position: relative;
+    max-width: 20rem;
+    background-color: #393939;
+    border: 3px solid transparent;
+    color: #fff;
+
+    // sm
+    min-height: 2rem;
+    padding: calc(.375rem - 3px) 60px calc(.375rem - 3px) 12px;
+
+    &:focus {
+      border-color: #0062ff;
+      outline-color: #fff;
+    }
+
+    &:active {
+      background: #6f6f6f;
+    }
+
+    &:hover {
+      background-color: #4c4c4c;
+    }
+
+    &::after {
+      background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' height='24' width='24' viewBox='0 0 32 32' xml:space='preserve'%3E%3Cg%3E%3Cpath fill='%23fff' d='M23.1,10.4h4.1V8.8h-4.1c-0.5-1.2-1.8-1.9-3.1-1.4c-0.7,0.2-1.2,0.8-1.4,1.4h-3.3V5.6h-8v3.2H4.8v1.6h2.4v3.2h8v-3.2h3.3c0.2,0.7,0.8,1.2,1.5,1.5v6.6c-1.6,0.3-2.8,1.5-3.1,3.1H4.8v1.6h12.1c0.4,2.2,2.6,3.6,4.7,3.1c1.6-0.3,2.8-1.6,3.1-3.1h2.5v-1.6h-2.5c-0.3-1.6-1.6-2.8-3.1-3.1v-6.6C22.3,11.6,22.8,11.1,23.1,10.4z M13.6,8.8V12H8.8V7.2h4.8V8.8z M23.1,21.6c0,0.1,0.1,0.2,0.1,0.4c0.1,0.3,0.1,0.6,0,0.8c0,0.1-0.1,0.3-0.1,0.4c-0.5,1.2-1.8,1.9-3.1,1.4c-0.7-0.2-1.2-0.8-1.4-1.4c0-0.1-0.1-0.2-0.1-0.4c-0.1-0.3-0.1-0.6,0-0.8c0-0.1,0.1-0.3,0.1-0.4c0.5-1.2,1.8-1.9,3.1-1.4C22.3,20.4,22.8,20.9,23.1,21.6z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+      position: absolute;
+      top: 50%;
+      right: 0;
+      margin-top: -8px;
+    }
+  }
+
+
+}

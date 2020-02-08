@@ -1,0 +1,13 @@
+Sphinx==2.2.2
+recommonmark==0.6.0
+nbsphinx==0.5.0
+ipython==7.10.1
+sphinx-autodoc-typehints==1.10.3
+sphinx-tabs==1.1.13
+sphinx-automodapi==0.12
+jupyter-sphinx==0.2.3
+matplotlib==3.1.2
+pydot==1.4.1
+pillow==7.0.0
+seaborn==0.9.0
+qiskit
