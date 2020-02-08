@@ -1,4 +1,5 @@
 .venv
+.vscode
 node_modules
 .idea
 dist
@@ -8,3 +9,4 @@ strapi-markdown
 documentation/api
 documentation/qiskit
 documentation/stubs
+documentation/**/*.py

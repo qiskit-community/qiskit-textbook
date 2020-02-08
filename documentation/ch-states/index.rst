@@ -1,3 +1,12 @@
+.. toctree::
+  :hidden:
+
+  The Atoms of Computation. <atoms-computation>
+  The Unique Properties of Qubits. <unique-properties-qubits>
+  Writing Down Qubit States. <writing-down-qubit-states>
+  Pauli Matrices and the Bloch Sphere. <pauli-matrices-bloch-sphere>
+  States for Many Qubits. <states-many-qubits>
+
 Introduction
 ============
 
@@ -49,5 +58,3 @@ Since we will be using Qiskit, our Python-based framework for quantum
 computing, it would also be useful to know the basics of Python. Those
 who need a primer can consult the `Introduction to Python and Jupyter
 notebooks <../ch-prerequisites/python-and-jupyter-notebooks.html>`__.
-
-.. code:: python

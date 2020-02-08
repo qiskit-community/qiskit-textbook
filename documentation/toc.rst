@@ -2,11 +2,11 @@
   :maxdepth: 6
   :includehidden:
 
-  Get started <index.rst>
-  Learn quantum computing <learn-qc/index.rst>
-  Circuit Composer <circ-comp/index.rst>
-  Qiskit tutorials <qis-tut/index.rst>
-  Qiskit API documentation <qiskit/index.rst>
-  IBM Quantum Experience user guide <guide/index.rst>
-  Dashboard admin documentation <admin/index.rst>
-  Release notes <release-notes/index.rst>
+  Prerequisites <ch-prerequisites/index.rst>
+  Quantum States and Qubits <ch-states/index.rst>
+  Single Qubits and Multi-Qubits gates <ch-gates/index.rst>
+  Problems <ch-ex/index.rst>
+  Quantum Algorithms <ch-algorithms/index.rst>
+  Quantum Algorithms for Applications <ch-applications/index.rst>
+  Investigating Quantum Hardware Using Qiskit <ch-quantum-hardware/index.rst>
+  Implementations of Recent Quantum Algorithms <ch-paper-implementations/vqls.rst>

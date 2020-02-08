@@ -1,3 +1,12 @@
+.. toctree::
+  :hidden:
+
+  Quantum Gates. <quantum-gates>
+  Fun with Matrices. <fun-matrices>
+  The Standard Gate Set. <standard-gate-set>
+  Proving Universality. <proving-universality>
+  Basic Circuit Identities. <basic-circuit-identities>
+
 Introduction
 ============
 
@@ -24,5 +33,3 @@ Toffoli from single- and two-qubit operations.
    :alt: A Toffoli made from single- and two-qubit gates
 
    A Toffoli made from single- and two-qubit gates
-
-.. code:: python

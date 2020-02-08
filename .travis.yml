@@ -12,7 +12,3 @@ install:
 
 script:
   - npm run build
-
-branches:
-  only:
-    - a-la-iqx
