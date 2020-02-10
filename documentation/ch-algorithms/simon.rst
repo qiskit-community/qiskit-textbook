@@ -1,10 +1,6 @@
 Simon’s Algorithm
 =================
 
-.. raw:: html
-
-   <!-- #region -->
-
 In this section, we first introduce the Simon problem, and classical and
 quantum algorithms to solve it. We then implement the quantum algorithm
 using Qiskit, and run on a simulator and device.
@@ -208,10 +204,6 @@ the first proof that there can be an exponential speed-up in solving a
 specific problem by using a quantum computer rather than a classical
 one.
 
-.. raw:: html
-
-   <!-- #region -->
-
 2. Example 
 ----------
 
@@ -332,113 +324,136 @@ equations that will allow us to determine :math:`s`.
 
    </ol>
 
-.. raw:: html
-
-   <!-- #endregion -->
-
 3. Qiskit Implementation 
 ------------------------
 
 We now implement Simon’s algorithm for the above `example <example>`__
 for :math:`2`-qubits with a :math:`s=11`.
 
-.. code:: python
+.. code:: ipython3
 
-   #initialization
-   %matplotlib inline
-   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    #initialization
+    %matplotlib inline
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    
+    # importing Qiskit
+    from qiskit import IBMQ, BasicAer
+    from qiskit.providers.ibmq import least_busy
+    from qiskit import QuantumCircuit, execute
+    
+    # import basic plot tools
+    from qiskit.visualization import plot_histogram
 
-   # importing Qiskit
-   from qiskit import IBMQ, BasicAer
-   from qiskit.providers.ibmq import least_busy
-   from qiskit import QuantumCircuit, execute
+.. code:: ipython3
 
-   # import basic plot tools
-   from qiskit.visualization import plot_histogram
-
-.. code:: python
-
-   s = '11'
+    s = '11'
 
 In Qiskit, measurements are only allowed at the end of the quantum
 circuit. In the case of Simon’s algorithm, this simply means that we
 need to move the measurements on the second register to the end.
 
-.. code:: python
+.. code:: ipython3
 
-   # Creating registers
-   # qubits and classical bits for querying the oracle and finding the hidden period s
-   n = 2*len(str(s))
-   simonCircuit = QuantumCircuit(n)
-   barriers = True
+    # Creating registers
+    # qubits and classical bits for querying the oracle and finding the hidden period s
+    n = 2*len(str(s))
+    simonCircuit = QuantumCircuit(n)
+    barriers = True
+    
+    # Apply Hadamard gates before querying the oracle
+    simonCircuit.h(range(len(str(s))))    
+        
+    # Apply barrier 
+    if barriers:
+        simonCircuit.barrier()
+    
+    # Apply the query function
+    ## 2-qubit oracle for s = 11
+    simonCircuit.cx(0, len(str(s)) + 0)
+    simonCircuit.cx(0, len(str(s)) + 1)
+    simonCircuit.cx(1, len(str(s)) + 0)
+    simonCircuit.cx(1, len(str(s)) + 1)  
+    
+    # Apply barrier 
+    if barriers:
+        simonCircuit.barrier()
+    
+    # Apply Hadamard gates to the input register
+    simonCircuit.h(range(len(str(s))))
+    
+    # Measure ancilla qubits
+    simonCircuit.measure_all()
 
-   # Apply Hadamard gates before querying the oracle
-   simonCircuit.h(range(len(str(s))))    
-       
-   # Apply barrier 
-   if barriers:
-       simonCircuit.barrier()
+.. code:: ipython3
 
-   # Apply the query function
-   ## 2-qubit oracle for s = 11
-   simonCircuit.cx(0, len(str(s)) + 0)
-   simonCircuit.cx(0, len(str(s)) + 1)
-   simonCircuit.cx(1, len(str(s)) + 0)
-   simonCircuit.cx(1, len(str(s)) + 1)  
+    simonCircuit.draw(output='mpl')
 
-   # Apply barrier 
-   if barriers:
-       simonCircuit.barrier()
 
-   # Apply Hadamard gates to the input register
-   simonCircuit.h(range(len(str(s))))
 
-   # Measure ancilla qubits
-   simonCircuit.measure_all()
 
-.. code:: python
+.. image:: simon_files/simon_11_0.svg
 
-   simonCircuit.draw(output='mpl')
+
 
 3a. Experiment with Simulators 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can run the above circuit on the simulator.
 
-.. code:: python
+.. code:: ipython3
 
-   # use local simulator
-   backend = BasicAer.get_backend('qasm_simulator')
-   shots = 1024
-   results = execute(simonCircuit, backend=backend, shots=shots).result()
-   answer = results.get_counts()
+    # use local simulator
+    backend = BasicAer.get_backend('qasm_simulator')
+    shots = 1024
+    results = execute(simonCircuit, backend=backend, shots=shots).result()
+    answer = results.get_counts()
+    
+    # Categorize measurements by input register values
+    answer_plot = {}
+    for measresult in answer.keys():
+        measresult_input = measresult[len(str(s)):]
+        if measresult_input in answer_plot:
+            answer_plot[measresult_input] += answer[measresult]
+        else:
+            answer_plot[measresult_input] = answer[measresult] 
+    
+    # Plot the categorized results
+    print( answer_plot )
+    plot_histogram(answer_plot)
 
-   # Categorize measurements by input register values
-   answer_plot = {}
-   for measresult in answer.keys():
-       measresult_input = measresult[len(str(s)):]
-       if measresult_input in answer_plot:
-           answer_plot[measresult_input] += answer[measresult]
-       else:
-           answer_plot[measresult_input] = answer[measresult] 
 
-   # Plot the categorized results
-   print( answer_plot )
-   plot_histogram(answer_plot)
+.. parsed-literal::
 
-.. code:: python
+    {'11': 526, '00': 498}
 
-   # Calculate the dot product of the results
-   def sdotz(a, b):
-       accum = 0
-       for i in range(len(a)):
-           accum += int(a[i]) * int(b[i])
-       return (accum % 2)
 
-   print('s, z, s.z (mod 2)')
-   for z_rev in answer_plot:
-       z = z_rev[::-1]
-       print( '{}, {}, {}.{}={}'.format(s, z, s,z,sdotz(s,z)) )
+
+
+.. image:: simon_files/simon_13_1.svg
+
+
+
+.. code:: ipython3
+
+    # Calculate the dot product of the results
+    def sdotz(a, b):
+        accum = 0
+        for i in range(len(a)):
+            accum += int(a[i]) * int(b[i])
+        return (accum % 2)
+    
+    print('s, z, s.z (mod 2)')
+    for z_rev in answer_plot:
+        z = z_rev[::-1]
+        print( '{}, {}, {}.{}={}'.format(s, z, s,z,sdotz(s,z)) )
+
+
+.. parsed-literal::
+
+    s, z, s.z (mod 2)
+    11, 11, 11.11=0
+    11, 00, 11.00=0
+
 
 Using these results, we can recover the value of :math:`s = 11`.
 
@@ -447,49 +462,81 @@ Using these results, we can recover the value of :math:`s = 11`.
 
 We can run the circuit on the real device as below.
 
-.. code:: python
+.. code:: ipython3
 
-   # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to 5 qubits
-   IBMQ.load_account()
-   provider = IBMQ.get_provider(hub='ibm-q')
-   provider.backends()
-   backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= n and 
-                                      not x.configuration().simulator and x.status().operational==True))
-   print("least busy backend: ", backend)
+    # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to 5 qubits
+    IBMQ.load_account()
+    provider = IBMQ.get_provider(hub='ibm-q')
+    provider.backends()
+    backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= n and 
+                                       not x.configuration().simulator and x.status().operational==True))
+    print("least busy backend: ", backend)
 
-.. code:: python
 
-   # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
-   from qiskit.tools.monitor import job_monitor
+.. parsed-literal::
 
-   shots = 1024
-   job = execute(simonCircuit, backend=backend, shots=shots)
+    least busy backend:  ibmq_burlington
 
-   job_monitor(job, interval = 2)
 
-.. code:: python
+.. code:: ipython3
 
-   # Categorize measurements by input register values
-   answer_plot = {}
-   for measresult in answer.keys():
-       measresult_input = measresult[len(str(s)):]
-       if measresult_input in answer_plot:
-           answer_plot[measresult_input] += answer[measresult]
-       else:
-           answer_plot[measresult_input] = answer[measresult] 
+    # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
+    from qiskit.tools.monitor import job_monitor
+    
+    shots = 1024
+    job = execute(simonCircuit, backend=backend, shots=shots)
+    
+    job_monitor(job, interval = 2)
 
-   # Plot the categorized results
-   print( answer_plot )
-   plot_histogram(answer_plot)
 
-.. code:: python
+.. parsed-literal::
 
-   # Calculate the dot product of the most significant results
-   print('s, z, s.z (mod 2)')
-   for z_rev in answer_plot:
-       if answer_plot[z_rev] >= 0.1*shots:
-           z = z_rev[::-1]
-           print( '{}, {}, {}.{}={}'.format(s, z, s,z,sdotz(s,z)) )
+    Job Status: job has successfully run
+
+
+.. code:: ipython3
+
+    # Categorize measurements by input register values
+    answer_plot = {}
+    for measresult in answer.keys():
+        measresult_input = measresult[len(str(s)):]
+        if measresult_input in answer_plot:
+            answer_plot[measresult_input] += answer[measresult]
+        else:
+            answer_plot[measresult_input] = answer[measresult] 
+    
+    # Plot the categorized results
+    print( answer_plot )
+    plot_histogram(answer_plot)
+
+
+.. parsed-literal::
+
+    {'11': 526, '00': 498}
+
+
+
+
+.. image:: simon_files/simon_19_1.svg
+
+
+
+.. code:: ipython3
+
+    # Calculate the dot product of the most significant results
+    print('s, z, s.z (mod 2)')
+    for z_rev in answer_plot:
+        if answer_plot[z_rev] >= 0.1*shots:
+            z = z_rev[::-1]
+            print( '{}, {}, {}.{}={}'.format(s, z, s,z,sdotz(s,z)) )
+
+
+.. parsed-literal::
+
+    s, z, s.z (mod 2)
+    11, 11, 11.11=0
+    11, 00, 11.00=0
+
 
 As we can see, the most significant results are those for which
 :math:`s.z = 0` (mod 2). Using a classical computer, we can then recover
@@ -561,7 +608,21 @@ Such a blackbox function can be realized by the following procedures.
    Journal on Computing, 26(5), 1474–1483,
    `doi:10.1137/S0097539796298637 <https://doi.org/10.1137/S0097539796298637>`__
 
-.. code:: python
+.. code:: ipython3
 
-   import qiskit
-   qiskit.__qiskit_version__
+    import qiskit
+    qiskit.__qiskit_version__
+
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
+
+

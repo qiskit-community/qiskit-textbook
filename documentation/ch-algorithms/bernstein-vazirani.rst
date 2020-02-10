@@ -128,10 +128,6 @@ Because the inverse of the :math:`n` Hadamard gates is again the
 
    \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} (-1)^{a\cdot x}|x\rangle \xrightarrow{H^{\otimes n}} |a\rangle.
 
-.. raw:: html
-
-   <!-- #region -->
-
 2. Example 
 ----------
 
@@ -207,105 +203,124 @@ Measure to find the secret string :math:`s=11`
 
    </ol>
 
-.. raw:: html
-
-   <!-- #endregion -->
-
 3. Qiskit Implementation 
 ------------------------
 
 We now implement the Bernstein-Vazirani algorithm with Qiskit for a two
 bit function with :math:`s=11`.
 
-.. code:: python
+.. code:: ipython3
 
-   # initialization
-   import matplotlib.pyplot as plt
-   %matplotlib inline
-   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
-   import numpy as np
-
-   # importing Qiskit
-   from qiskit import IBMQ, BasicAer
-   from qiskit.providers.ibmq import least_busy
-   from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute
-
-   # import basic plot tools
-   from qiskit.visualization import plot_histogram
+    # initialization
+    import matplotlib.pyplot as plt
+    %matplotlib inline
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    import numpy as np
+    
+    # importing Qiskit
+    from qiskit import IBMQ, BasicAer
+    from qiskit.providers.ibmq import least_busy
+    from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute
+    
+    # import basic plot tools
+    from qiskit.visualization import plot_histogram
 
 We first set the number of qubits used in the experiment, and the hidden
 integer :math:`s` to be found by the algorithm. The hidden integer
 :math:`s` determines the circuit for the quantum oracle.
 
-.. code:: python
+.. code:: ipython3
 
-   nQubits = 2 # number of physical qubits used to represent s
-   s = 3       # the hidden integer 
-
-   # make sure that a can be represented with nqubits
-   s = s % 2**(nQubits)
+    nQubits = 2 # number of physical qubits used to represent s
+    s = 3       # the hidden integer 
+    
+    # make sure that a can be represented with nqubits
+    s = s % 2**(nQubits)
 
 We then use Qiskit to program the Bernstein-Vazirani algorithm.
 
-.. code:: python
+.. code:: ipython3
 
-   # Creating registers
-   # qubits for querying the oracle and finding the hidden integer
-   qr = QuantumRegister(nQubits)
-   # bits for recording the measurement on qr
-   cr = ClassicalRegister(nQubits)
+    # Creating registers
+    # qubits for querying the oracle and finding the hidden integer
+    qr = QuantumRegister(nQubits)
+    # bits for recording the measurement on qr
+    cr = ClassicalRegister(nQubits)
+    
+    bvCircuit = QuantumCircuit(qr, cr)
+    barriers = True
+    
+    # Apply Hadamard gates before querying the oracle
+    for i in range(nQubits):
+        bvCircuit.h(qr[i])
+        
+    # Apply barrier 
+    if barriers:
+        bvCircuit.barrier()
+    
+    # Apply the inner-product oracle
+    for i in range(nQubits):
+        if (s & (1 << i)):
+            bvCircuit.z(qr[i])
+        else:
+            bvCircuit.iden(qr[i])
+            
+    # Apply barrier 
+    if barriers:
+        bvCircuit.barrier()
+    
+    #Apply Hadamard gates after querying the oracle
+    for i in range(nQubits):
+        bvCircuit.h(qr[i])
+        
+    # Apply barrier 
+    if barriers:
+        bvCircuit.barrier()
+    
+    # Measurement
+    bvCircuit.measure(qr, cr)
 
-   bvCircuit = QuantumCircuit(qr, cr)
-   barriers = True
 
-   # Apply Hadamard gates before querying the oracle
-   for i in range(nQubits):
-       bvCircuit.h(qr[i])
-       
-   # Apply barrier 
-   if barriers:
-       bvCircuit.barrier()
 
-   # Apply the inner-product oracle
-   for i in range(nQubits):
-       if (s & (1 << i)):
-           bvCircuit.z(qr[i])
-       else:
-           bvCircuit.iden(qr[i])
-           
-   # Apply barrier 
-   if barriers:
-       bvCircuit.barrier()
 
-   #Apply Hadamard gates after querying the oracle
-   for i in range(nQubits):
-       bvCircuit.h(qr[i])
-       
-   # Apply barrier 
-   if barriers:
-       bvCircuit.barrier()
+.. parsed-literal::
 
-   # Measurement
-   bvCircuit.measure(qr, cr)
+    <qiskit.circuit.instructionset.InstructionSet at 0x7ff6782de6d0>
 
-.. code:: python
 
-   bvCircuit.draw(output='mpl')
+
+.. code:: ipython3
+
+    bvCircuit.draw(output='mpl')
+
+
+
+
+.. image:: bernstein-vazirani_files/bernstein-vazirani_13_0.svg
+
+
 
 3a. Experiment with Simulators 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can run the above circuit on the simulator.
 
-.. code:: python
+.. code:: ipython3
 
-   # use local simulator
-   backend = BasicAer.get_backend('qasm_simulator')
-   shots = 1024
-   results = execute(bvCircuit, backend=backend, shots=shots).result()
-   answer = results.get_counts()
+    # use local simulator
+    backend = BasicAer.get_backend('qasm_simulator')
+    shots = 1024
+    results = execute(bvCircuit, backend=backend, shots=shots).result()
+    answer = results.get_counts()
+    
+    plot_histogram(answer)
 
-   plot_histogram(answer)
+
+
+
+.. image:: bernstein-vazirani_files/bernstein-vazirani_15_0.svg
+
+
 
 We can see that the result of the measurement is the binary
 representation of the hidden integer :math:`3` :math:`(11)`.
@@ -315,34 +330,53 @@ representation of the hidden integer :math:`3` :math:`(11)`.
 
 We can run the circuit on the real device as below.
 
-.. code:: python
+.. code:: ipython3
 
-   # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to 5 qubits
-   IBMQ.load_account()
-   provider = IBMQ.get_provider(hub='ibm-q')
-   provider.backends()
-   backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits <= 5 and
-                                      x.configuration().n_qubits >= 2 and
-                                      not x.configuration().simulator and x.status().operational==True))
-   print("least busy backend: ", backend)
+    # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to 5 qubits
+    IBMQ.load_account()
+    provider = IBMQ.get_provider(hub='ibm-q')
+    provider.backends()
+    backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits <= 5 and
+                                       x.configuration().n_qubits >= 2 and
+                                       not x.configuration().simulator and x.status().operational==True))
+    print("least busy backend: ", backend)
 
-.. code:: python
 
-   # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
-   from qiskit.tools.monitor import job_monitor
+.. parsed-literal::
 
-   shots = 1024
-   job = execute(bvCircuit, backend=backend, shots=shots)
+    least busy backend:  ibmq_burlington
 
-   job_monitor(job, interval = 2)
 
-.. code:: python
+.. code:: ipython3
 
-   # Get the results from the computation
-   results = job.result()
-   answer = results.get_counts()
+    # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
+    from qiskit.tools.monitor import job_monitor
+    
+    shots = 1024
+    job = execute(bvCircuit, backend=backend, shots=shots)
+    
+    job_monitor(job, interval = 2)
 
-   plot_histogram(answer)
+
+.. parsed-literal::
+
+    Job Status: job has successfully run
+
+
+.. code:: ipython3
+
+    # Get the results from the computation
+    results = job.result()
+    answer = results.get_counts()
+    
+    plot_histogram(answer)
+
+
+
+
+.. image:: bernstein-vazirani_files/bernstein-vazirani_20_0.svg
+
+
 
 As we can see, most of the results are :math:`11`. The other results are
 due to errors in the quantum computation.
@@ -373,9 +407,22 @@ due to errors in the quantum computation.
    `10.1103/PhysRevA.64.042306 <https://doi.org/10.1103/PhysRevA.64.042306>`__,
    `arXiv:quant-ph/0012114 <https://arxiv.org/abs/quant-ph/0012114>`__.
 
-.. code:: python
+.. code:: ipython3
 
-   import qiskit
-   qiskit.__qiskit_version__
+    import qiskit
+    qiskit.__qiskit_version__
 
-.. code:: python
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
+
+
+

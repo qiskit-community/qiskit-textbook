@@ -187,10 +187,6 @@ done twice to get the full effect of :math:`U`. This would simply have
 Pauli decomposition
 ~~~~~~~~~~~~~~~~~~~
 
-.. raw:: html
-
-   <!-- #region -->
-
 As we saw above, it is possible to write matrices entirely in terms of
 outer products.
 
@@ -251,9 +247,22 @@ Now we have some powerful tools to analyze quantum operations, let’s
 look at the operations we will need to analyze for our study of
 universality.
 
-.. code:: python
+.. code:: ipython3
 
-   import qiskit
-   qiskit.__qiskit_version__
+    import qiskit
+    qiskit.__qiskit_version__
 
-.. code:: python
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
+
+
+

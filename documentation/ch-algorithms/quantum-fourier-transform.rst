@@ -505,10 +505,6 @@ the input qubits. This becomes important in physical implementations of
 the QFT, where nearest-neighbor couplings are easier to achieve than
 distant couplings between qubits.
 
-.. raw:: html
-
-   <!-- #region -->
-
 7. Qiskit Implementation
 ------------------------
 
@@ -555,85 +551,104 @@ generalized as:
            for k in range(j+1,n):
                circ.cu1(math.pi/float(2**(k-j)), k, j)
 
-.. raw:: html
-
-   <!-- #endregion -->
-
 We will now implement the three-qubit QFT as discussed above. We first
 create a state whose QFT is known. The output after a QFT is applied to
 this special state is :math:`\vert001\rangle`.
 
-.. code:: python
+.. code:: ipython3
 
-   import numpy as np
-   pi = np.pi
-
-   # importing Qiskit
-   from qiskit import BasicAer, IBMQ
-   from qiskit import QuantumCircuit, execute
-   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
-
-   from qiskit.providers.ibmq import least_busy
-   from qiskit.tools.monitor import job_monitor
-   from qiskit.visualization import plot_histogram
+    import numpy as np
+    pi = np.pi
+    
+    # importing Qiskit
+    from qiskit import BasicAer, IBMQ
+    from qiskit import QuantumCircuit, execute
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    
+    from qiskit.providers.ibmq import least_busy
+    from qiskit.tools.monitor import job_monitor
+    from qiskit.visualization import plot_histogram
 
 First let’s define the QFT function, as well as a function that creates
 a state from which a QFT will return 001:
 
-.. code:: python
+.. code:: ipython3
 
-   def input_state(circ, n):
-       """special n-qubit input state for QFT that produces output 1."""
-       for j in range(n):
-           circ.h(j)
-           circ.u1(-pi/float(2**(j)), j)
-           
-   def qft(circ, n):
-       """n-qubit QFT on the qubits in circ."""
-       for j in range(n):
-           circ.h(j)
-           for k in range(j+1,n):
-               circ.cu1(pi/float(2**(k-j)), k, j)
-           circ.barrier()
-       swap_registers(circ, n)
-       
-   def swap_registers(circ, n):
-       for j in range(int(np.floor(n/2.))):
-           circ.swap(j, n-j-1)
-       return circ
+    def input_state(circ, n):
+        """special n-qubit input state for QFT that produces output 1."""
+        for j in range(n):
+            circ.h(j)
+            circ.u1(-pi/float(2**(j)), j)
+            
+    def qft(circ, n):
+        """n-qubit QFT on the qubits in circ."""
+        for j in range(n):
+            circ.h(j)
+            for k in range(j+1,n):
+                circ.cu1(pi/float(2**(k-j)), k, j)
+            circ.barrier()
+        swap_registers(circ, n)
+        
+    def swap_registers(circ, n):
+        for j in range(int(np.floor(n/2.))):
+            circ.swap(j, n-j-1)
+        return circ
 
 Let’s now implement a QFT on a prepared three qubit input state that
 should return :math:`001`:
 
-.. code:: python
+.. code:: ipython3
 
-   n = 3
-   qft_circuit = QuantumCircuit(n)
+    n = 3
+    qft_circuit = QuantumCircuit(n)
+    
+    # first, prepare the state that should return 001 and draw that circuit
+    input_state(qft_circuit, n)
+    
+    qft_circuit.draw(output='mpl')
 
-   # first, prepare the state that should return 001 and draw that circuit
-   input_state(qft_circuit, n)
 
-   qft_circuit.draw(output='mpl')
 
-.. code:: python
 
-   # next, do a qft on the prepared state and draw the entire circuit
-   qft_circuit.barrier()
-   qft(qft_circuit, n)
-   qft_circuit.measure_all()
-       
-   qft_circuit.draw(output='mpl')
+.. image:: quantum-fourier-transform_files/quantum-fourier-transform_17_0.svg
+
+
+
+.. code:: ipython3
+
+    # next, do a qft on the prepared state and draw the entire circuit
+    qft_circuit.barrier()
+    qft(qft_circuit, n)
+    qft_circuit.measure_all()
+        
+    qft_circuit.draw(output='mpl')
+
+
+
+
+.. image:: quantum-fourier-transform_files/quantum-fourier-transform_18_0.svg
+
+
 
 7a. Running QFT on a simulator
 ------------------------------
 
-.. code:: python
+.. code:: ipython3
 
-   # run on local simulator
-   backend = BasicAer.get_backend("qasm_simulator")
+    # run on local simulator
+    backend = BasicAer.get_backend("qasm_simulator")
+    
+    simulate = execute(qft_circuit, backend=backend, shots=1024).result()
+    simulate.get_counts()
 
-   simulate = execute(qft_circuit, backend=backend, shots=1024).result()
-   simulate.get_counts()
+
+
+
+.. parsed-literal::
+
+    {'100': 1024}
+
+
 
 We indeed see that the outcome is always :math:`001` when we execute the
 code on the simulator. Note the reversed order of the output value
@@ -646,25 +661,44 @@ as well, since the output register contains the reversed QFT values.
 We then see how the same circuit can be executed on real-device
 backends.
 
-.. code:: python
+.. code:: ipython3
 
-   # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to n qubits
-   IBMQ.load_account()
-   provider = IBMQ.get_provider(hub='ibm-q')
-   backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= n and
-                                      not x.configuration().simulator and x.status().operational==True))
-   print("least busy backend: ", backend)
+    # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to n qubits
+    IBMQ.load_account()
+    provider = IBMQ.get_provider(hub='ibm-q')
+    backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= n and
+                                       not x.configuration().simulator and x.status().operational==True))
+    print("least busy backend: ", backend)
 
-.. code:: python
 
-   shots = 2048
-   job_exp = execute(qft_circuit, backend=backend, shots=shots)
-   job_monitor(job_exp)
+.. parsed-literal::
 
-.. code:: python
+    least busy backend:  ibmq_vigo
 
-   results = job_exp.result()
-   plot_histogram(results.get_counts())
+
+.. code:: ipython3
+
+    shots = 2048
+    job_exp = execute(qft_circuit, backend=backend, shots=shots)
+    job_monitor(job_exp)
+
+
+.. parsed-literal::
+
+    Job Status: job has successfully run
+
+
+.. code:: ipython3
+
+    results = job_exp.result()
+    plot_histogram(results.get_counts())
+
+
+
+
+.. image:: quantum-fourier-transform_files/quantum-fourier-transform_26_0.svg
+
+
 
 We see that the highest probability outcome is still :math:`100` on a
 real device. Recall again that the output of the QFT circuit has the
@@ -687,7 +721,21 @@ qubits in reverse order.
    Information, Cambridge Series on Information and the Natural Sciences
    (Cambridge University Press, Cambridge, 2000).
 
-.. code:: python
+.. code:: ipython3
 
-   import qiskit
-   qiskit.__qiskit_version__
+    import qiskit
+    qiskit.__qiskit_version__
+
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
+
+

@@ -1,13 +1,9 @@
 Quantum Gates
 =============
 
-.. code:: python
+.. code:: ipython3
 
-   from qiskit import *
-
-.. raw:: html
-
-   <!-- #region -->
+    from qiskit import *
 
 To manipulate an input state we need to apply the basic operations of
 quantum computing. These are known as quantum gates. Here we’ll give an
@@ -67,10 +63,6 @@ talking about their matrix representation or the way they are written in
 Qiskit. Typically we will use the style of :math:`X`, :math:`Y` and
 :math:`Z` when referring to gates in text or equations, and ``x``, ``y``
 and ``z`` when writing Qiskit code.
-
-.. raw:: html
-
-   <!-- #region -->
 
 Hadamard and S
 ~~~~~~~~~~~~~~
@@ -149,14 +141,6 @@ will be discussed more in later sections. These gates are extremely
 useful for many tasks in making and manipulating superpositions, as well
 as facilitating different kinds of measurements. But to unlock the full
 potential of qubits, we need the next set of gates.
-
-.. raw:: html
-
-   <!-- #endregion -->
-
-.. raw:: html
-
-   <!-- #region -->
 
 Other single-qubit gates
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -238,10 +222,6 @@ From this gate, the Hadamard is done by :math:`H= U_2(0,\pi)`. In IBM Q
 hardware, this is implemented by a pre- and post-frame change and an
 :math:`X_{\pi/2}` pulse.
 
-.. raw:: html
-
-   <!-- #region -->
-
 Multiqubit gates
 ~~~~~~~~~~~~~~~~
 
@@ -295,32 +275,53 @@ can expect the result to be,
 
 This is exactly what we find when we analyze the circuit with this tool.
 
-.. code:: python
+.. code:: ipython3
 
-   # set up circuit (no measurements required)
-   qc = QuantumCircuit(2)
-   qc.x(0) # qubits numbered from the right, so qubit 0 is the qubit on the right
-   qc.z(1) # and qubit 1 is on the left
+    # set up circuit (no measurements required)
+    qc = QuantumCircuit(2)
+    qc.x(0) # qubits numbered from the right, so qubit 0 is the qubit on the right
+    qc.z(1) # and qubit 1 is on the left
+    
+    # set up simulator that returns unitary matrix
+    backend = Aer.get_backend('unitary_simulator')
+    
+    # run the circuit to get the matrix
+    gate = execute(qc,backend).result().get_unitary()
+    
+    # now we use some fanciness to display it in latex
+    from IPython.display import display, Markdown, Latex
+    gate_latex = '\\begin{pmatrix}'
+    for line in gate:
+        for element in line:
+            gate_latex += str(element) + '&'
+        gate_latex  = gate_latex[0:-1]
+        gate_latex +=  '\\\\'
+    gate_latex  = gate_latex[0:-2]
+    gate_latex += '\end{pmatrix}'
+    display(Markdown(gate_latex))
 
-   # set up simulator that returns unitary matrix
-   backend = Aer.get_backend('unitary_simulator')
 
-   # run the circuit to get the matrix
-   gate = execute(qc,backend).result().get_unitary()
 
-   # now we use some fanciness to display it in latex
-   from IPython.display import display, Markdown, Latex
-   gate_latex = '\\begin{pmatrix}'
-   for line in gate:
-       for element in line:
-           gate_latex += str(element) + '&'
-       gate_latex  = gate_latex[0:-1]
-       gate_latex +=  '\\\\'
-   gate_latex  = gate_latex[0:-2]
-   gate_latex += '\end{pmatrix}'
-   display(Markdown(gate_latex))
+.. raw:: latex
 
-.. code:: python
+   \begin{pmatrix}0j&(1+0j)&0j&0j\\(1+0j)&0j&0j&0j\\0j&0j&0j&(-1+0j)\\0j&0j&(-1+0j)&0j\end{pmatrix}
 
-   import qiskit
-   qiskit.__qiskit_version__
+
+.. code:: ipython3
+
+    import qiskit
+    qiskit.__qiskit_version__
+
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
+
+

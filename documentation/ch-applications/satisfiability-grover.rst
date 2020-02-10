@@ -173,47 +173,53 @@ our Grover search. In particular, we use the LogicalExpressionOracle
 component provided by Aqua, which supports parsing DIMACS CNF format
 strings and constructing the corresponding oracle circuit.
 
-.. code:: python
+.. code:: ipython3
 
-   import numpy as np
-   from qiskit import BasicAer
-   from qiskit.visualization import plot_histogram
-   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
-   from qiskit.aqua import QuantumInstance, run_algorithm
-   from qiskit.aqua.algorithms import Grover
-   from qiskit.aqua.components.oracles import LogicalExpressionOracle, TruthTableOracle
+    import numpy as np
+    from qiskit import BasicAer
+    from qiskit.visualization import plot_histogram
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    from qiskit.aqua import QuantumInstance, run_algorithm
+    from qiskit.aqua.algorithms import Grover
+    from qiskit.aqua.components.oracles import LogicalExpressionOracle, TruthTableOracle
 
-.. code:: python
+.. code:: ipython3
 
-   input_3sat = '''
-   c example DIMACS-CNF 3-SAT
-   p cnf 3 5
-   -1 -2 -3 0
-   1 -2 3 0
-   1 2 -3 0
-   1 -2 -3 0
-   -1 2 3 0
-   '''
+    input_3sat = '''
+    c example DIMACS-CNF 3-SAT
+    p cnf 3 5
+    -1 -2 -3 0
+    1 -2 3 0
+    1 2 -3 0
+    1 -2 -3 0
+    -1 2 3 0
+    '''
 
-.. code:: python
+.. code:: ipython3
 
-   oracle = LogicalExpressionOracle(input_3sat)
+    oracle = LogicalExpressionOracle(input_3sat)
 
 The ``oracle`` can now be used to create an Grover instance:
 
-.. code:: python
+.. code:: ipython3
 
-   grover = Grover(oracle)
+    grover = Grover(oracle)
 
 We can then configure a simulator backend and run the Grover instance to
 get the result:
 
-.. code:: python
+.. code:: ipython3
 
-   backend = BasicAer.get_backend('qasm_simulator')
-   quantum_instance = QuantumInstance(backend, shots=1024)
-   result = grover.run(quantum_instance)
-   print(result['result'])
+    backend = BasicAer.get_backend('qasm_simulator')
+    quantum_instance = QuantumInstance(backend, shots=1024)
+    result = grover.run(quantum_instance)
+    print(result['result'])
+
+
+.. parsed-literal::
+
+    [-1, -2, -3]
+
 
 As seen above, a satisfying solution to the specified 3-SAT problem is
 obtained. And it is indeed one of the three satisfying solutions.
@@ -224,9 +230,16 @@ binary strings ``000``, ``011``, and ``101`` (note the bit order in each
 string), corresponding to the three satisfying solutions all have high
 probabilities associated with them.
 
-.. code:: python
+.. code:: ipython3
 
-   plot_histogram(result['measurement'])
+    plot_histogram(result['measurement'])
+
+
+
+
+.. image:: satisfiability-grover_files/satisfiability-grover_13_0.svg
+
+
 
 We have seen that the simulator can find the solutions to the example
 problem. We would like to see what happens if we use the real quantum
@@ -238,23 +251,30 @@ thousands characters of QASM of the circuit), at the moment the above
 circuit cannot be run on real device backends. We can see the compiled
 QASM on real-device ``ibmq_16_melbourne`` backend as follows:
 
-.. code:: python
+.. code:: ipython3
 
-   # Load our saved IBMQ accounts and get the ibmq_16_melbourne backend
-   from qiskit import IBMQ
-   IBMQ.load_account()
-   provider = IBMQ.get_provider(hub='ibm-q')
-   backend = provider.get_backend('ibmq_16_melbourne')
+    # Load our saved IBMQ accounts and get the ibmq_16_melbourne backend
+    from qiskit import IBMQ
+    IBMQ.load_account()
+    provider = IBMQ.get_provider(hub='ibm-q')
+    backend = provider.get_backend('ibmq_16_melbourne')
 
-.. code:: python
+.. code:: ipython3
 
-   from qiskit.compiler import transpile
+    from qiskit.compiler import transpile
+    
+    # transpile the circuit for ibmq_16_melbourne
+    grover_compiled = transpile(result['circuit'], backend=backend, optimization_level=3)
+    
+    print('gates = ', grover_compiled.count_ops())
+    print('depth = ', grover_compiled.depth())
 
-   # transpile the circuit for ibmq_16_melbourne
-   grover_compiled = transpile(result['circuit'], backend=backend, optimization_level=3)
 
-   print('gates = ', grover_compiled.count_ops())
-   print('depth = ', grover_compiled.depth())
+.. parsed-literal::
+
+    gates =  OrderedDict([('cx', 370), ('u3', 169), ('u1', 71), ('u2', 56), ('measure', 3), ('barrier', 2)])
+    depth =  418
+
 
 The number of gates needed is far above the limits regarding decoherence
 time of the current near-term quantum computers. It is a challenge to
@@ -275,7 +295,21 @@ other optimization problems.
    Without the Physics”,
    `arXiv:1708.03684 <https://arxiv.org/abs/1708.03684>`__
 
-.. code:: python
+.. code:: ipython3
 
-   import qiskit
-   qiskit.__qiskit_version__
+    import qiskit
+    qiskit.__qiskit_version__
+
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
+
+

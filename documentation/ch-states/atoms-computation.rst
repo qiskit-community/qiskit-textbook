@@ -14,11 +14,11 @@ basics principles behind these devices. To help us transition over to
 quantum computing later on, we’ll do it using the same tools as we’ll
 use for quantum.
 
-.. code:: python
+.. code:: ipython3
 
-   from qiskit import QuantumCircuit, execute, Aer
-   from qiskit.visualization import plot_histogram
-   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    from qiskit import QuantumCircuit, execute, Aer
+    from qiskit.visualization import plot_histogram
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
 
 Splitting information into bits
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -103,12 +103,12 @@ then do some actual computation, and finally extract an output. For your
 first quantum circuit, we’ll focus on the last of these jobs. We start
 by creating a circuit with eight qubits and eight outputs.
 
-.. code:: python
+.. code:: ipython3
 
-   n = 8
-   n_q = 8
-   n_b = 8
-   qc_output = QuantumCircuit(n_q,n_b)
+    n = 8
+    n_q = 8
+    n_b = 8
+    qc_output = QuantumCircuit(n_q,n_b)
 
 This circuit, which we have called ``qc_output``, is created by Qiskit
 using ``QuantumCircuit``. The number ``n_q`` defines the number of
@@ -124,16 +124,23 @@ programmers like to do things). The command ``qc.measure(j,j)`` adds a
 measurement to our circuit ``qc`` that tells qubit ``j`` to write an
 output to bit ``j``.
 
-.. code:: python
+.. code:: ipython3
 
-   for j in range(n):
-       qc_output.measure(j,j)
+    for j in range(n):
+        qc_output.measure(j,j)
 
 Now our circuit has something in, let’s take a look at it.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_output.draw(output='mpl')
+    qc_output.draw(output='mpl')
+
+
+
+
+.. image:: atoms-computation_files/atoms-computation_12_0.svg
+
+
 
 Qubits are always initialized to give the output ``0``. Since we don’t
 do anything to our qubits in the circuit above, this is exactly the
@@ -141,10 +148,17 @@ result we’ll get when we measure them. We can see this by running the
 circuit many times and plotting the results in a histogram. We will find
 that the result is always ``00000000``: a ``0`` from each qubit.
 
-.. code:: python
+.. code:: ipython3
 
-   counts = execute(qc_output,Aer.get_backend('qasm_simulator')).result().get_counts()
-   plot_histogram(counts)
+    counts = execute(qc_output,Aer.get_backend('qasm_simulator')).result().get_counts()
+    plot_histogram(counts)
+
+
+
+
+.. image:: atoms-computation_files/atoms-computation_14_0.svg
+
+
 
 The reason for running many times and showing the result as a histogram
 is because quantum computers may have some randomness in their results.
@@ -171,29 +185,50 @@ operation called ``x`` that does the job of the NOT.
 Below we create a new circuit dedicated to the job of encoding and call
 it ``qc_encode``. For now, we only specify the number of qubits.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_encode = QuantumCircuit(n)
-   qc_encode.x(7)
+    qc_encode = QuantumCircuit(n)
+    qc_encode.x(7)
+    
+    qc_encode.draw(output='mpl')
 
-   qc_encode.draw(output='mpl')
+
+
+
+.. image:: atoms-computation_files/atoms-computation_17_0.svg
+
+
 
 Extracting results can be done using the circuit we have from before:
 ``qc_output``. Adding the two circuits using ``qc_encode + qc_output``
 creates a new circuit with everything needed to extract an output added
 at the end.
 
-.. code:: python
+.. code:: ipython3
 
-   qc = qc_encode + qc_output
-   qc.draw(output='mpl',justify='none')
+    qc = qc_encode + qc_output
+    qc.draw(output='mpl',justify='none')
+
+
+
+
+.. image:: atoms-computation_files/atoms-computation_19_0.svg
+
+
 
 Now we can run the combined circuit and look at the results.
 
-.. code:: python
+.. code:: ipython3
 
-   counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
-   plot_histogram(counts)
+    counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
+    plot_histogram(counts)
+
+
+
+
+.. image:: atoms-computation_files/atoms-computation_21_0.svg
+
+
 
 Now our computer outputs the string ``10000000`` instead.
 
@@ -212,13 +247,20 @@ for example. Just use a search engine to find out what the number looks
 like in binary (if it includes a ‘0b’, just ignore it), and then add
 some 0s to the left side if you are younger than 64.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_encode = QuantumCircuit(n)
-   qc_encode.x(1)
-   qc_encode.x(5)
+    qc_encode = QuantumCircuit(n)
+    qc_encode.x(1)
+    qc_encode.x(5)
+    
+    qc_encode.draw(output='mpl')
 
-   qc_encode.draw(output='mpl')
+
+
+
+.. image:: atoms-computation_files/atoms-computation_23_0.svg
+
+
 
 Now we know how to encode information in a computer. The next step is to
 process it: To take an input that we have encoded, and turn it into an
@@ -226,10 +268,6 @@ output that we need.
 
 Remembering how to add
 ~~~~~~~~~~~~~~~~~~~~~~
-
-.. raw:: html
-
-   <!-- #region -->
 
 To look at turning inputs into outputs, we need a problem to solve.
 Let’s do some basic maths. In primary school you will have learned how
@@ -380,9 +418,7 @@ and a part that extracts the result. The first part will need to be
 changed whenever we want to use a new input, but the rest will always
 remain the same.
 
-.. raw:: html
 
-   <!-- #region -->
 
 The two bits we want to add are encoded in the qubits 0 and 1. The above
 example encodes a ``1`` in both these qubits, and so it seeks to find
@@ -425,11 +461,18 @@ controlled-NOT gate. Since that’s quite a long name, we usually just
 call it the CNOT. In Qiskit its name is ``cx``, which is even shorter.
 In circuit diagrams it is drawn as in the image below.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_cnot = QuantumCircuit(2)
-   qc_cnot.cx(0,1)
-   qc_cnot.draw(output='mpl')
+    qc_cnot = QuantumCircuit(2)
+    qc_cnot.cx(0,1)
+    qc_cnot.draw(output='mpl')
+
+
+
+
+.. image:: atoms-computation_files/atoms-computation_31_0.svg
+
+
 
 This is applied to a pair of qubits. One acts as the control qubit (this
 is the one with the little dot). The other acts as the *target qubit*
@@ -449,14 +492,21 @@ that gives the gate its name).
 Try the CNOT out for yourself by trying each of the possible inputs. For
 example, here’s a circuit that tests the CNOT with the input ``01``.
 
-.. code:: python
+.. code:: ipython3
 
-   qc = QuantumCircuit(2,2)
-   qc.x(0)
-   qc.cx(0,1)
-   qc.measure(0,0)
-   qc.measure(1,1)
-   qc.draw(output='mpl')
+    qc = QuantumCircuit(2,2)
+    qc.x(0)
+    qc.cx(0,1)
+    qc.measure(0,0)
+    qc.measure(1,1)
+    qc.draw(output='mpl')
+
+
+
+
+.. image:: atoms-computation_files/atoms-computation_33_0.svg
+
+
 
 If you execute this circuit, you’ll find that the output is ``11``. We
 can think of this happening because of either of the following reasons.
@@ -474,22 +524,29 @@ For our half adder, we don’t want to overwrite one of our inputs.
 Instead, we want to write the result on a different pair of qubits. For
 this we can use two CNOTs.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_ha = QuantumCircuit(4,2)
-   # encode inputs in qubits 0 and 1
-   qc_ha.x(0) # For a=0, remove this line. For a=1, leave it.
-   qc_ha.x(1) # For b=0, remove this line. For b=1, leave it.
-   qc_ha.barrier()
-   # use cnots to write the XOR of the inputs on qubit 2
-   qc_ha.cx(0,2)
-   qc_ha.cx(1,2)
-   qc_ha.barrier()
-   # extract outputs
-   qc_ha.measure(2,0) # extract XOR value
-   qc_ha.measure(3,1)
+    qc_ha = QuantumCircuit(4,2)
+    # encode inputs in qubits 0 and 1
+    qc_ha.x(0) # For a=0, remove this line. For a=1, leave it.
+    qc_ha.x(1) # For b=0, remove this line. For b=1, leave it.
+    qc_ha.barrier()
+    # use cnots to write the XOR of the inputs on qubit 2
+    qc_ha.cx(0,2)
+    qc_ha.cx(1,2)
+    qc_ha.barrier()
+    # extract outputs
+    qc_ha.measure(2,0) # extract XOR value
+    qc_ha.measure(3,1)
+    
+    qc_ha.draw(output='mpl')
 
-   qc_ha.draw(output='mpl')
+
+
+
+.. image:: atoms-computation_files/atoms-computation_35_0.svg
+
+
 
 We are now halfway to a fully working half adder. We just have the other
 bit of the output left to do: the one that will live on qubit 4.
@@ -513,32 +570,46 @@ it is basically an AND gate.
 
 In Qiskit, the Toffoli is represented with the ``ccx`` command.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_ha = QuantumCircuit(4,2)
-   # encode inputs in qubits 0 and 1
-   qc_ha.x(0) # For a=0, remove the this line. For a=1, leave it.
-   qc_ha.x(1) # For b=0, remove the this line. For b=1, leave it.
-   qc_ha.barrier()
-   # use cnots to write the XOR of the inputs on qubit 2
-   qc_ha.cx(0,2)
-   qc_ha.cx(1,2)
-   # use ccx to write the AND of the inputs on qubit 3
-   qc_ha.ccx(0,1,3)
-   qc_ha.barrier()
-   # extract outputs
-   qc_ha.measure(2,0) # extract XOR value
-   qc_ha.measure(3,1) # extract AND value
+    qc_ha = QuantumCircuit(4,2)
+    # encode inputs in qubits 0 and 1
+    qc_ha.x(0) # For a=0, remove the this line. For a=1, leave it.
+    qc_ha.x(1) # For b=0, remove the this line. For b=1, leave it.
+    qc_ha.barrier()
+    # use cnots to write the XOR of the inputs on qubit 2
+    qc_ha.cx(0,2)
+    qc_ha.cx(1,2)
+    # use ccx to write the AND of the inputs on qubit 3
+    qc_ha.ccx(0,1,3)
+    qc_ha.barrier()
+    # extract outputs
+    qc_ha.measure(2,0) # extract XOR value
+    qc_ha.measure(3,1) # extract AND value
+    
+    qc_ha.draw(output='mpl')
 
-   qc_ha.draw(output='mpl')
+
+
+
+.. image:: atoms-computation_files/atoms-computation_37_0.svg
+
+
 
 In this example we are calculating ``1+1``, because the two input bits
 are both ``1``. Let’s see what we get.
 
-.. code:: python
+.. code:: ipython3
 
-   counts = execute(qc_ha,Aer.get_backend('qasm_simulator')).result().get_counts()
-   plot_histogram(counts)
+    counts = execute(qc_ha,Aer.get_backend('qasm_simulator')).result().get_counts()
+    plot_histogram(counts)
+
+
+
+
+.. image:: atoms-computation_files/atoms-computation_39_0.svg
+
+
 
 The result is ``10``, which is the binary representation of the number
 2. We have built a computer that can solve the famous mathematical
@@ -559,9 +630,22 @@ other problem-solving technique can be compiled.
 
 As we’ll see, in quantum computing we split the atom.
 
-.. code:: python
+.. code:: ipython3
 
-   import qiskit
-   qiskit.__qiskit_version__
+    import qiskit
+    qiskit.__qiskit_version__
 
-.. code:: python
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
+
+
+
