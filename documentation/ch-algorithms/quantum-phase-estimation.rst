@@ -186,21 +186,21 @@ In this example we will use three qubits and obtain an *exact* result
 
 Let’s first prepare our environment:
 
-.. code:: ipython3
+.. code:: python
 
-    #initialization
-    import matplotlib.pyplot as plt
-    %matplotlib inline
-    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
-    import numpy as np
-    import math
-    
-    # importing Qiskit
-    from qiskit import IBMQ, Aer
-    from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute
-    
-    # import basic plot tools
-    from qiskit.visualization import plot_histogram
+   #initialization
+   import matplotlib.pyplot as plt
+   %matplotlib inline
+   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+   import numpy as np
+   import math
+
+   # importing Qiskit
+   from qiskit import IBMQ, Aer
+   from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute
+
+   # import basic plot tools
+   from qiskit.visualization import plot_histogram
 
 Now, set up the quantum circuit. We will use four qubits – qubits 0 to 2
 as counting qubits, and qubit 3 as the eigenstate of the unitary
@@ -209,120 +209,76 @@ operator (:math:`T`).
 We initialize :math:`\vert\psi\rangle = \vert1\rangle` by applying an
 :math:`X` gate:
 
-.. code:: ipython3
+.. code:: python
 
-    qpe = QuantumCircuit(4, 3)
-    qpe.x(3)
-    qpe.draw(output='mpl')
-
-
-
-
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_11_0.svg
-
-
+   qpe = QuantumCircuit(4, 3)
+   qpe.x(3)
+   qpe.draw(output='mpl')
 
 Next, we apply Hadamard gates to the counting qubits:
 
-.. code:: ipython3
+.. code:: python
 
-    for qubit in range(3):
-        qpe.h(qubit)
-    qpe.draw(output='mpl')
-
-
-
-
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_13_0.svg
-
-
+   for qubit in range(3):
+       qpe.h(qubit)
+   qpe.draw(output='mpl')
 
 Next we perform the controlled unitary operations:
 
-.. code:: ipython3
+.. code:: python
 
-    repetitions = 2**2
-    for counting_qubit in range(3):
-        for i in range(repetitions):
-            qpe.cu1(math.pi/4, counting_qubit, 3); # This is C-U
-        repetitions //= 2
-    qpe.draw(output='mpl')
-
-
-
-
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_15_0.svg
-
-
+   repetitions = 2**2
+   for counting_qubit in range(3):
+       for i in range(repetitions):
+           qpe.cu1(math.pi/4, counting_qubit, 3); # This is C-U
+       repetitions //= 2
+   qpe.draw(output='mpl')
 
 We apply the inverse quantum Fourier transformation to convert the state
 of the counting register. Here we provide the code for
 :math:`QFT^\dagger`:
 
-.. code:: ipython3
+.. code:: python
 
-    def qft_dagger(circ, n):
-        """n-qubit QFTdagger the first n qubits in circ"""
-        # Don't forget the Swaps!
-        for qubit in range(int(n/2)):
-            circ.swap(qubit, n-qubit-1)
-        for j in range(n,0,-1):
-            k = n - j
-            for m in range(k):
-                circ.cu1(-math.pi/float(2**(k-m)), n-m-1, n-k-1)
-            circ.h(n-k-1)
+   def qft_dagger(circ, n):
+       """n-qubit QFTdagger the first n qubits in circ"""
+       # Don't forget the Swaps!
+       for qubit in range(int(n/2)):
+           circ.swap(qubit, n-qubit-1)
+       for j in range(n,0,-1):
+           k = n - j
+           for m in range(k):
+               circ.cu1(-math.pi/float(2**(k-m)), n-m-1, n-k-1)
+           circ.h(n-k-1)
 
 We then measure the counting register. At the moment our qubits are in
 reverse order (a common problem in quantum computing!) We measure to the
 classical bits in reverse order to fix this:
 
-.. code:: ipython3
+.. code:: python
 
-    # Apply inverse QFT
-    qft_dagger(qpe, 3)
-    
-    # We measure in reverse order to correct issues later
-    qpe.measure(0,2)
-    qpe.measure(1,1)
-    qpe.measure(2,0)
+   # Apply inverse QFT
+   qft_dagger(qpe, 3)
 
+   # We measure in reverse order to correct issues later
+   qpe.measure(0,2)
+   qpe.measure(1,1)
+   qpe.measure(2,0)
 
+.. code:: python
 
-
-.. parsed-literal::
-
-    <qiskit.circuit.instructionset.InstructionSet at 0x7fdd23956650>
-
-
-
-.. code:: ipython3
-
-    qpe.draw(output="mpl")
-
-
-
-
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_20_0.svg
-
-
+   qpe.draw(output="mpl")
 
 2.2 Results 
 ~~~~~~~~~~~
 
-.. code:: ipython3
+.. code:: python
 
-    backend = Aer.get_backend('qasm_simulator')
-    shots = 2048
-    results = execute(qpe, backend=backend, shots=shots).result()
-    answer = results.get_counts()
-    plot_histogram(answer)
-
-
-
-
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_22_0.svg
-
-
+   backend = Aer.get_backend('qasm_simulator')
+   shots = 2048
+   results = execute(qpe, backend=backend, shots=shots).result()
+   answer = results.get_counts()
+   plot_histogram(answer)
 
 We see we get one result (``001``) with certainty, which translates to
 the decimal: ``1``. We now need to divide our result (``1``) by
@@ -342,58 +298,44 @@ Instead of a :math:`T`-gate, let’s use a gate with
 :math:`\theta = \frac{1}{3}`. We set up our circuit as with the last
 example:
 
-.. code:: ipython3
+.. code:: python
 
-    # Create and set up circuit
-    qpe2 = QuantumCircuit(4, 3)
-    
-    # Apply H-Gates to counting qubits:
-    for qubit in range(3):
-        qpe2.h(qubit)
-    
-    # Prepare our eigenstate |psi>:
-    qpe2.x(3)
-    
-    # Do the controlled-U operations:
-    angle = 2*math.pi/3
-    repetitions = 2**2
-    for counting_qubit in range(3):
-        for i in range(repetitions):
-            qpe2.cu1(angle, counting_qubit, 3);
-        repetitions //= 2
-    
-    # Do the inverse QFT:
-    qft_dagger(qpe2, 3)
-    
-    # Measure of course!
-    qpe2.measure(0,2)
-    qpe2.measure(1,1)
-    qpe2.measure(2,0)
-    
-    qpe2.draw(output='mpl')
+   # Create and set up circuit
+   qpe2 = QuantumCircuit(4, 3)
 
+   # Apply H-Gates to counting qubits:
+   for qubit in range(3):
+       qpe2.h(qubit)
 
+   # Prepare our eigenstate |psi>:
+   qpe2.x(3)
 
+   # Do the controlled-U operations:
+   angle = 2*math.pi/3
+   repetitions = 2**2
+   for counting_qubit in range(3):
+       for i in range(repetitions):
+           qpe2.cu1(angle, counting_qubit, 3);
+       repetitions //= 2
 
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_25_0.svg
+   # Do the inverse QFT:
+   qft_dagger(qpe2, 3)
 
+   # Measure of course!
+   qpe2.measure(0,2)
+   qpe2.measure(1,1)
+   qpe2.measure(2,0)
 
+   qpe2.draw(output='mpl')
 
-.. code:: ipython3
+.. code:: python
 
-    # Let's see the results!
-    backend = Aer.get_backend('qasm_simulator')
-    shots = 4096
-    results = execute(qpe2, backend=backend, shots=shots).result()
-    answer = results.get_counts()
-    plot_histogram(answer)
-
-
-
-
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_26_0.svg
-
-
+   # Let's see the results!
+   backend = Aer.get_backend('qasm_simulator')
+   shots = 4096
+   results = execute(qpe2, backend=backend, shots=shots).result()
+   answer = results.get_counts()
+   plot_histogram(answer)
 
 We are expecting the result :math:`\theta = 0.3333\dots`, and we see our
 most likely results are ``010 = 2`` and ``011 = 3``. These two results
@@ -408,60 +350,46 @@ bits, and this gives us uncertainty and imprecision.
 To get more precision we simply add more counting qubits. We are going
 to add two more counting qubits:
 
-.. code:: ipython3
+.. code:: python
 
-    # Create and set up circuit
-    qpe3 = QuantumCircuit(6, 5)
-    
-    # Apply H-Gates to counting qubits:
-    for qubit in range(5):
-        qpe3.h(qubit)
-    
-    # Prepare our eigenstate |psi>:
-    qpe3.x(5)
-    
-    # Do the controlled-U operations:
-    angle = 2*math.pi/3
-    repetitions = 2**4
-    for counting_qubit in range(5):
-        for i in range(repetitions):
-            qpe3.cu1(angle, counting_qubit, 5);
-        repetitions //= 2
-    
-    # Do the inverse QFT:
-    qft_dagger(qpe3, 5)
-    
-    # Measure of course!
-    qpe3.measure(0,4)
-    qpe3.measure(1,3)
-    qpe3.measure(2,2)
-    qpe3.measure(3,1)
-    qpe3.measure(4,0)
-    
-    qpe3.draw(output='mpl')
+   # Create and set up circuit
+   qpe3 = QuantumCircuit(6, 5)
 
+   # Apply H-Gates to counting qubits:
+   for qubit in range(5):
+       qpe3.h(qubit)
 
+   # Prepare our eigenstate |psi>:
+   qpe3.x(5)
 
+   # Do the controlled-U operations:
+   angle = 2*math.pi/3
+   repetitions = 2**4
+   for counting_qubit in range(5):
+       for i in range(repetitions):
+           qpe3.cu1(angle, counting_qubit, 5);
+       repetitions //= 2
 
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_28_0.svg
+   # Do the inverse QFT:
+   qft_dagger(qpe3, 5)
 
+   # Measure of course!
+   qpe3.measure(0,4)
+   qpe3.measure(1,3)
+   qpe3.measure(2,2)
+   qpe3.measure(3,1)
+   qpe3.measure(4,0)
 
+   qpe3.draw(output='mpl')
 
-.. code:: ipython3
+.. code:: python
 
-    # Let's see the results!
-    backend = Aer.get_backend('qasm_simulator')
-    shots = 4096
-    results = execute(qpe3, backend=backend, shots=shots).result()
-    answer = results.get_counts()
-    plot_histogram(answer)
-
-
-
-
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_29_0.svg
-
-
+   # Let's see the results!
+   backend = Aer.get_backend('qasm_simulator')
+   shots = 4096
+   results = execute(qpe3, backend=backend, shots=shots).result()
+   answer = results.get_counts()
+   plot_histogram(answer)
 
 The two most likely measurements are now ``01011`` (decimal 11) and
 ``01010`` (decimal 10). Measuring these results would tell us
@@ -484,52 +412,31 @@ respectively. A much better precision!
 We can run the circuit in section 2.1 on a real device, let’s remind
 ourselves of the circuit:
 
-.. code:: ipython3
+.. code:: python
 
-    qpe.draw(output='mpl')
+   qpe.draw(output='mpl')
 
+.. code:: python
 
+   # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to n qubits
+   IBMQ.load_account()
+   from qiskit.providers.ibmq import least_busy
+   from qiskit.tools.monitor import job_monitor
+   provider = IBMQ.get_provider(hub='ibm-q')
+   backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= 4 and not x.configuration().simulator and x.status().operational==True))
+   print("least busy backend: ", backend)
 
+   # Run with 3072 shots
+   shots = 4096
+   job_exp = execute(qpe, backend=backend, shots=shots)
+   job_monitor(job_exp)
 
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_32_0.svg
+.. code:: python
 
-
-
-.. code:: ipython3
-
-    # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to n qubits
-    IBMQ.load_account()
-    from qiskit.providers.ibmq import least_busy
-    from qiskit.tools.monitor import job_monitor
-    provider = IBMQ.get_provider(hub='ibm-q')
-    backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= 4 and not x.configuration().simulator and x.status().operational==True))
-    print("least busy backend: ", backend)
-    
-    # Run with 3072 shots
-    shots = 4096
-    job_exp = execute(qpe, backend=backend, shots=shots)
-    job_monitor(job_exp)
-
-
-.. parsed-literal::
-
-    least busy backend:  ibmq_london
-    Job Status: job has successfully run
-
-
-.. code:: ipython3
-
-    # get the results from the computation
-    results = job_exp.result()
-    answer = results.get_counts(qpe)
-    plot_histogram(answer)
-
-
-
-
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_34_0.svg
-
-
+   # get the results from the computation
+   results = job_exp.result()
+   answer = results.get_counts(qpe)
+   plot_histogram(answer)
 
 We can hopefully see that the most likely result is ``011`` which is the
 result we would expect from the simulator. More likely, the results
@@ -541,74 +448,53 @@ CNOT for our controlled-:math:`U` instead:
 4.2 Phase Estimation of a CNOT 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code:: ipython3
+.. code:: python
 
-    # Create and set up circuit
-    qpe4 = QuantumCircuit(4, 3)
-    
-    # Apply H-Gates to counting qubits:
-    for qubit in range(3):
-        qpe4.h(qubit)
-    
-    # Prepare our eigenstate |psi>:
-    qpe4.x(3)
-    qpe4.h(3)
-    
-    # Do the controlled-U operations:
-    angle = math.pi
-    repetitions = 2**2
-    for counting_qubit in range(3):
-        for i in range(repetitions):
-            qpe4.cx(counting_qubit, 3);
-        repetitions //= 2
-    
-    # Do the inverse QFT:
-    qft_dagger(qpe4, 3)
-    
-    # Measure of course!
-    qpe4.measure(0,2)
-    qpe4.measure(1,1)
-    qpe4.measure(2,0)
-    
-    qpe4.draw(output='mpl')
+   # Create and set up circuit
+   qpe4 = QuantumCircuit(4, 3)
 
+   # Apply H-Gates to counting qubits:
+   for qubit in range(3):
+       qpe4.h(qubit)
 
+   # Prepare our eigenstate |psi>:
+   qpe4.x(3)
+   qpe4.h(3)
 
+   # Do the controlled-U operations:
+   angle = math.pi
+   repetitions = 2**2
+   for counting_qubit in range(3):
+       for i in range(repetitions):
+           qpe4.cx(counting_qubit, 3);
+       repetitions //= 2
 
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_36_0.svg
+   # Do the inverse QFT:
+   qft_dagger(qpe4, 3)
 
+   # Measure of course!
+   qpe4.measure(0,2)
+   qpe4.measure(1,1)
+   qpe4.measure(2,0)
 
+   qpe4.draw(output='mpl')
 
-.. code:: ipython3
+.. code:: python
 
-    backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= 4 and not x.configuration().simulator and x.status().operational==True))
-    print("least busy backend: ", backend)
-    
-    # Run with 2048 shots
-    shots = 2048
-    job_exp = execute(qpe4, backend=backend, shots=shots)
-    job_monitor(job_exp)
+   backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= 4 and not x.configuration().simulator and x.status().operational==True))
+   print("least busy backend: ", backend)
 
+   # Run with 2048 shots
+   shots = 2048
+   job_exp = execute(qpe4, backend=backend, shots=shots)
+   job_monitor(job_exp)
 
-.. parsed-literal::
+.. code:: python
 
-    least busy backend:  ibmq_london
-    Job Status: job has successfully run
-
-
-.. code:: ipython3
-
-    # get the results from the computation
-    results = job_exp.result()
-    answer = results.get_counts(qpe4)
-    plot_histogram(answer)
-
-
-
-
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_38_0.svg
-
-
+   # get the results from the computation
+   results = job_exp.result()
+   answer = results.get_counts(qpe4)
+   plot_histogram(answer)
 
 You can *hopefully* see we are most likely to measure ``100``, the
 expected result of running QPE on a CNOT-gate. The results are still
@@ -643,21 +529,7 @@ factor a number!)
 and Quantum Information: 10th Anniversary Edition (10th ed.). Cambridge
 University Press, New York, NY, USA.
 
-.. code:: ipython3
+.. code:: python
 
-    import qiskit
-    qiskit.__qiskit_version__
-
-
-
-
-.. parsed-literal::
-
-    {'qiskit-terra': '0.11.1',
-     'qiskit-aer': '0.3.4',
-     'qiskit-ignis': '0.2.0',
-     'qiskit-ibmq-provider': '0.4.5',
-     'qiskit-aqua': '0.6.2',
-     'qiskit': '0.14.1'}
-
-
+   import qiskit
+   qiskit.__qiskit_version__

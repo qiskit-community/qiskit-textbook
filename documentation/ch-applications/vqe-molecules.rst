@@ -63,6 +63,10 @@ classical controller changing the parameter :math:`\theta` minimizing
 the expectation value of
 :math:`\langle \psi(\theta) |H|\psi(\theta) \rangle`.
 
+.. raw:: html
+
+   <!-- #region -->
+
 The Variational Method of Quantum Mechanics
 -------------------------------------------
 
@@ -146,6 +150,14 @@ guess approximating :math:`|\psi_{min}\rangle`, calculating its
 expectation value, :math:`\langle H \rangle_{\psi}`, and iteratively
 updating the wave function, arbitrarily tight bounds on the ground state
 energy of a Hamiltonian may be obtained.
+
+.. raw:: html
+
+   <!-- #endregion -->
+
+.. raw:: html
+
+   <!-- #region -->
 
 The Variational Quantum Eigensolver
 -----------------------------------
@@ -285,55 +297,55 @@ distance between the two probability vectors).
 
 We first create the random probability vector in python:
 
-.. code:: ipython3
+.. code:: python
 
-    import numpy as np
-    np.random.seed(999999)
-    target_distr = np.random.rand(2)
-    # We now convert the random vector into a valid probability vector
-    target_distr /= sum(target_distr)
+   import numpy as np
+   np.random.seed(999999)
+   target_distr = np.random.rand(2)
+   # We now convert the random vector into a valid probability vector
+   target_distr /= sum(target_distr)
 
 We subsequently create a function that takes the parameters of our
 single U3 variational form as arguments and returns the corresponding
 quantum circuit:
 
-.. code:: ipython3
+.. code:: python
 
-    from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
-    def get_var_form(params):
-        qr = QuantumRegister(1, name="q")
-        cr = ClassicalRegister(1, name='c')
-        qc = QuantumCircuit(qr, cr)
-        qc.u3(params[0], params[1], params[2], qr[0])
-        qc.measure(qr, cr[0])
-        return qc
+   from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
+   def get_var_form(params):
+       qr = QuantumRegister(1, name="q")
+       cr = ClassicalRegister(1, name='c')
+       qc = QuantumCircuit(qr, cr)
+       qc.u3(params[0], params[1], params[2], qr[0])
+       qc.measure(qr, cr[0])
+       return qc
 
 Now we specify the objective function which takes as input a list of the
 variational form’s parameters, and returns the cost associated with
 those parameters:
 
-.. code:: ipython3
+.. code:: python
 
-    from qiskit import Aer, execute
-    backend = Aer.get_backend("qasm_simulator")
-    NUM_SHOTS = 10000
-    
-    def get_probability_distribution(counts):
-        output_distr = [v / NUM_SHOTS for v in counts.values()]
-        if len(output_distr) == 1:
-            output_distr.append(0)
-        return output_distr
-    
-    def objective_function(params):
-        # Obtain a quantum circuit instance from the paramters
-        qc = get_var_form(params)
-        # Execute the quantum circuit to obtain the probability distribution associated with the current parameters
-        result = execute(qc, backend, shots=NUM_SHOTS).result()
-        # Obtain the counts for each measured state, and convert those counts into a probability vector
-        output_distr = get_probability_distribution(result.get_counts(qc))
-        # Calculate the cost as the distance between the output distribution and the target distribution
-        cost = sum([np.abs(output_distr[i] - target_distr[i]) for i in range(2)])
-        return cost
+   from qiskit import Aer, execute
+   backend = Aer.get_backend("qasm_simulator")
+   NUM_SHOTS = 10000
+
+   def get_probability_distribution(counts):
+       output_distr = [v / NUM_SHOTS for v in counts.values()]
+       if len(output_distr) == 1:
+           output_distr.append(0)
+       return output_distr
+
+   def objective_function(params):
+       # Obtain a quantum circuit instance from the paramters
+       qc = get_var_form(params)
+       # Execute the quantum circuit to obtain the probability distribution associated with the current parameters
+       result = execute(qc, backend, shots=NUM_SHOTS).result()
+       # Obtain the counts for each measured state, and convert those counts into a probability vector
+       output_distr = get_probability_distribution(result.get_counts(qc))
+       # Calculate the cost as the distance between the output distribution and the target distribution
+       cost = sum([np.abs(output_distr[i] - target_distr[i]) for i in range(2)])
+       return cost
 
 Finally, we create an instance of the COBYLA optimizer, and run the
 algorithm. Note that the output varies from run to run. Moreover, while
@@ -341,36 +353,26 @@ close, the obtained distribution might not be exactly the same as the
 target distribution, however, increasing the number of shots taken will
 increase the accuracy of the output.
 
-.. code:: ipython3
+.. code:: python
 
-    from qiskit.aqua.components.optimizers import COBYLA
-    
-    # Initialize the COBYLA optimizer
-    optimizer = COBYLA(maxiter=500, tol=0.0001)
-    
-    # Create the initial parameters (noting that our single qubit variational form has 3 parameters)
-    params = np.random.rand(3)
-    ret = optimizer.optimize(num_vars=3, objective_function=objective_function, initial_point=params)
-    
-    # Obtain the output distribution using the final parameters
-    qc = get_var_form(ret[0])
-    counts = execute(qc, backend, shots=NUM_SHOTS).result().get_counts(qc)
-    output_distr = get_probability_distribution(counts)
-    
-    print("Target Distribution:", target_distr)
-    print("Obtained Distribution:", output_distr)
-    print("Output Error (Manhattan Distance):", ret[1])
-    print("Parameters Found:", ret[0])
+   from qiskit.aqua.components.optimizers import COBYLA
 
+   # Initialize the COBYLA optimizer
+   optimizer = COBYLA(maxiter=500, tol=0.0001)
 
+   # Create the initial parameters (noting that our single qubit variational form has 3 parameters)
+   params = np.random.rand(3)
+   ret = optimizer.optimize(num_vars=3, objective_function=objective_function, initial_point=params)
 
-.. parsed-literal::
+   # Obtain the output distribution using the final parameters
+   qc = get_var_form(ret[0])
+   counts = execute(qc, backend, shots=NUM_SHOTS).result().get_counts(qc)
+   output_distr = get_probability_distribution(counts)
 
-    Target Distribution: [0.51357006 0.48642994]
-    Obtained Distribution: [0.5206, 0.4794]
-    Output Error (Manhattan Distance): 0.008659881261160907
-    Parameters Found: [1.54305723 0.1226433  0.48569819]
-
+   print("Target Distribution:", target_distr)
+   print("Obtained Distribution:", output_distr)
+   print("Output Error (Manhattan Distance):", ret[1])
+   print("Parameters Found:", ret[0])
 
 Structure of Common Variational Forms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -427,73 +429,19 @@ to each qubit pair in each layer. The circuits for RyRz corresponding to
 ``entanglement="full"`` and ``entanglement="linear"`` can be seen by
 executing the following code snippet:
 
-.. code:: ipython3
+.. code:: python
 
-    from qiskit.aqua.components.variational_forms import RYRZ
-    entanglements = ["linear", "full"]
-    for entanglement in entanglements:
-        form = RYRZ(num_qubits=4, depth=1, entanglement=entanglement)
-        if entanglement == "linear":
-            print("=============Linear Entanglement:=============")
-        else:
-            print("=============Full Entanglement:=============")
-        # We initialize all parameters to 0 for this demonstration
-        print(form.construct_circuit([0] * form.num_parameters).draw(fold=100))
-        print()
-
-
-.. parsed-literal::
-
-    =============Linear Entanglement:=============
-            ┌───────────┐┌───────┐ ░                                                                 ░ »
-    q_0: |0>┤ U3(0,0,0) ├┤ U1(0) ├─░───────────────■─────────────────────────────────────────────────░─»
-            ├───────────┤├───────┤ ░ ┌──────────┐┌─┴─┐┌──────────┐                                   ░ »
-    q_1: |0>┤ U3(0,0,0) ├┤ U1(0) ├─░─┤ U2(0,pi) ├┤ X ├┤ U2(0,pi) ├──■────────────────────────────────░─»
-            ├───────────┤├───────┤ ░ ├──────────┤└───┘└──────────┘┌─┴─┐┌──────────┐                  ░ »
-    q_2: |0>┤ U3(0,0,0) ├┤ U1(0) ├─░─┤ U2(0,pi) ├─────────────────┤ X ├┤ U2(0,pi) ├──■───────────────░─»
-            ├───────────┤├───────┤ ░ ├──────────┤                 └───┘└──────────┘┌─┴─┐┌──────────┐ ░ »
-    q_3: |0>┤ U3(0,0,0) ├┤ U1(0) ├─░─┤ U2(0,pi) ├──────────────────────────────────┤ X ├┤ U2(0,pi) ├─░─»
-            └───────────┘└───────┘ ░ └──────────┘                                  └───┘└──────────┘ ░ »
-    «     ┌───────────┐┌───────┐ ░ 
-    «q_0: ┤ U3(0,0,0) ├┤ U1(0) ├─░─
-    «     ├───────────┤├───────┤ ░ 
-    «q_1: ┤ U3(0,0,0) ├┤ U1(0) ├─░─
-    «     ├───────────┤├───────┤ ░ 
-    «q_2: ┤ U3(0,0,0) ├┤ U1(0) ├─░─
-    «     ├───────────┤├───────┤ ░ 
-    «q_3: ┤ U3(0,0,0) ├┤ U1(0) ├─░─
-    «     └───────────┘└───────┘ ░ 
-    
-    =============Full Entanglement:=============
-            ┌───────────┐┌───────┐ ░                                                                »
-    q_0: |0>┤ U3(0,0,0) ├┤ U1(0) ├─░───────────────■────────────────■────────────────■──────────────»
-            ├───────────┤├───────┤ ░ ┌──────────┐┌─┴─┐┌──────────┐  │                │              »
-    q_1: |0>┤ U3(0,0,0) ├┤ U1(0) ├─░─┤ U2(0,pi) ├┤ X ├┤ U2(0,pi) ├──┼────────────────┼──────────────»
-            ├───────────┤├───────┤ ░ ├──────────┤└───┘└──────────┘┌─┴─┐┌──────────┐  │  ┌──────────┐»
-    q_2: |0>┤ U3(0,0,0) ├┤ U1(0) ├─░─┤ U2(0,pi) ├─────────────────┤ X ├┤ U2(0,pi) ├──┼──┤ U2(0,pi) ├»
-            ├───────────┤├───────┤ ░ ├──────────┤                 └───┘└──────────┘┌─┴─┐├──────────┤»
-    q_3: |0>┤ U3(0,0,0) ├┤ U1(0) ├─░─┤ U2(0,pi) ├──────────────────────────────────┤ X ├┤ U2(0,pi) ├»
-            └───────────┘└───────┘ ░ └──────────┘                                  └───┘└──────────┘»
-    «                                                                            ░ ┌───────────┐»
-    «q_0: ───────────────────────────────────────────────────────────────────────░─┤ U3(0,0,0) ├»
-    «                                                                            ░ ├───────────┤»
-    «q_1: ─────■────────────────────■────────────────────────────────────────────░─┤ U3(0,0,0) ├»
-    «        ┌─┴─┐    ┌──────────┐  │                                            ░ ├───────────┤»
-    «q_2: ───┤ X ├────┤ U2(0,pi) ├──┼────────────────────────────■───────────────░─┤ U3(0,0,0) ├»
-    «     ┌──┴───┴───┐└──────────┘┌─┴─┐┌──────────┐┌──────────┐┌─┴─┐┌──────────┐ ░ ├───────────┤»
-    «q_3: ┤ U2(0,pi) ├────────────┤ X ├┤ U2(0,pi) ├┤ U2(0,pi) ├┤ X ├┤ U2(0,pi) ├─░─┤ U3(0,0,0) ├»
-    «     └──────────┘            └───┘└──────────┘└──────────┘└───┘└──────────┘ ░ └───────────┘»
-    «     ┌───────┐ ░ 
-    «q_0: ┤ U1(0) ├─░─
-    «     ├───────┤ ░ 
-    «q_1: ┤ U1(0) ├─░─
-    «     ├───────┤ ░ 
-    «q_2: ┤ U1(0) ├─░─
-    «     ├───────┤ ░ 
-    «q_3: ┤ U1(0) ├─░─
-    «     └───────┘ ░ 
-    
-
+   from qiskit.aqua.components.variational_forms import RYRZ
+   entanglements = ["linear", "full"]
+   for entanglement in entanglements:
+       form = RYRZ(num_qubits=4, depth=1, entanglement=entanglement)
+       if entanglement == "linear":
+           print("=============Linear Entanglement:=============")
+       else:
+           print("=============Full Entanglement:=============")
+       # We initialize all parameters to 0 for this demonstration
+       print(form.construct_circuit([0] * form.num_parameters).draw(fold=100))
+       print()
 
 Assume the depth setting is set to :math:`d`. Then, RyRz has
 :math:`n\times (d+1)\times 2` parameters, Ry with linear entanglement
@@ -513,24 +461,24 @@ may be found at: https://github.com/Qiskit/qiskit-tutorials ).
 
 The following libraries must first be imported.
 
-.. code:: ipython3
+.. code:: python
 
-    from qiskit.aqua.algorithms import VQE, ExactEigensolver
-    import matplotlib.pyplot as plt
-    %matplotlib inline
-    import numpy as np
-    from qiskit.chemistry.components.variational_forms import UCCSD
-    from qiskit.chemistry.components.initial_states import HartreeFock
-    from qiskit.aqua.components.variational_forms import RYRZ
-    from qiskit.aqua.components.optimizers import COBYLA, SPSA, SLSQP
-    from qiskit.aqua.operators import Z2Symmetries
-    from qiskit import IBMQ, BasicAer, Aer
-    from qiskit.chemistry.drivers import PySCFDriver, UnitsType
-    from qiskit.chemistry import FermionicOperator
-    from qiskit import IBMQ
-    from qiskit.providers.aer import noise
-    from qiskit.aqua import QuantumInstance
-    from qiskit.ignis.mitigation.measurement import CompleteMeasFitter
+   from qiskit.aqua.algorithms import VQE, ExactEigensolver
+   import matplotlib.pyplot as plt
+   %matplotlib inline
+   import numpy as np
+   from qiskit.chemistry.components.variational_forms import UCCSD
+   from qiskit.chemistry.components.initial_states import HartreeFock
+   from qiskit.aqua.components.variational_forms import RYRZ
+   from qiskit.aqua.components.optimizers import COBYLA, SPSA, SLSQP
+   from qiskit.aqua.operators import Z2Symmetries
+   from qiskit import IBMQ, BasicAer, Aer
+   from qiskit.chemistry.drivers import PySCFDriver, UnitsType
+   from qiskit.chemistry import FermionicOperator
+   from qiskit import IBMQ
+   from qiskit.providers.aer import noise
+   from qiskit.aqua import QuantumInstance
+   from qiskit.ignis.mitigation.measurement import CompleteMeasFitter
 
 Running VQE on a Statevector Simulator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -543,32 +491,32 @@ orbitals. First, we define a function that takes an interatomic distance
 and returns the appropriate qubit operator, :math:`H`, as well as some
 other information about the operator.
 
-.. code:: ipython3
+.. code:: python
 
-    def get_qubit_op(dist):
-        driver = PySCFDriver(atom="Li .0 .0 .0; H .0 .0 " + str(dist), unit=UnitsType.ANGSTROM, 
-                             charge=0, spin=0, basis='sto3g')
-        molecule = driver.run()
-        freeze_list = [0]
-        remove_list = [-3, -2]
-        repulsion_energy = molecule.nuclear_repulsion_energy
-        num_particles = molecule.num_alpha + molecule.num_beta
-        num_spin_orbitals = molecule.num_orbitals * 2
-        remove_list = [x % molecule.num_orbitals for x in remove_list]
-        freeze_list = [x % molecule.num_orbitals for x in freeze_list]
-        remove_list = [x - len(freeze_list) for x in remove_list]
-        remove_list += [x + molecule.num_orbitals - len(freeze_list)  for x in remove_list]
-        freeze_list += [x + molecule.num_orbitals for x in freeze_list]
-        ferOp = FermionicOperator(h1=molecule.one_body_integrals, h2=molecule.two_body_integrals)
-        ferOp, energy_shift = ferOp.fermion_mode_freezing(freeze_list)
-        num_spin_orbitals -= len(freeze_list)
-        num_particles -= len(freeze_list)
-        ferOp = ferOp.fermion_mode_elimination(remove_list)
-        num_spin_orbitals -= len(remove_list)
-        qubitOp = ferOp.mapping(map_type='parity', threshold=0.00000001)
-        qubitOp = Z2Symmetries.two_qubit_reduction(qubitOp, num_particles)
-        shift = energy_shift + repulsion_energy
-        return qubitOp, num_particles, num_spin_orbitals, shift
+   def get_qubit_op(dist):
+       driver = PySCFDriver(atom="Li .0 .0 .0; H .0 .0 " + str(dist), unit=UnitsType.ANGSTROM, 
+                            charge=0, spin=0, basis='sto3g')
+       molecule = driver.run()
+       freeze_list = [0]
+       remove_list = [-3, -2]
+       repulsion_energy = molecule.nuclear_repulsion_energy
+       num_particles = molecule.num_alpha + molecule.num_beta
+       num_spin_orbitals = molecule.num_orbitals * 2
+       remove_list = [x % molecule.num_orbitals for x in remove_list]
+       freeze_list = [x % molecule.num_orbitals for x in freeze_list]
+       remove_list = [x - len(freeze_list) for x in remove_list]
+       remove_list += [x + molecule.num_orbitals - len(freeze_list)  for x in remove_list]
+       freeze_list += [x + molecule.num_orbitals for x in freeze_list]
+       ferOp = FermionicOperator(h1=molecule.one_body_integrals, h2=molecule.two_body_integrals)
+       ferOp, energy_shift = ferOp.fermion_mode_freezing(freeze_list)
+       num_spin_orbitals -= len(freeze_list)
+       num_particles -= len(freeze_list)
+       ferOp = ferOp.fermion_mode_elimination(remove_list)
+       num_spin_orbitals -= len(remove_list)
+       qubitOp = ferOp.mapping(map_type='parity', threshold=0.00000001)
+       qubitOp = Z2Symmetries.two_qubit_reduction(qubitOp, num_particles)
+       shift = energy_shift + repulsion_energy
+       return qubitOp, num_particles, num_spin_orbitals, shift
 
 First, the exact ground state energy is calculated using the qubit
 operator and a classical exact eigensolver. Subsequently, the initial
@@ -599,93 +547,46 @@ expectation value is directly calculated through matrix multiplication.
 Note that the following code snippet may take a few minutes to run to
 completion.
 
-.. code:: ipython3
+.. code:: python
 
-    backend = BasicAer.get_backend("statevector_simulator")
-    distances = np.arange(0.5, 4.0, 0.1)
-    exact_energies = []
-    vqe_energies = []
-    optimizer = SLSQP(maxiter=5)
-    for dist in distances:
-        qubitOp, num_particles, num_spin_orbitals, shift = get_qubit_op(dist)
-        result = ExactEigensolver(qubitOp).run()
-        exact_energies.append(result['energy'] + shift)
-        initial_state = HartreeFock(
-            qubitOp.num_qubits,
-            num_spin_orbitals,
-            num_particles,
-            'parity'
-        ) 
-        var_form = UCCSD(
-            qubitOp.num_qubits,
-            depth=1,
-            num_orbitals=num_spin_orbitals,
-            num_particles=num_particles,
-            initial_state=initial_state,
-            qubit_mapping='parity'
-        )
-        vqe = VQE(qubitOp, var_form, optimizer)
-        results = vqe.run(backend)['energy'] + shift
-        vqe_energies.append(results)
-        print("Interatomic Distance:", np.round(dist, 2), "VQE Result:", results, "Exact Energy:", exact_energies[-1])
-        
-    print("All energies have been calculated")
+   backend = BasicAer.get_backend("statevector_simulator")
+   distances = np.arange(0.5, 4.0, 0.1)
+   exact_energies = []
+   vqe_energies = []
+   optimizer = SLSQP(maxiter=5)
+   for dist in distances:
+       qubitOp, num_particles, num_spin_orbitals, shift = get_qubit_op(dist)
+       result = ExactEigensolver(qubitOp).run()
+       exact_energies.append(result['energy'] + shift)
+       initial_state = HartreeFock(
+           qubitOp.num_qubits,
+           num_spin_orbitals,
+           num_particles,
+           'parity'
+       ) 
+       var_form = UCCSD(
+           qubitOp.num_qubits,
+           depth=1,
+           num_orbitals=num_spin_orbitals,
+           num_particles=num_particles,
+           initial_state=initial_state,
+           qubit_mapping='parity'
+       )
+       vqe = VQE(qubitOp, var_form, optimizer)
+       results = vqe.run(backend)['energy'] + shift
+       vqe_energies.append(results)
+       print("Interatomic Distance:", np.round(dist, 2), "VQE Result:", results, "Exact Energy:", exact_energies[-1])
+       
+   print("All energies have been calculated")
 
+.. code:: python
 
-.. parsed-literal::
-
-    Interatomic Distance: 0.5 VQE Result: -7.039710215565218 Exact Energy: -7.0397325216352
-    Interatomic Distance: 0.6 VQE Result: -7.31334430290689 Exact Energy: -7.313345828761003
-    Interatomic Distance: 0.7 VQE Result: -7.500921095751998 Exact Energy: -7.500922090905937
-    Interatomic Distance: 0.8 VQE Result: -7.630976914888905 Exact Energy: -7.630978249333209
-    Interatomic Distance: 0.9 VQE Result: -7.7208107948706335 Exact Energy: -7.720812412134779
-    Interatomic Distance: 1.0 VQE Result: -7.782240655507769 Exact Energy: -7.782242402637009
-    Interatomic Distance: 1.1 VQE Result: -7.823597493067004 Exact Energy: -7.823599276362815
-    Interatomic Distance: 1.2 VQE Result: -7.850696622555617 Exact Energy: -7.8506983775960215
-    Interatomic Distance: 1.3 VQE Result: -7.867561602360669 Exact Energy: -7.867563290110055
-    Interatomic Distance: 1.4 VQE Result: -7.876999876625421 Exact Energy: -7.877001491818371
-    Interatomic Distance: 1.5 VQE Result: -7.881014173736876 Exact Energy: -7.881015715646997
-    Interatomic Distance: 1.6 VQE Result: -7.881070663268204 Exact Energy: -7.8810720440309145
-    Interatomic Distance: 1.7 VQE Result: -7.878267161938819 Exact Energy: -7.878268167584997
-    Interatomic Distance: 1.8 VQE Result: -7.873440112088826 Exact Energy: -7.873440293132828
-    Interatomic Distance: 1.9 VQE Result: -7.8672336666975875 Exact Energy: -7.867233964816027
-    Interatomic Distance: 2.0 VQE Result: -7.860152328052092 Exact Energy: -7.8601532073787785
-    Interatomic Distance: 2.1 VQE Result: -7.852595105573739 Exact Energy: -7.852595827876739
-    Interatomic Distance: 2.2 VQE Result: -7.844878726257743 Exact Energy: -7.844879093009718
-    Interatomic Distance: 2.3 VQE Result: -7.837257439559378 Exact Energy: -7.837257967615506
-    Interatomic Distance: 2.4 VQE Result: -7.829935044964875 Exact Energy: -7.829937002623397
-    Interatomic Distance: 2.5 VQE Result: -7.823070191793284 Exact Energy: -7.823076642134093
-    Interatomic Distance: 2.6 VQE Result: -7.8167825917026885 Exact Energy: -7.8167951504729345
-    Interatomic Distance: 2.7 VQE Result: -7.811153437700115 Exact Energy: -7.811168284803364
-    Interatomic Distance: 2.8 VQE Result: -7.806218298530634 Exact Energy: -7.8062295600898475
-    Interatomic Distance: 2.9 VQE Result: -7.801962397110541 Exact Energy: -7.80197360233255
-    Interatomic Distance: 3.0 VQE Result: -7.798352411524604 Exact Energy: -7.7983634309151295
-    Interatomic Distance: 3.1 VQE Result: -7.7953268158537385 Exact Energy: -7.795340451637538
-    Interatomic Distance: 3.2 VQE Result: -7.792800697723607 Exact Energy: -7.7928348067386075
-    Interatomic Distance: 3.3 VQE Result: -7.790603800220275 Exact Energy: -7.790774009971013
-    Interatomic Distance: 3.4 VQE Result: -7.788715355351082 Exact Energy: -7.789088897991485
-    Interatomic Distance: 3.5 VQE Result: -7.787215777163667 Exact Energy: -7.787716973466142
-    Interatomic Distance: 3.6 VQE Result: -7.786080385670116 Exact Energy: -7.786603763673839
-    Interatomic Distance: 3.7 VQE Result: -7.785203496927196 Exact Energy: -7.785702912499905
-    Interatomic Distance: 3.8 VQE Result: -7.78447953997175 Exact Energy: -7.784975591698672
-    Interatomic Distance: 3.9 VQE Result: -7.783853365855263 Exact Energy: -7.784389611675315
-    All energies have been calculated
-
-
-.. code:: ipython3
-
-    plt.plot(distances, exact_energies, label="Exact Energy")
-    plt.plot(distances, vqe_energies, label="VQE Energy")
-    plt.xlabel('Atomic distance (Angstrom)')
-    plt.ylabel('Energy')
-    plt.legend()
-    plt.show()
-
-
-
-
-.. image:: vqe-molecules_files/vqe-molecules_21_0.png
-
+   plt.plot(distances, exact_energies, label="Exact Energy")
+   plt.plot(distances, vqe_energies, label="VQE Energy")
+   plt.xlabel('Atomic distance (Angstrom)')
+   plt.ylabel('Energy')
+   plt.legend()
+   plt.show()
 
 Note that the VQE results are very close to the exact results, and so
 the exact energy curve is hidden by the VQE curve.
@@ -699,30 +600,30 @@ noisy simulator and error mitigation.
 First, we prepare the qubit operator representing the molecule’s
 Hamiltonian:
 
-.. code:: ipython3
+.. code:: python
 
-    driver = PySCFDriver(atom='H .0 .0 -0.3625; H .0 .0 0.3625', unit=UnitsType.ANGSTROM, charge=0, spin=0, basis='sto3g')
-    molecule = driver.run()
-    num_particles = molecule.num_alpha + molecule.num_beta
-    qubitOp = FermionicOperator(h1=molecule.one_body_integrals, h2=molecule.two_body_integrals).mapping(map_type='parity')
-    qubitOp = Z2Symmetries.two_qubit_reduction(qubitOp, num_particles)
+   driver = PySCFDriver(atom='H .0 .0 -0.3625; H .0 .0 0.3625', unit=UnitsType.ANGSTROM, charge=0, spin=0, basis='sto3g')
+   molecule = driver.run()
+   num_particles = molecule.num_alpha + molecule.num_beta
+   qubitOp = FermionicOperator(h1=molecule.one_body_integrals, h2=molecule.two_body_integrals).mapping(map_type='parity')
+   qubitOp = Z2Symmetries.two_qubit_reduction(qubitOp, num_particles)
 
 Now, we load a device coupling map and noise model from the IBMQ
 provider and create a quantum instance, enabling error mitigation:
 
-.. code:: ipython3
+.. code:: python
 
-    IBMQ.load_account()
-    provider = IBMQ.get_provider(hub='ibm-q')
-    backend = Aer.get_backend("qasm_simulator")
-    device = provider.get_backend("ibmqx2")
-    coupling_map = device.configuration().coupling_map
-    noise_model = noise.device.basic_device_noise_model(device.properties())
-    quantum_instance = QuantumInstance(backend=backend, shots=1000, 
-                                       noise_model=noise_model, 
-                                       coupling_map=coupling_map,
-                                       measurement_error_mitigation_cls=CompleteMeasFitter,
-                                       cals_matrix_refresh_period=30,)
+   IBMQ.load_account()
+   provider = IBMQ.get_provider(hub='ibm-q')
+   backend = Aer.get_backend("qasm_simulator")
+   device = provider.get_backend("ibmqx2")
+   coupling_map = device.configuration().coupling_map
+   noise_model = noise.device.basic_device_noise_model(device.properties())
+   quantum_instance = QuantumInstance(backend=backend, shots=1000, 
+                                      noise_model=noise_model, 
+                                      coupling_map=coupling_map,
+                                      measurement_error_mitigation_cls=CompleteMeasFitter,
+                                      cals_matrix_refresh_period=30,)
 
 Finally, we must configure the optimizer, the variational form, and the
 VQE instance. As the effects of noise increase as the number of two
@@ -732,22 +633,15 @@ and uses substantially fewer two qubit gates.
 
 The following code may take a few minutes to run to completion.
 
-.. code:: ipython3
+.. code:: python
 
-    exact_solution = ExactEigensolver(qubitOp).run()
-    print("Exact Result:", exact_solution['energy'])
-    optimizer = SPSA(max_trials=100)
-    var_form = RYRZ(qubitOp.num_qubits, depth=1, entanglement="linear")
-    vqe = VQE(qubitOp, var_form, optimizer=optimizer)
-    ret = vqe.run(quantum_instance)
-    print("VQE Result:", ret['energy'])
-
-
-.. parsed-literal::
-
-    Exact Result: -1.8671209783412681
-    VQE Result: -1.8429114965754119
-
+   exact_solution = ExactEigensolver(qubitOp).run()
+   print("Exact Result:", exact_solution['energy'])
+   optimizer = SPSA(max_trials=100)
+   var_form = RYRZ(qubitOp.num_qubits, depth=1, entanglement="linear")
+   vqe = VQE(qubitOp, var_form, optimizer=optimizer)
+   ret = vqe.run(quantum_instance)
+   print("VQE Result:", ret['energy'])
 
 When noise mitigation is enabled, even though the result does not fall
 within chemical accuracy (defined as being within 0.0016 Hartree of the

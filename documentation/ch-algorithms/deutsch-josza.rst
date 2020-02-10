@@ -328,120 +328,97 @@ indicating a balanced function.
 We now implement the Deutsch-Josza algorithm for the example of a two
 bit balanced function with hidden bitstring :math:`a = 3`.
 
-.. code:: ipython3
+.. code:: python
 
-    # initialization
-    %matplotlib inline
-    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
-    import numpy as np
-    
-    # importing Qiskit
-    from qiskit import IBMQ, BasicAer
-    from qiskit.providers.ibmq import least_busy
-    from qiskit import QuantumCircuit, execute
-    
-    # import basic plot tools
-    from qiskit.visualization import plot_histogram
+   # initialization
+   %matplotlib inline
+   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+   import numpy as np
 
-.. code:: ipython3
+   # importing Qiskit
+   from qiskit import IBMQ, BasicAer
+   from qiskit.providers.ibmq import least_busy
+   from qiskit import QuantumCircuit, execute
 
-    # set the length of the $n$-bit string. 
-    n = 2
-    
-    # set the oracle, b for balanced, c for constant
-    oracle = "b"
-    
-    # if the oracle is balanced, set the hidden bitstring, b
-    if oracle == "b":
-        b = 3 # np.random.randint(1,2**n) uncomment for a random value
-    
-    # if the oracle is constant, set c = 0 or 1 randomly.
-    if oracle == "c":
-        c = np.random.randint(2)
+   # import basic plot tools
+   from qiskit.visualization import plot_histogram
 
-.. code:: ipython3
+.. code:: python
 
-    # Creating registers
-    # n qubits for querying the oracle and one qubit for storing the answer
-    djCircuit = QuantumCircuit(n+1, n)
-    barriers = True
-    
-    # Since all qubits are initialized to |0>, we need to flip the second register qubit to the the |1> state
-    djCircuit.x(n)
-    
-    # Apply barrier
-    if barriers:
-        djCircuit.barrier()
-    
-    # Apply Hadamard gates to all qubits
-    djCircuit.h(range(n+1))
-        
-    # Apply barrier 
-    if barriers:
-        djCircuit.barrier()
-    
-    # Query the oracle
-    if oracle == "c": # if the oracle is constant, return c
-        if c == 1:
-            djCircuit.x(n)
-        else:
-            djCircuit.iden(n)
-    else: # otherwise, the oracle is balanced and it returns the inner product of the input with b (non-zero bitstring) 
-        for i in range(n):
-            if (b & (1 << i)):
-                djCircuit.cx(i, n)
-    
-    # Apply barrier 
-    if barriers:
-        djCircuit.barrier()
-    
-    # Apply Hadamard gates to the first register after querying the oracle
-    djCircuit.h(range(n))
-    
-    # Measure the first register
-    djCircuit.measure(range(n), range(n))
+   # set the length of the $n$-bit string. 
+   n = 2
 
+   # set the oracle, b for balanced, c for constant
+   oracle = "b"
 
+   # if the oracle is balanced, set the hidden bitstring, b
+   if oracle == "b":
+       b = 3 # np.random.randint(1,2**n) uncomment for a random value
 
+   # if the oracle is constant, set c = 0 or 1 randomly.
+   if oracle == "c":
+       c = np.random.randint(2)
 
-.. parsed-literal::
+.. code:: python
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7fc5b891de50>
+   # Creating registers
+   # n qubits for querying the oracle and one qubit for storing the answer
+   djCircuit = QuantumCircuit(n+1, n)
+   barriers = True
 
+   # Since all qubits are initialized to |0>, we need to flip the second register qubit to the the |1> state
+   djCircuit.x(n)
 
+   # Apply barrier
+   if barriers:
+       djCircuit.barrier()
 
-.. code:: ipython3
+   # Apply Hadamard gates to all qubits
+   djCircuit.h(range(n+1))
+       
+   # Apply barrier 
+   if barriers:
+       djCircuit.barrier()
 
-    djCircuit.draw(output='mpl')
+   # Query the oracle
+   if oracle == "c": # if the oracle is constant, return c
+       if c == 1:
+           djCircuit.x(n)
+       else:
+           djCircuit.iden(n)
+   else: # otherwise, the oracle is balanced and it returns the inner product of the input with b (non-zero bitstring) 
+       for i in range(n):
+           if (b & (1 << i)):
+               djCircuit.cx(i, n)
 
+   # Apply barrier 
+   if barriers:
+       djCircuit.barrier()
 
+   # Apply Hadamard gates to the first register after querying the oracle
+   djCircuit.h(range(n))
 
+   # Measure the first register
+   djCircuit.measure(range(n), range(n))
 
-.. image:: deutsch-josza_files/deutsch-josza_16_0.svg
+.. code:: python
 
-
+   djCircuit.draw(output='mpl')
 
 3a. Experiment with Simulators 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can run the above circuit on the simulator.
 
-.. code:: ipython3
+.. code:: python
 
-    # use local simulator
-    backend = BasicAer.get_backend('qasm_simulator')
-    shots = 1024
-    results = execute(djCircuit, backend=backend, shots=shots).result()
-    answer = results.get_counts()
-    
-    plot_histogram(answer)
+   # use local simulator
+   backend = BasicAer.get_backend('qasm_simulator')
+   shots = 1024
+   results = execute(djCircuit, backend=backend, shots=shots).result()
+   answer = results.get_counts()
 
-
-
-
-.. image:: deutsch-josza_files/deutsch-josza_18_0.svg
-
-
+   plot_histogram(answer)
 
 We can see that the result of the measurement is :math:`11` as expected.
 
@@ -451,51 +428,32 @@ We can see that the result of the measurement is :math:`11` as expected.
 We can run the circuit on the real device as shown below. We first look
 for the least-busy device that can handle our circuit.
 
-.. code:: ipython3
+.. code:: python
 
-    # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to (n+1) qubits
-    IBMQ.load_account()
-    provider = IBMQ.get_provider(hub='ibm-q')
-    backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= (n+1) and
-                                       not x.configuration().simulator and x.status().operational==True))
-    print("least busy backend: ", backend)
+   # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to (n+1) qubits
+   IBMQ.load_account()
+   provider = IBMQ.get_provider(hub='ibm-q')
+   backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= (n+1) and
+                                      not x.configuration().simulator and x.status().operational==True))
+   print("least busy backend: ", backend)
 
+.. code:: python
 
-.. parsed-literal::
+   # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
+   from qiskit.tools.monitor import job_monitor
 
-    least busy backend:  ibmq_vigo
+   shots = 1024
+   job = execute(djCircuit, backend=backend, shots=shots)
 
+   job_monitor(job, interval = 2)
 
-.. code:: ipython3
+.. code:: python
 
-    # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
-    from qiskit.tools.monitor import job_monitor
-    
-    shots = 1024
-    job = execute(djCircuit, backend=backend, shots=shots)
-    
-    job_monitor(job, interval = 2)
+   # Get the results of the computation
+   results = job.result()
+   answer = results.get_counts()
 
-
-.. parsed-literal::
-
-    Job Status: job has successfully run
-
-
-.. code:: ipython3
-
-    # Get the results of the computation
-    results = job.result()
-    answer = results.get_counts()
-    
-    plot_histogram(answer)
-
-
-
-
-.. image:: deutsch-josza_files/deutsch-josza_23_0.svg
-
-
+   plot_histogram(answer)
 
 As we can see, most of the results are :math:`11`. The other results are
 due to errors in the quantum computation.
@@ -523,22 +481,9 @@ due to errors in the quantum computation.
    454: 339–354.
    `doi:10.1098/rspa.1998.0164 <https://doi.org/10.1098%2Frspa.1998.0164>`__.
 
-.. code:: ipython3
+.. code:: python
 
-    import qiskit
-    qiskit.__qiskit_version__
+   import qiskit
+   qiskit.__qiskit_version__
 
-
-
-
-.. parsed-literal::
-
-    {'qiskit-terra': '0.11.1',
-     'qiskit-aer': '0.3.4',
-     'qiskit-ignis': '0.2.0',
-     'qiskit-ibmq-provider': '0.4.5',
-     'qiskit-aqua': '0.6.2',
-     'qiskit': '0.14.1'}
-
-
-
+.. code:: python

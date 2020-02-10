@@ -11,6 +11,10 @@ preparation for showing that they are universal.
 Clifford gates
 ~~~~~~~~~~~~~~
 
+.. raw:: html
+
+   <!-- #region -->
+
 Some of the most important quantum operations are the so-called Clifford
 operations. A prominent example is the Hadamard gate:
 

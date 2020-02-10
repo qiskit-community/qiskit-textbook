@@ -1,9 +1,9 @@
 Measurement Error Mitigation
 ============================
 
-.. code:: ipython3
+.. code:: python
 
-    from qiskit import *
+   from qiskit import *
 
 Introduction
 ~~~~~~~~~~~~
@@ -30,26 +30,26 @@ probability exists for each outcome.
 As an example, we will first create a simple noise model, which randomly
 flips each bit in an output with probability :math:`p`.
 
-.. code:: ipython3
+.. code:: python
 
-    from qiskit.providers.aer.noise import NoiseModel
-    from qiskit.providers.aer.noise.errors import pauli_error, depolarizing_error
-    
-    def get_noise(p):
-    
-        error_meas = pauli_error([('X',p), ('I', 1 - p)])
-    
-        noise_model = NoiseModel()
-        noise_model.add_all_qubit_quantum_error(error_meas, "measure") # measurement error is applied to measurements
-            
-        return noise_model
+   from qiskit.providers.aer.noise import NoiseModel
+   from qiskit.providers.aer.noise.errors import pauli_error, depolarizing_error
+
+   def get_noise(p):
+
+       error_meas = pauli_error([('X',p), ('I', 1 - p)])
+
+       noise_model = NoiseModel()
+       noise_model.add_all_qubit_quantum_error(error_meas, "measure") # measurement error is applied to measurements
+           
+       return noise_model
 
 Let’s start with an instance of this in which each bit is flipped
 :math:`1\%` of the time.
 
-.. code:: ipython3
+.. code:: python
 
-    noise_model = get_noise(0.01)
+   noise_model = get_noise(0.01)
 
 Now we can test out its effects. Specifically, let’s define a two qubit
 circuit and prepare the states :math:`\left|00\right\rangle`,
@@ -60,26 +60,21 @@ respectively. Let’s see what happens with noise. Here, and in the rest
 of this section, the number of samples taken for each circuit will be
 ``shots=10000``.
 
-.. code:: ipython3
+.. code:: python
 
-    for state in ['00','01','10','11']:
-        qc = QuantumCircuit(2,2)
-        if state[0]=='1':
-            qc.x(1)
-        if state[1]=='1':
-            qc.x(0)  
-        qc.measure(qc.qregs[0],qc.cregs[0])
-        print(state+' becomes',
-              execute(qc,Aer.get_backend('qasm_simulator'),noise_model=noise_model,shots=10000).result().get_counts())
+   for state in ['00','01','10','11']:
+       qc = QuantumCircuit(2,2)
+       if state[0]=='1':
+           qc.x(1)
+       if state[1]=='1':
+           qc.x(0)  
+       qc.measure(qc.qregs[0],qc.cregs[0])
+       print(state+' becomes',
+             execute(qc,Aer.get_backend('qasm_simulator'),noise_model=noise_model,shots=10000).result().get_counts())
 
+.. raw:: html
 
-.. parsed-literal::
-
-    00 becomes {'01': 94, '00': 9812, '10': 94}
-    01 becomes {'01': 9813, '10': 1, '00': 102, '11': 84}
-    10 becomes {'01': 2, '10': 9809, '00': 105, '11': 84}
-    11 becomes {'01': 117, '10': 97, '00': 2, '11': 9784}
-
+   <!-- #region -->
 
 Here we find that the correct output is certainly the most dominant.
 Ones that differ on only a single bit (such as ``'01'``, ``'10'`` in the
@@ -112,19 +107,17 @@ should have been something along the lines of.
 Here is a circuit that produces results like this (up to statistical
 fluctuations).
 
-.. code:: ipython3
+.. code:: python
 
-    qc = QuantumCircuit(2,2)
-    qc.h(0)
-    qc.cx(0,1)  
-    qc.measure(qc.qregs[0],qc.cregs[0])
-    print(execute(qc,Aer.get_backend('qasm_simulator'),noise_model=noise_model,shots=10000).result().get_counts())
+   qc = QuantumCircuit(2,2)
+   qc.h(0)
+   qc.cx(0,1)  
+   qc.measure(qc.qregs[0],qc.cregs[0])
+   print(execute(qc,Aer.get_backend('qasm_simulator'),noise_model=noise_model,shots=10000).result().get_counts())
 
+.. raw:: html
 
-.. parsed-literal::
-
-    {'01': 89, '10': 86, '00': 4936, '11': 4889}
-
+   <!-- #region -->
 
 In this example we first looked at results for each of the definite
 basis states, and used these results to mitigate the effects of errors
@@ -225,32 +218,22 @@ As an example, let’s apply this process for the state
 
 In code, we can express this as follows.
 
-.. code:: ipython3
+.. code:: python
 
-    import numpy as np
-    
-    M = [[0.9808,0.0107,0.0095,0.0001],
-        [0.0095,0.9788,0.0001,0.0107],
-        [0.0096,0.0002,0.9814,0.0087],
-        [0.0001,0.0103,0.0090,0.9805]]
-    
-    Cideal = [[0],
-              [5000],
-              [5000],
-              [0]]
-    
-    Cnoisy = np.dot( M, Cideal)
-    print('C_noisy =\n',Cnoisy)
+   import numpy as np
 
+   M = [[0.9808,0.0107,0.0095,0.0001],
+       [0.0095,0.9788,0.0001,0.0107],
+       [0.0096,0.0002,0.9814,0.0087],
+       [0.0001,0.0103,0.0090,0.9805]]
 
-.. parsed-literal::
+   Cideal = [[0],
+             [5000],
+             [5000],
+             [0]]
 
-    C_noisy =
-     [[ 101. ]
-     [4894.5]
-     [4908. ]
-     [  96.5]]
-
+   Cnoisy = np.dot( M, Cideal)
+   print('C_noisy =\n',Cnoisy)
 
 Either way, the resulting counts found in :math:`C_{noisy}`, for
 measuring the
@@ -266,46 +249,27 @@ a matrix :math:`M` by finding the inverse matrix :math:`M^{-1}`,
 
 .. math:: C_{ideal} = M^{-1} C_{noisy}.
 
-.. code:: ipython3
+.. code:: python
 
-    import scipy.linalg as la
-    
-    
-    M = [[0.9808,0.0107,0.0095,0.0001],
-        [0.0095,0.9788,0.0001,0.0107],
-        [0.0096,0.0002,0.9814,0.0087],
-        [0.0001,0.0103,0.0090,0.9805]]
-    
-    Minv = la.inv(M)
-    
-    print(Minv)
+   import scipy.linalg as la
 
 
-.. parsed-literal::
+   M = [[0.9808,0.0107,0.0095,0.0001],
+       [0.0095,0.9788,0.0001,0.0107],
+       [0.0096,0.0002,0.9814,0.0087],
+       [0.0001,0.0103,0.0090,0.9805]]
 
-    [[ 1.01978044e+00 -1.11470783e-02 -9.87135367e-03  1.05228426e-04]
-     [-9.89772783e-03  1.02188470e+00  9.39504466e-05 -1.11514471e-02]
-     [-9.97422955e-03 -4.05845410e-06  1.01913199e+00 -9.04172099e-03]
-     [ 9.15212840e-05 -1.07335657e-02 -9.35458279e-03  1.02008794e+00]]
+   Minv = la.inv(M)
 
+   print(Minv)
 
 Applying this inverse to :math:`C_{noisy}`, we can obtain an
 approximation of the true counts.
 
-.. code:: ipython3
+.. code:: python
 
-    Cmitigated = np.dot( Minv, Cnoisy)
-    print('C_mitigated =\n',Cmitigated)
-
-
-.. parsed-literal::
-
-    C_mitigated =
-     [[-2.69429661e-15]
-     [ 5.00000000e+03]
-     [ 5.00000000e+03]
-     [-1.44328993e-15]]
-
+   Cmitigated = np.dot( Minv, Cnoisy)
+   print('C_mitigated =\n',Cmitigated)
 
 Of course, counts should be integers, and so these values need to be
 rounded. This gives us a very nice result.
@@ -327,9 +291,9 @@ extremely well!
 Error mitigation in Qiskit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code:: ipython3
+.. code:: python
 
-    from qiskit.ignis.mitigation.measurement import (complete_meas_cal,CompleteMeasFitter)
+   from qiskit.ignis.mitigation.measurement import (complete_meas_cal,CompleteMeasFitter)
 
 The process of measurement error mitigation can also be done using tools
 from Qiskit. This handles the collection of data for the basis states,
@@ -342,127 +306,60 @@ As an example, let’s stick with doing error mitigation for a pair of
 qubits. For this we define a two qubit quantum register, and feed it
 into the function ``complete_meas_cal``.
 
-.. code:: ipython3
+.. code:: python
 
-    qr = qiskit.QuantumRegister(2)
-    meas_calibs, state_labels = complete_meas_cal(qr=qr, circlabel='mcal')
+   qr = qiskit.QuantumRegister(2)
+   meas_calibs, state_labels = complete_meas_cal(qr=qr, circlabel='mcal')
 
 This creates a set of circuits to take measurements for each of the four
 basis states for two qubits: :math:`\left|00\right\rangle`,
 :math:`\left|01\right\rangle`, :math:`\left|10\right\rangle` and
 :math:`\left|11\right\rangle`.
 
-.. code:: ipython3
+.. code:: python
 
-    for circuit in meas_calibs:
-        print('Circuit',circuit.name)
-        print(circuit)
-        print()
-
-
-.. parsed-literal::
-
-    Circuit mcalcal_00
-              ░ ┌─┐   
-    q0_0: |0>─░─┤M├───
-              ░ └╥┘┌─┐
-    q0_1: |0>─░──╫─┤M├
-              ░  ║ └╥┘
-     c0_0: 0 ════╩══╬═
-                    ║ 
-     c0_1: 0 ═══════╩═
-                      
-    
-    Circuit mcalcal_01
-             ┌───┐ ░ ┌─┐   
-    q0_0: |0>┤ X ├─░─┤M├───
-             └───┘ ░ └╥┘┌─┐
-    q0_1: |0>──────░──╫─┤M├
-                   ░  ║ └╥┘
-     c0_0: 0 ═════════╩══╬═
-                         ║ 
-     c0_1: 0 ════════════╩═
-                           
-    
-    Circuit mcalcal_10
-                   ░ ┌─┐   
-    q0_0: |0>──────░─┤M├───
-             ┌───┐ ░ └╥┘┌─┐
-    q0_1: |0>┤ X ├─░──╫─┤M├
-             └───┘ ░  ║ └╥┘
-     c0_0: 0 ═════════╩══╬═
-                         ║ 
-     c0_1: 0 ════════════╩═
-                           
-    
-    Circuit mcalcal_11
-             ┌───┐ ░ ┌─┐   
-    q0_0: |0>┤ X ├─░─┤M├───
-             ├───┤ ░ └╥┘┌─┐
-    q0_1: |0>┤ X ├─░──╫─┤M├
-             └───┘ ░  ║ └╥┘
-     c0_0: 0 ═════════╩══╬═
-                         ║ 
-     c0_1: 0 ════════════╩═
-                           
-    
-
+   for circuit in meas_calibs:
+       print('Circuit',circuit.name)
+       print(circuit)
+       print()
 
 Let’s now run these circuits without any noise present.
 
-.. code:: ipython3
+.. code:: python
 
-    # Execute the calibration circuits without noise
-    backend = qiskit.Aer.get_backend('qasm_simulator')
-    job = qiskit.execute(meas_calibs, backend=backend, shots=1000)
-    cal_results = job.result()
+   # Execute the calibration circuits without noise
+   backend = qiskit.Aer.get_backend('qasm_simulator')
+   job = qiskit.execute(meas_calibs, backend=backend, shots=1000)
+   cal_results = job.result()
 
 With the results we can construct the calibration matrix, which we have
 been calling :math:`M`.
 
-.. code:: ipython3
+.. code:: python
 
-    meas_fitter = CompleteMeasFitter(cal_results, state_labels, circlabel='mcal')
-    print(meas_fitter.cal_matrix)
-
-
-.. parsed-literal::
-
-    [[1. 0. 0. 0.]
-     [0. 1. 0. 0.]
-     [0. 0. 1. 0.]
-     [0. 0. 0. 1.]]
-
+   meas_fitter = CompleteMeasFitter(cal_results, state_labels, circlabel='mcal')
+   print(meas_fitter.cal_matrix)
 
 With no noise present, this is simply the identity matrix.
 
 Now let’s create a noise model. And to make things interesting, let’s
 have the errors be ten times more likely than before.
 
-.. code:: ipython3
+.. code:: python
 
-    noise_model = get_noise(0.1)
+   noise_model = get_noise(0.1)
 
 Again we can run the circuits, and look at the calibration matrix,
 :math:`M`.
 
-.. code:: ipython3
+.. code:: python
 
-    backend = qiskit.Aer.get_backend('qasm_simulator')
-    job = qiskit.execute(meas_calibs, backend=backend, shots=1000, noise_model=noise_model)
-    cal_results = job.result()
-    
-    meas_fitter = CompleteMeasFitter(cal_results, state_labels, circlabel='mcal')
-    print(meas_fitter.cal_matrix)
+   backend = qiskit.Aer.get_backend('qasm_simulator')
+   job = qiskit.execute(meas_calibs, backend=backend, shots=1000, noise_model=noise_model)
+   cal_results = job.result()
 
-
-.. parsed-literal::
-
-    [[0.831 0.097 0.105 0.014]
-     [0.076 0.791 0.016 0.091]
-     [0.084 0.013 0.776 0.069]
-     [0.009 0.099 0.103 0.826]]
-
+   meas_fitter = CompleteMeasFitter(cal_results, state_labels, circlabel='mcal')
+   print(meas_fitter.cal_matrix)
 
 This time we find a more interesting matrix, and one that is not
 invertible. Let’s see how well we can mitigate for this noise. Again,
@@ -470,53 +367,40 @@ let’s use the Bell state
 :math:`(\left|00\right\rangle+\left|11\right\rangle)/\sqrt{2}` for our
 test.
 
-.. code:: ipython3
+.. code:: python
 
-    qc = QuantumCircuit(2,2)
-    qc.h(0)
-    qc.cx(0,1)  
-    qc.measure(qc.qregs[0],qc.cregs[0])
-    
-    results = qiskit.execute(qc, backend=backend, shots=10000, noise_model=noise_model).result()
-    
-    noisy_counts = results.get_counts()
-    print(noisy_counts)
+   qc = QuantumCircuit(2,2)
+   qc.h(0)
+   qc.cx(0,1)  
+   qc.measure(qc.qregs[0],qc.cregs[0])
 
+   results = qiskit.execute(qc, backend=backend, shots=10000, noise_model=noise_model).result()
 
-.. parsed-literal::
-
-    {'01': 892, '10': 943, '00': 4144, '11': 4021}
-
+   noisy_counts = results.get_counts()
+   print(noisy_counts)
 
 In Qiskit we mitigate for the noise by creating a measurement filter
 object. Then, taking the results from above, we use this to calulate a
 mitigated set of counts. Qiskit returns this as a dictionary, so that
 the user doesn’t need to use vectors themselves to get the result.
 
-.. code:: ipython3
+.. code:: python
 
-    # Get the filter object
-    meas_filter = meas_fitter.filter
-    
-    # Results with mitigation
-    mitigated_results = meas_filter.apply(results)
-    mitigated_counts = mitigated_results.get_counts(0)
+   # Get the filter object
+   meas_filter = meas_fitter.filter
+
+   # Results with mitigation
+   mitigated_results = meas_filter.apply(results)
+   mitigated_counts = mitigated_results.get_counts(0)
 
 To see the results most clearly, let’s plot both the noisy and mitigated
 results.
 
-.. code:: ipython3
+.. code:: python
 
-    from qiskit.visualization import *
-    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
-    plot_histogram([noisy_counts, mitigated_counts], legend=['noisy', 'mitigated'])
-
-
-
-
-.. image:: measurement-error-mitigation_files/measurement-error-mitigation_36_0.svg
-
-
+   from qiskit.visualization import *
+   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+   plot_histogram([noisy_counts, mitigated_counts], legend=['noisy', 'mitigated'])
 
 Here we have taken results for which almost :math:`20\%` of samples are
 in the wrong state, and turned it into an exact representation of what

@@ -1,10 +1,10 @@
 Basic Circuit Identities
 ========================
 
-.. code:: ipython3
+.. code:: python
 
-    from qiskit import *
-    from qiskit.circuit import Gate
+   from qiskit import *
+   from qiskit.circuit import Gate
 
 When we program quantum computers, our aim is always to build useful
 quantum circuits from the basic building blocks. But sometimes, we might
@@ -18,6 +18,10 @@ a paper by Barenco and coauthors in 1995 [1].
 
 Making a controlled-:math:`Z` from a CNOT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+   <!-- #region -->
 
 The controlled-Z or ``cz`` gate is another well-used two-qubit gate.
 Just as the CNOT applies an :math:`X` to its target qubit whenever its
@@ -80,8 +84,16 @@ and a controlled-:math:`H`:
    qc.cx(c,t)
    qc.ry(pi/4,t)
 
+.. raw:: html
+
+   <!-- #endregion -->
+
 Swapping qubits
 ~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+   <!-- #region -->
 
 Sometimes we need to move information around in a quantum computer. For
 some qubit implementations, this could be done by physically moving
@@ -192,6 +204,10 @@ here.
 
 Making the CNOTs we need from the CNOTs we have
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+   <!-- #region -->
 
 The gates in any quantum computer are driven by the physics of the
 underlying system. In IBM Q devices, the physics behind CNOTs means that
@@ -436,6 +452,10 @@ methods described above simply need to be scaled up.
 Controlled rotations
 ~~~~~~~~~~~~~~~~~~~~
 
+.. raw:: html
+
+   <!-- #region -->
+
 We have already seen how to build controlled :math:`\pi` rotations from
 a single CNOT gate. Now we’ll look at how to build any controlled
 rotation.
@@ -505,8 +525,16 @@ custom would be defined as
    qc_a.rx(np.pi/4,0)
    A = qc_a.to_instruction()
 
+.. raw:: html
+
+   <!-- #endregion -->
+
 The Toffoli
 ~~~~~~~~~~~
+
+.. raw:: html
+
+   <!-- #region -->
 
 The Toffoli gate is a three-qubit gate with two controls and one target.
 It performs an X on the target only if both controls are in the state
@@ -583,6 +611,10 @@ equivalent of just three CNOT gates.
 
 Arbitrary rotations from H and T
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+   <!-- #region -->
 
 The qubits in current devices are subject to noise, which basically
 consists of gates that are done by mistake. Simple things like

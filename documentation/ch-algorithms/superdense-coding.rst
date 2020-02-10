@@ -1,3 +1,7 @@
+.. raw:: html
+
+   <!-- #region {"colab_type": "text", "id": "OQYW8N5rPyGC"} -->
+
 Superdense Coding
 =================
 
@@ -23,6 +27,10 @@ just a single qubit of communication.
 The teleportation protocol is actually a flipped version of the
 superdense coding protocol, in the sense that Alice and Bob merely “swap
 their equipment.”
+
+.. raw:: html
+
+   <!-- #region {"colab_type": "text", "id": "N5LyBKFXYG41"} -->
 
 2. The Process
 --------------
@@ -116,164 +124,117 @@ squared.
 3. Simulating the Superdense Coding Protocol
 --------------------------------------------
 
-.. code:: ipython3
+.. raw:: html
 
-    # Importing all necessary libraries for work.
-    
-    from qiskit import *
-    from qiskit.visualization import plot_histogram
-    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+   <!-- #endregion -->
 
-.. code:: ipython3
+\```python colab={} colab_type=“code” id=“u6m-M5G0X4HO” # Importing all
+necessary libraries for work.
 
-    # Create the quantum circuit with 2 qubits and 2 classical bits
-    qc = QuantumCircuit(2, 2)
-    
-    qc.barrier()
-    
-    
-    # First generate the entangled pair between Alice and Bob (Remember: Hadamard followed by CX generates a Bell pair)
-    # At this point, qubit 1 goes to Bob and qubit 2 goes to Alice
-    qc.h(0)
-    qc.cx(0, 1)
-    qc.barrier()
-    
-    # Next, Alice encodes her message. First, we need to prepare the state Alice will like to send,
-    # In this tutorial, Alice is sending 11:
-    
-    qc.z(0)
-    qc.x(0)
-    qc.barrier()
-    
-    # Alice then sends her qubit to Bob.
-    # After recieving qubit 0, Bob applies the recovery protocol:
-    qc.cx(0, 1)
-    qc.h(0)
-    
-    # Let's take a measurement to see which classical bit of information Bob receives:
-    qc.barrier()
-    qc.measure(0, 0)
-    qc.measure(1, 1)
-    
-    # Draw our output
-    qc.draw(output = "mpl")
+from qiskit import \* from qiskit.visualization import plot_histogram
+%config InlineBackend.figure_format = ‘svg’ # Makes the images look nice
+
+::
 
 
+   ```python colab={"base_uri": "https://localhost:8080/", "height": 185} colab_type="code" id="_HMTtQ8IYh19" outputId="2d05d830-a863-49d9-c522-5a0e331d2fe1"
+   # Create the quantum circuit with 2 qubits and 2 classical bits
+   qc = QuantumCircuit(2, 2)
+
+   qc.barrier()
 
 
-.. image:: superdense-coding_files/superdense-coding_3_0.svg
+   # First generate the entangled pair between Alice and Bob (Remember: Hadamard followed by CX generates a Bell pair)
+   # At this point, qubit 1 goes to Bob and qubit 2 goes to Alice
+   qc.h(0)
+   qc.cx(0, 1)
+   qc.barrier()
 
+   # Next, Alice encodes her message. First, we need to prepare the state Alice will like to send,
+   # In this tutorial, Alice is sending 11:
 
+   qc.z(0)
+   qc.x(0)
+   qc.barrier()
+
+   # Alice then sends her qubit to Bob.
+   # After recieving qubit 0, Bob applies the recovery protocol:
+   qc.cx(0, 1)
+   qc.h(0)
+
+   # Let's take a measurement to see which classical bit of information Bob receives:
+   qc.barrier()
+   qc.measure(0, 0)
+   qc.measure(1, 1)
+
+   # Draw our output
+   qc.draw(output = "mpl")
+
+.. raw:: html
+
+   <!-- #region {"colab_type": "text", "id": "ODWmbUKVY2a5"} -->
 
 3.1 Visualizing our measurements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code:: ipython3
+.. raw:: html
 
-    backend = Aer.get_backend('qasm_simulator')
-    job_sim = execute(qc, backend, shots=1024)
-    sim_result = job_sim.result()
-    
-    measurement_result = sim_result.get_counts(qc)
-    print(measurement_result)
-    plot_histogram(measurement_result)
+   <!-- #endregion -->
 
+\```python colab={“base_uri”: “https://localhost:8080/”, “height”: 352}
+colab_type=“code” id=“caUnckbWY0Sd”
+outputId=“f2347fd0-8027-435d-dcab-0fd3a0044c92” backend =
+Aer.get_backend(‘qasm_simulator’) job_sim = execute(qc, backend,
+shots=1024) sim_result = job_sim.result()
 
-.. parsed-literal::
+measurement_result = sim_result.get_counts(qc) print(measurement_result)
+plot_histogram(measurement_result)
 
-    {'11': 1024}
-
-
+::
 
 
-.. image:: superdense-coding_files/superdense-coding_5_1.svg
+   <!-- #region {"colab_type": "text", "id": "fMHrapgKZCpp"} -->
+   ## 4. Superdense Coding on a Real Quantum Computer
 
 
+   Let's see how superdense coding works on real quantum computer.
 
-4. Superdense Coding on a Real Quantum Computer
------------------------------------------------
+   First, we want to load our account to get the least busy quantum system
+   <!-- #endregion -->
 
-Let’s see how superdense coding works on real quantum computer.
+   ```python colab={"base_uri": "https://localhost:8080/", "height": 85} colab_type="code" id="CVZk6LPJaQXa" outputId="91fc343f-5c01-428f-a324-888a641b4c55"
+   from qiskit import IBMQ
+   from qiskit.providers.ibmq import least_busy
+   shots = 256
 
-First, we want to load our account to get the least busy quantum system
+   # Load local account information
+   IBMQ.load_account()
+   provider = IBMQ.get_provider(hub='ibm-q')
+   backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= 2 and not x.configuration().simulator and x.status().operational==True))
+   print("least busy backend: ", backend)
+   job = execute(qc, backend=backend, shots=shots)
 
-.. code:: ipython3
+``python colab={"base_uri": "https://localhost:8080/", "height": 34} colab_type="code" id="rtFSdEg-bE0u" outputId="5fb9cd41-db14-4298-882f-9fee155158d9" # Monitoring our job from qiskit.tools.monitor import job_monitor job_monitor(job)``
 
-    from qiskit import IBMQ
-    from qiskit.providers.ibmq import least_busy
-    shots = 256
-    
-    # Load local account information
-    IBMQ.load_account()
-    provider = IBMQ.get_provider(hub='ibm-q')
-    backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= 2 and not x.configuration().simulator and x.status().operational==True))
-    print("least busy backend: ", backend)
-    job = execute(qc, backend=backend, shots=shots)
+``python colab={"base_uri": "https://localhost:8080/", "height": 335} colab_type="code" id="ufD9dKRded1X" outputId="87a43f61-0d3b-40db-8107-d925414b0f5d" # Plotting our result result = job.result() plot_histogram(result.get_counts(qc))``
 
+.. raw:: html
 
-
-.. parsed-literal::
-
-    least busy backend:  ibmq_burlington
-
-
-.. code:: ipython3
-
-    # Monitoring our job
-    from qiskit.tools.monitor import job_monitor
-    job_monitor(job)
-
-
-.. parsed-literal::
-
-    Job Status: job has successfully run
-
-
-.. code:: ipython3
-
-    # Plotting our result
-    result = job.result()
-    plot_histogram(result.get_counts(qc))
-
-
-
-
-.. image:: superdense-coding_files/superdense-coding_9_0.svg
-
-
+   <!-- #region {"colab_type": "text", "id": "idsn5tuwfG_4"} -->
 
 As we see that there are a few results from the other three states when
 run in a real quantum computer. These are due to errors in the gates
 that were applied and qubit decoherence.
 
-.. code:: ipython3
+.. code:: python
 
-    correct_results = result.get_counts(qc)['11']
-    accuracy = (correct_results/float(shots))*100
-    print("Accuracy = %.2f%%" % accuracy)
+   correct_results = result.get_counts(qc)['11']
+   accuracy = (correct_results/float(shots))*100
+   print("Accuracy = %.2f%%" % accuracy)
 
+.. code:: python
 
-.. parsed-literal::
+   import qiskit
+   qiskit.__qiskit_version__
 
-    Accuracy = 46.88%
-
-
-.. code:: ipython3
-
-    import qiskit
-    qiskit.__qiskit_version__
-
-
-
-
-.. parsed-literal::
-
-    {'qiskit-terra': '0.11.1',
-     'qiskit-aer': '0.3.4',
-     'qiskit-ignis': '0.2.0',
-     'qiskit-ibmq-provider': '0.4.5',
-     'qiskit-aqua': '0.6.2',
-     'qiskit': '0.14.1'}
-
-
-
+.. code:: python

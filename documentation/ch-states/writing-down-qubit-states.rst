@@ -1,24 +1,24 @@
 Writing Down Qubit States
 =========================
 
-.. code:: ipython3
+.. code:: python
 
-    from qiskit import *
+   from qiskit import *
 
 In the previous chapter we saw that there are multiple ways to extract
 an output from a qubit. The two methods we’ve used so far are the z and
 x measurements.
 
-.. code:: ipython3
+.. code:: python
 
-    # z measurement of qubit 0
-    measure_z = QuantumCircuit(1,1)
-    measure_z.measure(0,0);
-    
-    # x measurement of qubit 0
-    measure_x = QuantumCircuit(1,1)
-    measure_x.h(0)
-    measure_x.measure(0,0);
+   # z measurement of qubit 0
+   measure_z = QuantumCircuit(1,1)
+   measure_z.measure(0,0);
+
+   # x measurement of qubit 0
+   measure_x = QuantumCircuit(1,1)
+   measure_x.h(0)
+   measure_x.measure(0,0);
 
 Sometimes these measurements give results with certainty. Sometimes
 their outputs are random. This all depends on which of the infinitely
@@ -364,21 +364,21 @@ Try this out yourself using a single qubit, creating circuits using
 operations from the following list, and then doing the x and z
 measurements in the way described at the top of the page.
 
-.. code:: ipython3
+.. code:: python
 
-    qc = QuantumCircuit(1)
-    
-    qc.h(0) # the hadamard
-    
-    qc.x(0) # x gate
-    
-    qc.y(0) # y gate
-    
-    qc.z(0) # z gate
-    
-    # for the following, replace theta by any number
-    theta = 3.14159/4
-    qc.ry(theta,0); # y axis rotation
+   qc = QuantumCircuit(1)
+
+   qc.h(0) # the hadamard
+
+   qc.x(0) # x gate
+
+   qc.y(0) # y gate
+
+   qc.z(0) # z gate
+
+   # for the following, replace theta by any number
+   theta = 3.14159/4
+   qc.ry(theta,0); # y axis rotation
 
 You’ll find examples where the z measurement gives a certain result, but
 the x is completely random. You’ll also find examples where the opposite
@@ -404,45 +404,39 @@ whatever gates from the above list you choose to put in ``qc``, the
 total certainty comes out as :math:`1` (or as near as possible given
 statistical noise).
 
-.. code:: ipython3
+.. code:: python
 
-    shots = 2**14 # number of samples used for statistics
-    
-    uncertainty = 0
-    for measure_circuit in [measure_z, measure_x]:
-    
-        # run the circuit with a the selected measurement and get the number of samples that output each bit value
-        counts = execute(qc+measure_circuit,Aer.get_backend('qasm_simulator'),shots=shots).result().get_counts()
-    
-        # calculate the probabilities for each bit value
-        probs = {}
-        for output in ['0','1']:
-            if output in counts:
-                probs[output] = counts[output]/shots
-            else:
-                probs[output] = 0
-                
-        uncertainty += ( probs['0'] -  probs['1'] )**2
-    
-    # print the total uncertainty
-    print('The total uncertainty is',uncertainty )
+   shots = 2**14 # number of samples used for statistics
 
+   uncertainty = 0
+   for measure_circuit in [measure_z, measure_x]:
 
-.. parsed-literal::
+       # run the circuit with a the selected measurement and get the number of samples that output each bit value
+       counts = execute(qc+measure_circuit,Aer.get_backend('qasm_simulator'),shots=shots).result().get_counts()
 
-    The total uncertainty is 0.9984327554702759
+       # calculate the probabilities for each bit value
+       probs = {}
+       for output in ['0','1']:
+           if output in counts:
+               probs[output] = counts[output]/shots
+           else:
+               probs[output] = 0
+               
+       uncertainty += ( probs['0'] -  probs['1'] )**2
 
+   # print the total uncertainty
+   print('The total uncertainty is',uncertainty )
 
 Now we have found this rule, let’s try to break it! Then we can hope to
 get a deeper understanding of what is going on. We can do this by simply
 implementing the operation below, and then recalculating the total
 uncertainty.
 
-.. code:: ipython3
+.. code:: python
 
-    # for the following, replace theta by any number
-    theta = 3.14159/2
-    qc.rx(theta,0); # x axis rotation
+   # for the following, replace theta by any number
+   theta = 3.14159/2
+   qc.rx(theta,0); # x axis rotation
 
 For a circuit with a single ``rx`` with :math:`\theta=\pi/2`, we will
 find that :math:`(p^z_0-p^z_1)^2 + (p^x_0-p^x_1)^2=0`. This operation
@@ -574,13 +568,13 @@ define a new measurement, and that basis is mutally unbiased with x and
 z. This is the third and final fundamental measurement for a single
 qubit. We call it the y measurement, and can implement it with
 
-.. code:: ipython3
+.. code:: python
 
-    # y measurement of qubit 0
-    measure_y = QuantumCircuit(1,1)
-    measure_y.sdg(0)
-    measure_y.h(0)
-    measure_y.measure(0,0);
+   # y measurement of qubit 0
+   measure_y = QuantumCircuit(1,1)
+   measure_y.sdg(0)
+   measure_y.h(0)
+   measure_y.measure(0,0);
 
 With the x, y and z measurements, we now have everything covered.
 Whatever operations we apply, a single isolated qubit will always obey
@@ -593,34 +587,28 @@ Whatever operations we apply, a single isolated qubit will always obey
 To see this, we can incorporate the y measurement into our measure of
 total certainty.
 
-.. code:: ipython3
+.. code:: python
 
-    shots = 2**14 # number of samples used for statistics
-    
-    uncertainty = 0
-    for measure_circuit in [measure_z, measure_x, measure_y]:
-    
-        # run the circuit with a the selected measurement and get the number of samples that output each bit value
-        counts = execute(qc+measure_circuit,Aer.get_backend('qasm_simulator'),shots=shots).result().get_counts()
-    
-        # calculate the probabilities for each bit value
-        probs = {}
-        for output in ['0','1']:
-            if output in counts:
-                probs[output] = counts[output]/shots
-            else:
-                probs[output] = 0
-                
-        uncertainty += ( probs['0'] -  probs['1'] )**2
-    
-    # print the total uncertainty
-    print('The total uncertainty is',uncertainty )
+   shots = 2**14 # number of samples used for statistics
 
+   uncertainty = 0
+   for measure_circuit in [measure_z, measure_x, measure_y]:
 
-.. parsed-literal::
+       # run the circuit with a the selected measurement and get the number of samples that output each bit value
+       counts = execute(qc+measure_circuit,Aer.get_backend('qasm_simulator'),shots=shots).result().get_counts()
 
-    The total uncertainty is 1.0074288547039032
+       # calculate the probabilities for each bit value
+       probs = {}
+       for output in ['0','1']:
+           if output in counts:
+               probs[output] = counts[output]/shots
+           else:
+               probs[output] = 0
+               
+       uncertainty += ( probs['0'] -  probs['1'] )**2
 
+   # print the total uncertainty
+   print('The total uncertainty is',uncertainty )
 
 For more than one qubit, this relation will need another upgrade. This
 is because the qubits can spend their limited certainty on creating
@@ -633,21 +621,7 @@ single qubit. As we’ll see in the next section, the conservation of
 certainty leads to a particularly useful way of visualizing single-qubit
 states and gates.
 
-.. code:: ipython3
+.. code:: python
 
-    import qiskit
-    qiskit.__qiskit_version__
-
-
-
-
-.. parsed-literal::
-
-    {'qiskit-terra': '0.11.1',
-     'qiskit-aer': '0.3.4',
-     'qiskit-ignis': '0.2.0',
-     'qiskit-ibmq-provider': '0.4.5',
-     'qiskit-aqua': '0.6.2',
-     'qiskit': '0.14.1'}
-
-
+   import qiskit
+   qiskit.__qiskit_version__

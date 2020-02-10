@@ -1,6 +1,10 @@
 Grover’s Algorithm
 ==================
 
+.. raw:: html
+
+   <!-- #region -->
+
 In this section, we introduce Grover’s algorithm and how it can be used
 to solve unstructured search problems. We then implement the quantum
 algorithm using Qiskit, and run on a simulator and device.
@@ -23,6 +27,10 @@ Contents
 4. `Problems <#problems>`__
 
 5. `References <#references>`__
+
+.. raw:: html
+
+   <!-- #region -->
 
 1. Introduction 
 ---------------
@@ -166,6 +174,10 @@ not just the probability, that is being amplified in this procedure.
 In the case that there are multiple solutions, :math:`M`, it can be
 shown that roughly :math:`\sqrt{(N/M)}` rotations will suffice.
 
+.. raw:: html
+
+   <!-- #endregion -->
+
 2. Example: 2 Qubits 
 --------------------
 
@@ -290,123 +302,71 @@ be depicted here.
 We now implement Grover’s algorithm for the above case of 2 qubits for
 :math:`\lvert w \rangle = \lvert 00 \rangle`.
 
-.. code:: ipython3
+.. code:: python
 
-    #initialization
-    import matplotlib.pyplot as plt
-    %matplotlib inline
-    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
-    import numpy as np
-    
-    # importing Qiskit
-    from qiskit import IBMQ, BasicAer, Aer
-    from qiskit.providers.ibmq import least_busy
-    from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute
-    
-    # import basic plot tools
-    from qiskit.visualization import plot_histogram
+   #initialization
+   import matplotlib.pyplot as plt
+   %matplotlib inline
+   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+   import numpy as np
+
+   # importing Qiskit
+   from qiskit import IBMQ, BasicAer, Aer
+   from qiskit.providers.ibmq import least_busy
+   from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute
+
+   # import basic plot tools
+   from qiskit.visualization import plot_histogram
 
 We start by preparing a quantum circuit for two qubits and a classical
 register with two bits.
 
-.. code:: ipython3
+.. code:: python
 
-    qr = QuantumRegister(2)
-    cr = ClassicalRegister(2)
-    
-    groverCircuit = QuantumCircuit(qr,cr)
+   qr = QuantumRegister(2)
+   cr = ClassicalRegister(2)
+
+   groverCircuit = QuantumCircuit(qr,cr)
 
 Then we simply need to write out the commands for the circuit depicted
 above. First, Initialize the state :math:`|s\rangle`:
 
-.. code:: ipython3
+.. code:: python
 
-    groverCircuit.h(qr)
-
-
-
-
-.. parsed-literal::
-
-    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3d8bf4b10>
-
-
+   groverCircuit.h(qr)
 
 Apply the Oracle for :math:`|w\rangle = |00\rangle`:
 
-.. code:: ipython3
+.. code:: python
 
-    groverCircuit.x(qr)
-    groverCircuit.cz(qr[0],qr[1])
-    groverCircuit.x(qr)
-
-
-
-
-.. parsed-literal::
-
-    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3f8752390>
-
-
+   groverCircuit.x(qr)
+   groverCircuit.cz(qr[0],qr[1])
+   groverCircuit.x(qr)
 
 Apply a Hadamard operation to both qubits:
 
-.. code:: ipython3
+.. code:: python
 
-    groverCircuit.h(qr)
-
-
-
-
-.. parsed-literal::
-
-    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3f8752450>
-
-
+   groverCircuit.h(qr)
 
 Apply the reflection :math:`U_s`:
 
-.. code:: ipython3
+.. code:: python
 
-    groverCircuit.z(qr)
-    groverCircuit.cz(qr[0],qr[1])
-
-
-
-
-.. parsed-literal::
-
-    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3f8758090>
-
-
+   groverCircuit.z(qr)
+   groverCircuit.cz(qr[0],qr[1])
 
 Apply the final Hadamard to both qubits:
 
-.. code:: ipython3
+.. code:: python
 
-    groverCircuit.h(qr)
-
-
-
-
-.. parsed-literal::
-
-    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3f8758610>
-
-
+   groverCircuit.h(qr)
 
 Drawing the circuit confirms that we have assembled it correctly:
 
-.. code:: ipython3
+.. code:: python
 
-    groverCircuit.draw(output="mpl")
-
-
-
-
-.. image:: grover_files/grover_19_0.svg
-
-
+   groverCircuit.draw(output="mpl")
 
 2.1.1 Experiment with Simulators 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -414,39 +374,25 @@ Drawing the circuit confirms that we have assembled it correctly:
 Let’s run the circuit in simulation. First, we can verify that we have
 the correct statevector:
 
-.. code:: ipython3
+.. code:: python
 
-    backend_sim = Aer.get_backend('statevector_simulator')
-    job_sim = execute(groverCircuit, backend_sim)
-    statevec = job_sim.result().get_statevector()
-    print(statevec)
-
-
-.. parsed-literal::
-
-    [ 1.00000000e+00-2.44929360e-16j -1.57009246e-16+4.79367020e-32j
-     -2.22044605e-16+3.69778549e-32j -1.57009246e-16+2.17894100e-32j]
-
+   backend_sim = Aer.get_backend('statevector_simulator')
+   job_sim = execute(groverCircuit, backend_sim)
+   statevec = job_sim.result().get_statevector()
+   print(statevec)
 
 Now let us measure the state and create the corresponding histogram
 experiments:
 
-.. code:: ipython3
+.. code:: python
 
-    groverCircuit.measure(qr,cr)
-    
-    backend = BasicAer.get_backend('qasm_simulator')
-    shots = 1024
-    results = execute(groverCircuit, backend=backend, shots=shots).result()
-    answer = results.get_counts()
-    plot_histogram(answer)
+   groverCircuit.measure(qr,cr)
 
-
-
-
-.. image:: grover_files/grover_23_0.svg
-
-
+   backend = BasicAer.get_backend('qasm_simulator')
+   shots = 1024
+   results = execute(groverCircuit, backend=backend, shots=shots).result()
+   answer = results.get_counts()
+   plot_histogram(answer)
 
 We confirm that in 100% of the cases the element :math:`|00\rangle` is
 found.
@@ -456,45 +402,26 @@ found.
 
 We can run the circuit on the real device as below.
 
-.. code:: ipython3
+.. code:: python
 
-    # Load IBM Q account and get the least busy backend device
-    provider = IBMQ.load_account()
-    device = least_busy(provider.backends(simulator=False))
-    print("Running on current least busy device: ", device)
+   # Load IBM Q account and get the least busy backend device
+   provider = IBMQ.load_account()
+   device = least_busy(provider.backends(simulator=False))
+   print("Running on current least busy device: ", device)
 
+.. code:: python
 
-.. parsed-literal::
+   # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
+   from qiskit.tools.monitor import job_monitor
+   job = execute(groverCircuit, backend=device, shots=1024, max_credits=10)
+   job_monitor(job, interval = 2)
 
-    Running on current least busy device:  ibmq_burlington
+.. code:: python
 
-
-.. code:: ipython3
-
-    # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
-    from qiskit.tools.monitor import job_monitor
-    job = execute(groverCircuit, backend=device, shots=1024, max_credits=10)
-    job_monitor(job, interval = 2)
-
-
-.. parsed-literal::
-
-    Job Status: job has successfully run
-
-
-.. code:: ipython3
-
-    # Get the results from the computation
-    results = job.result()
-    answer = results.get_counts(groverCircuit)
-    plot_histogram(answer)
-
-
-
-
-.. image:: grover_files/grover_29_0.svg
-
-
+   # Get the results from the computation
+   results = job.result()
+   answer = results.get_counts(groverCircuit)
+   plot_histogram(answer)
 
 We confirm that in the majority of the cases the element
 :math:`|00\rangle` is found. The other results are due to errors in the
@@ -658,6 +585,8 @@ and :math:`\lvert110\rangle`
 Note that since there are 2 solutions and 8 possibilities, we will only
 need to run one iteration (steps 2 & 3).
 
+.. _qiskit-implementation-1:
+
 3.1 Qiskit Implementation 
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -668,168 +597,130 @@ for :math:`3`-qubits and searching for two marked states
 We create a phase oracle that will mark states :math:`\lvert101\rangle`
 and :math:`\lvert110\rangle` as the results (step 1).
 
-.. code:: ipython3
+.. code:: python
 
-    def phase_oracle(circuit, register):
-        circuit.cz(qr[2],qr[0])
-        circuit.cz(qr[2],qr[1])
+   def phase_oracle(circuit, register):
+       circuit.cz(qr[2],qr[0])
+       circuit.cz(qr[2],qr[1])
 
 Next we set up the circuit for inversion about the average (step 2),
 where we will first need to define a function that creates a
 multiple-controlled Z gate.
 
-.. code:: ipython3
+.. code:: python
 
-    def n_controlled_Z(circuit, controls, target):
-        """Implement a Z gate with multiple controls"""
-        if (len(controls) > 2):
-            raise ValueError('The controlled Z with more than 2 controls is not implemented')
-        elif (len(controls) == 1):
-            circuit.h(target)
-            circuit.cx(controls[0], target)
-            circuit.h(target)
-        elif (len(controls) == 2):
-            circuit.h(target)
-            circuit.ccx(controls[0], controls[1], target)
-            circuit.h(target)
+   def n_controlled_Z(circuit, controls, target):
+       """Implement a Z gate with multiple controls"""
+       if (len(controls) > 2):
+           raise ValueError('The controlled Z with more than 2 controls is not implemented')
+       elif (len(controls) == 1):
+           circuit.h(target)
+           circuit.cx(controls[0], target)
+           circuit.h(target)
+       elif (len(controls) == 2):
+           circuit.h(target)
+           circuit.ccx(controls[0], controls[1], target)
+           circuit.h(target)
 
-.. code:: ipython3
+.. code:: python
 
-    def inversion_about_average(circuit, register, n, barriers):
-        """Apply inversion about the average step of Grover's algorithm."""
-        circuit.h(register)
-        circuit.x(register)
-        
-        if barriers:
-            circuit.barrier()
-        
-        n_controlled_Z(circuit, [register[j] for j in range(n-1)], register[n-1])
-        
-        if barriers:
-            circuit.barrier()
-        
-        circuit.x(register)
-        circuit.h(register)
+   def inversion_about_average(circuit, register, n, barriers):
+       """Apply inversion about the average step of Grover's algorithm."""
+       circuit.h(register)
+       circuit.x(register)
+       
+       if barriers:
+           circuit.barrier()
+       
+       n_controlled_Z(circuit, [register[j] for j in range(n-1)], register[n-1])
+       
+       if barriers:
+           circuit.barrier()
+       
+       circuit.x(register)
+       circuit.h(register)
 
 Now we put the pieces together, with the creation of a uniform
 superposition at the start of the circuit and a measurement at the end.
 Note that since there are 2 solutions and 8 possibilities, we will only
 need to run one iteration.
 
-.. code:: ipython3
+.. code:: python
 
-    barriers = True
-    
-    qr = QuantumRegister(3)
-    cr = ClassicalRegister(3)
-    
-    groverCircuit = QuantumCircuit(qr,cr)
-    groverCircuit.h(qr)
-    
-    if barriers:
-        groverCircuit.barrier()
-    
-    phase_oracle(groverCircuit, qr)
-    
-    if barriers:
-        groverCircuit.barrier()
-    
-    inversion_about_average(groverCircuit, qr, 3, barriers)
-    
-    if barriers:
-        groverCircuit.barrier()
-    
-    groverCircuit.measure(qr,cr)
+   barriers = True
 
+   qr = QuantumRegister(3)
+   cr = ClassicalRegister(3)
 
+   groverCircuit = QuantumCircuit(qr,cr)
+   groverCircuit.h(qr)
 
+   if barriers:
+       groverCircuit.barrier()
 
-.. parsed-literal::
+   phase_oracle(groverCircuit, qr)
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3a88b1550>
+   if barriers:
+       groverCircuit.barrier()
 
+   inversion_about_average(groverCircuit, qr, 3, barriers)
 
+   if barriers:
+       groverCircuit.barrier()
 
-.. code:: ipython3
+   groverCircuit.measure(qr,cr)
 
-    groverCircuit.draw(output="mpl")
+.. code:: python
 
+   groverCircuit.draw(output="mpl")
 
-
-
-.. image:: grover_files/grover_40_0.svg
-
-
+.. _experiment-with-simulators-1:
 
 3.1.1 Experiment with Simulators 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can run the above circuit on the simulator.
 
-.. code:: ipython3
+.. code:: python
 
-    backend = BasicAer.get_backend('qasm_simulator')
-    shots = 1024
-    results = execute(groverCircuit, backend=backend, shots=shots).result()
-    answer = results.get_counts()
-    plot_histogram(answer)
-
-
-
-
-.. image:: grover_files/grover_42_0.svg
-
-
+   backend = BasicAer.get_backend('qasm_simulator')
+   shots = 1024
+   results = execute(groverCircuit, backend=backend, shots=shots).result()
+   answer = results.get_counts()
+   plot_histogram(answer)
 
 As we can see, the algorithm discovers our marked states
 :math:`\lvert101\rangle` and :math:`\lvert110\rangle`.
+
+.. _experiment-with-real-devices-1:
 
 3.1.2 Experiment with Real Devices 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can run the circuit on the real device as below.
 
-.. code:: ipython3
+.. code:: python
 
-    backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= 3 and 
-                                       not x.configuration().simulator and x.status().operational==True))
-    print("least busy backend: ", backend)
+   backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= 3 and 
+                                      not x.configuration().simulator and x.status().operational==True))
+   print("least busy backend: ", backend)
 
+.. code:: python
 
-.. parsed-literal::
+   # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
+   from qiskit.tools.monitor import job_monitor
 
-    least busy backend:  ibmq_burlington
+   shots = 1024
+   job = execute(groverCircuit, backend=backend, shots=shots)
 
+   job_monitor(job, interval = 2)
 
-.. code:: ipython3
+.. code:: python
 
-    # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
-    from qiskit.tools.monitor import job_monitor
-    
-    shots = 1024
-    job = execute(groverCircuit, backend=backend, shots=shots)
-    
-    job_monitor(job, interval = 2)
-
-
-.. parsed-literal::
-
-    Job Status: job has successfully run
-
-
-.. code:: ipython3
-
-    # Get the results from the computation
-    results = job.result()
-    answer = results.get_counts(groverCircuit)
-    plot_histogram(answer)
-
-
-
-
-.. image:: grover_files/grover_47_0.svg
-
-
+   # Get the results from the computation
+   results = job.result()
+   answer = results.get_counts(groverCircuit)
+   plot_histogram(answer)
 
 As we can see, the algorithm discovers our marked states
 :math:`\lvert101\rangle` and :math:`\lvert110\rangle`. The other results
@@ -868,21 +759,7 @@ are due to errors in the quantum computation.
 3. I. Chuang & M. Nielsen, “Quantum Computation and Quantum
    Information”, Cambridge: Cambridge University Press, 2000.
 
-.. code:: ipython3
+.. code:: python
 
-    import qiskit
-    qiskit.__qiskit_version__
-
-
-
-
-.. parsed-literal::
-
-    {'qiskit-terra': '0.11.1',
-     'qiskit-aer': '0.3.4',
-     'qiskit-ignis': '0.2.0',
-     'qiskit-ibmq-provider': '0.4.5',
-     'qiskit-aqua': '0.6.2',
-     'qiskit': '0.14.1'}
-
-
+   import qiskit
+   qiskit.__qiskit_version__
