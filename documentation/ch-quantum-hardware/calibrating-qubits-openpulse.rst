@@ -28,6 +28,7 @@ Contents
 .. contents:: Quick links throughout the document:
 
 
+
 Part 2. Calibrating and using a :math:`\pi` pulse A. `Calibrating
 :math:`\pi` pulses using a Rabi experiment <#rabi>`__ B. `Determining 0
 vs 1 <#zerovone>`__ C. `Measuring :math:`T_1` using inversion
@@ -449,7 +450,6 @@ sphere.
 
 .. figure:: https://github.com/aasfaw/qiskit-intros/blob/master/zero_to_one_X180.png?raw=true
    :alt: bloch1
-
 
 We will change the drive amplitude in small increments and measuring the
 state of the qubit each time. We expect to see oscillations which are
@@ -902,7 +902,6 @@ pulses and the qubit.
 
 .. figure:: https://github.com/aasfaw/qiskit-intros/blob/master/dephasing.png?raw=true
    :alt: bloch2
-
 
 .. code:: ipython3
 

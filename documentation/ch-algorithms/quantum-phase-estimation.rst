@@ -7,6 +7,7 @@ Contents
 .. contents:: Quick links throughout the document:
 
 
+
 Quantum phase estimation is one of the most important subroutines in
 quantum computation. It serves as a central building block for many
 quantum algorithms. The objective of the algorithm is the following:

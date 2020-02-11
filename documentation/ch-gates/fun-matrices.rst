@@ -52,10 +52,10 @@ product, and works by standard matrix multiplication. For example
 
 .. math::
 
-   |0\rangle\langle0|= \begin{pmatrix} 1 \\\\ 0 \end{pmatrix} \begin{pmatrix} 1 & 0 \end{pmatrix} = \begin{pmatrix} 1&0 \\\\ 0&0 \end{pmatrix},\\\\
-   |0\rangle\langle1| = \begin{pmatrix} 1 \\\\ 0 \end{pmatrix} \begin{pmatrix} 0 & 1 \end{pmatrix} = \begin{pmatrix} 0&1 \\\\ 0&0 \end{pmatrix},\\\\
-   |1\rangle\langle0| = \begin{pmatrix} 0 \\\\ 1 \end{pmatrix} \begin{pmatrix} 1 & 0 \end{pmatrix} = \begin{pmatrix} 0&0 \\\\ 1&0 \end{pmatrix},\\\\
-   |1\rangle\langle1| = \begin{pmatrix} 0 \\\\ 1 \end{pmatrix} \begin{pmatrix} 0 & 1 \end{pmatrix} = \begin{pmatrix} 0&0 \\\\ 0&1 \end{pmatrix}.\\\\
+   |0\rangle\langle0|= \begin{pmatrix} 1 \\\\\\\\ 0 \end{pmatrix} \begin{pmatrix} 1 & 0 \end{pmatrix} = \begin{pmatrix} 1&0 \\\\\\\\ 0&0 \end{pmatrix},\\\\\\\\
+   |0\rangle\langle1| = \begin{pmatrix} 1 \\\\\\\\ 0 \end{pmatrix} \begin{pmatrix} 0 & 1 \end{pmatrix} = \begin{pmatrix} 0&1 \\\\\\\\ 0&0 \end{pmatrix},\\\\\\\\
+   |1\rangle\langle0| = \begin{pmatrix} 0 \\\\\\\\ 1 \end{pmatrix} \begin{pmatrix} 1 & 0 \end{pmatrix} = \begin{pmatrix} 0&0 \\\\\\\\ 1&0 \end{pmatrix},\\\\\\\\
+   |1\rangle\langle1| = \begin{pmatrix} 0 \\\\\\\\ 1 \end{pmatrix} \begin{pmatrix} 0 & 1 \end{pmatrix} = \begin{pmatrix} 0&0 \\\\\\\\ 0&1 \end{pmatrix}.\\\\\\\\
 
  This also means that we can write any matrix purely in terms of outer
 products. In the examples above, we constructed the four matrices that
@@ -64,7 +64,7 @@ write any other single-qubit matrix in terms of them.
 
 .. math::
 
-   M= \begin{pmatrix} m_{0,0}&m_{0,1} \\\\ m_{1,0}&m_{1,1} \end{pmatrix} = m_{0,0} |0\rangle\langle0|+ m_{0,1} |0\rangle\langle1|+ m_{1,0} |1\rangle\langle0|+ m_{1,1} |1\rangle\langle1|
+   M= \begin{pmatrix} m_{0,0}&m_{0,1} \\\\\\\\ m_{1,0}&m_{1,1} \end{pmatrix} = m_{0,0} |0\rangle\langle0|+ m_{0,1} |0\rangle\langle1|+ m_{1,0} |1\rangle\langle0|+ m_{1,1} |1\rangle\langle1|
 
  This property also extends to matrices for any number of qubits,
 :math:`n`. We simply use the outer products of the corresponding
@@ -182,14 +182,14 @@ outer products.
 
 .. math::
 
-   M= \begin{pmatrix} m_{0,0}&m_{0,1} \\\\ m_{1,0}&m_{1,1} \end{pmatrix} = m_{0,0} |0\rangle\langle0|+ m_{0,1} |0\rangle\langle1|+ m_{1,0} |1\rangle\langle0|+ m_{1,1} |1\rangle\langle1|
+   M= \begin{pmatrix} m_{0,0}&m_{0,1} \\\\\\\\ m_{1,0}&m_{1,1} \end{pmatrix} = m_{0,0} |0\rangle\langle0|+ m_{0,1} |0\rangle\langle1|+ m_{1,0} |1\rangle\langle0|+ m_{1,1} |1\rangle\langle1|
 
  Now we will see that it is also possible to write them completely in
 terms of Pauli operators. For this, the key thing to note is that
 
 .. math::
 
-   \frac{1+Z}{2} = \frac{1}{2}\left[ \begin{pmatrix} 1&0 \\\\0&1 \end{pmatrix}+\begin{pmatrix} 1&0 \\\\0&-1 \end{pmatrix}\right] = |0\rangle\langle0|,\\\\\frac{1-Z}{2} = \frac{1}{2}\left[ \begin{pmatrix} 1&0 \\\\0&1 \end{pmatrix}-\begin{pmatrix} 1&0 \\\\0&-1 \end{pmatrix}\right] = |1\rangle\langle1|
+   \frac{1+Z}{2} = \frac{1}{2}\left[ \begin{pmatrix} 1&0 \\\\\\\\0&1 \end{pmatrix}+\begin{pmatrix} 1&0 \\\\\\\\0&-1 \end{pmatrix}\right] = |0\rangle\langle0|,\\\\\\\\\frac{1-Z}{2} = \frac{1}{2}\left[ \begin{pmatrix} 1&0 \\\\\\\\0&1 \end{pmatrix}-\begin{pmatrix} 1&0 \\\\\\\\0&-1 \end{pmatrix}\right] = |1\rangle\langle1|
 
  This shows that :math:`|0\rangle\langle0|` and
 :math:`|1\rangle\langle1|` can be expressed using the identity matrix

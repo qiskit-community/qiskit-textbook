@@ -13,6 +13,7 @@ Contents
 .. contents:: Quick links throughout the document:
 
 
+
    -  5a `Running QAOA on a simulator <#implementationsim>`__
    -  5b `Running QAOA on a real quantum device <#implementationdev>`__
 

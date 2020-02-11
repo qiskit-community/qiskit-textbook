@@ -45,9 +45,9 @@ previous section.
 
 .. math::
 
-   X= \begin{pmatrix} 0&1 \\\\ 1&0 \end{pmatrix}\\\\
-   Y= \begin{pmatrix} 0&-i \\\\ i&0 \end{pmatrix}\\\\
-   Z= \begin{pmatrix} 1&0 \\\\ 0&-1 \end{pmatrix}
+   X= \begin{pmatrix} 0&1 \\\\\\\\ 1&0 \end{pmatrix}\\\\\\\\
+   Y= \begin{pmatrix} 0&-i \\\\\\\\ i&0 \end{pmatrix}\\\\\\\\
+   Z= \begin{pmatrix} 1&0 \\\\\\\\ 0&-1 \end{pmatrix}
 
  There, their job was to help us make calculations regarding
 measurements. But since these matrices are unitary, and therefore define
@@ -94,7 +94,7 @@ states. Its matrix form is
 
 .. math::
 
-   H = \frac{1}{\sqrt{2}} \begin{pmatrix} 1&1 \\\\ 1&-1 \end{pmatrix}.
+   H = \frac{1}{\sqrt{2}} \begin{pmatrix} 1&1 \\\\\\\\ 1&-1 \end{pmatrix}.
 
  The :math:`S` and :math:`S^\dagger` gates have a similar role to play
 in quantum computation.
@@ -109,7 +109,7 @@ be regarded as the two possible square roots of the :math:`Z` gate,
 
 .. math::
 
-   S = \begin{pmatrix} 1&0 \\\\ 0&i \end{pmatrix}, \, \, \, \, S^\dagger = \begin{pmatrix} 1&0 \\\\ 0&-i \end{pmatrix}.
+   S = \begin{pmatrix} 1&0 \\\\\\\\ 0&i \end{pmatrix}, \, \, \, \, S^\dagger = \begin{pmatrix} 1&0 \\\\\\\\ 0&-i \end{pmatrix}.
 
  The effect of these gates is to rotate between the states of the x and
 y bases.
@@ -169,7 +169,7 @@ Their matrix form is
 
 .. math::
 
-   T = \begin{pmatrix} 1&0 \\\\ 0&e^{i\pi/4}\end{pmatrix}, \, \, \, \, T^\dagger = \begin{pmatrix} 1&0 \\\\ 0&e^{-i\pi/4} \end{pmatrix}.
+   T = \begin{pmatrix} 1&0 \\\\\\\\ 0&e^{i\pi/4}\end{pmatrix}, \, \, \, \, T^\dagger = \begin{pmatrix} 1&0 \\\\\\\\ 0&e^{-i\pi/4} \end{pmatrix}.
 
 All single-qubit operations are compiled down to gates known as
 :math:`U_1` , :math:`U_2` and :math:`U_3` before running on real IBM
@@ -179,7 +179,7 @@ general is
 
 .. math::
 
-   U_3(\theta,\phi,\lambda) = \begin{pmatrix} \cos(\theta/2) & -e^{i\lambda}\sin(\theta/2) \\\\ e^{i\phi}\sin(\theta/2) 
+   U_3(\theta,\phi,\lambda) = \begin{pmatrix} \cos(\theta/2) & -e^{i\lambda}\sin(\theta/2) \\\\\\\\ e^{i\phi}\sin(\theta/2) 
    & e^{i\lambda+i\phi}\cos(\theta/2) \end{pmatrix}.
 
  This has the effect of rotating a qubit in the initial
@@ -196,7 +196,7 @@ matrix form are,
 
 .. math::
 
-   U_1(\lambda) = U_3(0,0,\lambda) = \begin{pmatrix} 1 & 0 \\\\ 0 & e^{i\lambda} \end{pmatrix}.
+   U_1(\lambda) = U_3(0,0,\lambda) = \begin{pmatrix} 1 & 0 \\\\\\\\ 0 & e^{i\lambda} \end{pmatrix}.
 
  In IBM Q hardware, this gate is implemented as a frame change and takes
 zero time.
@@ -205,7 +205,7 @@ The second gate is :math:`U_2`, and has the form
 
 .. math::
 
-   U_2(\phi,\lambda) = U_3(\pi/2,\phi,\lambda) = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 & -e^{i\lambda} \\\\ e^{i\phi} & e^{i\lambda+i\phi} \end{pmatrix}.
+   U_2(\phi,\lambda) = U_3(\pi/2,\phi,\lambda) = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 & -e^{i\lambda} \\\\\\\\ e^{i\phi} & e^{i\lambda+i\phi} \end{pmatrix}.
 
  From this gate, the Hadamard is done by :math:`H= U_2(0,\pi)`. In IBM Q
 hardware, this is implemented by a pre- and post-frame change and an
@@ -259,7 +259,7 @@ can expect the result to be,
 
 .. math::
 
-   Z \otimes X=  \begin{pmatrix} 1&0 \\\\ 0&-1 \end{pmatrix} \otimes \begin{pmatrix} 0&1 \\\\ 1&0 \end{pmatrix} = \begin{pmatrix} 0&1&0&0 \\\\ 1&0&0&0\\\\0&0&0&-1\\\\0&0&-1&0 \end{pmatrix}.
+   Z \otimes X=  \begin{pmatrix} 1&0 \\\\\\\\ 0&-1 \end{pmatrix} \otimes \begin{pmatrix} 0&1 \\\\\\\\ 1&0 \end{pmatrix} = \begin{pmatrix} 0&1&0&0 \\\\\\\\ 1&0&0&0\\\\\\\\0&0&0&-1\\\\\\\\0&0&-1&0 \end{pmatrix}.
 
  This is exactly what we find when we analyze the circuit with this
 tool.
@@ -279,7 +279,7 @@ tool.
     
     # now we use some fanciness to display it in latex
     from IPython.display import display, Markdown, Latex
-    gate_latex = '\\begin{pmatrix}'
+    gate_latex = '\\\\begin{pmatrix}'
     for line in gate:
         for element in line:
             gate_latex += str(element) + '&'
@@ -293,7 +293,7 @@ tool.
 
 .. raw:: latex
 
-   \begin{pmatrix}0j&(1+0j)&0j&0j\\(1+0j)&0j&0j&0j\\0j&0j&0j&(-1+0j)\\0j&0j&(-1+0j)&0j\end{pmatrix}
+   \begin{pmatrix}0j&(1+0j)&0j&0j\\\\(1+0j)&0j&0j&0j\\\\0j&0j&0j&(-1+0j)\\\\0j&0j&(-1+0j)&0j\end{pmatrix}
 
 
 .. code:: ipython3

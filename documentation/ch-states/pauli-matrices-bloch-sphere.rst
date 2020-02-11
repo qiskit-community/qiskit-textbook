@@ -18,9 +18,9 @@ important matrices for qubits are known as the Pauli matrices.
 
 .. math::
 
-   X= \begin{pmatrix} 0&1 \\\\ 1&0 \end{pmatrix}\\\\
-   Y= \begin{pmatrix} 0&-i \\\\ i&0 \end{pmatrix}\\\\
-   Z= \begin{pmatrix} 1&0 \\\\ 0&-1 \end{pmatrix}
+   X= \begin{pmatrix} 0&1 \\\\\\\\ 1&0 \end{pmatrix}\\\\\\\\
+   Y= \begin{pmatrix} 0&-i \\\\\\\\ i&0 \end{pmatrix}\\\\\\\\
+   Z= \begin{pmatrix} 1&0 \\\\\\\\ 0&-1 \end{pmatrix}
 
  These have many useful properties, as well as a deep connection to the
 x, y and z measurements. Specifically, we can use them to calculate the

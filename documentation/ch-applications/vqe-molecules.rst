@@ -11,6 +11,7 @@ Contents
 .. contents:: Quick links throughout the document:
 
 
+
    1. `Mathematical Background <#backgroundmath>`__
    2. `Bounding the Ground State <#groundstate>`__
 
@@ -196,7 +197,7 @@ Consider the case where :math:`n=1`. The U3 gate takes three parameters,
 transformation:
 
 :raw-latex:`\begin{align}
-    U3(\theta, \phi, \lambda) = \begin{pmatrix}\cos(\frac{\theta}{2}) & -e^{i\lambda}\sin(\frac{\theta}{2}) \\ e^{i\phi}\sin(\frac{\theta}{2}) & e^{i\lambda + i\phi}\cos(\frac{\theta}{2}) \end{pmatrix}
+    U3(\theta, \phi, \lambda) = \begin{pmatrix}\cos(\frac{\theta}{2}) & -e^{i\lambda}\sin(\frac{\theta}{2}) \\\\ e^{i\phi}\sin(\frac{\theta}{2}) & e^{i\lambda + i\phi}\cos(\frac{\theta}{2}) \end{pmatrix}
 \end{align}`
 
 Up to a global phase, any possible single qubit transformation may be
@@ -206,7 +207,6 @@ possible state is given by the circuit:
 
 .. figure:: images/U3_var_form.png
    :alt: u3_var_form
-
 
 Moreover, this universal ‘variational form’ only has 3 parameters and
 thus can be efficiently optimized. It is worth emphasising that the
@@ -224,7 +224,6 @@ parameterized 2 qubit circuit:
 
 .. figure:: images/two_qubit_var_form.png
    :alt: 2qubit_var_form
-
 
 Allow the transformation performed by the above circuit to be
 represented by :math:`U(\theta)`. When optimized variationally, the

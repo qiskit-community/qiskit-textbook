@@ -18,24 +18,12 @@ def add_newlines_to_equations(filename):
     with open(filename) as f:
         for line in f:
             if line == "    \"$$\\n\",\n":
-                if in_equation:
+                if not in_equation:
                     line.replace("$$","$$\\n")
                 else:
                     line.replace("$$","\\n$$")
                 in_equation = not in_equation
             out += line
-    with open(filename, 'w') as f:
-        f.write(out)
-
-def fix_fuckup(filename):
-    out = ""
-    with open(filename) as f:
-        for line in f:
-            line = line.replace("$$\n", "$$")
-            if line[0] == "$":
-                out = out[:-1]
-            out += line.replace("\"\n", "\"")
-                
     with open(filename, 'w') as f:
         f.write(out)
 
@@ -45,4 +33,3 @@ for directory in os.listdir(filepath):
         for file in os.listdir(filepath + directory):
             if str(file)[-6:] == ".ipynb":
                 add_newlines_to_equations(filepath + directory + "/" + file)
-                #fix_fuckup(filepath + directory + "/" + file)

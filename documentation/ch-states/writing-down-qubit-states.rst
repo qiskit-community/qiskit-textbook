@@ -47,7 +47,7 @@ vectors.
 
 .. math::
 
-   |0\rangle = \begin{pmatrix} 1 \\\\\\ 0 \end{pmatrix} \, \, \, \, |1\rangle =\begin{pmatrix} 0 \\\\\\ 1 \end{pmatrix}.
+   |0\rangle = \begin{pmatrix} 1 \\\\\\\\\\\\ 0 \end{pmatrix} \, \, \, \, |1\rangle =\begin{pmatrix} 0 \\\\\\\\\\\\ 1 \end{pmatrix}.
 
  This is a lot of notation to take in all at once. First let’s unpack
 the weird :math:`|` and :math:`\rangle` . Their job is essentially just
@@ -85,14 +85,14 @@ element in the other. For a couple of arbitrary vectors that we’ll call
 
 .. math::
 
-   \begin{pmatrix} a_0 \\\\ a_1 \end{pmatrix} +\begin{pmatrix} b_0 \\\\ b_1 \end{pmatrix}=\begin{pmatrix} a_0+b_0 \\\\ a_1+b_1 \end{pmatrix}.
+   \begin{pmatrix} a_0 \\\\\\\\ a_1 \end{pmatrix} +\begin{pmatrix} b_0 \\\\\\\\ b_1 \end{pmatrix}=\begin{pmatrix} a_0+b_0 \\\\\\\\ a_1+b_1 \end{pmatrix}.
 
  To multiple a vector by a number, we simply multiply every element in
 the list by that number:
 
 .. math::
 
-   x \times\begin{pmatrix} a_0 \\\\ a_1 \end{pmatrix} = \begin{pmatrix} x \times a_0 \\\\ x \times a_1 \end{pmatrix}
+   x \times\begin{pmatrix} a_0 \\\\\\\\ a_1 \end{pmatrix} = \begin{pmatrix} x \times a_0 \\\\\\\\ x \times a_1 \end{pmatrix}
 
  Multiplying a vector with another vector is a bit more tricky, since
 there are multiple ways we can do it. One is called the ‘inner product’,
@@ -100,7 +100,7 @@ and works as follows.
 
 .. math::
 
-   \begin{pmatrix} a_0 & a_1 \end{pmatrix} \begin{pmatrix} b_0 \\\\ b_1 \end{pmatrix}= a_0~b_0 + a_1~b_1.
+   \begin{pmatrix} a_0 & a_1 \end{pmatrix} \begin{pmatrix} b_0 \\\\\\\\ b_1 \end{pmatrix}= a_0~b_0 + a_1~b_1.
 
  Note that the right hand side of this equation contains only normal
 numbers being multipled and added in a normal way. The inner product of
@@ -145,14 +145,14 @@ either. But let’s hedge our bets a little and multiply it by some number
 
 .. math::
 
-   x ~ (|0\rangle + |1\rangle) = \begin{pmatrix} x \\\\ x \end{pmatrix}
+   x ~ (|0\rangle + |1\rangle) = \begin{pmatrix} x \\\\\\\\ x \end{pmatrix}
 
  We can choose the value of :math:`x` to make sure that the state plays
 nicely in our calculations. For example, think about the inner product,
 
 .. math::
 
-   \begin{pmatrix} x & x \end{pmatrix} \times \begin{pmatrix} x \\\\ x \end{pmatrix}= 2x^2.
+   \begin{pmatrix} x & x \end{pmatrix} \times \begin{pmatrix} x \\\\\\\\ x \end{pmatrix}= 2x^2.
 
  We can get any value for the inner product that we want, just by
 choosing the appropriate value of :math:`x`.
@@ -170,7 +170,7 @@ is, so here’s a few ways of writing it down.
 
 .. math::
 
-   \begin{pmatrix} \frac{1}{\sqrt{2}} \\\\ \frac{1}{\sqrt{2}} \end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\\\ 1 \end{pmatrix} = \frac{ |0\rangle + |1\rangle}{\sqrt{2}}
+   \begin{pmatrix} \frac{1}{\sqrt{2}} \\\\\\\\ \frac{1}{\sqrt{2}} \end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\\\\\\\ 1 \end{pmatrix} = \frac{ |0\rangle + |1\rangle}{\sqrt{2}}
 
  This state is essentially just :math:`|0\rangle` and :math:`|1\rangle`
 added together and then normalized, so we will give it a name to reflect
@@ -235,7 +235,7 @@ Let’s find an example. Consider a state that looks like this:
 
 .. math::
 
-   |\tilde 0\rangle = \begin{pmatrix} -1 \\\\ 0 \end{pmatrix} = -|0\rangle.
+   |\tilde 0\rangle = \begin{pmatrix} -1 \\\\\\\\ 0 \end{pmatrix} = -|0\rangle.
 
  This is equivalent to multiplying the state :math:`|0\rangle` by
 :math:`-1`. It means that every inner product we could calculate with
@@ -267,14 +267,14 @@ example:
 
 .. math::
 
-   \begin{pmatrix} a_0 \\\\ a_1 \end{pmatrix} \rightarrow \begin{pmatrix} a_0 \\\\ -a_1 \end{pmatrix}.
+   \begin{pmatrix} a_0 \\\\\\\\ a_1 \end{pmatrix} \rightarrow \begin{pmatrix} a_0 \\\\\\\\ -a_1 \end{pmatrix}.
 
  Doing this with the :math:`|+\rangle` state gives us a new state. We’ll
 call it :math:`|-\rangle`.
 
 .. math::
 
-   |-\rangle = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\\\ -1 \end{pmatrix} = \frac{ |0\rangle - |1\rangle}{\sqrt{2}}
+   |-\rangle = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\\\\\\\ -1 \end{pmatrix} = \frac{ |0\rangle - |1\rangle}{\sqrt{2}}
 
  The values :math:`p_0^z` and :math:`p_1^z` for :math:`|-\rangle` are
 the same as for :math:`|+\rangle`. These two states are thus
@@ -509,7 +509,7 @@ be defined as follows:
 
 .. math::
 
-   |a\rangle = \begin{pmatrix} a_0 \\\\ a_1 \end{pmatrix}, ~~~ \langle a| = \begin{pmatrix} a_0^* & a_1^* \end{pmatrix}.
+   |a\rangle = \begin{pmatrix} a_0 \\\\\\\\ a_1 \end{pmatrix}, ~~~ \langle a| = \begin{pmatrix} a_0^* & a_1^* \end{pmatrix}.
 
  Then we just need a small change to the Born rule, where we square the
 magnitudes of inner products, rather than just the inner products

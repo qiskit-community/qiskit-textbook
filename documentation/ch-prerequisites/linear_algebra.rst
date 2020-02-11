@@ -35,7 +35,7 @@ Formally, a **vector** :math:`|v\rangle` is defined as elements of a set
 known as a vector space. A more intuitive and geometric definition is
 that a vector “is a mathematical quantity with both direction and
 magnitude”. For instance, consider a vector with :math:`x` and :math:`y`
-components of the form :math:`\begin{pmatrix} 3 \\ 5 \end{pmatrix}`.
+components of the form :math:`\begin{pmatrix} 3 \\\\ 5 \end{pmatrix}`.
 This vector can be visualized as an arrow pointing in the direction of
 :math:`3` unit down the :math:`x` axis and :math:`5` units up the
 :math:`y` axis:
@@ -104,14 +104,14 @@ We will now clarify this previous definition by working through a basic
 example. Let us demonstrate that the set :math:`\mathbb{R}^2` over the
 field :math:`\mathbb{R}` is a vector space. We assert that
 
-.. math:: \begin{pmatrix} x_1 \\ y_1 \end{pmatrix} \ + \ \begin{pmatrix} x_2 \\ y_2 \end{pmatrix} \ = \ \begin{pmatrix} x_1 \ + \ x_2 \\ y_1 \ + \ y_2 \end{pmatrix}
+.. math:: \begin{pmatrix} x_1 \\\\ y_1 \end{pmatrix} \ + \ \begin{pmatrix} x_2 \\\\ y_2 \end{pmatrix} \ = \ \begin{pmatrix} x_1 \ + \ x_2 \\\\ y_1 \ + \ y_2 \end{pmatrix}
 
 is contained within :math:`\mathbb{R}^2`. This is evidently the case, as
 the sum of two real numbers is a real number[1], making both components
 of the newly-formed vector real numbers. In turn, the vector is
 contained in :math:`\\mathbb{R}^2`. We also assert that:
 
-.. math:: n |v\rangle \ = \ \begin{pmatrix} nx \\ ny \end{pmatrix} \ \in \ V \ \ \ \ \forall n \ \in \ \mathbb{R}
+.. math:: n |v\rangle \ = \ \begin{pmatrix} nx \\\\ ny \end{pmatrix} \ \in \ V \ \ \ \ \forall n \ \in \ \mathbb{R}
 
 is contained within :math:`\\mathbb{R}^2`. The product of a real number
 and a real number is in turn a real number, making the values of the new
@@ -130,7 +130,7 @@ to other vectors:
 Generally, matrices are written as “arrays” of numbers, looking
 something like this:
 
-.. math:: M \ = \ \begin{pmatrix} 1 & -2 & 3 \\ 1 & 5i & 0 \\ 1 \ + \ i & 7 & -4 \end{pmatrix}
+.. math:: M \ = \ \begin{pmatrix} 1 & -2 & 3 \\\\ 1 & 5i & 0 \\\\ 1 \ + \ i & 7 & -4 \end{pmatrix}
 
 We can actually “apply” a matrix to a vector by performing matrix
 multiplication. In general, matrix multiplication between two matrices
@@ -147,7 +147,7 @@ this process until we have used all rows of the first matrix. The
 resulting matrix is our new matrix! That may have been confusing, so
 here is an example:
 
-.. math:: \begin{pmatrix} 2 & 0 \\ 5 & -1 \end{pmatrix} \begin{pmatrix} -3 & 1 \\ 2 & 1 \end{pmatrix} \ = \ \begin{pmatrix} (2)(-3) + (0)(2) & (2)(1) \ + \ (0)(1) \\ (5)(-3) + (-1)(2) & (5)(1) \ + \ (-1)(1) \end{pmatrix} \ = \ \begin{pmatrix} -6 & 2 \\ -17 & 4 \end{pmatrix}
+.. math:: \begin{pmatrix} 2 & 0 \\\\ 5 & -1 \end{pmatrix} \begin{pmatrix} -3 & 1 \\\\ 2 & 1 \end{pmatrix} \ = \ \begin{pmatrix} (2)(-3) + (0)(2) & (2)(1) \ + \ (0)(1) \\\\ (5)(-3) + (-1)(2) & (5)(1) \ + \ (-1)(1) \end{pmatrix} \ = \ \begin{pmatrix} -6 & 2 \\\\ -17 & 4 \end{pmatrix}
 
 As you can see, we simply used the previously outlined process to arrive
 at the final matrix! Going back to “applying” matrices to vectors, all
@@ -164,20 +164,20 @@ state vector, thus changing the state. For instance, one of the most
 commonly seen quantum gates is the Pauli-X gate, which is represented by
 the follwing matrix:
 
-.. math:: \sigma_x \ = \ \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}
+.. math:: \sigma_x \ = \ \begin{pmatrix} 0 & 1 \\\\ 1 & 0 \end{pmatrix}
 
 This gate acts kind of similarly to the classical NOT logic gate. It
 maps the computational basis state :math:`|0\rangle` to
 :math:`|1\rangle` and :math:`|1\rangle` to :math:`|0\rangle` (it “flips”
 the state). As actual column vectors, we write the two basis states:
 
-.. math:: |0\rangle \ = \ \begin{pmatrix} 1 \\ 0 \end{pmatrix} \ \ \ \ \ \ \ |1\rangle \ = \ \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+.. math:: |0\rangle \ = \ \begin{pmatrix} 1 \\\\ 0 \end{pmatrix} \ \ \ \ \ \ \ |1\rangle \ = \ \begin{pmatrix} 0 \\\\ 1 \end{pmatrix}
 
 So when we apply this matrix to each of the vectors:
 
-.. math:: \sigma_x |0\rangle \ = \ \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \ = \ \begin{pmatrix} (0)(1) \ + \ (1)(0) \\ (1)(1) \ + \ (0)(0) \end{pmatrix} \ = \ \begin{pmatrix} 0 \\ 1 \end{pmatrix} \ = \ |1\rangle
+.. math:: \sigma_x |0\rangle \ = \ \begin{pmatrix} 0 & 1 \\\\ 1 & 0 \end{pmatrix} \begin{pmatrix} 1 \\\\ 0 \end{pmatrix} \ = \ \begin{pmatrix} (0)(1) \ + \ (1)(0) \\\\ (1)(1) \ + \ (0)(0) \end{pmatrix} \ = \ \begin{pmatrix} 0 \\\\ 1 \end{pmatrix} \ = \ |1\rangle
 
-.. math:: \sigma_x |1\rangle \ = \ \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \ = \ \begin{pmatrix} (0)(0) \ + \ (1)(1) \\ (1)(0) \ + \ (0)(1) \end{pmatrix} \ = \ \begin{pmatrix} 1 \\ 0 \end{pmatrix} \ = \ |0\rangle
+.. math:: \sigma_x |1\rangle \ = \ \begin{pmatrix} 0 & 1 \\\\ 1 & 0 \end{pmatrix} \begin{pmatrix} 0 \\\\ 1 \end{pmatrix} \ = \ \begin{pmatrix} (0)(0) \ + \ (1)(1) \\\\ (1)(0) \ + \ (0)(1) \end{pmatrix} \ = \ \begin{pmatrix} 1 \\\\ 0 \end{pmatrix} \ = \ |0\rangle
 
 And so the matrix acts on the state vectors exactly as expected!
 
@@ -198,7 +198,7 @@ main diagonal (the diagonal that goes from the top left corner to the
 bottom right corner). For instance, a matrix that we commonly use in
 quantum computation, the Pauli-Y matrix is Hermitian:
 
-.. math:: \sigma_y \ = \ \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix} \ \Rightarrow \ \sigma_y^{\dagger} \ = \ \begin{pmatrix} 0 & -(i) \\ -(-i) & 0 \end{pmatrix} \ = \ \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix} \ = \ \sigma_y
+.. math:: \sigma_y \ = \ \begin{pmatrix} 0 & -i \\\\ i & 0 \end{pmatrix} \ \Rightarrow \ \sigma_y^{\dagger} \ = \ \begin{pmatrix} 0 & -(i) \\\\ -(-i) & 0 \end{pmatrix} \ = \ \begin{pmatrix} 0 & -i \\\\ i & 0 \end{pmatrix} \ = \ \sigma_y
 
 Notice how we switched the places of the :math:`i` and the :math:`-i`
 (as we are reflecting across the main diagonal, the zeroes remain
@@ -224,7 +224,7 @@ matrices get larger than :math:`2 \ \times \ 2`, calculating the inverse
 becomes a huge pain and is left to computers for the most part. For a
 :math:`2 \ \times \ 2` matrix, the inverse is defined as:
 
-.. math:: A \ = \ \begin{pmatrix} a & b \\ c & d \end{pmatrix} \ \Rightarrow \ A^{-1} \ = \ \frac{1}{\text{det} \ A} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}
+.. math:: A \ = \ \begin{pmatrix} a & b \\\\ c & d \end{pmatrix} \ \Rightarrow \ A^{-1} \ = \ \frac{1}{\text{det} \ A} \begin{pmatrix} d & -b \\\\ -c & a \end{pmatrix}
 
 Where :math:`\text{det} \ A` is the **determinant** of the matrix. In
 the :math:`2 \ \times \ 2` case,
@@ -243,7 +243,7 @@ which is also equal to its inverse, therefore, the Pauli-Y matrix is its
 own inverse, that’s pretty cool!). We can verify that this matrix is in
 fact unitary:
 
-.. math:: \sigma_y \ = \ \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix} \ \ \ \ \ \sigma_y^{\dagger} \ = \ \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix} \ \Rightarrow \ \sigma_y^{\dagger} \sigma_y \ = \ \begin{pmatrix} (0)(0) + (-i)(i) & (0)(-i) \ + \ (-i)(0) \\ (i)(0) \ + \ (0)(i) &  (i)(-i) \ + \ (0)(0) \end{pmatrix} \ = \ \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \ = \ \mathbb{I}
+.. math:: \sigma_y \ = \ \begin{pmatrix} 0 & -i \\\\ i & 0 \end{pmatrix} \ \ \ \ \ \sigma_y^{\dagger} \ = \ \begin{pmatrix} 0 & -i \\\\ i & 0 \end{pmatrix} \ \Rightarrow \ \sigma_y^{\dagger} \sigma_y \ = \ \begin{pmatrix} (0)(0) + (-i)(i) & (0)(-i) \ + \ (-i)(0) \\\\ (i)(0) \ + \ (0)(i) &  (i)(-i) \ + \ (0)(0) \end{pmatrix} \ = \ \begin{pmatrix} 1 & 0 \\\\ 0 & 1 \end{pmatrix} \ = \ \mathbb{I}
 
 The reason why unitary matrices are so important in the context of
 quantum computation will become more apparent in the section on Hilbert
@@ -325,8 +325,8 @@ imply each other.
 
 Let’s now consider a basic example. For instance, consider the set of
 two vectors in :math:`\mathbb{R}^2`, consisting of
-:math:`|a\rangle \ = \ \begin{pmatrix} 1 \\ 0 \end{pmatrix}` and
-:math:`|b\rangle \ = \ \begin{pmatrix} 2 \\ 0 \end{pmatrix}`. Well, for
+:math:`|a\rangle \ = \ \begin{pmatrix} 1 \\\\ 0 \end{pmatrix}` and
+:math:`|b\rangle \ = \ \begin{pmatrix} 2 \\\\ 0 \end{pmatrix}`. Well, for
 example, if we choose the field over our vector space to be
 :math:`\mathbb{R}`, then we can create a linear combination of these
 vectors that equates to :math:`0`. For example:
@@ -384,7 +384,7 @@ where :math:`\langle a |` is equal to the conjugate transpose of
 :math:`|a\rangle`, denoted :math:`|a\rangle^{\dagger}`. Thus, the inner
 product between two vectors of the Hilbert space looks something like:
 
-.. math:: \langle a | b \rangle \ = \ \begin{pmatrix} a_1^{*} & a_2^{*} & ... & a_n^{*} \end{pmatrix} \begin{pmatrix} b_1 \\ b_2 \\ . \\ . \\ . \\ b_n \end{pmatrix} \ = \ a_1^{*} b_1 \ + \ a_2^{*} b_2 \ + \ ... \ + \ a_n^{*} b_n
+.. math:: \langle a | b \rangle \ = \ \begin{pmatrix} a_1^{*} & a_2^{*} & ... & a_n^{*} \end{pmatrix} \begin{pmatrix} b_1 \\\\ b_2 \\\\ . \\\\ . \\\\ . \\\\ b_n \end{pmatrix} \ = \ a_1^{*} b_1 \ + \ a_2^{*} b_2 \ + \ ... \ + \ a_n^{*} b_n
 
 Where :math:`*` denotes the complex conjugate of the vector.
 
@@ -483,26 +483,26 @@ lambda back into the original equation to get the eigenvalues! Let’s do
 an example, and find the eigenvectors/eigenvalues of the Pauli-Z matrix,
 :math:`\sigma_z`. We start with:
 
-.. math:: \text{det} (\sigma_z \ - \ \lambda \mathbb{I}) \ = \ \text{det} \begin{pmatrix} 1 \ - \ \lambda & 0 \\ 0 & -1 \ - \ \lambda \end{pmatrix}  \ = \ (-1 \ - \ \lambda)(1 \ - \ \lambda) \ = \ 1 \ - \ \lambda^2 \ = \ 0 \ \Rightarrow \ \lambda \ = \ \pm 1
+.. math:: \text{det} (\sigma_z \ - \ \lambda \mathbb{I}) \ = \ \text{det} \begin{pmatrix} 1 \ - \ \lambda & 0 \\\\ 0 & -1 \ - \ \lambda \end{pmatrix}  \ = \ (-1 \ - \ \lambda)(1 \ - \ \lambda) \ = \ 1 \ - \ \lambda^2 \ = \ 0 \ \Rightarrow \ \lambda \ = \ \pm 1
 
 The equation, in terms of lambda that is obtained when solving the
 determinant is called the **characteristic polynomial**. We can then
 plug each of these values back into the original equation. We’ll start
 with :math:`\lambda \ = \ 1`:
 
-.. math:: \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} |v\rangle \ = \ |v\rangle \ \Rightarrow \ \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \begin{pmatrix} a \\ b \end{pmatrix} \ = \ \begin{pmatrix} a \\ b \end{pmatrix} \ \Rightarrow \begin{pmatrix} a \\ -b \end{pmatrix} \ = \ \begin{pmatrix} a \\ b \end{pmatrix}
+.. math:: \begin{pmatrix} 1 & 0 \\\\ 0 & -1 \end{pmatrix} |v\rangle \ = \ |v\rangle \ \Rightarrow \ \begin{pmatrix} 1 & 0 \\\\ 0 & -1 \end{pmatrix} \begin{pmatrix} a \\\\ b \end{pmatrix} \ = \ \begin{pmatrix} a \\\\ b \end{pmatrix} \ \Rightarrow \begin{pmatrix} a \\\\ -b \end{pmatrix} \ = \ \begin{pmatrix} a \\\\ b \end{pmatrix}
 
 So this means that :math:`a` can be any number and :math:`b` is
-:math:`0`. Thus, the vector :math:`\begin{pmatrix} 1 \\ 0 \end{pmatrix}`
+:math:`0`. Thus, the vector :math:`\begin{pmatrix} 1 \\\\ 0 \end{pmatrix}`
 forms a basis for all vectors that satisfy our relationship, and is thus
 the eigenvector that corresponds to the eigenvalue of :math:`1`! We do
 the same thing for :math:`\lambda \ = \ -1`:
 
-.. math:: \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} |v\rangle \ = \ -|v\rangle \ \Rightarrow \ \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \begin{pmatrix} a \\ b \end{pmatrix} \ = \ \begin{pmatrix} -a \\ -b \end{pmatrix} \ \Rightarrow \begin{pmatrix} a \\ -b \end{pmatrix} \ = \ \begin{pmatrix} -a \\ -b \end{pmatrix}
+.. math:: \begin{pmatrix} 1 & 0 \\\\ 0 & -1 \end{pmatrix} |v\rangle \ = \ -|v\rangle \ \Rightarrow \ \begin{pmatrix} 1 & 0 \\\\ 0 & -1 \end{pmatrix} \begin{pmatrix} a \\\\ b \end{pmatrix} \ = \ \begin{pmatrix} -a \\\\ -b \end{pmatrix} \ \Rightarrow \begin{pmatrix} a \\\\ -b \end{pmatrix} \ = \ \begin{pmatrix} -a \\\\ -b \end{pmatrix}
 
 This time, :math:`b` can be any number and :math:`a` is :math:`0`, thus
 our basis vector (and thus our eigenvector corresponding to :math:`-1`)
-is :math:`\begin{pmatrix} 0 \\ 1 \end{pmatrix}`. Notice how the
+is :math:`\begin{pmatrix} 0 \\\\ 1 \end{pmatrix}`. Notice how the
 eigenvectors of the Pauli-Z matrix are the quantum computational basis
 states :math:`|0\rangle` and :math:`|1\rangle`! This is no coincidence!
 For instance, when we measure a qubit in the :math:`Z`-basis, we are
@@ -625,11 +625,11 @@ Substituting in all of this new information, we get:
 We did it! This fact is **super** useful in quantum computation!
 Consider the Pauli matrices:
 
-.. math:: \sigma_x \ = \ \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}
+.. math:: \sigma_x \ = \ \begin{pmatrix} 0 & 1 \\\\ 1 & 0 \end{pmatrix}
 
-.. math:: \sigma_y \ = \ \begin{pmatrix} 0 & i \\ -i & 0 \end{pmatrix}
+.. math:: \sigma_y \ = \ \begin{pmatrix} 0 & i \\\\ -i & 0 \end{pmatrix}
 
-.. math:: \sigma_z \ = \ \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}
+.. math:: \sigma_z \ = \ \begin{pmatrix} 1 & 0 \\\\ 0 & -1 \end{pmatrix}
 
 These matrices are incredibly important to quantum computation, they are
 some of the most fundamental “quantum gates” used to manipulate qubits.

@@ -11,6 +11,7 @@ Contents
 .. contents:: Quick links throughout the document:
 
 
+
 1. Introduction 
 ----------------
 
@@ -72,7 +73,7 @@ such that the final result is the state:
 This operation is exactly the result of applying the Hadamard operator
 (:math:`H`) on the qubit:
 
-.. math:: H = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \end{bmatrix}
+.. math:: H = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 & 1 \\\\\\\\ 1 & -1 \end{bmatrix}
 
 If we apply the :math:`H` operator to the state
 :math:`\vert\psi\rangle = \alpha \vert 0 \rangle + \beta \vert 1 \rangle`,
@@ -490,7 +491,7 @@ defined in `OpenQASM <https://github.com/QISKit/openqasm>`__ as
 
 
    CU_1(\theta) =
-   \begin{bmatrix} 1 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & e^{i\theta}\end{bmatrix}
+   \begin{bmatrix} 1 & 0 & 0 & 0 \\\\\\\\ 0 & 1 & 0 & 0 \\\\\\\\ 0 & 0 & 1 & 0 \\\\\\\\ 0 & 0 & 0 & e^{i\theta}\end{bmatrix}
 
 Hence, the mapping from the :math:`CROT_k` gate in the discussion above
 into the :math:`CU_1` gate is found from the equation

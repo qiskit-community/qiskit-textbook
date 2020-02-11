@@ -55,7 +55,7 @@ def fix_matrices(filename):
     out = ""
     with open(filename) as f:
         for line in f:
-            if "{bmatrix}" in line:
+            if "matrix}" in line:
                 line = line.replace("\\\\", "\\\\\\\\")
             if line[-3:] == "\\\\\n" and not line[-5:] == "\\\\\\\\\n":
                 line = line.replace("\\\\", "\\\\\\\\")

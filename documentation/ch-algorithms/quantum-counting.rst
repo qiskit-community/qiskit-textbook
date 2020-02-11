@@ -8,18 +8,12 @@ the quantum counting algorithm tells us how many of these solutions
 there are. This algorithm is interesting as it combines both quantum
 search and quantum phase estimation.
 
-1. `Overview <#overview>`__
-   1.1 `Intuition <#intuition>`__
-   1.2 `A Closer Look <#closer_look>`__
-2. `The Code <#code>`__
-   2.1 `Initialising our Code <#init_code>`__
-   2.2 `The Controlled-Grover Iteration <#cont_grover>`__
-   2.3 `The Inverse QFT <#inv_qft>`__
-   2.4 `Putting it Together <#putting_together>`__
-3. `Simulating <#simulating>`__
-4. `Finding the Number of Solutions <#finding_m>`__
-5. `Exercises <#exercises>`__
-6. `References <#references>`__
+Contents
+--------
+
+.. contents:: Quick links throughout the document:
+
+
 
 1. Overview 
 ------------
@@ -57,7 +51,7 @@ the Grover iterator as the matrix:
    \sin{\theta} && \cos{\theta}
    \end{pmatrix}
 
- The matrix :math:`G` has eigenvectors:
+The matrix :math:`G` has eigenvectors:
 
 .. math::
 
@@ -71,7 +65,7 @@ the Grover iterator as the matrix:
    1
    \end{pmatrix}
 
- With the aforementioned eigenvalues :math:`e^{\pm i\theta}`.
+With the aforementioned eigenvalues :math:`e^{\pm i\theta}`.
 Fortunately, we do not need to prepare our register in either of these
 states, the state :math:`|s\rangle` is in the space spanned by
 :math:`|\omega\rangle`, :math:`|s’\rangle`, and thus is a superposition
@@ -81,14 +75,13 @@ of the two vectors.
 
    |s\rangle = \alpha |\omega\rangle + \beta|s'\rangle
 
- As a result, the output of the QPE algorithm will be a superposition of
+As a result, the output of the QPE algorithm will be a superposition of
 the two phases, and when we measure the register we will obtain one of
 these two values! We can then use some simple maths to get our estimate
 of :math:`M`.
 
 .. figure:: images/quantum_counting2.svg
    :alt: quantum_counting2
-
 
 2. The Code 
 ------------
@@ -379,24 +372,30 @@ need to do:
 You may remember that we can get the angle :math:`\theta/2` can from the
 inner product of :math:`|s\rangle` and :math:`|s’\rangle`:
 
+.. figure:: images/quantum_counting3.svg
+   :alt: counting3
+
 .. math::
+
 
    \langle s'|s\rangle = \cos{\tfrac{\theta}{2}}
 
- And that the inner product of these vectors is:
+And that the inner product of these vectors is:
 
 .. math::
 
+
    \langle s'|s\rangle = \sqrt{\frac{N-M}{N}}
 
- We can combine these equations, then use some trigonometry and algebra
+We can combine these equations, then use some trigonometry and algebra
 to show:
 
 .. math::
 
+
    N\sin^2{\frac{\theta}{2}} = M
 
- And in code:
+And in code:
 
 .. code:: ipython3
 

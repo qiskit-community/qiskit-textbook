@@ -25,7 +25,7 @@ specify the state of two qubits:
 
 .. math::
 
-   |a\rangle = a_{00}|00\rangle+ a_{01}|01\rangle+a_{10}|10\rangle+ a_{11}|11\rangle = \begin{pmatrix} a_{00} \\\\ a_{01} \\\\ a_{10} \\\\ a_{11} \end{pmatrix}.
+   |a\rangle = a_{00}|00\rangle+ a_{01}|01\rangle+a_{10}|10\rangle+ a_{11}|11\rangle = \begin{pmatrix} a_{00} \\\\\\\\ a_{01} \\\\\\\\ a_{10} \\\\\\\\ a_{11} \end{pmatrix}.
 
  As in the single-qubit case, the elements of this vector are complex
 numbers. We require the state to be normalized so that
@@ -56,7 +56,7 @@ qubits.
     # now we use some fanciness to display it in latex
     from IPython.display import display, Markdown, Latex
     def state2latex(state):
-        state_latex = '\\begin{pmatrix}'
+        state_latex = '\\\\begin{pmatrix}'
         for amplitude in state:
             state_latex += str(amplitude) + '\\\\'
         state_latex  = state_latex[0:-4]
@@ -69,7 +69,7 @@ qubits.
 
 .. raw:: latex
 
-   \begin{pmatrix}(0.5000000000000001+0j)\\(0.5+0j)\\(0.3536941345835999+0.353412590552683j)\\(0.35369413458359983+0.3534125905526829\end{pmatrix}
+   \begin{pmatrix}(0.5000000000000001+0j)\\\\(0.5+0j)\\\\(0.3536941345835999+0.353412590552683j)\\\\(0.35369413458359983+0.3534125905526829\end{pmatrix}
 
 
 Note that Python uses :math:`j` to denote :math:`\sqrt{-1}`, rather than
@@ -109,7 +109,7 @@ an :math:`X` that acts only on the qubit on the right:
 
 .. math::
 
-   I \otimes X=  \begin{pmatrix} 1&0 \\\\ 0&1 \end{pmatrix} \otimes \begin{pmatrix} 0&1 \\\\ 1&0 \end{pmatrix} = \begin{pmatrix} 0&1&0&0 \\\\ 1&0&0&0\\\\0&0&0&1\\\\0&0&1&0 \end{pmatrix}, ~~~ I= \begin{pmatrix} 1&0 \\\\ 0&1 \end{pmatrix}.
+   I \otimes X=  \begin{pmatrix} 1&0 \\\\\\\\ 0&1 \end{pmatrix} \otimes \begin{pmatrix} 0&1 \\\\\\\\ 1&0 \end{pmatrix} = \begin{pmatrix} 0&1&0&0 \\\\\\\\ 1&0&0&0\\\\\\\\0&0&0&1\\\\\\\\0&0&1&0 \end{pmatrix}, ~~~ I= \begin{pmatrix} 1&0 \\\\\\\\ 0&1 \end{pmatrix}.
 
  This was made by combining the :math:`X` matrix for the qubit on the
 right with the single-qubit identity operator, :math:`I`, for the qubit
