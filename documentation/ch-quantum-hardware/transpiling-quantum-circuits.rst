@@ -115,13 +115,12 @@ represent generalized phase gates of the form
 
 .. math::
 
-
    U_{1}(\lambda) = \begin{bmatrix}
-   1 & 0 \\
+   1 & 0 \\\\
    0 & e^{i\lambda}
    \end{bmatrix}
 
-This set includes common gates such as :math:`Z`, :math:`T`,
+ This set includes common gates such as :math:`Z`, :math:`T`,
 :math:`T^{\dagger}`, :math:`S`, and :math:`S^{\dagger}`. It turns out
 that these gates do not actually need to be performed on hardware, but
 instead, can be implemented in software as “virtual gates”. These
@@ -143,17 +142,18 @@ fixed time-interval.
 The only entangling gate supported by the IBM Q devices is the CNOT gate
 (``cx``) that, in the computational basis, can be written as:
 
-.. math::
+$$:raw-latex:`\mathrm{CNOT}`(0,1) =
 
+.. raw:: latex
 
-   \mathrm{CNOT}(0,1) = \begin{bmatrix}
-   1 & 0 & 0 & 0 \\
-   0 & 0 & 0 & 1 \\
-   0 & 0 & 1 & 0 \\
+   \begin{bmatrix}
+   1 & 0 & 0 & 0 \\\\
+   0 & 0 & 0 & 1 \\\\
+   0 & 0 & 1 & 0 \\\\
    0 & 1 & 0 & 0
    \end{bmatrix}
 
-,
+$$,
 
 where we see that the matrix form follows from the specific bit-ordering
 convention used in Qiskit.

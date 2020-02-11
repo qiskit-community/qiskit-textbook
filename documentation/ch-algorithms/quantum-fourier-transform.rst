@@ -8,13 +8,8 @@ QFT on a simulator and a five qubit device.
 Contents
 --------
 
-.. contents:: Quick links throoughout the document:
+.. contents:: Quick links throughout the document:
 
-   -  `Running QFT on a simulator <#implementationsim>`__
-   -  `Running QFT on a real quantum device <#implementationdev>`__
-
-8. `Problems <#problems>`__
-9. `References <#references>`__
 
 1. Introduction 
 ----------------
@@ -28,20 +23,23 @@ most notably Shor’s factoring algorithm and quantum phase estimation.
 
 The discrete Fourier transform acts on a vector
 :math:`(x_0, ..., x_{N-1})` and maps it to the vector
-:math:`(y_0, ..., y_{N-1})` according to the formula
+:math:`(y_0, ..., y_{N-1})` according to the formula:
 
 .. math:: y_k = \frac{1}{\sqrt{N}}\sum_{j=0}^{N-1}x_j\omega_N^{jk}
 
- where :math:`\omega_N^{jk} = e^{2\pi i \frac{jk}{N}}`.
+where :math:`\omega_N^{jk} = e^{2\pi i \frac{jk}{N}}`.
 
 Similarly, the quantum Fourier transform acts on a quantum state
 :math:`\sum_{i=0}^{N-1} x_i \vert i \rangle` and maps it to the quantum
 state :math:`\sum_{i=0}^{N-1} y_i \vert i \rangle` according to the
-formula
+formula:
 
-.. math:: y_k = \frac{1}{\sqrt{N}}\sum_{j=0}^{N-1}x_j\omega_N^{jk}
+.. math::
 
- with :math:`\omega_N^{jk}` defined as above. Note that only the
+
+   y_k = \frac{1}{\sqrt{N}}\sum_{j=0}^{N-1}x_j\omega_N^{jk}
+
+with :math:`\omega_N^{jk}` defined as above. Note that only the
 amplitudes of the state were affected by this transformation.
 
 This can also be expressed as the map:
@@ -59,22 +57,22 @@ Consider how the QFT operator as defined above acts on a single qubit
 state
 :math:`\vert\psi\rangle = \alpha \vert 0 \rangle + \beta \vert 1 \rangle`.
 In this case, :math:`x_0 = \alpha`, :math:`x_1 = \beta`, and
-:math:`N = 2`. Then,
+:math:`N = 2`. Then:
 
 .. math:: y_0 = \frac{1}{\sqrt{2}}\left(    \alpha \exp\left(2\pi i\frac{0\times0}{2}\right) + \beta \exp\left(2\pi i\frac{1\times0}{2}\right)      \right) = \frac{1}{\sqrt{2}}\left(\alpha + \beta\right)
 
-and
+and:
 
 .. math:: y_1 = \frac{1}{\sqrt{2}}\left(    \alpha \exp\left(2\pi i\frac{0\times1}{2}\right) + \beta \exp\left(2\pi i\frac{1\times1}{2}\right)      \right) = \frac{1}{\sqrt{2}}\left(\alpha - \beta\right)
 
-such that the final result is the state
+such that the final result is the state:
 
 .. math:: U_{QFT}\vert\psi\rangle = \frac{1}{\sqrt{2}}(\alpha + \beta) \vert 0 \rangle + \frac{1}{\sqrt{2}}(\alpha - \beta)  \vert 1 \rangle
 
 This operation is exactly the result of applying the Hadamard operator
 (:math:`H`) on the qubit:
 
-.. math:: H = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
+.. math:: H = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \end{bmatrix}
 
 If we apply the :math:`H` operator to the state
 :math:`\vert\psi\rangle = \alpha \vert 0 \rangle + \beta \vert 1 \rangle`,
@@ -97,50 +95,32 @@ acting on the state
 :math:`\vert x \rangle = \vert x_1\ldots x_n \rangle` where :math:`x_1`
 is the most significant bit.
 
-\\begin{aligned} QFT_N:raw-latex:`\vert `x :raw-latex:`\rangle `& =
-:raw-latex:`\frac{1}{\sqrt{N}}`
-:raw-latex:`\sum`\ *{y=0}{N-1}:raw-latex:`\omega`\ N^{xy}
-:raw-latex:`\vert `y :raw-latex:`\rangle ` \\ & =
-:raw-latex:`\frac{1}{\sqrt{N}}` :raw-latex:`\sum`\ {y=0}\ {N-1} e^{2
-:raw-latex:`\pi `i xy / 2^n} :raw-latex:`\vert `y
-:raw-latex:`\rangle `~:raw-latex:`\text{since}`:
-:raw-latex:`\omega`\ N^{xy} = e^{2:raw-latex:`\pi `i
-:raw-latex:`\frac{xy}{N}`} ::raw-latex:`\text{and}`: N = 2^n \\ & =
-:raw-latex:`\frac{1}{\sqrt{N}}` :raw-latex:`\sum`\ {y=0}^{N-1} e^{2
-:raw-latex:`\pi `i :raw-latex:`\left`(:raw-latex:`\sum`*\ {k=1}^n
-y_k/2^k:raw-latex:`\right`) x} :raw-latex:`\vert `y_1
-:raw-latex:`\ldots `y_n
-:raw-latex:`\rangle `::raw-latex:`\text{rewriting in fractional binary notation}`:
-y = y_1:raw-latex:`\ldots `y_n, y/2^n = :raw-latex:`\sum`\ *{k=1}^n
-y_k/2^k \\ & = :raw-latex:`\frac{1}{\sqrt{N}}`
-:raw-latex:`\sum`*\ {y=0}^{N-1} :raw-latex:`\prod`\ *{k=1}^n e^{2
-:raw-latex:`\pi `i x y_k/2^k } :raw-latex:`\vert `y_1
-:raw-latex:`\ldots `y_n
-:raw-latex:`\rangle `::raw-latex:`\text{after expanding the exponential of a sum to a product of exponentials}`
-\\ & = :raw-latex:`\frac{1}{\sqrt{N}}` :raw-latex:`\bigotimes`*\ {k=1}^n
-:raw-latex:`\left`(:raw-latex:`\vert`0:raw-latex:`\rangle `+ e^{2
-:raw-latex:`\pi `i x /2^k }
-:raw-latex:`\vert`1:raw-latex:`\rangle `:raw-latex:`\right`)
-::raw-latex:`\text{after rearranging the sum and products, and expanding}`
-:raw-latex:`\sum`\ *{y=0}^{N-1} =
-:raw-latex:`\sum`*\ {y_1=0}:sup:`{1}:raw-latex:`\sum`\ {y_2=0}^{1}:raw-latex:`\ldots`:raw-latex:`\sum`\ {y_n=0}`\ {1}
-\\ & = :raw-latex:`\frac{1}{\sqrt{N}}`
-:raw-latex:`\left`(:raw-latex:`\vert`0:raw-latex:`\rangle `+
-e^{:raw-latex:`\frac{2\pi i}{2}`x}
-:raw-latex:`\vert`1:raw-latex:`\rangle`:raw-latex:`\right`)
-:raw-latex:`\otimes`
-:raw-latex:`\left`(:raw-latex:`\vert`0:raw-latex:`\rangle `+
-e^{:raw-latex:`\frac{2\pi i}{2^2}`x}
-:raw-latex:`\vert`1:raw-latex:`\rangle`:raw-latex:`\right`)
-:raw-latex:`\otimes  ` :raw-latex:`\ldots` :raw-latex:`\otimes`
-:raw-latex:`\left`(:raw-latex:`\vert`0:raw-latex:`\rangle `+
-e^{:raw-latex:`\frac{2\pi i}{2^{n-1}}`x}
-:raw-latex:`\vert`1:raw-latex:`\rangle`:raw-latex:`\right`)
-:raw-latex:`\otimes`
-:raw-latex:`\left`(:raw-latex:`\vert`0:raw-latex:`\rangle `+
-e^{:raw-latex:`\frac{2\pi i}{2^n}`x}
-:raw-latex:`\vert`1:raw-latex:`\rangle`:raw-latex:`\right`)
-\\end{aligned}
+.. math::
+
+
+   \begin{aligned}
+   QFT_N\vert x \rangle & = \frac{1}{\sqrt{N}} \sum_{y=0}^{N-1}\omega_N^{xy} \vert y \rangle 
+   \\\\
+   & = \frac{1}{\sqrt{N}} \sum_{y=0}^{N-1} e^{2 \pi i xy / 2^n} \vert y \rangle ~\text{since}\: \omega_N^{xy} = e^{2\pi i \frac{xy}{N}} \:\text{and}\: N = 2^n 
+   \\\\
+   & = \frac{1}{\sqrt{N}} \sum_{y=0}^{N-1} e^{2 \pi i \left(\sum_{k=1}^n y_k/2^k\right) x} \vert y_1 \ldots y_n \rangle \:\text{rewriting in fractional binary notation}\: y = y_1\ldots y_n, y/2^n = \sum_{k=1}^n y_k/2^k 
+   \\\\
+   & = \frac{1}{\sqrt{N}} \sum_{y=0}^{N-1} \prod_{k=1}^n e^{2 \pi i x y_k/2^k } \vert y_1 \ldots y_n \rangle \:\text{after expanding the exponential of a sum to a product of exponentials} 
+   \\\\
+   & = \frac{1}{\sqrt{N}} \bigotimes_{k=1}^n  \left(\vert0\rangle + e^{2 \pi i x /2^k } \vert1\rangle \right) \:\text{after rearranging the sum and products, and expanding} 
+   \sum_{y=0}^{N-1} = \sum_{y_1=0}^{1}\sum_{y_2=0}^{1}\ldots\sum_{y_n=0}^{1} 
+   \\\\
+   & = \frac{1}{\sqrt{N}}
+   \left(\vert0\rangle + e^{\frac{2\pi i}{2}x} \vert1\rangle\right) 
+   \otimes
+   \left(\vert0\rangle + e^{\frac{2\pi i}{2^2}x} \vert1\rangle\right) 
+   \otimes  
+   \ldots
+   \otimes
+   \left(\vert0\rangle + e^{\frac{2\pi i}{2^{n-1}}x} \vert1\rangle\right) 
+   \otimes
+   \left(\vert0\rangle + e^{\frac{2\pi i}{2^n}x} \vert1\rangle\right) 
+   \end{aligned}
 
 4. The circuit that implements QFT 
 -----------------------------------
@@ -159,8 +139,8 @@ block-diagonal form as
 .. math::
 
    CROT_k = \left[\begin{matrix}
-   I&0\\
-   0&UROT_k\\
+   I&0\\\\
+   0&UROT_k\\\\
    \end{matrix}\right]
 
  where
@@ -168,8 +148,8 @@ block-diagonal form as
 .. math::
 
    UROT_k = \left[\begin{matrix}
-   1&0\\
-   0&\exp\left(\frac{2\pi i}{2^k}\right)\\
+   1&0\\\\
+   0&\exp\left(\frac{2\pi i}{2^k}\right)\\\\
    \end{matrix}\right]
 
 The action of :math:`CROT_k` on the two-qubit state
@@ -510,7 +490,7 @@ defined in `OpenQASM <https://github.com/QISKit/openqasm>`__ as
 
 
    CU_1(\theta) =
-   \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & e^{i\theta}\end{bmatrix}
+   \begin{bmatrix} 1 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & e^{i\theta}\end{bmatrix}
 
 Hence, the mapping from the :math:`CROT_k` gate in the discussion above
 into the :math:`CU_1` gate is found from the equation

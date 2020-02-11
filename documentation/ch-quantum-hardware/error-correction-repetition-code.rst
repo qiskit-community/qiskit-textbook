@@ -1257,10 +1257,9 @@ error event. Specifically, to first order it is clear that
 
 .. math::
 
-
    \frac{p}{1-p} \approx \frac{C_{11}}{C_{00}}
 
-Here :math:`p` is the probaility of the error corresponding to a
+ Here :math:`p` is the probaility of the error corresponding to a
 particular edge, :math:`C_{11}` is the number of counts in the
 ``results[n]['0']`` correponding to the syndrome value of both adjacent
 nodes being ``1``, and :math:`C_{00}` is the same for them both being

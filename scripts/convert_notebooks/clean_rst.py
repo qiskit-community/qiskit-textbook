@@ -42,7 +42,7 @@ def replace_contents(filename):
             if in_contents and not saving_lines and line == "\n":
                 saving_lines = True
                 in_contents = False
-                out += "\n.. contents:: Quick links throughout the document:\n"
+                out += "\n.. contents:: Quick links throughout the document:\n\n"
             if in_contents and line == "\n":
                 saving_lines = False
             if saving_lines:
@@ -51,10 +51,25 @@ def replace_contents(filename):
         f.write(out)
     return 0
 
+def fix_matrices(filename):
+    out = ""
+    with open(filename) as f:
+        for line in f:
+            if "{bmatrix}" in line:
+                line = line.replace("\\\\", "\\\\\\\\")
+            if line[-3:] == "\\\\\n" and not line[-5:] == "\\\\\\\\\n":
+                line = line.replace("\\\\", "\\\\\\\\")
+            out += line
+    with open(filename, 'w') as f:
+        f.write(out)
+    return 0
 
+print("Cleaning Up .rst...")
 for directory in os.listdir(filepath):
     if os.path.isdir(filepath + directory):
         for file in os.listdir(filepath + directory):
             if str(file)[-4:] == ".rst":
-                remove_figure_captions(filepath + directory + "/" + file)
-                replace_contents(filepath + directory + "/" + file)
+                fullpath = filepath + directory + "/" + file
+                remove_figure_captions(fullpath)
+                replace_contents(fullpath)
+                fix_matrices(fullpath)

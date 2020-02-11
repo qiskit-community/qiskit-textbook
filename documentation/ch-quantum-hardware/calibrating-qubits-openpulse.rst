@@ -25,7 +25,8 @@ has to be mostly executed in order.
 Contents
 --------
 
-.. contents:: Quick links throoughout the document:
+.. contents:: Quick links throughout the document:
+
 
 Part 2. Calibrating and using a :math:`\pi` pulse A. `Calibrating
 :math:`\pi` pulses using a Rabi experiment <#rabi>`__ B. `Determining 0

@@ -51,29 +51,27 @@ the Grover iterator as the matrix:
 
 .. math::
 
-
    G =
    \begin{pmatrix}
-   \cos{\theta} && -\sin{\theta}\\
+   \cos{\theta} && -\sin{\theta}\\\\
    \sin{\theta} && \cos{\theta}
    \end{pmatrix}
 
-The matrix :math:`G` has eigenvectors:
+ The matrix :math:`G` has eigenvectors:
 
 .. math::
 
-
    \begin{pmatrix}
-   -i\\
+   -i\\\\
    1
    \end{pmatrix}
    ,
    \begin{pmatrix}
-   i\\
+   i\\\\
    1
    \end{pmatrix}
 
-With the aforementioned eigenvalues :math:`e^{\pm i\theta}`.
+ With the aforementioned eigenvalues :math:`e^{\pm i\theta}`.
 Fortunately, we do not need to prepare our register in either of these
 states, the state :math:`|s\rangle` is in the space spanned by
 :math:`|\omega\rangle`, :math:`|s’\rangle`, and thus is a superposition
@@ -81,10 +79,9 @@ of the two vectors.
 
 .. math::
 
-
    |s\rangle = \alpha |\omega\rangle + \beta|s'\rangle
 
-As a result, the output of the QPE algorithm will be a superposition of
+ As a result, the output of the QPE algorithm will be a superposition of
 the two phases, and when we measure the register we will obtain one of
 these two values! We can then use some simple maths to get our estimate
 of :math:`M`.
@@ -364,10 +361,9 @@ need to do:
 
 .. math::
 
-
    \theta = \text{value}\times\frac{2\pi}{2^t}
 
-Or, in code:
+ Or, in code:
 
 .. code:: ipython3
 
@@ -385,25 +381,22 @@ inner product of :math:`|s\rangle` and :math:`|s’\rangle`:
 
 .. math::
 
-
    \langle s'|s\rangle = \cos{\tfrac{\theta}{2}}
 
-And that the inner product of these vectors is:
+ And that the inner product of these vectors is:
 
 .. math::
 
-
    \langle s'|s\rangle = \sqrt{\frac{N-M}{N}}
 
-We can combine these equations, then use some trigonometry and algebra
+ We can combine these equations, then use some trigonometry and algebra
 to show:
 
 .. math::
 
-
    N\sin^2{\frac{\theta}{2}} = M
 
-And in code:
+ And in code:
 
 .. code:: ipython3
 

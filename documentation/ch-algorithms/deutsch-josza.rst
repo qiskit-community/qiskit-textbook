@@ -8,21 +8,8 @@ quantum algorithm using Qiskit, and run on a simulator and device.
 Contents
 --------
 
-.. contents:: Quick links throoughout the document:
+.. contents:: Quick links throughout the document:
 
-   -  `Deutsch-Josza Problem <#djproblem>`__
-   -  `Deutsch-Josza Algorithm <#djalgorithm>`__
-
-2. `Example <#example>`__
-
-3. `Qiskit Implementation <#implementation>`__
-
-   -  `Simulation <#simulation>`__
-   -  `Device <#device>`__
-
-4. `Problems <#problems>`__
-
-5. `References <#references>`__
 
 1. Introduction 
 ----------------
@@ -141,7 +128,7 @@ to $ :raw-latex:`\vert `x:raw-latex:`\rangle `:raw-latex:`\vert `y
 :raw-latex:`\lvert `:raw-latex:`\psi`\ *2 :raw-latex:`\rangle  ` & =
 :raw-latex:`\frac{1}{\sqrt{2^{n+1}}}`:raw-latex:`\sum`*\ {x=0}:sup:`{2`\ n-1}
 :raw-latex:`\vert `x:raw-latex:`\rangle `(:raw-latex:`\vert `f(x):raw-latex:`\rangle `-
-:raw-latex:`\vert `1 :raw-latex:`\oplus `f(x):raw-latex:`\rangle`) \\
+:raw-latex:`\vert `1 :raw-latex:`\oplus `f(x):raw-latex:`\rangle`) \\\\
 & =
 :raw-latex:`\frac{1}{\sqrt{2^{n+1}}}`:raw-latex:`\sum`\_{x=0}\ :sup:`{2`\ n-1}(-1)^{f(x)}|x:raw-latex:`\rangle `(
 \|0:raw-latex:`\rangle `- \|1:raw-latex:`\rangle `) \\end{aligned} since
@@ -260,9 +247,9 @@ Apply Hadamard on all qubits
 
 For :math:`a=3`, (11 in binary) the oracle function can be implemented
 as :math:`\text{Q}_f = CX_{1a}CX_{2a}`, :raw-latex:`\begin{align*}
-            \lvert \psi_2 \rangle =  \frac{1}{2\sqrt{2}} \left[ \lvert 0 0 \rangle_1 \left( \lvert 0 \oplus 0 \oplus 0 \rangle_2 - \lvert 1 \oplus 0 \oplus 0 \rangle_2 \right) \\
-                  + \lvert 0 1 \rangle_1 \left( \lvert 0 \oplus 0 \oplus 1 \rangle_2 - \lvert 1 \oplus 0 \oplus 1 \rangle_2 \right) \\
-                  + \lvert 1 0 \rangle_1 \left( \lvert 0 \oplus 1 \oplus 0 \rangle_2 - \lvert 1 \oplus 1 \oplus 0 \rangle_2 \right) \\
+            \lvert \psi_2 \rangle =  \frac{1}{2\sqrt{2}} \left[ \lvert 0 0 \rangle_1 \left( \lvert 0 \oplus 0 \oplus 0 \rangle_2 - \lvert 1 \oplus 0 \oplus 0 \rangle_2 \right) \\\\
+                  + \lvert 0 1 \rangle_1 \left( \lvert 0 \oplus 0 \oplus 1 \rangle_2 - \lvert 1 \oplus 0 \oplus 1 \rangle_2 \right) \\\\
+                  + \lvert 1 0 \rangle_1 \left( \lvert 0 \oplus 1 \oplus 0 \rangle_2 - \lvert 1 \oplus 1 \oplus 0 \rangle_2 \right) \\\\
                   + \lvert 1 1 \rangle_1 \left( \lvert 0 \oplus 1 \oplus 1 \rangle_2 - \lvert 1 \oplus 1 \oplus 1 \rangle_2 \right) \right]
         \end{align*}`
 
@@ -272,7 +259,7 @@ as :math:`\text{Q}_f = CX_{1a}CX_{2a}`, :raw-latex:`\begin{align*}
 
 Thus \\begin{aligned} :raw-latex:`\lvert `:raw-latex:`\psi`\_2
 :raw-latex:`\rangle `& = :raw-latex:`\frac{1}{2\sqrt{2}}`
-:raw-latex:`\left[ \lvert 0 0 \rangle_1 \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right) - \lvert 0 1 \rangle_1  \left( \lvert 0 \rangle_2 - \lvert  1 \rangle_2 \right) - \lvert 1 0 \rangle_1  \left( \lvert 0  \rangle_2 - \lvert 1 \rangle_2 \right) + \lvert 1 1 \rangle_1  \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right)  \right] `\\
+:raw-latex:`\left[ \lvert 0 0 \rangle_1 \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right) - \lvert 0 1 \rangle_1  \left( \lvert 0 \rangle_2 - \lvert  1 \rangle_2 \right) - \lvert 1 0 \rangle_1  \left( \lvert 0  \rangle_2 - \lvert 1 \rangle_2 \right) + \lvert 1 1 \rangle_1  \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right)  \right] `\\\\
 & = :raw-latex:`\frac{1}{2}` :raw-latex:`\left`( :raw-latex:`\lvert `0 0
 :raw-latex:`\rangle`\_1 - :raw-latex:`\lvert `0 1
 :raw-latex:`\rangle`\_1 - :raw-latex:`\lvert `1 0

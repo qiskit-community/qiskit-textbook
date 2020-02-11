@@ -143,16 +143,15 @@ rewritten as
 
 .. math::
 
-
    C = 
    \begin{pmatrix}
-       9808 \\
-       95 \\
-       96 \\
+       9808 \\\\
+       95 \\\\
+       96 \\\\
        1
    \end{pmatrix}.
 
-Here the first element is that for ``'00'``, the next is that for
+ Here the first element is that for ``'00'``, the next is that for
 ``'01'``, and so on.
 
 The information gathered from the basis states
@@ -180,16 +179,15 @@ This gives us the following matrix.
 
 .. math::
 
-
    M = 
    \begin{pmatrix}
-       0.9808&0.0107&0.0095&0.0001 \\
-       0.0095&0.9788&0.0001&0.0107 \\
-       0.0096&0.0002&0.9814&0.0087 \\
+       0.9808&0.0107&0.0095&0.0001 \\\\
+       0.0095&0.9788&0.0001&0.0107 \\\\
+       0.0096&0.0002&0.9814&0.0087 \\\\
        0.0001&0.0103&0.0090&0.9805
    \end{pmatrix}
 
-If we now take the vector describing the perfect results for a given
+ If we now take the vector describing the perfect results for a given
 state, applying this matrix gives us a good approximation of the results
 when measurement noise is present.
 
@@ -202,28 +200,27 @@ As an example, let’s apply this process for the state
 
 .. math::
 
-
    \begin{pmatrix}
-       0.9808&0.0107&0.0095&0.0001 \\
-       0.0095&0.9788&0.0001&0.0107 \\
-       0.0096&0.0002&0.9814&0.0087 \\
+       0.9808&0.0107&0.0095&0.0001 \\\\
+       0.0095&0.9788&0.0001&0.0107 \\\\
+       0.0096&0.0002&0.9814&0.0087 \\\\
        0.0001&0.0103&0.0090&0.9805
    \end{pmatrix}
    \begin{pmatrix}
-       0 \\
-       5000 \\
-       5000 \\
+       0 \\\\
+       5000 \\\\
+       5000 \\\\
        0
    \end{pmatrix}
    =
    \begin{pmatrix}
-       101 \\
-       4895.5 \\
-       4908 \\
+       101 \\\\
+       4895.5 \\\\
+       4908 \\\\
        96.5
    \end{pmatrix}.
 
-In code, we can express this as follows.
+ In code, we can express this as follows.
 
 .. code:: ipython3
 
@@ -312,16 +309,15 @@ rounded. This gives us a very nice result.
 
 .. math::
 
-
    C_{mitigated} = 
    \begin{pmatrix}
-       0 \\
-       5000 \\
-       5000 \\
+       0 \\\\
+       5000 \\\\
+       5000 \\\\
        0
    \end{pmatrix}
 
-This is exactly the true result we desire. Our mitigation worked
+ This is exactly the true result we desire. Our mitigation worked
 extremely well!
 
 Error mitigation in Qiskit

@@ -10,7 +10,8 @@ qubit quantum chip
 Contents
 --------
 
-.. contents:: Quick links throoughout the document:
+.. contents:: Quick links throughout the document:
+
 
    -  5a `Running QAOA on a simulator <#implementationsim>`__
    -  5b `Running QAOA on a real quantum device <#implementationdev>`__
@@ -298,7 +299,7 @@ or estimate the expectation value
     
    F_p(\vec{\gamma},\vec{\beta}) = \langle \psi_p(\vec{\gamma},\vec{\beta})|H|\psi_p(\vec{\alpha},\vec{\beta})\rangle 
 
- so we can optimize the parameters :math:`\vec{\gamma},\vec{\beta}`. We
+\ so we can optimize the parameters :math:`\vec{\gamma},\vec{\beta}`. We
 will be considering two scenarios here.
 
 Classical evaluation
@@ -425,7 +426,6 @@ bounded by a universal constant :math:`\|\hat{C}_k\| \leq \tilde{C}` for
 all :math:`k = 1\ldots m`. Then consider
 
 .. math::
-
 
    \begin{eqnarray}
    \langle \psi_p(\vec{\gamma},\vec{\beta})|H^2|\psi_p(\vec{\alpha},\vec{\beta})\rangle - \langle \psi_p(\vec{\gamma},\vec{\beta})|H|\psi_p(\vec{\alpha},\vec{\beta})\rangle^2 &\leq & \langle \psi_p(\vec{\gamma},\vec{\beta})|H^2|\psi_p(\vec{\alpha},\vec{\beta})\rangle \\\nonumber

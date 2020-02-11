@@ -4,7 +4,8 @@ Quantum Phase Estimation
 Contents
 --------
 
-.. contents:: Quick links throoughout the document:
+.. contents:: Quick links throughout the document:
+
 
 Quantum phase estimation is one of the most important subroutines in
 quantum computation. It serves as a central building block for many
@@ -85,13 +86,12 @@ with :math:`0\leq j\leq n-1`, and using the relation
 
 .. math::
 
-
    \begin{aligned}
    \psi_{2} & =\frac {1}{2^{\frac {n}{2}}} \left(|0\rangle+{e^{\boldsymbol{2\pi i} \theta 2^{n-1}}}|1\rangle \right) \otimes \cdots \otimes \left(|0\rangle+{e^{\boldsymbol{2\pi i} \theta 2^{1}}}\vert1\rangle \right) \otimes \left(|0\rangle+{e^{\boldsymbol{2\pi i} \theta 2^{0}}}\vert1\rangle \right) \otimes |\psi\rangle\\\\
    & = \frac{1}{2^{\frac {n}{2}}}\sum _{k=0}^{2^{n}-1}e^{\boldsymbol{2\pi i} \theta k}|k\rangle \otimes \vert\psi\rangle
    \end{aligned}
 
-where :math:`k` denotes the integer representation of n-bit binary
+ where :math:`k` denotes the integer representation of n-bit binary
 numbers.
 
 3. **Inverse Fourier Transform**: Notice that the above expression is
@@ -101,7 +101,6 @@ numbers.
    state :math:`\vert x\rangle` into an output as
 
 .. math::
-
 
    QFT\vert x \rangle = \frac{1}{2^\frac{n}{2}}
    \left(\vert0\rangle + e^{\frac{2\pi i}{2}x} \vert1\rangle\right) 
@@ -114,15 +113,20 @@ numbers.
    \otimes
    \left(\vert0\rangle + e^{\frac{2\pi i}{2^n}x} \vert1\rangle\right) 
 
-Replacing :math:`x` by :math:`2^n\theta` in the above expression gives
+ Replacing :math:`x` by :math:`2^n\theta` in the above expression gives
 exactly the expression derived in step 2 above. Therefore, to recover
 the state :math:`\vert2^n\theta\rangle`, apply an inverse Fourier
 transform on the ancilla register. Doing so, we find
 
-.. math::
+$$:raw-latex:`\vert`:raw-latex:`\psi`\ *3:raw-latex:`\rangle `=
+:raw-latex:`\frac {1}{2^{\frac {n}{2}}}`:raw-latex:`\sum `*\ {k=0}:sup:`{2`\ {n}-1}e^{:raw-latex:`\boldsymbol{2\pi i}`
+:raw-latex:`\theta `k}|k:raw-latex:`\rangle `:raw-latex:`\otimes `\|
+:raw-latex:`\psi `:raw-latex:`\rangle `:raw-latex:`\xrightarrow{\mathcal{QFT}_n^{-1}}`
+:raw-latex:`\frac {1}{2^n}`:raw-latex:`\sum `\ *{x=0}{2\ {n}-1}:raw-latex:`\sum `*\ {k=0}:sup:`{2`\ {n}-1}
+e^{-:raw-latex:`\frac{2\pi i k}{2^n}`(x - 2^n :raw-latex:`\theta`)}
+\|x:raw-latex:`\rangle `:raw-latex:`\otimes `\|:raw-latex:`\psi`:raw-latex:`\rangle`
 
-
-   \vert\psi_3\rangle = \frac {1}{2^{\frac {n}{2}}}\sum _{k=0}^{2^{n}-1}e^{\boldsymbol{2\pi i} \theta k}|k\rangle \otimes | \psi \rangle \xrightarrow{\mathcal{QFT}_n^{-1}} \frac {1}{2^n}\sum _{x=0}^{2^{n}-1}\sum _{k=0}^{2^{n}-1} e^{-\frac{2\pi i k}{2^n}(x - 2^n \theta)} |x\rangle \otimes |\psi\rangle
+$$
 
 4. **Measurement**: The above expression peaks near
    :math:`x = 2^n\theta`. For the case when :math:`2^n\theta` is an
@@ -147,11 +151,11 @@ Phase Estimation to estimate its phase. You will remember that the
 
     T|1\rangle = 
    \begin{bmatrix}
-   1 & 0\\
+   1 & 0\\\\
    0 & e^\frac{i\pi}{4}\\ 
    \end{bmatrix}
    \begin{bmatrix}
-   0\\
+   0\\\\
    1\\ 
    \end{bmatrix}
    = e^\frac{i\pi}{4}|1\rangle 
@@ -455,10 +459,9 @@ The two most likely measurements are now ``01011`` (decimal 11) and
 
 .. math::
 
-
    \theta = \frac{11}{2^5} = 0.344,\;\text{  or  }\;\; \theta = \frac{10}{2^5} = 0.313
 
- These two results differ from :math:`\frac{1}{3}` by 3% and 6%
+\ These two results differ from :math:`\frac{1}{3}` by 3% and 6%
 respectively. A much better precision!
 
 4. Experiment with Real Devices 

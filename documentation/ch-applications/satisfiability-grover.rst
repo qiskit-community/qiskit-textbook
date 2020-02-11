@@ -7,7 +7,8 @@ using the implementation of Grover’s algorithm in Qiskit Aqua.
 Contents
 --------
 
-.. contents:: Quick links throoughout the document:
+.. contents:: Quick links throughout the document:
+
 
 2. `3-Satisfiability Problem <#3satproblem>`__
 

@@ -5,8 +5,14 @@ This notebook demonstrates Superdense Coding (SDC) in quantum computing.
 We first use Qiskit’s simulator to test our quantum circuit, and then
 try it out on a real quantum computer.
 
-1. The Difference between Superdense Coding and Quantum Teleportation
----------------------------------------------------------------------
+Contents
+--------
+
+.. contents:: Quick links throughout the document:
+
+
+1. The Difference between Superdense Coding and Quantum Teleportation 
+----------------------------------------------------------------------
 
 Quantum teleportation and superdense coding are closely related and
 might cause confusion if not properly explained or differentiate.
@@ -24,8 +30,8 @@ The teleportation protocol is actually a flipped version of the
 superdense coding protocol, in the sense that Alice and Bob merely “swap
 their equipment.”
 
-2. The Process
---------------
+2. The Protocol 
+----------------
 
 2.1 Step 1
 ~~~~~~~~~~
@@ -113,8 +119,8 @@ negative sign :math:`-|11\rangle`, writing it as :math:`|11\rangle` is
 also correct because the probability is calculated as the amplitude of
 squared.
 
-3. Simulating the Superdense Coding Protocol
---------------------------------------------
+3. Simulating the Superdense Coding Protocol 
+---------------------------------------------
 
 .. code:: ipython3
 
@@ -190,8 +196,8 @@ squared.
 
 
 
-4. Superdense Coding on a Real Quantum Computer
------------------------------------------------
+4. Superdense Coding on a Real Quantum Computer 
+------------------------------------------------
 
 Let’s see how superdense coding works on real quantum computer.
 

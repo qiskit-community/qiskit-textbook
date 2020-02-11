@@ -22,18 +22,16 @@ to the classical NOT gate or bit-flip. Specifically, the action of the
 
 .. math::
 
-
    X |0\rangle = |1\rangle,\\\\ X |1\rangle = |0\rangle.
 
-The :math:`Z` gate has a similar effect on the states :math:`|+\rangle`
+ The :math:`Z` gate has a similar effect on the states :math:`|+\rangle`
 and :math:`|-\rangle`:
 
 .. math::
 
-
    Z |+\rangle = |-\rangle, \\\\ Z |-\rangle = |+\rangle.
 
-These gates are implemented in Qiskit as follows (assuming a circuit
+ These gates are implemented in Qiskit as follows (assuming a circuit
 named ``qc``).
 
 .. code:: python
@@ -47,12 +45,11 @@ previous section.
 
 .. math::
 
-
    X= \begin{pmatrix} 0&1 \\\\ 1&0 \end{pmatrix}\\\\
    Y= \begin{pmatrix} 0&-i \\\\ i&0 \end{pmatrix}\\\\
    Z= \begin{pmatrix} 1&0 \\\\ 0&-1 \end{pmatrix}
 
-There, their job was to help us make calculations regarding
+ There, their job was to help us make calculations regarding
 measurements. But since these matrices are unitary, and therefore define
 a reversible quantum operation, this additional interpretation of them
 as gates is also possible.
@@ -83,11 +80,10 @@ along the z axis to those pointing along x, and vice versa.
 
 .. math::
 
-
    H |0\rangle = |+\rangle, \, \, \, \, H |1\rangle = |-\rangle,\\\\
    H |+\rangle = |0\rangle, \, \, \, \, H |-\rangle = |1\rangle.
 
-This effect makes it an essential part of making x measurements, since
+ This effect makes it an essential part of making x measurements, since
 the hardware behind quantum computing typically only allows the z
 measurement to be performed directly. By moving x basis information to
 the z basis, it allows an indirect measurement of x.
@@ -98,11 +94,10 @@ states. Its matrix form is
 
 .. math::
 
-
    H = \frac{1}{\sqrt{2}} \begin{pmatrix} 1&1 \\\\ 1&-1 \end{pmatrix}.
 
-The :math:`S` and :math:`S^\dagger` gates have a similar role to play in
-quantum computation.
+ The :math:`S` and :math:`S^\dagger` gates have a similar role to play
+in quantum computation.
 
 .. code:: python
 
@@ -114,19 +109,17 @@ be regarded as the two possible square roots of the :math:`Z` gate,
 
 .. math::
 
-
    S = \begin{pmatrix} 1&0 \\\\ 0&i \end{pmatrix}, \, \, \, \, S^\dagger = \begin{pmatrix} 1&0 \\\\ 0&-i \end{pmatrix}.
 
-The effect of these gates is to rotate between the states of the x and y
-bases.
+ The effect of these gates is to rotate between the states of the x and
+y bases.
 
 .. math::
-
 
    S |+\rangle = |\circlearrowright\rangle, \, \, \, \, S |-\rangle = |\circlearrowleft\rangle,\\\\
    S^\dagger |\circlearrowright\rangle = |+\rangle, \, \, \, \, S^\dagger |\circlearrowleft\rangle = |-\rangle.
 
-They are therefore used as part of y measurements.
+ They are therefore used as part of y measurements.
 
 .. code:: python
 
@@ -176,7 +169,6 @@ Their matrix form is
 
 .. math::
 
-
    T = \begin{pmatrix} 1&0 \\\\ 0&e^{i\pi/4}\end{pmatrix}, \, \, \, \, T^\dagger = \begin{pmatrix} 1&0 \\\\ 0&e^{-i\pi/4} \end{pmatrix}.
 
 All single-qubit operations are compiled down to gates known as
@@ -187,38 +179,35 @@ general is
 
 .. math::
 
-
    U_3(\theta,\phi,\lambda) = \begin{pmatrix} \cos(\theta/2) & -e^{i\lambda}\sin(\theta/2) \\\\ e^{i\phi}\sin(\theta/2) 
    & e^{i\lambda+i\phi}\cos(\theta/2) \end{pmatrix}.
 
-This has the effect of rotating a qubit in the initial :math:`|0\rangle`
-state to one with an arbitrary superposition and relative phase:
+ This has the effect of rotating a qubit in the initial
+:math:`|0\rangle` state to one with an arbitrary superposition and
+relative phase:
 
 .. math::
 
-
    U_3|0\rangle = \cos(\theta/2)|0\rangle + \sin(\theta/2)e^{i\phi}|1\rangle.
 
-The :math:`U_1` gate is known as the phase gate and is essentially the
+ The :math:`U_1` gate is known as the phase gate and is essentially the
 same as :math:`R_z(\lambda)`. Its relationship with :math:`U_3` and its
 matrix form are,
 
 .. math::
 
-
    U_1(\lambda) = U_3(0,0,\lambda) = \begin{pmatrix} 1 & 0 \\\\ 0 & e^{i\lambda} \end{pmatrix}.
 
-In IBM Q hardware, this gate is implemented as a frame change and takes
+ In IBM Q hardware, this gate is implemented as a frame change and takes
 zero time.
 
 The second gate is :math:`U_2`, and has the form
 
 .. math::
 
-
    U_2(\phi,\lambda) = U_3(\pi/2,\phi,\lambda) = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 & -e^{i\lambda} \\\\ e^{i\phi} & e^{i\lambda+i\phi} \end{pmatrix}.
 
-From this gate, the Hadamard is done by :math:`H= U_2(0,\pi)`. In IBM Q
+ From this gate, the Hadamard is done by :math:`H= U_2(0,\pi)`. In IBM Q
 hardware, this is implemented by a pre- and post-frame change and an
 :math:`X_{\pi/2}` pulse.
 
@@ -270,10 +259,10 @@ can expect the result to be,
 
 .. math::
 
-
    Z \otimes X=  \begin{pmatrix} 1&0 \\\\ 0&-1 \end{pmatrix} \otimes \begin{pmatrix} 0&1 \\\\ 1&0 \end{pmatrix} = \begin{pmatrix} 0&1&0&0 \\\\ 1&0&0&0\\\\0&0&0&-1\\\\0&0&-1&0 \end{pmatrix}.
 
-This is exactly what we find when we analyze the circuit with this tool.
+ This is exactly what we find when we analyze the circuit with this
+tool.
 
 .. code:: ipython3
 

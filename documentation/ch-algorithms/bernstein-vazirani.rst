@@ -8,21 +8,8 @@ quantum algorithm using Qiskit, and run on a simulator and device.
 Contents
 --------
 
-.. contents:: Quick links throoughout the document:
+.. contents:: Quick links throughout the document:
 
-   -  `Bernstein-Vazirani Problem <#bvproblem>`__
-   -  `Bernstein-Vazirani Algorithm <#bvalgorithm>`__
-
-2. `Example <#example>`__
-
-3. `Qiskit Implementation <#implementation>`__
-
-   -  `Simulation <#simulation>`__
-   -  `Device <#device>`__
-
-4. `Problems <#problems>`__
-
-5. `References <#references>`__
 
 1. Introduction 
 ----------------
@@ -87,19 +74,17 @@ shown that:
 
 .. math::
 
-
    |a\rangle \xrightarrow{H^{\otimes n}} \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} (-1)^{a\cdot x}|x\rangle.
 
-In particular, when we start with a quantum register :math:`|0\rangle`
+ In particular, when we start with a quantum register :math:`|0\rangle`
 and apply :math:`n` Hadamard gates to it, we have the familiar quantum
 superposition:
 
 .. math::
 
-
    |0\rangle \xrightarrow{H^{\otimes n}} \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} |x\rangle,
 
-which is slightly different from the Hadamard transform of the reqister
+ which is slightly different from the Hadamard transform of the reqister
 :math:`|a \rangle` by the phase :math:`(-1)^{a\cdot x}`.
 
 Now, the quantum oracle :math:`f_a` returns :math:`1` on input :math:`x`
@@ -108,23 +93,20 @@ otherwise. This means we have the following transformation:
 
 .. math::
 
-
    |x \rangle \xrightarrow{f_a} | x \rangle = (-1)^{a\cdot x} |x \rangle. 
 
-The algorithm to reveal the hidden integer follows naturally by querying
-the quantum oracle :math:`f_a` with the quantum superposition obtained
-from the Hadamard transformation of :math:`|0\rangle`. Namely,
+ The algorithm to reveal the hidden integer follows naturally by
+querying the quantum oracle :math:`f_a` with the quantum superposition
+obtained from the Hadamard transformation of :math:`|0\rangle`. Namely,
 
 .. math::
-
 
    |0\rangle \xrightarrow{H^{\otimes n}} \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} |x\rangle \xrightarrow{f_a} \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} (-1)^{a\cdot x}|x\rangle.
 
-Because the inverse of the :math:`n` Hadamard gates is again the
+ Because the inverse of the :math:`n` Hadamard gates is again the
 :math:`n` Hadamard gates, we can obtain :math:`a` by
 
 .. math::
-
 
    \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} (-1)^{a\cdot x}|x\rangle \xrightarrow{H^{\otimes n}} |a\rangle.
 

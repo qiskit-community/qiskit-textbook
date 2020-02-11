@@ -1,4 +1,6 @@
-for i in *.ipynb ../../documentation/**/*.ipynb; do 
+python3 ./preprocess_notebooks.py
+
+for i in ../../documentation/**/*.ipynb; do 
     echo "$i"
     jupyter nbconvert --to rst  "$i" 
 done

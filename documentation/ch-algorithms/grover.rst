@@ -8,21 +8,8 @@ algorithm using Qiskit, and run on a simulator and device.
 Contents
 --------
 
-.. contents:: Quick links throoughout the document:
+.. contents:: Quick links throughout the document:
 
-2. `Example: 2 Qubits <#2qubits>`__
-
-   -  `Simulation <#2qubits-simulation>`__
-   -  `Device <#2qubits-device>`__
-
-3. `Example: 3 Qubits <#3qubits>`__
-
-   -  `Simulation <#3qubits-simulation>`__
-   -  `Device <#3qubits-device>`__
-
-4. `Problems <#problems>`__
-
-5. `References <#references>`__
 
 1. Introduction 
 ----------------

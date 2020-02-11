@@ -8,7 +8,8 @@ its implementation in finding the ground state energy of molecules.
 Contents
 --------
 
-.. contents:: Quick links throoughout the document:
+.. contents:: Quick links throughout the document:
+
 
    1. `Mathematical Background <#backgroundmath>`__
    2. `Bounding the Ground State <#groundstate>`__
@@ -109,8 +110,8 @@ Substituting :math:`H` with its representation as a weighted sum of its
 eigenvectors,
 
 :raw-latex:`\begin{align}
-    \langle H \rangle_{\psi} = \langle \psi | H | \psi \rangle &= \langle \psi | \left(\sum_{i = 1}^{N} \lambda_i |\psi_i\rangle \langle \psi_i |\right) |\psi\rangle\\
-    &= \sum_{i = 1}^{N} \lambda_i \langle \psi | \psi_i\rangle \langle \psi_i | \psi\rangle \\
+    \langle H \rangle_{\psi} = \langle \psi | H | \psi \rangle &= \langle \psi | \left(\sum_{i = 1}^{N} \lambda_i |\psi_i\rangle \langle \psi_i |\right) |\psi\rangle\\\\
+    &= \sum_{i = 1}^{N} \lambda_i \langle \psi | \psi_i\rangle \langle \psi_i | \psi\rangle \\\\
     &= \sum_{i = 1}^{N} \lambda_i | \langle \psi_i | \psi\rangle |^2
 \end{align}`
 
