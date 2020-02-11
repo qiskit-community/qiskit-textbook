@@ -81,8 +81,9 @@ $$
 ```
 
 3. Images _need_ a caption, and cannot be in html:
-```![essential_caption](link_to_image)
-
+```
+![essential_caption](link_to_image)
+```
 
 ## License
 The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
