@@ -80,7 +80,7 @@ $$
 
 ```
 
-3. Images _need_ a caption, and cannot be in html:
+3. Images _need_ a caption, and must be in markdown (*not* html):
 ```
 ![essential_caption](link_to_image)
 ```
