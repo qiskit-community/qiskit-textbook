@@ -1,10 +1,6 @@
 Randomized Benchmarking
 =======================
 
-.. raw:: html
-
-   <!-- #region -->
-
 Introduction
 ------------
 
@@ -61,20 +57,20 @@ A RB protocol (see [1,2]) consists of the following steps:
 (We should first import the relevant qiskit classes for the
 demonstration).
 
-.. code:: python
+.. code:: ipython3
 
-   #Import general libraries (needed for functions)
-   import numpy as np
-   import matplotlib.pyplot as plt
-   from IPython import display
-
-   #Import the RB Functions
-   import qiskit.ignis.verification.randomized_benchmarking as rb
-
-   #Import Qiskit classes 
-   import qiskit
-   from qiskit.providers.aer.noise import NoiseModel
-   from qiskit.providers.aer.noise.errors.standard_errors import depolarizing_error, thermal_relaxation_error
+    #Import general libraries (needed for functions)
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from IPython import display
+    
+    #Import the RB Functions
+    import qiskit.ignis.verification.randomized_benchmarking as rb
+    
+    #Import Qiskit classes 
+    import qiskit
+    from qiskit.providers.aer.noise import NoiseModel
+    from qiskit.providers.aer.noise.errors.standard_errors import depolarizing_error, thermal_relaxation_error
 
 Step 1: Generate RB sequences
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -93,49 +89,87 @@ found efficiently by the Gottesmann-Knill theorem.
 For example, we generate below several sequences of 2-qubit Clifford
 circuits.
 
-.. code:: python
+.. code:: ipython3
 
-   #Generate RB circuits (2Q RB)
+    #Generate RB circuits (2Q RB)
+    
+    #number of qubits
+    nQ=2 
+    rb_opts = {}
+    #Number of Cliffords in the sequence
+    rb_opts['length_vector'] = [1, 10, 20, 50, 75, 100, 125, 150, 175, 200]
+    #Number of seeds (random sequences)
+    rb_opts['nseeds'] = 5 
+    #Default pattern
+    rb_opts['rb_pattern'] = [[0,1]]
+    
+    rb_circs, xdata = rb.randomized_benchmarking_seq(**rb_opts)
 
-   #number of qubits
-   nQ=2 
-   rb_opts = {}
-   #Number of Cliffords in the sequence
-   rb_opts['length_vector'] = [1, 10, 20, 50, 75, 100, 125, 150, 175, 200]
-   #Number of seeds (random sequences)
-   rb_opts['nseeds'] = 5 
-   #Default pattern
-   rb_opts['rb_pattern'] = [[0,1]]
 
-   rb_circs, xdata = rb.randomized_benchmarking_seq(**rb_opts)
+.. parsed-literal::
+
+    Making the n=2 Clifford Table
+
 
 As an example, we print the circuit corresponding to the first RB
 sequence
 
-.. code:: python
+.. code:: ipython3
 
-   print(rb_circs[0][0])
+    print(rb_circs[0][0])
+
+
+.. parsed-literal::
+
+             ┌───┐               ┌───┐      ░  ┌───┐            ┌───┐      ┌─┐     »
+    qr_0: |0>┤ H ├────────────■──┤ X ├──────░──┤ X ├────────■───┤ H ├──────┤M├─────»
+             ├───┤┌───┐┌───┐┌─┴─┐├───┤┌───┐ ░ ┌┴───┴┐┌───┐┌─┴─┐┌┴───┴┐┌───┐└╥┘┌───┐»
+    qr_1: |0>┤ H ├┤ H ├┤ S ├┤ X ├┤ H ├┤ S ├─░─┤ Sdg ├┤ H ├┤ X ├┤ Sdg ├┤ H ├─╫─┤ H ├»
+             └───┘└───┘└───┘└───┘└───┘└───┘ ░ └─────┘└───┘└───┘└─────┘└───┘ ║ └───┘»
+     cr_0: 0 ═══════════════════════════════════════════════════════════════╩══════»
+                                                                                   »
+     cr_1: 0 ══════════════════════════════════════════════════════════════════════»
+                                                                                   »
+    «         
+    «qr_0: ───
+    «      ┌─┐
+    «qr_1: ┤M├
+    «      └╥┘
+    «cr_0: ═╬═
+    «       ║ 
+    «cr_1: ═╩═
+    «         
+
 
 One can verify that the Unitary representing each RB circuit should be
 the identity (with a global phase). We simulate this using Aer unitary
 simulator.
 
-.. code:: python
+.. code:: ipython3
 
-   # Create a new circuit without the measurement
-   qregs = rb_circs[0][-1].qregs
-   cregs = rb_circs[0][-1].cregs
-   qc = qiskit.QuantumCircuit(*qregs, *cregs)
-   for i in rb_circs[0][-1][0:-nQ]:
-       qc.data.append(i)
+    # Create a new circuit without the measurement
+    qregs = rb_circs[0][-1].qregs
+    cregs = rb_circs[0][-1].cregs
+    qc = qiskit.QuantumCircuit(*qregs, *cregs)
+    for i in rb_circs[0][-1][0:-nQ]:
+        qc.data.append(i)
 
-.. code:: python
+.. code:: ipython3
 
-   # The Unitary is an identity (with a global phase)
-   backend = qiskit.Aer.get_backend('unitary_simulator')
-   basis_gates = ['u1','u2','u3','cx'] # use U,CX for now
-   job = qiskit.execute(qc, backend=backend, basis_gates=basis_gates)
-   print(np.around(job.result().get_unitary(),3))
+    # The Unitary is an identity (with a global phase)
+    backend = qiskit.Aer.get_backend('unitary_simulator')
+    basis_gates = ['u1','u2','u3','cx'] # use U,CX for now
+    job = qiskit.execute(qc, backend=backend, basis_gates=basis_gates)
+    print(np.around(job.result().get_unitary(),3))
+
+
+.. parsed-literal::
+
+    [[ 1.-0.j -0.-0.j -0.-0.j -0.-0.j]
+     [ 0.-0.j  1.-0.j  0.+0.j  0.-0.j]
+     [ 0.-0.j -0.-0.j  1.-0.j -0.+0.j]
+     [ 0.-0.j -0.-0.j  0.+0.j  1.-0.j]]
+
 
 Step 2: Execute the RB sequences (with some noise)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -149,20 +183,20 @@ modeled by the operation:
 
 .. math:: \textit{S}_{\textbf{i}_\textbf{m}} = \bigcirc_{j=1}^{m+1} (\Lambda_{i_j,j} \circ C_{i_j})
 
-where :math:`{\textbf{i}_\textbf{m}} = (i_1,...,i_m)` and
+ where :math:`{\textbf{i}_\textbf{m}} = (i_1,...,i_m)` and
 :math:`i_{m+1}` is uniquely determined by
 :math:`{\textbf{i}_\textbf{m}}`.
 
-.. code:: python
+.. code:: ipython3
 
-   # Run on a noisy simulator
-   noise_model = NoiseModel()
-   # Depolarizing_error
-   dp = 0.005 
-   noise_model.add_all_qubit_quantum_error(depolarizing_error(dp, 1), ['u1', 'u2', 'u3'])
-   noise_model.add_all_qubit_quantum_error(depolarizing_error(2*dp, 2), 'cx')
-
-   backend = qiskit.Aer.get_backend('qasm_simulator')
+    # Run on a noisy simulator
+    noise_model = NoiseModel()
+    # Depolarizing_error
+    dp = 0.005 
+    noise_model.add_all_qubit_quantum_error(depolarizing_error(dp, 1), ['u1', 'u2', 'u3'])
+    noise_model.add_all_qubit_quantum_error(depolarizing_error(2*dp, 2), 'cx')
+    
+    backend = qiskit.Aer.get_backend('qasm_simulator')
 
 Step 3: Get statistics about the survival probabilities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -190,11 +224,11 @@ the averaged sequence **fidelity**,
 
 .. math:: F_{seq}(m,|\psi{\rangle}) = Tr[E_\psi \textit{S}_{K_m}(\rho_\psi)]
 
-where
+ where
 
 .. math:: \textit{S}_{K_m} = \frac{1}{K_m} \sum_{\textbf{i}_\textbf{m}} \textit{S}_{\textbf{i}_\textbf{m}}
 
-is the average sequence operation.
+ is the average sequence operation.
 
 Step 5: Fit the results
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -204,7 +238,7 @@ results for the averaged sequence fidelity to the model:
 
 .. math::  \textit{F}_{seq}^{(0)} \big(m,{|}\psi {\rangle} \big) = A_0 \alpha^m +B_0
 
-where :math:`A_0` and :math:`B_0` absorb state preparation and
+ where :math:`A_0` and :math:`B_0` absorb state preparation and
 measurement errors as well as an edge effect from the error on the final
 gate.
 
@@ -213,46 +247,71 @@ also called **Error per Clifford (EPC)** according to the relation
 
 .. math::  r = 1-\alpha-\frac{1-\alpha}{2^n} = \frac{2^n-1}{2^n}(1-\alpha)
 
-(where :math:`n=nQ` is the number of qubits).
+ (where :math:`n=nQ` is the number of qubits).
 
 As an example, we calculate the average sequence fidelity for each of
 the RB sequences, fit the results to the exponential curve, and compute
 the parameters :math:`\alpha` and EPC.
 
-.. code:: python
+.. code:: ipython3
 
-   # Create the RB fitter
-   backend = qiskit.Aer.get_backend('qasm_simulator')
-   basis_gates = ['u1','u2','u3','cx'] 
-   shots = 200
-   qobj_list = []
-   rb_fit = rb.RBFitter(None, xdata, rb_opts['rb_pattern'])
-   for rb_seed,rb_circ_seed in enumerate(rb_circs):
-       print('Compiling seed %d'%rb_seed)
-       new_rb_circ_seed = qiskit.compiler.transpile(rb_circ_seed, basis_gates=basis_gates)
-       qobj = qiskit.compiler.assemble(new_rb_circ_seed, shots=shots)
-       print('Simulating seed %d'%rb_seed)
-       job = backend.run(qobj, noise_model=noise_model, backend_options={'max_parallel_experiments': 0})
-       qobj_list.append(qobj)
-       # Add data to the fitter
-       rb_fit.add_data(job.result())
-       print('After seed %d, alpha: %f, EPC: %f'%(rb_seed,rb_fit.fit[0]['params'][1], rb_fit.fit[0]['epc']))
+    # Create the RB fitter
+    backend = qiskit.Aer.get_backend('qasm_simulator')
+    basis_gates = ['u1','u2','u3','cx'] 
+    shots = 200
+    qobj_list = []
+    rb_fit = rb.RBFitter(None, xdata, rb_opts['rb_pattern'])
+    for rb_seed,rb_circ_seed in enumerate(rb_circs):
+        print('Compiling seed %d'%rb_seed)
+        new_rb_circ_seed = qiskit.compiler.transpile(rb_circ_seed, basis_gates=basis_gates)
+        qobj = qiskit.compiler.assemble(new_rb_circ_seed, shots=shots)
+        print('Simulating seed %d'%rb_seed)
+        job = backend.run(qobj, noise_model=noise_model, backend_options={'max_parallel_experiments': 0})
+        qobj_list.append(qobj)
+        # Add data to the fitter
+        rb_fit.add_data(job.result())
+        print('After seed %d, alpha: %f, EPC: %f'%(rb_seed,rb_fit.fit[0]['params'][1], rb_fit.fit[0]['epc']))
+
+
+.. parsed-literal::
+
+    Compiling seed 0
+    Simulating seed 0
+    After seed 0, alpha: 0.972586, EPC: 0.020561
+    Compiling seed 1
+    Simulating seed 1
+    After seed 1, alpha: 0.973784, EPC: 0.019662
+    Compiling seed 2
+    Simulating seed 2
+    After seed 2, alpha: 0.972331, EPC: 0.020752
+    Compiling seed 3
+    Simulating seed 3
+    After seed 3, alpha: 0.971290, EPC: 0.021532
+    Compiling seed 4
+    Simulating seed 4
+    After seed 4, alpha: 0.971688, EPC: 0.021234
+
 
 Plot the results
 ~~~~~~~~~~~~~~~~
 
-.. code:: python
+.. code:: ipython3
 
-   plt.figure(figsize=(8, 6))
-   ax = plt.subplot(1, 1, 1)
+    plt.figure(figsize=(8, 6))
+    ax = plt.subplot(1, 1, 1)
+    
+    # Plot the essence by calling plot_rb_data
+    rb_fit.plot_rb_data(0, ax=ax, add_label=True, show_plt=False)
+        
+    # Add title and label
+    ax.set_title('%d Qubit RB'%(nQ), fontsize=18)
+    
+    plt.show()
 
-   # Plot the essence by calling plot_rb_data
-   rb_fit.plot_rb_data(0, ax=ax, add_label=True, show_plt=False)
-       
-   # Add title and label
-   ax.set_title('%d Qubit RB'%(nQ), fontsize=18)
 
-   plt.show()
+
+.. image:: randomized-benchmarking_files/randomized-benchmarking_18_0.png
+
 
 The intuition behind RB
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -296,13 +355,9 @@ a *twirl*:
 
 .. math::  W_G(\bar \Lambda) \frac{1}{|G|} \sum_{u \in G} U^{\dagger} \circ  \bar \Lambda \circ U
 
-Twirling over the entire unitary group yields exactly the same result as
-the Clifford group. The Clifford group is a *2-design* of the unitary
+ Twirling over the entire unitary group yields exactly the same result
+as the Clifford group. The Clifford group is a *2-design* of the unitary
 group.
-
-.. raw:: html
-
-   <!-- #region -->
 
 Simultaneous Randomized Benchmarking
 ------------------------------------
@@ -336,27 +391,42 @@ Then, the two qubit Clifford gate error function gives the error per 2Q
 Clifford. It assumes that the error in the underlying gates is
 depolarizing. This function is derived in the supplement to [5].
 
-.. code:: python
+.. code:: ipython3
 
-   #Count the number of single and 2Q gates in the 2Q Cliffords
-   gates_per_cliff = rb.rb_utils.gates_per_clifford(qobj_list, xdata[0],basis_gates, rb_opts['rb_pattern'][0])
-   for i in range(len(basis_gates)):
-       print("Number of %s gates per Clifford: %f"%(basis_gates[i],
-                                                    np.mean([gates_per_cliff[0][i],gates_per_cliff[1][i]])))
+    #Count the number of single and 2Q gates in the 2Q Cliffords
+    gates_per_cliff = rb.rb_utils.gates_per_clifford(qobj_list, xdata[0],basis_gates, rb_opts['rb_pattern'][0])
+    for i in range(len(basis_gates)):
+        print("Number of %s gates per Clifford: %f"%(basis_gates[i],
+                                                     np.mean([gates_per_cliff[0][i],gates_per_cliff[1][i]])))
 
-.. code:: python
 
-   # Prepare lists of the number of qubits and the errors
-   ngates = np.zeros(7)
-   ngates[0:3] = gates_per_cliff[0][0:3]
-   ngates[3:6] = gates_per_cliff[1][0:3]
-   ngates[6] = gates_per_cliff[0][3]
-   gate_qubits = np.array([0, 0, 0, 1, 1, 1, -1], dtype=int)
-   gate_errs = np.zeros(len(gate_qubits))
-   gate_errs[[1, 4]] = dp/2 #convert from depolarizing error to epg (1Q)
-   gate_errs[[2, 5]] = 2*dp/2 #convert from depolarizing error to epg (1Q)
-   gate_errs[6] = dp*3/4 #convert from depolarizing error to epg (2Q)
+.. parsed-literal::
 
-   #Calculate the predicted epc
-   pred_epc = rb.rb_utils.twoQ_clifford_error(ngates,gate_qubits,gate_errs)
-   print("Predicted 2Q Error per Clifford: %e"%pred_epc)
+    Number of u1 gates per Clifford: 0.259389
+    Number of u2 gates per Clifford: 1.024345
+    Number of u3 gates per Clifford: 0.414520
+    Number of cx gates per Clifford: 1.530568
+
+
+.. code:: ipython3
+
+    # Prepare lists of the number of qubits and the errors
+    ngates = np.zeros(7)
+    ngates[0:3] = gates_per_cliff[0][0:3]
+    ngates[3:6] = gates_per_cliff[1][0:3]
+    ngates[6] = gates_per_cliff[0][3]
+    gate_qubits = np.array([0, 0, 0, 1, 1, 1, -1], dtype=int)
+    gate_errs = np.zeros(len(gate_qubits))
+    gate_errs[[1, 4]] = dp/2 #convert from depolarizing error to epg (1Q)
+    gate_errs[[2, 5]] = 2*dp/2 #convert from depolarizing error to epg (1Q)
+    gate_errs[6] = dp*3/4 #convert from depolarizing error to epg (2Q)
+    
+    #Calculate the predicted epc
+    pred_epc = rb.rb_utils.twoQ_clifford_error(ngates,gate_qubits,gate_errs)
+    print("Predicted 2Q Error per Clifford: %e"%pred_epc)
+
+
+.. parsed-literal::
+
+    Predicted 2Q Error per Clifford: 1.671786e-02
+

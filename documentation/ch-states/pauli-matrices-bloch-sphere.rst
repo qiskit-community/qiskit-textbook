@@ -1,11 +1,11 @@
 Pauli Matrices and the Bloch Sphere
 ===================================
 
-.. code:: python
+.. code:: ipython3
 
-   from qiskit import *
-   from qiskit.visualization import plot_bloch_vector
-   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    from qiskit import *
+    from qiskit.visualization import plot_bloch_vector
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
 
 In this section we’ll further develop the topics introduced in the last,
 and introduce a useful visualization of single-qubit states.
@@ -52,28 +52,28 @@ for an isolated qubit, can then be written
 To calculate these values in Qiskit, we first need a single qubit
 circuit to analyze.
 
-.. code:: python
+.. code:: ipython3
 
-   qc = QuantumCircuit(1)
+    qc = QuantumCircuit(1)
 
 Then we need to define the x, y and z measurements.
 
-.. code:: python
+.. code:: ipython3
 
-   # z measurement of qubit 0
-   measure_z = QuantumCircuit(1,1)
-   measure_z.measure(0,0);
-
-   # x measurement of qubit 0
-   measure_x = QuantumCircuit(1,1)
-   measure_x.h(0)
-   measure_x.measure(0,0)
-
-   # y measurement of qubit 0
-   measure_y = QuantumCircuit(1,1)
-   measure_y.sdg(0)
-   measure_y.h(0)
-   measure_y.measure(0,0);
+    # z measurement of qubit 0
+    measure_z = QuantumCircuit(1,1)
+    measure_z.measure(0,0);
+    
+    # x measurement of qubit 0
+    measure_x = QuantumCircuit(1,1)
+    measure_x.h(0)
+    measure_x.measure(0,0)
+    
+    # y measurement of qubit 0
+    measure_y = QuantumCircuit(1,1)
+    measure_y.sdg(0)
+    measure_y.h(0)
+    measure_y.measure(0,0);
 
 Finally we can run the circuit with each kind of measurement, calculate
 the probabities and use them to determine :math:`\langle X \rangle`,
@@ -86,25 +86,25 @@ Here we place the results in a list called ``bloch_vector``, for which
 :math:`\langle Y \rangle` and ``bloch_vector[2]`` is
 :math:`\langle Z \rangle`
 
-.. code:: python
+.. code:: ipython3
 
-   shots = 2**14 # number of samples used for statistics
-
-   bloch_vector = []
-   for measure_circuit in [measure_x, measure_y, measure_z]:
-       
-       # run the circuit with a the selected measurement and get the number of samples that output each bit value
-       counts = execute(qc+measure_circuit,Aer.get_backend('qasm_simulator'),shots=shots).result().get_counts()
-
-       # calculate the probabilities for each bit value
-       probs = {}
-       for output in ['0','1']:
-           if output in counts:
-               probs[output] = counts[output]/shots
-           else:
-               probs[output] = 0
-               
-       bloch_vector.append( probs['0'] -  probs['1'] )
+    shots = 2**14 # number of samples used for statistics
+    
+    bloch_vector = []
+    for measure_circuit in [measure_x, measure_y, measure_z]:
+        
+        # run the circuit with a the selected measurement and get the number of samples that output each bit value
+        counts = execute(qc+measure_circuit,Aer.get_backend('qasm_simulator'),shots=shots).result().get_counts()
+    
+        # calculate the probabilities for each bit value
+        probs = {}
+        for output in ['0','1']:
+            if output in counts:
+                probs[output] = counts[output]/shots
+            else:
+                probs[output] = 0
+                
+        bloch_vector.append( probs['0'] -  probs['1'] )
 
 The Bloch sphere
 ~~~~~~~~~~~~~~~~
@@ -141,9 +141,16 @@ and intuition about balls to our understanding of qubits. Specifically,
 we can visualize any single-qubit state as a point on the surface of a
 sphere. We call this the Bloch sphere.
 
-.. code:: python
+.. code:: ipython3
 
-   plot_bloch_vector( bloch_vector )
+    plot_bloch_vector( bloch_vector )
+
+
+
+
+.. image:: pauli-matrices-bloch-sphere_files/pauli-matrices-bloch-sphere_13_0.svg
+
+
 
 We usually associate :math:`|0\rangle` with the north pole,
 :math:`|1\rangle` with the south, and the states for the x and y
@@ -154,7 +161,21 @@ As we’ll see in future sections, the Bloch sphere makes it easier to
 understand single-qubit operations. Each moves points around on the
 surface of the sphere, and so can be interpreted as a simple rotation.
 
-.. code:: python
+.. code:: ipython3
 
-   import qiskit
-   qiskit.__qiskit_version__
+    import qiskit
+    qiskit.__qiskit_version__
+
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
+
+

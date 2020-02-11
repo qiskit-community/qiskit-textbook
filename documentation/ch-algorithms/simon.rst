@@ -8,7 +8,7 @@ using Qiskit, and run on a simulator and device.
 Contents
 --------
 
-1. `Introduction <#introduction>`__
+.. contents:: Quick links throoughout the document:
 
    -  `Simon’s Problem <#problem>`__
    -  `Simon’s Algorithm <#algorithm>`__
@@ -84,11 +84,6 @@ Quantum Solution
 ^^^^^^^^^^^^^^^^
 
 The quantum circuit that implements Simon’s algorithm is shown below.
-
-.. figure:: images/simon_steps.jpeg
-   :alt: simon_steps
-
-   simon_steps
 
 Where the query function, :math:`\text{Q}_f` acts on two quantum
 registers as:
@@ -215,11 +210,6 @@ one.
 Let’s see the example of Simon’s algorithm for 2 qubits with the secret
 string :math:`s=11`, so that :math:`f(x) = f(y)` if
 :math:`y = x \oplus s`. The quantum circuit to solve the problem is:
-
-.. figure:: images/simon_example.jpeg
-   :alt: simon_example
-
-   simon_example
 
 .. raw:: html
 

@@ -13,18 +13,27 @@ return heavily optimized circuits mapped to targeted quantum devices.
 Here we will explore the IBM Qiskit ‘transpiler’ circuit rewriting
 framework.
 
-.. code:: python
+.. code:: ipython3
 
-   import numpy as np
-   from qiskit import *
-   from qiskit.tools.jupyter import *
-   from qiskit.providers.ibmq import least_busy
-   %matplotlib inline
-   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    import numpy as np
+    from qiskit import *
+    from qiskit.tools.jupyter import *
+    from qiskit.providers.ibmq import least_busy
+    %matplotlib inline
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
 
-.. code:: python
+.. code:: ipython3
 
-   IBMQ.load_account()
+    IBMQ.load_account()
+
+
+
+
+.. parsed-literal::
+
+    <AccountProvider for IBMQ(hub='ibm-q', group='open', project='main')>
+
+
 
 Core Steps in Circuit Rewriting
 -------------------------------
@@ -35,6 +44,10 @@ in the rewriting tool chain need not be linear, and can often have
 iterative sub-loops, conditional branches, and other complex behaviors.
 That being said, the basic building blocks follow the structure given
 below.
+
+.. figure:: images/transpiling_core_steps.png
+   :alt: core_steps
+
 
 Our goal in this section is to see what each of these “passes” does at a
 high-level, and then begin exploring their usage on a set of common
@@ -54,15 +67,40 @@ natively support a handful of quantum gates and non-gate operations. In
 the present case of IBM Q devices, the native gate set can be found by
 querying the devices themselves:
 
-.. code:: python
+.. code:: ipython3
 
-   provider = IBMQ.get_provider(group='open')
-   provider.backends(simulator=False)
+    provider = IBMQ.get_provider(group='open')
+    provider.backends(simulator=False)
 
-.. code:: python
 
-   backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= 5 and not x.configuration().simulator and x.status().operational==True))
-   backend.configuration().basis_gates
+
+
+.. parsed-literal::
+
+    [<IBMQBackend('ibmqx2') from IBMQ(hub='ibm-q', group='open', project='main')>,
+     <IBMQBackend('ibmq_16_melbourne') from IBMQ(hub='ibm-q', group='open', project='main')>,
+     <IBMQBackend('ibmq_vigo') from IBMQ(hub='ibm-q', group='open', project='main')>,
+     <IBMQBackend('ibmq_ourense') from IBMQ(hub='ibm-q', group='open', project='main')>,
+     <IBMQBackend('ibmq_london') from IBMQ(hub='ibm-q', group='open', project='main')>,
+     <IBMQBackend('ibmq_burlington') from IBMQ(hub='ibm-q', group='open', project='main')>,
+     <IBMQBackend('ibmq_essex') from IBMQ(hub='ibm-q', group='open', project='main')>,
+     <IBMQBackend('ibmq_armonk') from IBMQ(hub='ibm-q', group='open', project='main')>]
+
+
+
+.. code:: ipython3
+
+    backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= 5 and not x.configuration().simulator and x.status().operational==True))
+    backend.configuration().basis_gates
+
+
+
+
+.. parsed-literal::
+
+    ['u1', 'u2', 'u3', 'cx', 'id']
+
+
 
 We see that the our device supports five native gates: three
 single-qubit gates (``u1``, ``u2``, ``u3``, and ``id``) and one
@@ -124,55 +162,75 @@ Every quantum circuit run on a IBM Q device must be expressed using only
 these basis gates. For example, suppose one wants to run a simple phase
 estimation circuit:
 
-.. code:: python
+.. code:: ipython3
 
-   qr = QuantumRegister(2, 'q')
-   cr = ClassicalRegister(1, 'c')
-   qc = QuantumCircuit(qr, cr)
+    qr = QuantumRegister(2, 'q')
+    cr = ClassicalRegister(1, 'c')
+    qc = QuantumCircuit(qr, cr)
+    
+    qc.h(qr[0])
+    qc.x(qr[1])
+    qc.cu1(np.pi/4, qr[0], qr[1])
+    qc.h(qr[0])
+    qc.measure(qr[0], cr[0])
+    qc.draw(output='mpl')
 
-   qc.h(qr[0])
-   qc.x(qr[1])
-   qc.cu1(np.pi/4, qr[0], qr[1])
-   qc.h(qr[0])
-   qc.measure(qr[0], cr[0])
-   qc.draw(output='mpl')
 
-We have :math:`H`, :math:`X`, and controlled-:math:`U_{1}` gates, all of
-which are not in our devices basis gate set, and must be expanded. We
+
+
+.. image:: transpiling-quantum-circuits_files/transpiling-quantum-circuits_14_0.svg
+
+
+
+We have :math:`H`, :math:`X`, and controlled-\ :math:`U_{1}` gates, all
+of which are not in our devices basis gate set, and must be expanded. We
 will see that this expansion is taken care of for you, but for now let
 us just rewrite the circuit in the basis gate set:
 
-.. code:: python
+.. code:: ipython3
 
-   qr = QuantumRegister(2, 'q')
-   cr = ClassicalRegister(1, 'c')
-   qc_basis = QuantumCircuit(qr, cr)
+    qr = QuantumRegister(2, 'q')
+    cr = ClassicalRegister(1, 'c')
+    qc_basis = QuantumCircuit(qr, cr)
+    
+    # Hadamard in U2 format
+    qc_basis.u2(0, np.pi, qr[0])
+    # X gate in U3 format
+    qc_basis.u3(np.pi, 0, np.pi, qr[1])
+    
+    # Decomposition for controlled-U1 with lambda=pi/4
+    qc_basis.u1(np.pi/8, qr[0]) 
+    qc_basis.cx(qr[0], qr[1]) 
+    qc_basis.u1(-np.pi/8, qr[1]) 
+    qc_basis.cx(qr[0], qr[1])
+    qc_basis.u1(np.pi/8, qr[1])
+    
+    # Hadamard in U2 format
+    qc_basis.u2(0, np.pi, qr[0]) 
+    
+    qc_basis.measure(qr[0], cr[0])
+    qc_basis.draw(output='mpl')
 
-   # Hadamard in U2 format
-   qc_basis.u2(0, np.pi, qr[0])
-   # X gate in U3 format
-   qc_basis.u3(np.pi, 0, np.pi, qr[1])
 
-   # Decomposition for controlled-U1 with lambda=pi/4
-   qc_basis.u1(np.pi/8, qr[0]) 
-   qc_basis.cx(qr[0], qr[1]) 
-   qc_basis.u1(-np.pi/8, qr[1]) 
-   qc_basis.cx(qr[0], qr[1])
-   qc_basis.u1(np.pi/8, qr[1])
 
-   # Hadamard in U2 format
-   qc_basis.u2(0, np.pi, qr[0]) 
 
-   qc_basis.measure(qr[0], cr[0])
-   qc_basis.draw(output='mpl')
+.. image:: transpiling-quantum-circuits_files/transpiling-quantum-circuits_16_0.svg
+
+
 
 A few things to highlight. One, the circuit has gotten longer with
 respect to the initial one. This can be verified by checking the depth
 of the circuits:
 
-.. code:: python
+.. code:: ipython3
 
-   print(qc.depth(), ',', qc_basis.depth())
+    print(qc.depth(), ',', qc_basis.depth())
+
+
+.. parsed-literal::
+
+    4 , 7
+
 
 Second, although we had a single controlled gate, the fact that it was
 not in the basis set means that, when expanded, it requires more than a
@@ -185,13 +243,20 @@ steps must try to mitigate this effect through circuit optimizations.
 Finally, we will look at the particularly important example of a
 Toffoli, or controlled-controlled-not gate:
 
-.. code:: python
+.. code:: ipython3
 
-   qr = QuantumRegister(3, 'q')
-   qc = QuantumCircuit(qr)
+    qr = QuantumRegister(3, 'q')
+    qc = QuantumCircuit(qr)
+    
+    qc.ccx(qr[0], qr[1], qr[2])
+    qc.draw(output='mpl')
 
-   qc.ccx(qr[0], qr[1], qr[2])
-   qc.draw(output='mpl')
+
+
+
+.. image:: transpiling-quantum-circuits_files/transpiling-quantum-circuits_21_0.svg
+
+
 
 As a three-qubit gate, it should already be clear that this is not in
 the basis set of our devices. We have already seen that controlled gates
@@ -201,27 +266,34 @@ where multiple CNOT gates are needed to implement the entangling across
 the multiple qubits. In our basis set, the Toffoli gate can be written
 as:
 
-.. code:: python
+.. code:: ipython3
 
-   qr = QuantumRegister(3, 'q')
-   qc_basis = QuantumCircuit(qr)
+    qr = QuantumRegister(3, 'q')
+    qc_basis = QuantumCircuit(qr)
+    
+    qc_basis.u2(0,np.pi, qr[2])
+    qc_basis.cx(qr[1], qr[2])
+    qc_basis.u1(-np.pi/4, qr[2])
+    qc_basis.cx(qr[0], qr[2])
+    qc_basis.u1(np.pi/4, qr[2])
+    qc_basis.cx(qr[1], qr[2])
+    qc_basis.u1(np.pi/4, qr[1])
+    qc_basis.u1(-np.pi/4, qr[2])
+    qc_basis.cx(qr[0], qr[2])
+    qc_basis.cx(qr[0], qr[1])
+    qc_basis.u1(np.pi/4, qr[2])
+    qc_basis.u1(np.pi/4, qr[0])
+    qc_basis.u1(-np.pi/4, qr[1])
+    qc_basis.u2(0,np.pi, qr[2])
+    qc_basis.cx(qr[0], qr[1])
+    qc_basis.draw(output='mpl')
 
-   qc_basis.u2(0,np.pi, qr[2])
-   qc_basis.cx(qr[1], qr[2])
-   qc_basis.u1(-np.pi/4, qr[2])
-   qc_basis.cx(qr[0], qr[2])
-   qc_basis.u1(np.pi/4, qr[2])
-   qc_basis.cx(qr[1], qr[2])
-   qc_basis.u1(np.pi/4, qr[1])
-   qc_basis.u1(-np.pi/4, qr[2])
-   qc_basis.cx(qr[0], qr[2])
-   qc_basis.cx(qr[0], qr[1])
-   qc_basis.u1(np.pi/4, qr[2])
-   qc_basis.u1(np.pi/4, qr[0])
-   qc_basis.u1(-np.pi/4, qr[1])
-   qc_basis.u2(0,np.pi, qr[2])
-   qc_basis.cx(qr[0], qr[1])
-   qc_basis.draw(output='mpl')
+
+
+
+.. image:: transpiling-quantum-circuits_files/transpiling-quantum-circuits_23_0.svg
+
+
 
 Therefore, for every Toffoli gate in a quantum circuit, the IBM Q
 hardware must execute six CNOT gates, and a handful of single-qubit
@@ -233,21 +305,35 @@ errors.
 Initial Layout
 ~~~~~~~~~~~~~~
 
-.. code:: python
+.. code:: ipython3
 
-   qr = QuantumRegister(5, 'q')
-   cr = ClassicalRegister(5, 'c')
-   qc = QuantumCircuit(qr, cr)
+    qr = QuantumRegister(5, 'q')
+    cr = ClassicalRegister(5, 'c')
+    qc = QuantumCircuit(qr, cr)
+    
+    qc.h(qr[0])
+    qc.cx(qr[0], qr[4])
+    qc.cx(qr[4], qr[3])
+    qc.cx(qr[3], qr[1])
+    qc.cx(qr[1], qr[2])
+    
+    qc.draw(output='mpl')
 
-   qc.h(qr[0])
-   qc.cx(qr[0], qr[4])
-   qc.cx(qr[4], qr[3])
-   qc.cx(qr[3], qr[1])
-   qc.cx(qr[1], qr[2])
 
-   qc.draw(output='mpl')
 
-.. code:: python
 
-   from qiskit.visualization.gate_map import plot_gate_map
-   plot_gate_map(backend, plot_directed=True)
+.. image:: transpiling-quantum-circuits_files/transpiling-quantum-circuits_26_0.svg
+
+
+
+.. code:: ipython3
+
+    from qiskit.visualization.gate_map import plot_gate_map
+    plot_gate_map(backend, plot_directed=True)
+
+
+
+
+.. image:: transpiling-quantum-circuits_files/transpiling-quantum-circuits_27_0.svg
+
+

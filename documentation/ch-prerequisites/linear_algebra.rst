@@ -1,15 +1,21 @@
+.. raw:: html
+
+   <h1>
+
 An Introduction to Linear Algebra for Quantum Computing
-=======================================================
 
-.. code:: python
+.. raw:: html
 
-   from matplotlib import pyplot as plt
-   import numpy as np
-   from qiskit import *
-   from qiskit.visualization import plot_bloch_vector
+   </h1>
 
-Introduction
-------------
+.. code:: ipython3
+
+    from matplotlib import pyplot as plt
+    import numpy as np
+    from qiskit import *
+    from qiskit.visualization import plot_bloch_vector
+
+**Introduction**
 
 Linear algebra is the language of quantum computing. For this reason, it
 is crucial to develop a good understanding of the basic mathematical
@@ -19,8 +25,7 @@ this section of the textbook is to start at the absolute basics of
 linear algebra: vectors and vector spaces, and build a foundation that
 the reader can then leverage in their study of quantum computing.
 
-Vectors and Vector Spaces
--------------------------
+**Vectors and Vector Spaces**
 
 We will start our investigation into introductory linear algebra by
 first discussing one of the most important mathematical quantities in
@@ -35,15 +40,20 @@ This vector can be visualized as an arrow pointing in the direction of
 :math:`3` unit down the :math:`x` axis and :math:`5` units up the
 :math:`y` axis:
 
-.. code:: python
+.. code:: ipython3
 
-   plt.figure()
-   ax = plt.gca()
-   ax.quiver([3], [5], angles='xy', scale_units='xy', scale=1)
-   ax.set_xlim([-1, 10])
-   ax.set_ylim([-1, 10])
-   plt.draw()
-   plt.show()
+    plt.figure()
+    ax = plt.gca()
+    ax.quiver([3], [5], angles='xy', scale_units='xy', scale=1)
+    ax.set_xlim([-1, 10])
+    ax.set_ylim([-1, 10])
+    plt.draw()
+    plt.show()
+
+
+
+.. image:: linear_algebra_files/linear_algebra_3_0.png
+
 
 Note that “tail” of the vector doesn’t have to be positioned at the
 origin, all that matters is that it is pointing in the correct
@@ -59,9 +69,16 @@ system could look something like this arrow, enclosed inside the Bloch
 sphere, which is the so-called “state” space of all possible points to
 which our state vectors can “point”:
 
-.. code:: python
+.. code:: ipython3
 
-   plot_bloch_vector([1, 0, 0])
+    plot_bloch_vector([1, 0, 0])
+
+
+
+
+.. image:: linear_algebra_files/linear_algebra_5_0.png
+
+
 
 Hopefully this helps to illuminate how vectors can be used to store
 information about quantum states. This particular state corresponds to
@@ -100,8 +117,7 @@ is contained within :math:`\\mathbb{R}^2`. The product of a real number
 and a real number is in turn a real number, making the values of the new
 vector real, and thus proving this statement.
 
-Matrices and Matrix Operations
-------------------------------
+**Matrices and Matrix Operations**
 
 Now that we have introduced vectors, we can turn our attention to
 another fundamental concept: a **matrix**. The best way to think of
@@ -236,8 +252,7 @@ application of a unitary matrix “preserves” the quantum state in a sense
 (we will discuss this more rigorously in the Hilbert spaces section, and
 even more so in the quantum mechanics subtopic of the textbook).
 
-Spanning Sets, Linear Dependence and Bases
-------------------------------------------
+**Spanning Sets, Linear Dependence and Bases**
 
 We are now in a position to discuss the construction of vector spaces.
 Consider some vector space :math:`V`. We say that some set of vectors
@@ -346,8 +361,7 @@ state to be in either one of the basis vector states. (this is kind of
 intuitive, as the “weight” or the “amount of each basis vector” in the
 linear combination is equal, both being scaled by :math:`1/\sqrt{2}`).
 
-Hilbert Spaces, Orthonormality, and the Inner Product
------------------------------------------------------
+**Hilbert Spaces, Orthonormality, and the Inner Product**
 
 Hilbert Spaces are one of the most important mathematical constructs in
 quantum mechanics and quantum computation. Less rigorously, a Hilbert
@@ -390,13 +404,16 @@ state has to equal one (I mean, it has to be in **some** state!).
 
 Let’s consider the Bloch sphere:
 
-.. code:: python
+.. code:: ipython3
 
-   plot_bloch_vector([0, 0, 0])
+    plot_bloch_vector([0, 0, 0])
 
-.. raw:: html
 
-   <!-- #region -->
+
+
+.. image:: linear_algebra_files/linear_algebra_7_0.png
+
+
 
 The surface of this sphere, along with the inner product between qubit
 state vectors, is a valid Hilbert space! In addition to this, it can be
@@ -420,8 +437,7 @@ represented by the Bloch sphere, unitary transformations correspond to
 rotations of state vectors to different points on the sphere, not
 changing the length of the state vector in any way.
 
-Eigenvectors and Eigenvalues
-----------------------------
+**Eigenvectors and Eigenvalues**
 
 Consider the relationship of the form:
 
@@ -494,8 +510,7 @@ referring to performing a measurement that collapses the qubit’s state
 into one of the eigenvectors of the Z matrix, either :math:`|0\rangle`
 or :math:`|1\rangle`!
 
-Matrix Exponentials
--------------------
+**Matrix Exponentials**
 
 The notion of a matrix exponential is a very specific idea, but one that
 is so important that it warrants its own section in this part of the
@@ -666,3 +681,4 @@ JSTOR.
 
 [2] A New Branch of Mathematics: The Ausdehnungslehre of 1844 and Other
 Works: Hermann Grassmann, Lloyd C. Kannenberg: 9780812692761
+

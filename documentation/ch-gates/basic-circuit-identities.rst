@@ -1,10 +1,10 @@
 Basic Circuit Identities
 ========================
 
-.. code:: python
+.. code:: ipython3
 
-   from qiskit import *
-   from qiskit.circuit import Gate
+    from qiskit import *
+    from qiskit.circuit import Gate
 
 When we program quantum computers, our aim is always to build useful
 quantum circuits from the basic building blocks. But sometimes, we might
@@ -16,17 +16,14 @@ pretty basic).
 Many of the techniques discussed in this chapter were first proposed in
 a paper by Barenco and coauthors in 1995 [1].
 
-Making a controlled-:math:`Z` from a CNOT
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. raw:: html
-
-   <!-- #region -->
+Making a controlled-\ :math:`Z` from a CNOT
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The controlled-Z or ``cz`` gate is another well-used two-qubit gate.
 Just as the CNOT applies an :math:`X` to its target qubit whenever its
-control is in state :math:`|1\rangle`, the controlled-:math:`Z` applies
-a :math:`Z` in the same case. In Qasm it can be invoked directly with
+control is in state :math:`|1\rangle`, the controlled-\ :math:`Z`
+applies a :math:`Z` in the same case. In Qasm it can be invoked directly
+with
 
 .. code:: python
 
@@ -52,7 +49,7 @@ simply multiplying matrices, we find that
    H Z H = X.
 
 The same trick can be used to transform a CNOT into a
-controlled-:math:`Z`. All we need to do is precede and follow the CNOT
+controlled-\ :math:`Z`. All we need to do is precede and follow the CNOT
 with a Hadamard on the target qubit. This will transform any :math:`X`
 applied to that qubit into a :math:`Z`.
 
@@ -66,7 +63,7 @@ applied to that qubit into a :math:`Z`.
 More generally, we can transform a single CNOT into a controlled version
 of any rotation around the Bloch sphere by an angle :math:`\pi`, by
 simply preceding and following it with the correct rotations. For
-example, a controlled-:math:`Y`:
+example, a controlled-\ :math:`Y`:
 
 .. code:: python
 
@@ -75,7 +72,7 @@ example, a controlled-:math:`Y`:
    qc.cx(c,t)
    qc.s(t)
 
-and a controlled-:math:`H`:
+and a controlled-\ :math:`H`:
 
 .. code:: python
 
@@ -84,16 +81,8 @@ and a controlled-:math:`H`:
    qc.cx(c,t)
    qc.ry(pi/4,t)
 
-.. raw:: html
-
-   <!-- #endregion -->
-
 Swapping qubits
 ~~~~~~~~~~~~~~~
-
-.. raw:: html
-
-   <!-- #region -->
 
 Sometimes we need to move information around in a quantum computer. For
 some qubit implementations, this could be done by physically moving
@@ -205,10 +194,6 @@ here.
 Making the CNOTs we need from the CNOTs we have
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. raw:: html
-
-   <!-- #region -->
-
 The gates in any quantum computer are driven by the physics of the
 underlying system. In IBM Q devices, the physics behind CNOTs means that
 they cannot be directly applied to all possible pairs of qubits. For
@@ -225,8 +210,8 @@ one for which qubit :math:`t` acts as the control and qubit :math:`c` is
 the target?
 
 This question would be very simple to answer for the
-controlled-:math:`Z`. For this gate, it doesn’t matter which way around
-the control and target qubits are.
+controlled-\ :math:`Z`. For this gate, it doesn’t matter which way
+around the control and target qubits are.
 
 .. code:: python
 
@@ -251,21 +236,21 @@ To see why this is true, let’s remind ourselves of what the Z gate is:
 We can think of this as multiplying the state by :math:`-1`, but only
 when it is :math:`|1\rangle`.
 
-For a controlled-:math:`Z` gate, the control qubit must be in state
+For a controlled-\ :math:`Z` gate, the control qubit must be in state
 :math:`|1\rangle` for a :math:`Z` to be applied to the target qubit.
 Given the above property of :math:`Z`, this only has an effect when the
 target is in state :math:`|1\rangle`. We can therefore think of the
-controlled-:math:`Z` gate as one that multiplies the state of two qubits
-by :math:`-1`, but only when the state is :math:`|11\rangle`.
+controlled-\ :math:`Z` gate as one that multiplies the state of two
+qubits by :math:`-1`, but only when the state is :math:`|11\rangle`.
 
 This new interpretation is phrased in a perfectly symmetric way, and
 demonstrates that the labels of ‘control’ and ‘target’ are not necessary
 for this gate.
 
 This property gives us a way to reverse the orientation of a CNOT. We
-can first turn the CNOT into a controlled-:math:`Z` by using the method
-described earlier: placing a Hadamard both before and after on the
-target qubit.
+can first turn the CNOT into a controlled-\ :math:`Z` by using the
+method described earlier: placing a Hadamard both before and after on
+the target qubit.
 
 .. code:: python
 
@@ -275,10 +260,10 @@ target qubit.
    qc.h(t)
 
 Then, since we are free to choose which way around to think about a
-controlled-:math:`Z`\ ’s action, we can choose to think of :math:`t` as
-the control and :math:`c` as the target. We can then transform this
-controlled-:math:`Z` into a corresponding CNOT. We just need to place a
-Hadamard both before and after on the target qubit (which is now qubit
+controlled-\ :math:`Z`\ ’s action, we can choose to think of :math:`t`
+as the control and :math:`c` as the target. We can then transform this
+controlled-\ :math:`Z` into a corresponding CNOT. We just need to place
+a Hadamard both before and after on the target qubit (which is now qubit
 :math:`c`).
 
 .. code:: python
@@ -452,10 +437,6 @@ methods described above simply need to be scaled up.
 Controlled rotations
 ~~~~~~~~~~~~~~~~~~~~
 
-.. raw:: html
-
-   <!-- #region -->
-
 We have already seen how to build controlled :math:`\pi` rotations from
 a single CNOT gate. Now we’ll look at how to build any controlled
 rotation.
@@ -512,7 +493,6 @@ states.
 .. figure:: https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/4efe86a907a64a59a720b4dc54a98a88iden1.png
    :alt: A controlled version of a gate V
 
-   A controlled version of a gate V
 
 Here ``A``, ``B`` and ``C`` are gates that implement :math:`A` ,
 :math:`B` and :math:`C`, respectively, and must be defined as custom
@@ -525,16 +505,8 @@ custom would be defined as
    qc_a.rx(np.pi/4,0)
    A = qc_a.to_instruction()
 
-.. raw:: html
-
-   <!-- #endregion -->
-
 The Toffoli
 ~~~~~~~~~~~
-
-.. raw:: html
-
-   <!-- #region -->
 
 The Toffoli gate is a three-qubit gate with two controls and one target.
 It performs an X on the target only if both controls are in the state
@@ -569,7 +541,6 @@ controls are qubits :math:`a` and :math:`b`, and the target is qubit
 .. figure:: https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/693974b222d24dba9111e02ae25e9151iden2.png
    :alt: A doubly controlled version of a gate V
 
-   A doubly controlled version of a gate V
 
 By tracing through each value of the two control qubits, you can
 convince yourself that a U gate is applied to the target qubit if and
@@ -581,7 +552,6 @@ CNOT gates required to implement the Toffoli gate is six [2].
 .. figure:: https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/b3cbeb9b7d674d60a75bed351e4f2bcbiden3.png
    :alt: A Toffoli
 
-   A Toffoli
 
 The Toffoli is not the unique way to implement an AND gate in quantum
 computing. We could also define other gates that have the same effect,
@@ -589,8 +559,8 @@ but which also introduce relative phases. In these cases, we can
 implement the gate with fewer CNOTs.
 
 For example, suppose we use both the controlled-Hadamard and
-controlled-:math:`Z` gates, which can both be implemented with a single
-CNOT. With these we can make the following circuit:
+controlled-\ :math:`Z` gates, which can both be implemented with a
+single CNOT. With these we can make the following circuit:
 
 .. code:: python
 
@@ -611,10 +581,6 @@ equivalent of just three CNOT gates.
 
 Arbitrary rotations from H and T
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. raw:: html
-
-   <!-- #region -->
 
 The qubits in current devices are subject to noise, which basically
 consists of gates that are done by mistake. Simple things like

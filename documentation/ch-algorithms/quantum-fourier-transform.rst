@@ -8,13 +8,7 @@ QFT on a simulator and a five qubit device.
 Contents
 --------
 
-1. `Introduction <#introduction>`__
-2. `Example 1: 1-qubit QFT <#example1>`__
-3. `The Quantum Fourier transform <#qfteqn>`__
-4. `The circuit that implements QFT <#circuit>`__
-5. `Example 2: 3-qubit QFT <#example1>`__
-6. `A note about the form of the QFT circuit <#formnote>`__
-7. `Qiskit Implementation <#implementation>`__
+.. contents:: Quick links throoughout the document:
 
    -  `Running QFT on a simulator <#implementationsim>`__
    -  `Running QFT on a real quantum device <#implementationdev>`__
@@ -190,11 +184,6 @@ second is the target is given by
 
 Given these two gates, a circuit that implements `an n-qubit
 QFT <#qfteqn>`__ is shown below.
-
-.. figure:: images/qft.png
-   :alt: qft
-
-   qft
 
 The circuit operates as follows. We start with an n-qubit input state
 :math:`\vert x_1x_2\ldots x_n\rangle`.

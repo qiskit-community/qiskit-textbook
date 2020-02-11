@@ -1,15 +1,11 @@
 The Unique Properties of Qubits
 ===============================
 
-.. code:: python
+.. code:: ipython3
 
-   from qiskit import *
-   from qiskit.visualization import plot_histogram
-   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
-
-.. raw:: html
-
-   <!-- #region -->
+    from qiskit import *
+    from qiskit.visualization import plot_histogram
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
 
 You now know something about bits, and about how our familiar digital
 computers work. All the complex variables, objects and data structures
@@ -42,6 +38,8 @@ defined, the more uncertainty there is in its momentum, and vice-versa.
 
 |image0|
 
+.. |image0| image:: ./images/heisenberg_xkcd.png
+
 This is a common feature of quantum objects, though it need not always
 refer to position and momentum. There are many possible sets of
 parameters for different quantum objects, where certain knowledge of one
@@ -51,12 +49,19 @@ To see how the uncertainty principle affects qubits, we need to look at
 measurement. As we saw in the last section, this is the method by which
 we extract a bit from a qubit.
 
-.. code:: python
+.. code:: ipython3
 
-   measure_z = QuantumCircuit(1,1)
-   measure_z.measure(0,0)
+    measure_z = QuantumCircuit(1,1)
+    measure_z.measure(0,0)
+    
+    measure_z.draw(output='mpl')
 
-   measure_z.draw(output='mpl')
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_7_0.svg
+
+
 
 On the `Circuit
 Composer <https://quantum-computing.ibm.com/composer>`__, the same
@@ -65,7 +70,6 @@ operation looks like this.
 .. figure:: https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/e8401fb5e3ff4cd18590010209203bc4uni1.png
    :alt: A z measurement
 
-   A z measurement
 
 This version has a small ‘z’ written in the box that represents the
 operation. This hints at the fact that this kind of measurement is not
@@ -76,13 +80,20 @@ measurement*.
 Another commonly used measurement is the *x measurement*. It can be
 performed using the following sequence of gates.
 
-.. code:: python
+.. code:: ipython3
 
-   measure_x = QuantumCircuit(1,1)
-   measure_x.h(0)
-   measure_x.measure(0,0)
+    measure_x = QuantumCircuit(1,1)
+    measure_x.h(0)
+    measure_x.measure(0,0)
+    
+    measure_x.draw(output='mpl')
 
-   measure_x.draw(output='mpl')
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_9_0.svg
+
+
 
 Later chapters will explain why this sequence of operations performs a
 new kind of measurement. For now, you’ll need to trust us.
@@ -98,35 +109,66 @@ Results for an empty circuit
 The easiest way to see an example is to take a freshly initialized
 qubit.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_0 = QuantumCircuit(1)
+    qc_0 = QuantumCircuit(1)
+    
+    qc_0.draw(output='mpl')
 
-   qc_0.draw(output='mpl')
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_11_0.svg
+
+
 
 Qubits are always initialized such that they are certain to give the
 result ``0`` for a z measurement. The resulting histogram will therefore
 simply have a single column, showing the 100% probability of getting a
 ``0``.
 
-.. code:: python
+.. code:: ipython3
 
-   qc = qc_0 + measure_z
+    qc = qc_0 + measure_z
+    
+    print('Results for z measurement:')
+    counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
+    plot_histogram(counts)
 
-   print('Results for z measurement:')
-   counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
-   plot_histogram(counts)
+
+.. parsed-literal::
+
+    Results for z measurement:
+
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_13_1.svg
+
+
 
 If we instead do an x measurement, the results will be completely
 random.
 
-.. code:: python
+.. code:: ipython3
 
-   qc = qc_0 +  measure_x
+    qc = qc_0 +  measure_x
+    
+    print('Results for x measurement:')
+    counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
+    plot_histogram(counts)
 
-   print('Results for x measurement:')
-   counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
-   plot_histogram(counts)
+
+.. parsed-literal::
+
+    Results for x measurement:
+
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_15_1.svg
+
+
 
 Note that the reason why the results are not split exactly 50/50 here is
 because we take samples by repeating the circuit a finite number of
@@ -139,37 +181,68 @@ Results for a single Hadamard
 Now we’ll try a different circuit. This has a single gate called a
 Hadamard, which we will learn more about in future sections.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_plus = QuantumCircuit(1)
-   qc_plus.h(0)
+    qc_plus = QuantumCircuit(1)
+    qc_plus.h(0)
+    
+    qc_plus.draw(output='mpl')
 
-   qc_plus.draw(output='mpl')
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_18_0.svg
+
+
 
 To see what effect it has, let’s first try the z measurement.
 
-.. code:: python
+.. code:: ipython3
 
-   qc = qc_plus + measure_z
+    qc = qc_plus + measure_z
+    
+    qc.draw()
+    
+    print('Results for z measurement:')
+    counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
+    plot_histogram(counts)
 
-   qc.draw()
 
-   print('Results for z measurement:')
-   counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
-   plot_histogram(counts)
+.. parsed-literal::
+
+    Results for z measurement:
+
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_20_1.svg
+
+
 
 Here we see that it is the results of the z measurement that are random
 for this circuit.
 
 Now let’s see what happens for an x measurement.
 
-.. code:: python
+.. code:: ipython3
 
-   qc = qc_plus + measure_x
+    qc = qc_plus + measure_x
+    
+    print('Results for x measurement:')
+    counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
+    plot_histogram(counts)
 
-   print('Results for x measurement:')
-   counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
-   plot_histogram(counts)
+
+.. parsed-literal::
+
+    Results for x measurement:
+
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_22_1.svg
+
+
 
 For the x measurement, it is certain that the output for this circuit is
 ``0``. The results here are therefore very different to what we saw for
@@ -182,36 +255,68 @@ Results for a y rotation
 Using other circuits we can manipulate the results in different ways.
 Here is an example with an ``ry`` gate.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_y = QuantumCircuit(1)
-   qc_y.ry( -3.14159/4,0)
+    qc_y = QuantumCircuit(1)
+    qc_y.ry( -3.14159/4,0)
+    
+    qc_y.draw(output='mpl')
 
-   qc_y.draw(output='mpl')
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_24_0.svg
+
+
 
 We will learn more about ``ry`` in future sections. For now, just notice
 the effect it has for the z and x measurements.
 
-.. code:: python
+.. code:: ipython3
 
-   qc = qc_y + measure_z
+    qc = qc_y + measure_z
+    
+    print('Results for z measurement:')
+    counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
+    plot_histogram(counts)
 
-   print('Results for z measurement:')
-   counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
-   plot_histogram(counts)
+
+.. parsed-literal::
+
+    Results for z measurement:
+
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_26_1.svg
+
+
 
 Here we have a case that we have not seen before. The z measurement is
 most likely to output ``0``, but it is not completely certain. A similar
 effect is seen below for the x measurement: it is most likely, but not
 certain, to output ``1``.
 
-.. code:: python
+.. code:: ipython3
 
-   qc = qc_y + measure_x
+    qc = qc_y + measure_x
+    
+    print('\nResults for x measurement:')
+    counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
+    plot_histogram(counts)
 
-   print('\nResults for x measurement:')
-   counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
-   plot_histogram(counts)
+
+.. parsed-literal::
+
+    
+    Results for x measurement:
+
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_28_1.svg
+
+
 
 These results hint at an important principle: Qubits have a limited
 amount of certainty that they can hold. This ensures that, despite the
@@ -279,31 +384,51 @@ Now let’s see what actually happens. Here is a circuit, composed of
 gates you will learn about in later sections. It prepares a pair of
 qubits that will satisfy the above properties.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_hardy = QuantumCircuit(2)
-   qc_hardy.ry(1.911,1)
-   qc_hardy.cx(1,0)
-   qc_hardy.ry(0.785,0)
-   qc_hardy.cx(1,0)
-   qc_hardy.ry(2.356,0)
+    qc_hardy = QuantumCircuit(2)
+    qc_hardy.ry(1.911,1)
+    qc_hardy.cx(1,0)
+    qc_hardy.ry(0.785,0)
+    qc_hardy.cx(1,0)
+    qc_hardy.ry(2.356,0)
+    
+    qc_hardy.draw(output='mpl')
 
-   qc_hardy.draw(output='mpl')
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_32_0.svg
+
+
 
 Let’s see it in action. First a z measurement of both qubits.
 
-.. code:: python
+.. code:: ipython3
 
-   measurements = QuantumCircuit(2,2)
-   # z measurement on both qubits
-   measurements.measure(0,0)
-   measurements.measure(1,1)
+    measurements = QuantumCircuit(2,2)
+    # z measurement on both qubits
+    measurements.measure(0,0)
+    measurements.measure(1,1)
+    
+    qc = qc_hardy + measurements
+    
+    print('\nResults for two z measurements:')
+    counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
+    plot_histogram(counts)
 
-   qc = qc_hardy + measurements
 
-   print('\nResults for two z measurements:')
-   counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
-   plot_histogram(counts)
+.. parsed-literal::
+
+    
+    Results for two z measurements:
+
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_34_1.svg
+
+
 
 The probability of ``00`` is zero, and so these qubits do indeed satisfy
 property 1.
@@ -311,43 +436,65 @@ property 1.
 Next, let’s see the results of an x measurement of one and a z
 measurement of the other.
 
-.. code:: python
+.. code:: ipython3
 
-   measurements = QuantumCircuit(2,2)
-   # x measurement on qubit 0
-   measurements.h(0)
-   measurements.measure(0,0)
-   # z measurement on qubit 1
-   measurements.measure(1,1)
+    measurements = QuantumCircuit(2,2)
+    # x measurement on qubit 0
+    measurements.h(0)
+    measurements.measure(0,0)
+    # z measurement on qubit 1
+    measurements.measure(1,1)
+    
+    qc = qc_hardy + measurements
+    
+    print('\nResults for two x measurement on qubit 0 and z measurement on qubit 1:')
+    counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
+    plot_histogram(counts)
 
-   qc = qc_hardy + measurements
 
-   print('\nResults for two x measurement on qubit 0 and z measurement on qubit 1:')
-   counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
-   plot_histogram(counts)
+.. parsed-literal::
 
-.. raw:: html
+    
+    Results for two x measurement on qubit 0 and z measurement on qubit 1:
 
-   <!-- #region -->
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_36_1.svg
+
+
 
 The probability of ``11`` is zero. You’ll see the same if you swap
 around the measurements. These qubits therefore also satisfy property 2.
 
 Finally, let’s look at an x measurement of both.
 
-.. code:: python
+.. code:: ipython3
 
-   measurements = QuantumCircuit(2,2)
-   measurements.h(0)
-   measurements.measure(0,0)
-   measurements.h(1)
-   measurements.measure(1,1)
+    measurements = QuantumCircuit(2,2)
+    measurements.h(0)
+    measurements.measure(0,0)
+    measurements.h(1)
+    measurements.measure(1,1)
+    
+    qc = qc_hardy + measurements
+    
+    print('\nResults for two x measurement on both qubits:')
+    counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
+    plot_histogram(counts)
 
-   qc = qc_hardy + measurements
 
-   print('\nResults for two x measurement on both qubits:')
-   counts = execute(qc,Aer.get_backend('qasm_simulator')).result().get_counts()
-   plot_histogram(counts)
+.. parsed-literal::
+
+    
+    Results for two x measurement on both qubits:
+
+
+
+
+.. image:: unique-properties-qubits_files/unique-properties-qubits_38_1.svg
+
+
 
 We reasoned that, given properties 1 and 2, it would be impossible to
 get the output ``11``. From the results above, we see that our reasoning
@@ -396,11 +543,22 @@ chapter to guide you through them. We’ll also show you how to express
 them using math. This will provide a foundation for later chapters, in
 which we’ll explain various quantum algorithms and techniques.
 
-.. code:: python
+.. code:: ipython3
 
-   import qiskit
-   qiskit.__qiskit_version__
+    import qiskit
+    qiskit.__qiskit_version__
 
-.. code:: python
 
-.. |image0| image:: ./images/heisenberg_xkcd.png
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
+
+
+

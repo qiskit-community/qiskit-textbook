@@ -8,7 +8,7 @@ quantum algorithm using Qiskit, and run on a simulator and device.
 Contents
 --------
 
-1. `Introduction <#introduction>`__
+.. contents:: Quick links throoughout the document:
 
    -  `Bernstein-Vazirani Problem <#bvproblem>`__
    -  `Bernstein-Vazirani Algorithm <#bvalgorithm>`__
@@ -80,8 +80,6 @@ Bernstein-Vazirani algorithm to find the hidden integer is very simple:
 gates, (3) query the oracle, (4) apply Hadamard gates, and (5) measure,
 generically illustrated below:
 
-|image0|
-
 The correctness of the algorithm is best explained by looking at the
 transformation of a quantum register :math:`|a \rangle` by :math:`n`
 Hadamard gates, each applied to the qubit of the register. It can be
@@ -129,8 +127,6 @@ Because the inverse of the :math:`n` Hadamard gates is again the
 
 
    \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} (-1)^{a\cdot x}|x\rangle \xrightarrow{H^{\otimes n}} |a\rangle.
-
-.. |image0| image:: images/bernsteinvazirani_steps.jpeg%22%20width=%22300
 
 2. Example 
 -----------
@@ -289,7 +285,7 @@ We then use Qiskit to program the Bernstein-Vazirani algorithm.
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7fd3c9659550>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7ff6782de6d0>
 
 
 
@@ -348,7 +344,7 @@ We can run the circuit on the real device as below.
 
 .. parsed-literal::
 
-    least busy backend:  ibmqx2
+    least busy backend:  ibmq_burlington
 
 
 .. code:: ipython3
@@ -421,12 +417,12 @@ due to errors in the quantum computation.
 
 .. parsed-literal::
 
-    {'qiskit-terra': '0.12.0',
-     'qiskit-aer': '0.4.0',
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
      'qiskit-ignis': '0.2.0',
-     'qiskit-ibmq-provider': '0.4.6',
-     'qiskit-aqua': '0.6.4',
-     'qiskit': '0.15.0'}
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
 
 
 

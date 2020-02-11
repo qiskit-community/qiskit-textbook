@@ -1,9 +1,9 @@
 States for Many Qubits
 ======================
 
-.. code:: python
+.. code:: ipython3
 
-   from qiskit import *
+    from qiskit import *
 
 Introduction
 ~~~~~~~~~~~~
@@ -40,31 +40,38 @@ look at the state of our qubits. This can be done in Qiskit using the
 For example, here is the state vector for a simple circuit on two
 qubits.
 
-.. code:: python
+.. code:: ipython3
 
-   # set up circuit (no measurements required)
-   qc = QuantumCircuit(2)
-   qc.h(0)
-   qc.h(1)
-   qc.rz(3.14/4,1)
+    # set up circuit (no measurements required)
+    qc = QuantumCircuit(2)
+    qc.h(0)
+    qc.h(1)
+    qc.rz(3.14/4,1)
+    
+    # set up simulator that returns statevectors
+    backend = Aer.get_backend('statevector_simulator')
+    
+    # run the circuit to get the state vector
+    state = execute(qc,backend).result().get_statevector()
+    
+    # now we use some fanciness to display it in latex
+    from IPython.display import display, Markdown, Latex
+    def state2latex(state):
+        state_latex = '\\begin{pmatrix}'
+        for amplitude in state:
+            state_latex += str(amplitude) + '\\\\'
+        state_latex  = state_latex[0:-4]
+        state_latex += '\end{pmatrix}'
+        display(Markdown(state_latex))
+    
+    state2latex(state)
 
-   # set up simulator that returns statevectors
-   backend = Aer.get_backend('statevector_simulator')
 
-   # run the circuit to get the state vector
-   state = execute(qc,backend).result().get_statevector()
 
-   # now we use some fanciness to display it in latex
-   from IPython.display import display, Markdown, Latex
-   def state2latex(state):
-       state_latex = '\\begin{pmatrix}'
-       for amplitude in state:
-           state_latex += str(amplitude) + '\\\\'
-       state_latex  = state_latex[0:-4]
-       state_latex += '\end{pmatrix}'
-       display(Markdown(state_latex))
+.. raw:: latex
 
-   state2latex(state)
+   \begin{pmatrix}(0.5000000000000001+0j)\\(0.5+0j)\\(0.3536941345835999+0.353412590552683j)\\(0.35369413458359983+0.3534125905526829\end{pmatrix}
+
 
 Note that Python uses :math:`j` to denote :math:`\sqrt{-1}`, rather than
 :math:`i` as we use.
@@ -186,7 +193,21 @@ Chuang. 2011. *Quantum Computation and Quantum Information: 10th
 Anniversary Edition (10th ed.).* Cambridge University Press: New York,
 NY, USA.
 
-.. code:: python
+.. code:: ipython3
 
-   import qiskit
-   qiskit.__qiskit_version__
+    import qiskit
+    qiskit.__qiskit_version__
+
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
+
+

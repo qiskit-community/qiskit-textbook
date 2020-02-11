@@ -8,7 +8,7 @@ quantum algorithm using Qiskit, and run on a simulator and device.
 Contents
 --------
 
-1. `Introduction <#introduction>`__
+.. contents:: Quick links throoughout the document:
 
    -  `Deutsch-Josza Problem <#djproblem>`__
    -  `Deutsch-Josza Algorithm <#djalgorithm>`__
@@ -97,11 +97,6 @@ to $ :raw-latex:`\vert `x:raw-latex:`\rangle `:raw-latex:`\vert `y
 :raw-latex:`\oplus `f(x):raw-latex:`\rangle`$, where :math:`\oplus` is
 addition modulo :math:`2`. Below is the generic circuit for the
 Deutsh-Josza algorithm.
-
-.. figure:: images/deutsch_steps.png
-   :alt: deutsch_steps
-
-   deutsch_steps
 
 Now, let’s go through the steps of the algorithm:
 
@@ -223,11 +218,6 @@ For a constant function, it is simple:
 
 For a balanced function, there are many different circuits we can
 create, one is shown below:
-
-.. figure:: images/deutsch_balanced.png
-   :alt: deutsch_balanced
-
-   deutsch_balanced
 
 2. Example 
 -----------
@@ -416,7 +406,7 @@ bit balanced function with hidden bitstring :math:`a = 3`.
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7fa8f8d35110>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7fc5b891de50>
 
 
 
@@ -473,7 +463,7 @@ for the least-busy device that can handle our circuit.
 
 .. parsed-literal::
 
-    least busy backend:  ibmq_ourense
+    least busy backend:  ibmq_vigo
 
 
 .. code:: ipython3
@@ -543,12 +533,12 @@ due to errors in the quantum computation.
 
 .. parsed-literal::
 
-    {'qiskit-terra': '0.12.0',
-     'qiskit-aer': '0.4.0',
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
      'qiskit-ignis': '0.2.0',
-     'qiskit-ibmq-provider': '0.4.6',
-     'qiskit-aqua': '0.6.4',
-     'qiskit': '0.15.0'}
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
 
 
 

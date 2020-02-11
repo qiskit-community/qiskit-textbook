@@ -10,11 +10,7 @@ qubit quantum chip
 Contents
 --------
 
-1. `Introduction <#introduction>`__
-2. `Examples <#examples>`__
-3. `Approximate optimization algorithms <#approximateOPT>`__
-4. `The QAOA algorithm <#QAOA>`__
-5. `Qiskit Implementation <#implementation>`__
+.. contents:: Quick links throoughout the document:
 
    -  5a `Running QAOA on a simulator <#implementationsim>`__
    -  5b `Running QAOA on a real quantum device <#implementationdev>`__
@@ -23,7 +19,7 @@ Contents
 7. `References <#references>`__
 
 1. Introduction 
----------------
+----------------
 
 Combinatorial optimization `1 <#references>`__ means searching for an
 optimal solution in a finite or countably infinite set of potential
@@ -104,12 +100,8 @@ This means we can write the cost function as well as the Hamiltonain
 where both :math:`m` and the support of :math:`\hat{C}_k` is reasonably
 bounded.
 
-.. raw:: html
-
-   <!-- #region -->
-
 2 Examples: 
------------
+------------
 
 We consider 2 examples to illustrate combinatorial optimization
 problems. We will only implement the first example as in Qiskit, but
@@ -177,7 +169,7 @@ that satisfies more than :math:`\tilde{m}` of the :math:`m` clauses,
 which is again :math:`NP`-complete.
 
 3. Approximate optimization algorithms 
---------------------------------------
+---------------------------------------
 
 Both the previsously considederd problems :math:`MAXCUT` and
 :math:`MAX \; 3-SAT` are actually known to be a NP-hard problems
@@ -214,12 +206,8 @@ ratio of :math:`\alpha \approx 0.868`. This approximation ratio is
 actually believed to optimal so that we do not expect to see an
 improvement by using a quantum algorithm.
 
-.. raw:: html
-
-   <!-- #region -->
-
 4. The QAOA algorithm 
----------------------
+----------------------
 
 The Quantum approximate optimization algorithm (QAOA) by Farhi, Goldsone
 and Gutmann `3 <#references>`__ takes the approach of classical
@@ -255,7 +243,7 @@ is close to :math:`C_{max}` so is :math:`C(x^*)`.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 4.2.1 The QAOA trial state 
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Central to QAOA is the trial state
 :math:`|\psi_p(\vec{\gamma},\vec{\beta})\rangle` that will be prepared
@@ -270,11 +258,11 @@ Hamiltonian
 
 .. math::  H = \sum_{k = 1}^m \hat{C}_k 
 
-diagonal in the computational basis and a transverse field Hamiltonian
+ diagonal in the computational basis and a transverse field Hamiltonian
 
 .. math::  B = \sum_{i = 1}^n X_i 
 
-the trial state is prepared by applying :math:`p` alternating unitaries
+ the trial state is prepared by applying :math:`p` alternating unitaries
 
 .. math::  |\psi_p(\vec{\gamma},\vec{\beta})\rangle = e^{ -i\beta_p B } e^{ -i\gamma_p H } \ldots e^{ -i\beta_1 B } e^{ -i\gamma_1 H } |+\rangle^n 
 
@@ -300,7 +288,7 @@ Hardware of the quantum chip Ref. `4 <#references>`__, Ref.
 `5 <#references>`__.
 
 4.2.2 Computing the expectation value 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 An important component of this approach is that we will have to compute
 or estimate the expectation value
@@ -310,7 +298,7 @@ or estimate the expectation value
     
    F_p(\vec{\gamma},\vec{\beta}) = \langle \psi_p(\vec{\gamma},\vec{\beta})|H|\psi_p(\vec{\alpha},\vec{\beta})\rangle 
 
-so we can optimize the parameters :math:`\vec{\gamma},\vec{\beta}`. We
+ so we can optimize the parameters :math:`\vec{\gamma},\vec{\beta}`. We
 will be considering two scenarios here.
 
 Classical evaluation
@@ -475,30 +463,30 @@ Documentation <https://qiskit.org/documentation/>`__.
 
 As the first step will will load Qiskit and additional python packages.
 
-.. code:: python
+.. code:: ipython3
 
-   %matplotlib inline
-   # useful additional packages 
-
-   #import math tools
-   import numpy as np
-
-   # We import the tools to handle general Graphs
-   import networkx as nx
-
-   # We import plotting tools 
-   import matplotlib.pyplot as plt 
-   from   matplotlib import cm
-   from   matplotlib.ticker import LinearLocator, FormatStrFormatter
-   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
-
-   # importing Qiskit
-   from qiskit import Aer, IBMQ
-   from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit, execute
-
-   from qiskit.providers.ibmq      import least_busy
-   from qiskit.tools.monitor       import job_monitor
-   from qiskit.visualization import plot_histogram
+    %matplotlib inline
+    # useful additional packages 
+    
+    #import math tools
+    import numpy as np
+    
+    # We import the tools to handle general Graphs
+    import networkx as nx
+    
+    # We import plotting tools 
+    import matplotlib.pyplot as plt 
+    from   matplotlib import cm
+    from   matplotlib.ticker import LinearLocator, FormatStrFormatter
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    
+    # importing Qiskit
+    from qiskit import Aer, IBMQ
+    from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit, execute
+    
+    from qiskit.providers.ibmq      import least_busy
+    from qiskit.tools.monitor       import job_monitor
+    from qiskit.visualization import plot_histogram
 
 5.1 Problem definition
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -510,23 +498,35 @@ superconducting chip. The graph has :math:`n = 5` vertices $ V =
 carry the same unit weight :math:`w_{ij} = 1`. We load an additional
 network package to encode the graph and plot connectivity below.
 
-.. code:: python
+.. code:: ipython3
 
-   # Generating the butterfly graph with 5 nodes 
-   n     = 5
-   V     = np.arange(0,n,1)
-   E     =[(0,1,1.0),(0,2,1.0),(1,2,1.0),(3,2,1.0),(3,4,1.0),(4,2,1.0)] 
+    # Generating the butterfly graph with 5 nodes 
+    n     = 5
+    V     = np.arange(0,n,1)
+    E     =[(0,1,1.0),(0,2,1.0),(1,2,1.0),(3,2,1.0),(3,4,1.0),(4,2,1.0)] 
+    
+    G     = nx.Graph()
+    G.add_nodes_from(V)
+    G.add_weighted_edges_from(E)
+    
+    # Generate plot of the Graph
+    colors       = ['r' for node in G.nodes()]
+    default_axes = plt.axes(frameon=True)
+    pos          = nx.spring_layout(G)
+    
+    nx.draw_networkx(G, node_color=colors, node_size=600, alpha=1, ax=default_axes, pos=pos)
 
-   G     = nx.Graph()
-   G.add_nodes_from(V)
-   G.add_weighted_edges_from(E)
 
-   # Generate plot of the Graph
-   colors       = ['r' for node in G.nodes()]
-   default_axes = plt.axes(frameon=True)
-   pos          = nx.spring_layout(G)
+.. parsed-literal::
 
-   nx.draw_networkx(G, node_color=colors, node_size=600, alpha=1, ax=default_axes, pos=pos)
+    /usr/local/anaconda3/lib/python3.7/site-packages/networkx/drawing/nx_pylab.py:579: MatplotlibDeprecationWarning: 
+    The iterable function was deprecated in Matplotlib 3.1 and will be removed in 3.3. Use np.iterable instead.
+      if not cb.iterable(width):
+
+
+
+.. image:: qaoa_files/qaoa_10_1.svg
+
 
 5.2 Optimal trial state parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -584,44 +584,54 @@ We plot the function :math:`F_1(\gamma,\beta)` and use a simple grid
 search to find the parameters :math:`(\gamma^*,\beta^*)` that maximize
 the expectation value.
 
-.. code:: python
+.. code:: ipython3
 
-   # Evaluate the function
-   step_size   = 0.1;
+    # Evaluate the function
+    step_size   = 0.1;
+    
+    a_gamma         = np.arange(0, np.pi, step_size)
+    a_beta          = np.arange(0, np.pi, step_size)
+    a_gamma, a_beta = np.meshgrid(a_gamma,a_beta)
+    
+    F1 = 3-(np.sin(2*a_beta)**2*np.sin(2*a_gamma)**2-0.5*np.sin(4*a_beta)*np.sin(4*a_gamma))*(1+np.cos(4*a_gamma)**2)
+    
+    # Grid search for the minimizing variables
+    result = np.where(F1 == np.amax(F1))
+    a      = list(zip(result[0],result[1]))[0]
+    
+    gamma  = a[0]*step_size;
+    beta   = a[1]*step_size;
+    
+    # Plot the expetation value F1
+    fig = plt.figure()
+    ax  = fig.gca(projection='3d')
+    
+    surf = ax.plot_surface(a_gamma, a_beta, F1, cmap=cm.coolwarm, linewidth=0, antialiased=True)
+    
+    ax.set_zlim(1,4)
+    ax.zaxis.set_major_locator(LinearLocator(3))
+    ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
+    
+    plt.show()
+    
+    #The smallest paramters and the expectation can be extracted
+    print('\n --- OPTIMAL PARAMETERS --- \n')
+    print('The maximal expectation value is:  M1 = %.03f' % np.amax(F1))
+    print('This is attained for gamma = %.03f and beta = %.03f' % (gamma,beta))
 
-   a_gamma         = np.arange(0, np.pi, step_size)
-   a_beta          = np.arange(0, np.pi, step_size)
-   a_gamma, a_beta = np.meshgrid(a_gamma,a_beta)
 
-   F1 = 3-(np.sin(2*a_beta)**2*np.sin(2*a_gamma)**2-0.5*np.sin(4*a_beta)*np.sin(4*a_gamma))*(1+np.cos(4*a_gamma)**2)
 
-   # Grid search for the minimizing variables
-   result = np.where(F1 == np.amax(F1))
-   a      = list(zip(result[0],result[1]))[0]
+.. image:: qaoa_files/qaoa_12_0.svg
 
-   gamma  = a[0]*step_size;
-   beta   = a[1]*step_size;
 
-   # Plot the expetation value F1
-   fig = plt.figure()
-   ax  = fig.gca(projection='3d')
+.. parsed-literal::
 
-   surf = ax.plot_surface(a_gamma, a_beta, F1, cmap=cm.coolwarm, linewidth=0, antialiased=True)
+    
+     --- OPTIMAL PARAMETERS --- 
+    
+    The maximal expectation value is:  M1 = 3.431
+    This is attained for gamma = 1.900 and beta = 0.200
 
-   ax.set_zlim(1,4)
-   ax.zaxis.set_major_locator(LinearLocator(3))
-   ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
-
-   plt.show()
-
-   #The smallest paramters and the expectation can be extracted
-   print('\n --- OPTIMAL PARAMETERS --- \n')
-   print('The maximal expectation value is:  M1 = %.03f' % np.amax(F1))
-   print('This is attained for gamma = %.03f and beta = %.03f' % (gamma,beta))
-
-.. raw:: html
-
-   <!-- #region -->
 
 5.3 Quantum circuit
 ~~~~~~~~~~~~~~~~~~~
@@ -656,33 +666,40 @@ generate the circuit we follow these steps:
    i.e. we perfrom a :math:`Z` - measurement and record the resulting
    bit-string :math:`x \in \{0,1\}^5`.
 
-.. code:: python
+.. code:: ipython3
 
-   # preapre the quantum and classical resisters
-   QAOA = QuantumCircuit(len(V), len(V))
+    # preapre the quantum and classical resisters
+    QAOA = QuantumCircuit(len(V), len(V))
+    
+    # apply the layer of Hadamard gates to all qubits
+    QAOA.h(range(len(V)))
+    QAOA.barrier()
+    
+    # apply the Ising type gates with angle gamma along the edges in E
+    for edge in E:
+        k = edge[0]
+        l = edge[1]
+        QAOA.cu1(-2*gamma, k, l)
+        QAOA.u1(gamma, k)
+        QAOA.u1(gamma, l)
+        
+    # then apply the single qubit X - rotations with angle beta to all qubits
+    QAOA.barrier()
+    QAOA.rx(2*beta, range(len(V)))
+    
+    # Finally measure the result in the computational basis
+    QAOA.barrier()
+    QAOA.measure(range(len(V)),range(len(V)))
+    
+    ### draw the circuit for comparison
+    QAOA.draw(output='mpl')
 
-   # apply the layer of Hadamard gates to all qubits
-   QAOA.h(range(len(V)))
-   QAOA.barrier()
 
-   # apply the Ising type gates with angle gamma along the edges in E
-   for edge in E:
-       k = edge[0]
-       l = edge[1]
-       QAOA.cu1(-2*gamma, k, l)
-       QAOA.u1(gamma, k)
-       QAOA.u1(gamma, l)
-       
-   # then apply the single qubit X - rotations with angle beta to all qubits
-   QAOA.barrier()
-   QAOA.rx(2*beta, range(len(V)))
 
-   # Finally measure the result in the computational basis
-   QAOA.barrier()
-   QAOA.measure(range(len(V)),range(len(V)))
 
-   ### draw the circuit for comparison
-   QAOA.draw(output='mpl')
+.. image:: qaoa_files/qaoa_14_0.svg
+
+
 
 5.4 Cost function evaluation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -693,40 +710,47 @@ candidate” bitstring :math:`x` but could also be used to estimate the
 expectation value :math:`F_1(\gamma,\beta)` in settings where the
 expectation value can not be evlautated directly.
 
-.. code:: python
+.. code:: ipython3
 
-   # Compute the value of the cost function
-   def cost_function_C(x,G):
-       
-       E = G.edges()
-       if( len(x) != len(G.nodes())):
-           return np.nan
-           
-       C = 0;
-       for index in E:
-           e1 = index[0]
-           e2 = index[1]
-           
-           w      = G[e1][e2]['weight']
-           C = C + w*x[e1]*(1-x[e2]) + w*x[e2]*(1-x[e1])
-           
-       return C
+    # Compute the value of the cost function
+    def cost_function_C(x,G):
+        
+        E = G.edges()
+        if( len(x) != len(G.nodes())):
+            return np.nan
+            
+        C = 0;
+        for index in E:
+            e1 = index[0]
+            e2 = index[1]
+            
+            w      = G[e1][e2]['weight']
+            C = C + w*x[e1]*(1-x[e2]) + w*x[e2]*(1-x[e1])
+            
+        return C
 
 5a. Running QAOA on a simulator
 -------------------------------
 
 We first run the algorithm on a local QASM simulator.
 
-.. code:: python
+.. code:: ipython3
 
-   # run on local simulator
-   backend      = Aer.get_backend("qasm_simulator")
-   shots        = 10000
+    # run on local simulator
+    backend      = Aer.get_backend("qasm_simulator")
+    shots        = 10000
+    
+    simulate     = execute(QAOA, backend=backend, shots=shots)
+    QAOA_results = simulate.result()
+    
+    plot_histogram(QAOA_results.get_counts(),figsize = (8,6),bar_labels = False)
 
-   simulate     = execute(QAOA, backend=backend, shots=shots)
-   QAOA_results = simulate.result()
 
-   plot_histogram(QAOA_results.get_counts(),figsize = (8,6),bar_labels = False)
+
+
+.. image:: qaoa_files/qaoa_18_0.svg
+
+
 
 Evaluate the date from the simulation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -741,40 +765,60 @@ simulated data. We will use the obtained results to
 -  Plot the Historgram of the energies to see whether is indeed
    concentrates around the prediceted mean
 
-.. code:: python
+.. code:: ipython3
 
-   # Evaluate the data from the simulator
-   counts = QAOA_results.get_counts()
+    # Evaluate the data from the simulator
+    counts = QAOA_results.get_counts()
+    
+    avr_C       = 0
+    max_C       = [0,0]
+    hist        = {}
+    
+    for k in range(len(G.edges())+1):
+        hist[str(k)] = hist.get(str(k),0)
+    
+    for sample in list(counts.keys()):
+    
+        # use sampled bit string x to compute C(x)
+        x         = [int(num) for num in list(sample)]
+        tmp_eng   = cost_function_C(x,G)
+        
+        # compute the expectation value and energy distribution
+        avr_C     = avr_C    + counts[sample]*tmp_eng
+        hist[str(round(tmp_eng))] = hist.get(str(round(tmp_eng)),0) + counts[sample]
+        
+        # save best bit string
+        if( max_C[1] < tmp_eng):
+            max_C[0] = sample
+            max_C[1] = tmp_eng
+                    
+    M1_sampled   = avr_C/shots
+    
+    print('\n --- SIMULATION RESULTS ---\n')
+    print('The sampled mean value is M1_sampled = %.02f while the true value is M1 = %.02f \n' % (M1_sampled,np.amax(F1)))
+    print('The approximate solution is x* = %s with C(x*) = %d \n' % (max_C[0],max_C[1]))
+    print('The cost function is distributed as: \n')
+    plot_histogram(hist,figsize = (8,6),bar_labels = False)
 
-   avr_C       = 0
-   max_C       = [0,0]
-   hist        = {}
 
-   for k in range(len(G.edges())+1):
-       hist[str(k)] = hist.get(str(k),0)
+.. parsed-literal::
 
-   for sample in list(counts.keys()):
+    
+     --- SIMULATION RESULTS ---
+    
+    The sampled mean value is M1_sampled = 3.29 while the true value is M1 = 3.43 
+    
+    The approximate solution is x* = 00101 with C(x*) = 4 
+    
+    The cost function is distributed as: 
+    
 
-       # use sampled bit string x to compute C(x)
-       x         = [int(num) for num in list(sample)]
-       tmp_eng   = cost_function_C(x,G)
-       
-       # compute the expectation value and energy distribution
-       avr_C     = avr_C    + counts[sample]*tmp_eng
-       hist[str(round(tmp_eng))] = hist.get(str(round(tmp_eng)),0) + counts[sample]
-       
-       # save best bit string
-       if( max_C[1] < tmp_eng):
-           max_C[0] = sample
-           max_C[1] = tmp_eng
-                   
-   M1_sampled   = avr_C/shots
 
-   print('\n --- SIMULATION RESULTS ---\n')
-   print('The sampled mean value is M1_sampled = %.02f while the true value is M1 = %.02f \n' % (M1_sampled,np.amax(F1)))
-   print('The approximate solution is x* = %s with C(x*) = %d \n' % (max_C[0],max_C[1]))
-   print('The cost function is distributed as: \n')
-   plot_histogram(hist,figsize = (8,6),bar_labels = False)
+
+
+.. image:: qaoa_files/qaoa_20_1.svg
+
+
 
 5b. Running QAOA on a real quantum device
 -----------------------------------------
@@ -782,20 +826,33 @@ simulated data. We will use the obtained results to
 We then see how the same circuit can be executed on real-device
 backends.
 
-.. code:: python
+.. code:: ipython3
 
-   # Use the IBMQ essex device
-   provider = IBMQ.load_account()
-   backend = provider.get_backend('ibmq_essex')
-   shots   = 2048
+    # Use the IBMQ essex device
+    provider = IBMQ.load_account()
+    backend = provider.get_backend('ibmq_essex')
+    shots   = 2048
+    
+    job_exp = execute(QAOA, backend=backend, shots=shots)
+    job_monitor(job_exp)
 
-   job_exp = execute(QAOA, backend=backend, shots=shots)
-   job_monitor(job_exp)
 
-.. code:: python
+.. parsed-literal::
 
-   exp_results = job_exp.result()
-   plot_histogram(exp_results.get_counts(),figsize = (10,8),bar_labels = False)
+    Job Status: job has successfully run
+
+
+.. code:: ipython3
+
+    exp_results = job_exp.result()
+    plot_histogram(exp_results.get_counts(),figsize = (10,8),bar_labels = False)
+
+
+
+
+.. image:: qaoa_files/qaoa_24_0.svg
+
+
 
 Evaluate the data from the experiment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -803,47 +860,63 @@ Evaluate the data from the experiment
 We can now repeat the same analysis as before and compare the
 experimental result.
 
-.. code:: python
+.. code:: ipython3
 
-   # Evaluate the data from the experiment
-   counts = exp_results.get_counts()
+    # Evaluate the data from the experiment
+    counts = exp_results.get_counts()
+    
+    avr_C       = 0
+    max_C       = [0,0]
+    hist        = {}
+    
+    for k in range(len(G.edges())+1):
+        hist[str(k)] = hist.get(str(k),0)
+    
+    for sample in list(counts.keys()):
+    
+        # use sampled bit string x to compute C(x)
+        x         = [int(num) for num in list(sample)]
+        tmp_eng   = cost_function_C(x,G)
+        
+        # compute the expectation value and energy distribution
+        avr_C     = avr_C    + counts[sample]*tmp_eng
+        hist[str(round(tmp_eng))] = hist.get(str(round(tmp_eng)),0) + counts[sample]
+        
+        # save best bit string
+        if( max_C[1] < tmp_eng):
+            max_C[0] = sample
+            max_C[1] = tmp_eng
+                    
+    M1_sampled   = avr_C/shots
+    
+    print('\n --- EXPERIMENTAL RESULTS ---\n')
+    print('The sampled mean value is M1_sampled = %.02f while the true value is M1 = %.02f \n' % (M1_sampled,np.amax(F1)))
+    print('The approximate solution is x* = %s with C(x*) = %d \n' % (max_C[0],max_C[1]))
+    print('The cost function is distributed as: \n')
+    plot_histogram(hist,figsize = (8,6),bar_labels = False)
 
-   avr_C       = 0
-   max_C       = [0,0]
-   hist        = {}
 
-   for k in range(len(G.edges())+1):
-       hist[str(k)] = hist.get(str(k),0)
+.. parsed-literal::
 
-   for sample in list(counts.keys()):
+    
+     --- EXPERIMENTAL RESULTS ---
+    
+    The sampled mean value is M1_sampled = 3.04 while the true value is M1 = 3.43 
+    
+    The approximate solution is x* = 00101 with C(x*) = 4 
+    
+    The cost function is distributed as: 
+    
 
-       # use sampled bit string x to compute C(x)
-       x         = [int(num) for num in list(sample)]
-       tmp_eng   = cost_function_C(x,G)
-       
-       # compute the expectation value and energy distribution
-       avr_C     = avr_C    + counts[sample]*tmp_eng
-       hist[str(round(tmp_eng))] = hist.get(str(round(tmp_eng)),0) + counts[sample]
-       
-       # save best bit string
-       if( max_C[1] < tmp_eng):
-           max_C[0] = sample
-           max_C[1] = tmp_eng
-                   
-   M1_sampled   = avr_C/shots
 
-   print('\n --- EXPERIMENTAL RESULTS ---\n')
-   print('The sampled mean value is M1_sampled = %.02f while the true value is M1 = %.02f \n' % (M1_sampled,np.amax(F1)))
-   print('The approximate solution is x* = %s with C(x*) = %d \n' % (max_C[0],max_C[1]))
-   print('The cost function is distributed as: \n')
-   plot_histogram(hist,figsize = (8,6),bar_labels = False)
+
+
+.. image:: qaoa_files/qaoa_26_1.svg
+
+
 
 6. Problems
 -----------
-
-.. raw:: html
-
-   <!-- #region -->
 
 0. The QAOA algortihm produces a bit string, is this string the optimal
    solution for this graph? Compare the experiemental results from the
@@ -898,18 +971,32 @@ experimental result.
 3. Farhi, Edward, Jeffrey Goldstone, and Sam Gutmann. “A quantum
    approximate optimization algorithm.” arXiv preprint `arXiv:1411.4028
    (2014) <https://arxiv.org/abs/1411.4028>`__.
-4. Kandala, Abhinav, et al. “Hardware-efficient variational quantum
+4. Kandala, Abhinav, et al. “Hardware-efficient variational quantum
    eigensolver for small molecules and quantum magnets.” `Nature
    549.7671 (2017):
    242 <https://www.nature.com/articles/nature23879>`__.
-5. Farhi, Edward, et al. “Quantum algorithms for fixed qubit
+5. Farhi, Edward, et al. “Quantum algorithms for fixed qubit
    architectures.” arXiv preprint `arXiv:1703.06199
    (2017) <https://arxiv.org/abs/1703.06199>`__.
 6. Spall, J. C. (1992), `IEEE Transactions on Automatic Control,
    vol. 37(3),
    pp. 332–341 <https://ieeexplore.ieee.org/document/119632>`__.
 
-.. code:: python
+.. code:: ipython3
 
-   import qiskit
-   qiskit.__qiskit_version__
+    import qiskit
+    qiskit.__qiskit_version__
+
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
+
+

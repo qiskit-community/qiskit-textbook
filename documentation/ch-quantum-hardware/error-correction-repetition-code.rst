@@ -94,12 +94,19 @@ garbled. The probability for this, :math:`P`, will be less than
 :math:`p`. When encoded in this way, the message therefore becomes more
 likely to be understood. The code cell below shows an example of this.
 
-.. code:: python
+.. code:: ipython3
 
-   p = 0.01
-   P = 3 * p**2 * (1-p) + p**3 # probability of 2 or 3 errors
-   print('Probability of a single reply being garbled:',p)
-   print('Probability of a the majority of three replies being garbled:',P)
+    p = 0.01
+    P = 3 * p**2 * (1-p) + p**3 # probability of 2 or 3 errors
+    print('Probability of a single reply being garbled:',p)
+    print('Probability of a the majority of three replies being garbled:',P)
+
+
+.. parsed-literal::
+
+    Probability of a single reply being garbled: 0.01
+    Probability of a the majority of three replies being garbled: 0.00029800000000000003
+
 
 If :math:`P<P_a`, this technique solves our problem. If not, we can
 simply add more repetitions. The fact that :math:`P<p` above comes from
@@ -149,47 +156,53 @@ independently to each qubit. The other form of noise is that for
 measurement. This simply flips between a ``0`` to a ``1`` and vice-versa
 immediately before measurement with probability :math:`p_{meas}`.
 
-.. code:: python
+.. code:: ipython3
 
-   from qiskit.providers.aer.noise import NoiseModel
-   from qiskit.providers.aer.noise.errors import pauli_error, depolarizing_error
-
-   def get_noise(p_meas,p_gate):
-
-       error_meas = pauli_error([('X',p_meas), ('I', 1 - p_meas)])
-       error_gate1 = depolarizing_error(p_gate, 1)
-       error_gate2 = error_gate1.tensor(error_gate1)
-
-       noise_model = NoiseModel()
-       noise_model.add_all_qubit_quantum_error(error_meas, "measure") # measurement error is applied to measurements
-       noise_model.add_all_qubit_quantum_error(error_gate1, ["x"]) # single qubit gate error is applied to x gates
-       noise_model.add_all_qubit_quantum_error(error_gate2, ["cx"]) # two qubit gate error is applied to cx gates
-           
-       return noise_model
+    from qiskit.providers.aer.noise import NoiseModel
+    from qiskit.providers.aer.noise.errors import pauli_error, depolarizing_error
+    
+    def get_noise(p_meas,p_gate):
+    
+        error_meas = pauli_error([('X',p_meas), ('I', 1 - p_meas)])
+        error_gate1 = depolarizing_error(p_gate, 1)
+        error_gate2 = error_gate1.tensor(error_gate1)
+    
+        noise_model = NoiseModel()
+        noise_model.add_all_qubit_quantum_error(error_meas, "measure") # measurement error is applied to measurements
+        noise_model.add_all_qubit_quantum_error(error_gate1, ["x"]) # single qubit gate error is applied to x gates
+        noise_model.add_all_qubit_quantum_error(error_gate2, ["cx"]) # two qubit gate error is applied to cx gates
+            
+        return noise_model
 
 With this we’ll now create such a noise model with a probability of
 :math:`1\%` for each type of error.
 
-.. code:: python
+.. code:: ipython3
 
-   noise_model = get_noise(0.01,0.01)
+    noise_model = get_noise(0.01,0.01)
 
 Let’s see what affect this has when try to store a ``0`` using three
 qubits in state :math:`\left|0\right\rangle`. We’ll repeat the process
 ``shots=1024`` times to see how likely different results are.
 
-.. code:: python
+.. code:: ipython3
 
-   from qiskit import QuantumCircuit, execute, Aer
+    from qiskit import QuantumCircuit, execute, Aer
+    
+    qc0 = QuantumCircuit(3,3,name='0') # initialize circuit with three qubits in the 0 state
+    
+    qc0.measure(qc0.qregs[0],qc0.cregs[0]) # measure the qubits
+    
+    # run the circuit with th noise model and extract the counts
+    counts = execute( qc0, Aer.get_backend('qasm_simulator'),noise_model=noise_model).result().get_counts()
+    
+    print(counts)
 
-   qc0 = QuantumCircuit(3,3,name='0') # initialize circuit with three qubits in the 0 state
 
-   qc0.measure(qc0.qregs[0],qc0.cregs[0]) # measure the qubits
+.. parsed-literal::
 
-   # run the circuit with th noise model and extract the counts
-   counts = execute( qc0, Aer.get_backend('qasm_simulator'),noise_model=noise_model).result().get_counts()
+    {'010': 12, '000': 999, '100': 4, '001': 9}
 
-   print(counts)
 
 Here we see that almost all results still come out ``'000'``, as they
 would if there was no noise. Of the remaining possibilities, those with
@@ -200,17 +213,23 @@ encode a ``0``, this means that :math:`P<1\%`
 Now let’s try the same for storing a ``1`` using three qubits in state
 :math:`\left|1\right\rangle`.
 
-.. code:: python
+.. code:: ipython3
 
-   qc1 = QuantumCircuit(3,3,name='0') # initialize circuit with three qubits in the 0 state
-   qc1.x(qc1.qregs[0]) # flip each 0 to 1
+    qc1 = QuantumCircuit(3,3,name='0') # initialize circuit with three qubits in the 0 state
+    qc1.x(qc1.qregs[0]) # flip each 0 to 1
+    
+    qc1.measure(qc1.qregs[0],qc1.cregs[0]) # measure the qubits
+    
+    # run the circuit with th noise model and extract the counts
+    counts = execute( qc1, Aer.get_backend('qasm_simulator'),noise_model=noise_model).result().get_counts()
+    
+    print(counts)
 
-   qc1.measure(qc1.qregs[0],qc1.cregs[0]) # measure the qubits
 
-   # run the circuit with th noise model and extract the counts
-   counts = execute( qc1, Aer.get_backend('qasm_simulator'),noise_model=noise_model).result().get_counts()
+.. parsed-literal::
 
-   print(counts)
+    {'010': 1, '011': 25, '110': 13, '111': 962, '101': 23}
+
 
 The number of samples that come out with a majority in the wrong state
 (``0`` in this case) is again much less than 100, so :math:`P<1\%`.
@@ -224,11 +243,17 @@ them to have a :math:`50/50` chance of applying the bit flip error,
 ``x``. For example, let’s run the same circuit as before but with
 :math:`p_{meas}=0.5` and :math:`p_{gate}=0`.
 
-.. code:: python
+.. code:: ipython3
 
-   noise_model = get_noise(0.5,0.0)
-   counts = execute( qc1, Aer.get_backend('qasm_simulator'),noise_model=noise_model).result().get_counts()
-   print(counts)
+    noise_model = get_noise(0.5,0.0)
+    counts = execute( qc1, Aer.get_backend('qasm_simulator'),noise_model=noise_model).result().get_counts()
+    print(counts)
+
+
+.. parsed-literal::
+
+    {'110': 120, '001': 126, '100': 128, '101': 117, '010': 141, '011': 137, '111': 142, '000': 113}
+
 
 With this noise, all outcomes occur with equal probability, with
 differences in results being due only to statistical noise. No trace of
@@ -316,19 +341,26 @@ collapsing superpositions that we need to preserve.
 
 The way to do this is with the following circuit element.
 
-.. code:: python
+.. code:: ipython3
 
-   from qiskit import QuantumRegister, ClassicalRegister
-   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    from qiskit import QuantumRegister, ClassicalRegister
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    
+    cq = QuantumRegister(2,'code\ qubit\ ')
+    lq = QuantumRegister(1,'ancilla\ qubit\ ')
+    sb = ClassicalRegister(1,'syndrome\ bit\ ')
+    qc = QuantumCircuit(cq,lq,sb)
+    qc.cx(cq[0],lq[0])
+    qc.cx(cq[1],lq[0])
+    qc.measure(lq,sb)
+    qc.draw(output='mpl')
 
-   cq = QuantumRegister(2,'code\ qubit\ ')
-   lq = QuantumRegister(1,'ancilla\ qubit\ ')
-   sb = ClassicalRegister(1,'syndrome\ bit\ ')
-   qc = QuantumCircuit(cq,lq,sb)
-   qc.cx(cq[0],lq[0])
-   qc.cx(cq[1],lq[0])
-   qc.measure(lq,sb)
-   qc.draw(output='mpl')
+
+
+
+.. image:: error-correction-repetition-code_files/error-correction-repetition-code_18_0.svg
+
+
 
 Here we have three physical qubits. Two are called ‘code qubits’, and
 the other is called an ‘ancilla qubit’. One bit of output is extracted,
@@ -341,68 +373,120 @@ the code qubits in some state, and then run the circuit ``qc_init+qc``.
 First, the trivial case: ``qc_init`` does nothing, and so the code
 qubits are initially :math:`\left|00\right\rangle`.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_init = QuantumCircuit(cq)
+    qc_init = QuantumCircuit(cq)
+    
+    (qc_init+qc).draw(output='mpl')
 
-   (qc_init+qc).draw(output='mpl')
 
-.. code:: python
 
-   counts = execute( qc_init+qc, Aer.get_backend('qasm_simulator')).result().get_counts()
-   print('Results:',counts)
+
+.. image:: error-correction-repetition-code_files/error-correction-repetition-code_20_0.svg
+
+
+
+.. code:: ipython3
+
+    counts = execute( qc_init+qc, Aer.get_backend('qasm_simulator')).result().get_counts()
+    print('Results:',counts)
+
+
+.. parsed-literal::
+
+    Results: {'0': 1024}
+
 
 The outcome, in all cases, is ``0``.
 
 Now let’s try an initial state of :math:`\left|11\right\rangle`.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_init = QuantumCircuit(cq)
-   qc_init.x(cq)
+    qc_init = QuantumCircuit(cq)
+    qc_init.x(cq)
+    
+    (qc_init+qc).draw(output='mpl')
 
-   (qc_init+qc).draw(output='mpl')
 
-.. code:: python
 
-   counts = execute( qc_init+qc, Aer.get_backend('qasm_simulator')).result().get_counts()
-   print('Results:',counts)
+
+.. image:: error-correction-repetition-code_files/error-correction-repetition-code_23_0.svg
+
+
+
+.. code:: ipython3
+
+    counts = execute( qc_init+qc, Aer.get_backend('qasm_simulator')).result().get_counts()
+    print('Results:',counts)
+
+
+.. parsed-literal::
+
+    Results: {'0': 1024}
+
 
 The outcome in this case is also always ``0``. Given the linearity of
 quantum mechanics, we can expect the same to be true also for any
 superposition of :math:`\left|00\right\rangle` and
 :math:`\left|11\right\rangle`, such as the example below.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_init = QuantumCircuit(cq)
-   qc_init.h(cq[0])
-   qc_init.cx(cq[0],cq[1])
+    qc_init = QuantumCircuit(cq)
+    qc_init.h(cq[0])
+    qc_init.cx(cq[0],cq[1])
+    
+    (qc_init+qc).draw(output='mpl')
 
-   (qc_init+qc).draw(output='mpl')
 
-.. code:: python
 
-   counts = execute( qc_init+qc, Aer.get_backend('qasm_simulator')).result().get_counts()
-   print('Results:',counts)
+
+.. image:: error-correction-repetition-code_files/error-correction-repetition-code_26_0.svg
+
+
+
+.. code:: ipython3
+
+    counts = execute( qc_init+qc, Aer.get_backend('qasm_simulator')).result().get_counts()
+    print('Results:',counts)
+
+
+.. parsed-literal::
+
+    Results: {'0': 1024}
+
 
 The opposite outcome will be found for an initial state of
 :math:`\left|01\right\rangle`, :math:`\left|10\right\rangle` or any
 superposition thereof.
 
-.. code:: python
+.. code:: ipython3
 
-   qc_init = QuantumCircuit(cq)
-   qc_init.h(cq[0])
-   qc_init.cx(cq[0],cq[1])
-   qc_init.x(cq[0])
+    qc_init = QuantumCircuit(cq)
+    qc_init.h(cq[0])
+    qc_init.cx(cq[0],cq[1])
+    qc_init.x(cq[0])
+    
+    (qc_init+qc).draw(output='mpl')
 
-   (qc_init+qc).draw(output='mpl')
 
-.. code:: python
 
-   counts = execute( qc_init+qc, Aer.get_backend('qasm_simulator')).result().get_counts()
-   print('Results:',counts)
+
+.. image:: error-correction-repetition-code_files/error-correction-repetition-code_29_0.svg
+
+
+
+.. code:: ipython3
+
+    counts = execute( qc_init+qc, Aer.get_backend('qasm_simulator')).result().get_counts()
+    print('Results:',counts)
+
+
+.. parsed-literal::
+
+    Results: {'1': 1024}
+
 
 In such cases the output is always ``'1'``.
 
@@ -438,11 +522,11 @@ repetition code is implemented
 
 We can use it in Qiskit by importing the required tools from Ignis.
 
-.. code:: python
+.. code:: ipython3
 
-   from qiskit.ignis.verification.topological_codes import RepetitionCode
-   from qiskit.ignis.verification.topological_codes import lookuptable_decoding
-   from qiskit.ignis.verification.topological_codes import GraphDecoder
+    from qiskit.ignis.verification.topological_codes import RepetitionCode
+    from qiskit.ignis.verification.topological_codes import lookuptable_decoding
+    from qiskit.ignis.verification.topological_codes import GraphDecoder
 
 We are free to choose how many physical qubits we want the logical qubit
 to be encoded in. We can also choose how many times the syndrome
@@ -452,12 +536,12 @@ non-trivial case: three repetitions and one syndrome measurement round.
 The circuits for the repetition code can then be created automatically
 from the using the ``RepetitionCode`` object from Qiskit-Ignis.
 
-.. code:: python
+.. code:: ipython3
 
-   n = 3
-   T = 1
-
-   code = RepetitionCode(n,T)
+    n = 3
+    T = 1
+    
+    code = RepetitionCode(n,T)
 
 With this we can inspect various properties of the code, such as the
 names of the qubit registers used for the code and ancilla qubits.
@@ -466,17 +550,31 @@ The ``RepetitionCode`` contains two quantum circuits that implement the
 code: One for each of the two possible logical bit values. Here are
 those for logical ``0`` and ``1``, respectively.
 
-.. code:: python
+.. code:: ipython3
 
-   # this bit is just needed to make the labels look nice
-   for reg in code.circuit['0'].qregs+code.circuit['1'].cregs:
-       reg.name = reg.name.replace('_','\ ') + '\ '
+    # this bit is just needed to make the labels look nice
+    for reg in code.circuit['0'].qregs+code.circuit['1'].cregs:
+        reg.name = reg.name.replace('_','\ ') + '\ '
+    
+    code.circuit['0'].draw(output='mpl')
 
-   code.circuit['0'].draw(output='mpl')
 
-.. code:: python
 
-   code.circuit['1'].draw(output='mpl')
+
+.. image:: error-correction-repetition-code_files/error-correction-repetition-code_38_0.svg
+
+
+
+.. code:: ipython3
+
+    code.circuit['1'].draw(output='mpl')
+
+
+
+
+.. image:: error-correction-repetition-code_files/error-correction-repetition-code_39_0.svg
+
+
 
 In these circuits, we have two types of physical qubits. There are the
 ‘code qubits’, which are the three physical qubits across which the
@@ -496,20 +594,29 @@ just :math:`n-1` syndrome measurements of neighbouring pairs of qubits.
 Running these circuits on a simulator without any noise leads to very
 simple results.
 
-.. code:: python
+.. code:: ipython3
 
-   def get_raw_results(code,noise_model=None):
+    def get_raw_results(code,noise_model=None):
+    
+        circuits = code.get_circuit_list()
+        job = execute( circuits, Aer.get_backend('qasm_simulator'), noise_model=noise_model )
+        raw_results = {}
+        for log in ['0','1']:
+            raw_results[log] = job.result().get_counts(log)
+        return raw_results
+    
+    raw_results = get_raw_results(code)
+    for log in raw_results:
+        print('Logical',log,':',raw_results[log],'\n')
 
-       circuits = code.get_circuit_list()
-       job = execute( circuits, Aer.get_backend('qasm_simulator'), noise_model=noise_model )
-       raw_results = {}
-       for log in ['0','1']:
-           raw_results[log] = job.result().get_counts(log)
-       return raw_results
 
-   raw_results = get_raw_results(code)
-   for log in raw_results:
-       print('Logical',log,':',raw_results[log],'\n')
+.. parsed-literal::
+
+    Logical 0 : {'000 00': 1024} 
+    
+    Logical 1 : {'111 00': 1024} 
+    
+
 
 Here we see that the output comes in two parts. The part on the right
 holds the outcomes of the two syndrome measurements. That on the left
@@ -518,26 +625,44 @@ holds the outcomes of the three final measurements of the code qubits.
 For more measurement rounds, :math:`T=4` for example, we would have the
 results of more syndrome measurements on the right.
 
-.. code:: python
+.. code:: ipython3
 
-   code = RepetitionCode(n,4)
+    code = RepetitionCode(n,4)
+    
+    raw_results = get_raw_results(code)
+    for log in raw_results:
+        print('Logical',log,':',raw_results[log],'\n')
 
-   raw_results = get_raw_results(code)
-   for log in raw_results:
-       print('Logical',log,':',raw_results[log],'\n')
+
+.. parsed-literal::
+
+    Logical 0 : {'000 00 00 00 00': 1024} 
+    
+    Logical 1 : {'111 00 00 00 00': 1024} 
+    
+
 
 For more repetitions, :math:`n=5` for example, each set of measurements
 would be larger. The final measurement on the left would be of :math:`n`
 qubits. The :math:`T` syndrome measurements would each be of the
 :math:`n-1` possible neighbouring pairs.
 
-.. code:: python
+.. code:: ipython3
 
-   code = RepetitionCode(5,4)
+    code = RepetitionCode(5,4)
+    
+    raw_results = get_raw_results(code)
+    for log in raw_results:
+        print('Logical',log,':',raw_results[log],'\n')
 
-   raw_results = get_raw_results(code)
-   for log in raw_results:
-       print('Logical',log,':',raw_results[log],'\n')
+
+.. parsed-literal::
+
+    Logical 0 : {'00000 0000 0000 0000 0000': 1024} 
+    
+    Logical 1 : {'11111 0000 0000 0000 0000': 1024} 
+    
+
 
 Lookup table decoding
 ~~~~~~~~~~~~~~~~~~~~~
@@ -545,15 +670,24 @@ Lookup table decoding
 Now let’s return to the :math:`n=3`, :math:`T=1` example and look at a
 case with some noise.
 
-.. code:: python
+.. code:: ipython3
 
-   code = RepetitionCode(3,1)
+    code = RepetitionCode(3,1)
+    
+    noise_model = get_noise(0.05,0.05)
+    
+    raw_results = get_raw_results(code,noise_model)
+    for log in raw_results:
+        print('Logical',log,':',raw_results[log],'\n')
 
-   noise_model = get_noise(0.05,0.05)
 
-   raw_results = get_raw_results(code,noise_model)
-   for log in raw_results:
-       print('Logical',log,':',raw_results[log],'\n')
+.. parsed-literal::
+
+    Logical 0 : {'010 11': 3, '001 10': 3, '011 01': 1, '010 10': 3, '100 00': 49, '110 01': 1, '011 00': 6, '010 01': 22, '000 01': 84, '101 00': 3, '100 10': 3, '000 10': 50, '100 01': 9, '000 00': 686, '110 00': 4, '011 10': 1, '001 00': 45, '001 01': 3, '010 00': 44, '000 11': 4} 
+    
+    Logical 1 : {'110 11': 3, '101 01': 19, '101 11': 25, '001 11': 1, '001 10': 4, '011 01': 3, '011 11': 4, '010 10': 2, '100 00': 6, '110 01': 23, '011 00': 46, '111 01': 67, '010 01': 6, '100 11': 1, '101 00': 43, '100 10': 1, '101 10': 7, '100 01': 1, '111 11': 12, '110 10': 6, '110 00': 42, '011 10': 25, '111 10': 76, '001 00': 3, '111 00': 589, '001 01': 4, '010 00': 5} 
+    
+
 
 Here we have created ``raw_results``, a dictionary that holds both the
 results for a circuit encoding a logical ``0`` and ``1`` encoded for a
@@ -603,13 +737,13 @@ will need to be run for a large number of samples, to ensure that it
 gets good statistics for each possible outcome. We’ll use
 ``shots=10000``.
 
-.. code:: python
+.. code:: ipython3
 
-   circuits = code.get_circuit_list()
-   job = execute( circuits, Aer.get_backend('qasm_simulator'), noise_model=noise_model, shots=10000 )
-   table_results = {}
-   for log in ['0','1']:
-       table_results[log] = job.result().get_counts(log)
+    circuits = code.get_circuit_list()
+    job = execute( circuits, Aer.get_backend('qasm_simulator'), noise_model=noise_model, shots=10000 )
+    table_results = {}
+    for log in ['0','1']:
+        table_results[log] = job.result().get_counts(log)
 
 With this data, which we call ``table_results``, we can now use the
 ``lookuptable_decoding`` function from Qiskit. This takes each outcome
@@ -617,10 +751,16 @@ from ``raw_results`` and decodes it with the information in
 ``table_results``. Then it checks if the decoding was correct, and uses
 this information to calculate :math:`P`.
 
-.. code:: python
+.. code:: ipython3
 
-   P = lookuptable_decoding(raw_results,table_results)
-   print('P =',P)
+    P = lookuptable_decoding(raw_results,table_results)
+    print('P =',P)
+
+
+.. parsed-literal::
+
+    P = {'0': 0.0285, '1': 0.0184}
+
 
 Here we see that the values for :math:`P` are lower than those for
 :math:`p_{meas}` and :math:`p_{gate}`, so we get an improvement in the
@@ -650,18 +790,31 @@ For example, below is the processed form of a ``raw_results``
 dictionary, in this case for :math:`n=3` and :math:`T=2`. Only results
 with 50 or more samples are shown for clarity.
 
-.. code:: python
+.. code:: ipython3
 
-   code = RepetitionCode(3,2)
+    code = RepetitionCode(3,2)
+    
+    raw_results = get_raw_results(code,noise_model)
+    
+    results = code.process_results( raw_results )
+    
+    for log in ['0','1']:
+        print('\nLogical ' + log + ':')
+        print('raw results       ', {string:raw_results[log][string] for string in raw_results[log] if raw_results[log][string]>=50 })
+        print('processed results ', {string:results[log][string] for string in results[log] if results[log][string]>=50 })
 
-   raw_results = get_raw_results(code,noise_model)
 
-   results = code.process_results( raw_results )
+.. parsed-literal::
 
-   for log in ['0','1']:
-       print('\nLogical ' + log + ':')
-       print('raw results       ', {string:raw_results[log][string] for string in raw_results[log] if raw_results[log][string]>=50 })
-       print('processed results ', {string:results[log][string] for string in results[log] if results[log][string]>=50 })
+    
+    Logical 0:
+    raw results        {'000 00 01': 70, '000 00 00': 473}
+    processed results  {'0 0  01 01 00': 70, '0 0  00 00 00': 473}
+    
+    Logical 1:
+    raw results        {'111 01 00': 59, '111 00 00': 457}
+    processed results  {'1 1  00 01 01': 59, '1 1  00 00 00': 457}
+
 
 Here we can see that ``'000 00 00'`` has been transformed to
 ``'0 0  00 00 00'``, and ``'111 00 00'`` to ``'1 1  00 00 00'``, and so
@@ -850,20 +1003,20 @@ data. However, to obtain new data one only needs to use
 ``step_2 = True``, and perform decoding on any data one only needs to
 use ``step_3 = True``.
 
-.. code:: python
+.. code:: ipython3
 
-   step_2 = False
-   step_3 = False
+    step_2 = False
+    step_3 = False
 
 To benchmark a real device we need the tools required to access that
 device over the cloud, and compile circuits suitable to run on it. These
 are imported as follows.
 
-.. code:: python
+.. code:: ipython3
 
-   from qiskit import IBMQ
-   from qiskit.compiler import transpile
-   from qiskit.transpiler import PassManager
+    from qiskit import IBMQ
+    from qiskit.compiler import transpile
+    from qiskit.transpiler import PassManager
 
 We can now create the backend object, which is used to run the circuits.
 This is done by supplying the string used to specify the device. Here
@@ -871,20 +1024,20 @@ This is done by supplying the string used to specify the device. Here
 writing. We will also consider the 53 qubit *Rochester* device, which is
 specified with ``'ibmq_rochester'``.
 
-.. code:: python
+.. code:: ipython3
 
-   device_name = 'ibmq_16_melbourne'
-
-   if step_2:
-       
-       IBMQ.load_account()
-       
-       for provider in IBMQ.providers():
-           for potential_backend in provider.backends():
-               if potential_backend.name()==device_name:
-                   backend = potential_backend
-
-       coupling_map = backend.configuration().coupling_map
+    device_name = 'ibmq_16_melbourne'
+    
+    if step_2:
+        
+        IBMQ.load_account()
+        
+        for provider in IBMQ.providers():
+            for potential_backend in provider.backends():
+                if potential_backend.name()==device_name:
+                    backend = potential_backend
+    
+        coupling_map = backend.configuration().coupling_map
 
 When running a circuit on a real device, a transpilation process is
 first implemented. This changes the gates of the circuit into the native
@@ -910,7 +1063,6 @@ coupling map of the device, and find a line.
 .. figure:: images/melbourne.png
    :alt: Fig. 1. The coupling map of the IBM Q Melbourne device.
 
-   Fig. 1. The coupling map of the IBM Q Melbourne device.
 
 For Melbourne it is possible to find a line that covers all 15 qubits.
 The choice one specified in the list ``line`` below is designed to avoid
@@ -918,27 +1070,27 @@ the most error prone ``cx`` gates. For the 53 qubit *Rochester* device,
 there is no single line that covers all 53 qubits. Instead we can use
 the following choice, which covers 43.
 
-.. code:: python
+.. code:: ipython3
 
-   if device_name=='ibmq_16_melbourne':
-       line = [13,14,0,1,2,12,11,3,4,10,9,5,6,8,7]
-   elif device_name=='ibmq_rochester':
-       line = [10,11,17,23,22,21,20,19,16,7,8,9,5]#,0,1,2,3,4,6,13,14,15,18,27,26,25,29,36,37,38,41,50,49,48,47,46,45,44,43,42,39,30,31]
+    if device_name=='ibmq_16_melbourne':
+        line = [13,14,0,1,2,12,11,3,4,10,9,5,6,8,7]
+    elif device_name=='ibmq_rochester':
+        line = [10,11,17,23,22,21,20,19,16,7,8,9,5]#,0,1,2,3,4,6,13,14,15,18,27,26,25,29,36,37,38,41,50,49,48,47,46,45,44,43,42,39,30,31]
 
 Now we know how many qubits we have access to, we can create the
 repetition code objects for each code that we will run. Note that a code
 with ``n`` repetitions uses :math:`n` code qubits and :math:`n-1` link
 qubits, and so :math:`2n-1` in all.
 
-.. code:: python
+.. code:: ipython3
 
-   n_min = 3
-   n_max = int((len(line)+1)/2)
-
-   code = {}
-
-   for n in range(n_min,n_max+1):
-       code[n] = RepetitionCode(n,1)
+    n_min = 3
+    n_max = int((len(line)+1)/2)
+    
+    code = {}
+    
+    for n in range(n_min,n_max+1):
+        code[n] = RepetitionCode(n,1)
 
 Before running the circuits from these codes, we need to ensure that the
 transpiler knows which physical qubits on the device it should use. This
@@ -948,15 +1100,15 @@ by the following function, which takes a repetition code object and a
 ``line``, and creates a Python dictionary to specify which qubit of the
 code corresponds to which element of the line.
 
-.. code:: python
+.. code:: ipython3
 
-   def get_initial_layout(code,line):
-       initial_layout = {}
-       for j in range(n):
-           initial_layout[code.code_qubit[j]] = line[2*j]
-       for j in range(n-1):
-           initial_layout[code.link_qubit[j]] = line[2*j+1]
-       return initial_layout
+    def get_initial_layout(code,line):
+        initial_layout = {}
+        for j in range(n):
+            initial_layout[code.code_qubit[j]] = line[2*j]
+        for j in range(n-1):
+            initial_layout[code.link_qubit[j]] = line[2*j+1]
+        return initial_layout
 
 Now we can transpile the circuits, to create the circuits that will
 actually be run by the device. A check is also made to ensure that the
@@ -965,17 +1117,17 @@ increasing the number of qubits. Furthermore, the compiled circuits are
 collected into a single list, to allow them all to be submitted at once
 in the same batch job.
 
-.. code:: python
+.. code:: ipython3
 
-   if step_2:
-       
-       circuits = []
-       for n in range(n_min,n_max+1):
-           initial_layout = get_initial_layout(code[n],line)
-           for log in ['0','1']:
-               circuits.append( transpile(code[n].circuit[log], backend=backend, initial_layout=initial_layout) )
-               num_cx = dict(circuits[-1].count_ops())['cx']
-               assert num_cx==2*(n-1), str(num_cx) + ' instead of ' + str(2*(n-1)) + ' cx gates for n = ' + str(n)
+    if step_2:
+        
+        circuits = []
+        for n in range(n_min,n_max+1):
+            initial_layout = get_initial_layout(code[n],line)
+            for log in ['0','1']:
+                circuits.append( transpile(code[n].circuit[log], backend=backend, initial_layout=initial_layout) )
+                num_cx = dict(circuits[-1].count_ops())['cx']
+                assert num_cx==2*(n-1), str(num_cx) + ' instead of ' + str(2*(n-1)) + ' cx gates for n = ' + str(n)
 
 We are now ready to run the job. As with the simulated jobs considered
 already, the results from this are extracted into a dictionary
@@ -984,31 +1136,31 @@ results from different code sizes. This means that ``raw_results[n]`` in
 the following is equivalent to one of the ``raw_results`` dictionaries
 used earlier, for a given ``n``.
 
-.. code:: python
+.. code:: ipython3
 
-   if step_2:
-       
-       job = execute(circuits,backend,shots=8192)
-
-       raw_results = {}
-       j = 0
-       for d in range(n_min,n_max+1):
-           raw_results[d] = {}
-           for log in ['0','1']:
-               raw_results[d][log] = job.result().get_counts(j)
-               j += 1
+    if step_2:
+        
+        job = execute(circuits,backend,shots=8192)
+    
+        raw_results = {}
+        j = 0
+        for d in range(n_min,n_max+1):
+            raw_results[d] = {}
+            for log in ['0','1']:
+                raw_results[d][log] = job.result().get_counts(j)
+                j += 1
 
 It can be convenient to save the data to file, so that the processing of
 step 3 can be done or repeated at a later time.
 
-.. code:: python
+.. code:: ipython3
 
-   if step_2: # save results
-       with open('results/raw_results_'+device_name+'.txt', 'w') as file:
-           file.write(str(raw_results))
-   elif step_3: # read results
-       with open('results/raw_results_'+device_name+'.txt', 'r') as file:
-           raw_results = eval(file.read())
+    if step_2: # save results
+        with open('results/raw_results_'+device_name+'.txt', 'w') as file:
+            file.write(str(raw_results))
+    elif step_3: # read results
+        with open('results/raw_results_'+device_name+'.txt', 'r') as file:
+            raw_results = eval(file.read())
 
 As we saw previously, the process of decoding first needs the results to
 be rewritten in order for the syndrome to be expressed in the correct
@@ -1016,23 +1168,23 @@ form. As such, the ``process_results`` method of each the repetition
 code object ``code[n]`` is used to create determine a results dictionary
 ``results[n]`` from each ``raw_results[n]``.
 
-.. code:: python
+.. code:: ipython3
 
-   if step_3:
-       results = {}
-       for n in range(n_min,n_max+1):
-           results[n] = code[n].process_results( raw_results[n] )
+    if step_3:
+        results = {}
+        for n in range(n_min,n_max+1):
+            results[n] = code[n].process_results( raw_results[n] )
 
 The decoding also needs us to set up the ``GraphDecoder`` object for
 each code. The initialization of these involves the construction of the
 graph corresponding to the syndrome, as described in the last section.
 
-.. code:: python
+.. code:: ipython3
 
-   if step_3:
-       dec = {}
-       for n in range(n_min,n_max+1):
-           dec[n] = GraphDecoder(code[n])
+    if step_3:
+        dec = {}
+        for n in range(n_min,n_max+1):
+            dec[n] = GraphDecoder(code[n])
 
 Finally, the decoder object can be used to process the results. Here the
 default algorithm, minimim weight perfect matching, is used. The end
@@ -1040,20 +1192,20 @@ result is a calculation of the logical error probability. When running
 step 3, the following snippet also saves the logical error
 probabilities. Otherwise, it reads in previously saved probabilities.
 
-.. code:: python
+.. code:: ipython3
 
-   if step_3:
-       
-       logical_prob_match = {}
-       for n in range(n_min,n_max+1):
-           logical_prob_match[n] = dec[n].get_logical_prob(results[n])
-           
-       with open('results/logical_prob_match_'+device_name+'.txt', 'w') as file:
-           file.write(str(logical_prob_match))
-           
-   else:
-       with open('results/logical_prob_match_'+device_name+'.txt', 'r') as file:
-           logical_prob_match = eval(file.read())
+    if step_3:
+        
+        logical_prob_match = {}
+        for n in range(n_min,n_max+1):
+            logical_prob_match[n] = dec[n].get_logical_prob(results[n])
+            
+        with open('results/logical_prob_match_'+device_name+'.txt', 'w') as file:
+            file.write(str(logical_prob_match))
+            
+    else:
+        with open('results/logical_prob_match_'+device_name+'.txt', 'r') as file:
+            logical_prob_match = eval(file.read())
 
 The resulting logical error probabilities are displayed in the following
 graph, whch uses a log scale used on the y axis. We would expect that
@@ -1068,24 +1220,29 @@ small codes do represent an exception to this rule. Other deviations can
 also be expected, such as when the increasing the size of the code means
 uses a group of qubits with either exceptionally low or high noise.
 
-.. code:: python
+.. code:: ipython3
 
-   import matplotlib.pyplot as plt
-   import numpy as np
+    import matplotlib.pyplot as plt
+    import numpy as np
+    
+    x_axis = range(n_min,n_max+1)
+    P = { log: [logical_prob_match[n][log] for n in x_axis] for log in ['0', '1'] }
+    
+    ax = plt.gca()
+    plt.xlabel('Code distance, n')
+    plt.ylabel('ln(Logical error probability)')
+    ax.scatter( x_axis, P['0'], label="logical 0")
+    ax.scatter( x_axis, P['1'], label="logical 1")
+    ax.set_yscale('log')
+    ax.set_ylim(ymax=1.5*max(P['0']+P['1']),ymin=0.75*min(P['0']+P['1']))
+    plt.legend()
+    
+    plt.show()
 
-   x_axis = range(n_min,n_max+1)
-   P = { log: [logical_prob_match[n][log] for n in x_axis] for log in ['0', '1'] }
 
-   ax = plt.gca()
-   plt.xlabel('Code distance, n')
-   plt.ylabel('ln(Logical error probability)')
-   ax.scatter( x_axis, P['0'], label="logical 0")
-   ax.scatter( x_axis, P['1'], label="logical 1")
-   ax.set_yscale('log')
-   ax.set_ylim(ymax=1.5*max(P['0']+P['1']),ymin=0.75*min(P['0']+P['1']))
-   plt.legend()
 
-   plt.show()
+.. image:: error-correction-repetition-code_files/error-correction-repetition-code_81_0.png
+
 
 Another insight we can gain is to use the results to determine how
 likely certain error processes are to occur.
@@ -1114,33 +1271,49 @@ determines these ratios, and assigns each edge the weight
 :math:`-\ln(p/(1-p))`. By employing this method and inspecting the
 weights, we can easily retreive these probabilities.
 
-.. code:: python
+.. code:: ipython3
 
-   if step_3:
-
-       dec[n_max].weight_syndrome_graph(results=results[n_max])
-
-       probs = []
-       for edge in dec[n_max].S.edges:
-           ratio = np.exp(-dec[n_max].S.get_edge_data(edge[0],edge[1])['distance'])
-           probs.append( ratio/(1+ratio) )
-           
-       with open('results/probs_'+device_name+'.txt', 'w') as file:
-           file.write(str(probs))
-           
-   else:
-       
-       with open('results/probs_'+device_name+'.txt', 'r') as file:
-           probs = eval(file.read())
+    if step_3:
+    
+        dec[n_max].weight_syndrome_graph(results=results[n_max])
+    
+        probs = []
+        for edge in dec[n_max].S.edges:
+            ratio = np.exp(-dec[n_max].S.get_edge_data(edge[0],edge[1])['distance'])
+            probs.append( ratio/(1+ratio) )
+            
+        with open('results/probs_'+device_name+'.txt', 'w') as file:
+            file.write(str(probs))
+            
+    else:
+        
+        with open('results/probs_'+device_name+'.txt', 'r') as file:
+            probs = eval(file.read())
 
 Rather than display the full list, we can obtain a summary via the mean,
 standard devation, minimum, maximum and quartiles.
 
-.. code:: python
+.. code:: ipython3
 
-   import pandas as pd
+    import pandas as pd
+    
+    pd.Series(probs).describe().to_dict()
 
-   pd.Series(probs).describe().to_dict()
+
+
+
+.. parsed-literal::
+
+    {'count': 29.0,
+     'mean': 0.18570187935383517,
+     'std': 0.12966061187100628,
+     'min': 0.014967523298503253,
+     '25%': 0.05383187483426147,
+     '50%': 0.1799797775530839,
+     '75%': 0.2753350576063955,
+     'max': 0.4345054945054945}
+
+
 
 The benchmarking of the devices does not produce any set of error
 probabilities that is exactly equivalent. However, the probabilities for
@@ -1148,30 +1321,46 @@ readout errors and controlled-NOT gate errors could serve as a good
 comparison. Specifically, we can use the ``backend`` object to obtain
 these values from the benchmarking.
 
-.. code:: python
+.. code:: ipython3
 
-   if step_3:
+    if step_3:
+    
+        gate_probs = []
+        for j,qubit in enumerate(line):
+            
+            gate_probs.append( backend.properties().readout_error(qubit) )
+            
+            cx1,cx2 = 0,0
+            if j>0:
+                gate_probs( backend.properties().gate_error('cx',[qubit,line[j-1]]) )
+            if j<len(line)-1:
+                gate_probs( backend.properties().gate_error('cx',[qubit,line[j+1]]) )
+                    
+        with open('results/gate_probs_'+device_name+'.txt', 'w') as file:
+            file.write(str(gate_probs))
+            
+    else:
+        
+        with open('results/gate_probs_'+device_name+'.txt', 'r') as file:
+            gate_probs = eval(file.read())
+        
+    pd.Series(gate_probs).describe().to_dict()
 
-       gate_probs = []
-       for j,qubit in enumerate(line):
-           
-           gate_probs.append( backend.properties().readout_error(qubit) )
-           
-           cx1,cx2 = 0,0
-           if j>0:
-               gate_probs( backend.properties().gate_error('cx',[qubit,line[j-1]]) )
-           if j<len(line)-1:
-               gate_probs( backend.properties().gate_error('cx',[qubit,line[j+1]]) )
-                   
-       with open('results/gate_probs_'+device_name+'.txt', 'w') as file:
-           file.write(str(gate_probs))
-           
-   else:
-       
-       with open('results/gate_probs_'+device_name+'.txt', 'r') as file:
-           gate_probs = eval(file.read())
-       
-   pd.Series(gate_probs).describe().to_dict()
+
+
+
+.. parsed-literal::
+
+    {'count': 15.0,
+     'mean': 0.08386929848831581,
+     'std': 0.06860851140104485,
+     'min': 0.02134613228239715,
+     '25%': 0.050219500857068944,
+     '50%': 0.05460651866864599,
+     '75%': 0.09450000000000003,
+     'max': 0.28}
+
+
 
 If the results above are orders of magnitude different from those
 obtained in the repetition code, we would have cause to worry that one
@@ -1242,4 +1431,3 @@ find alternatives to the repetition approach. One of the foremost
 examples is the surface code, which will be added to this textbook as
 soon as it is implemented in Ignis.
 
-.. code:: python

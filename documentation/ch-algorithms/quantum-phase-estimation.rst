@@ -1,21 +1,10 @@
 Quantum Phase Estimation
 ========================
 
-1. `Overview <#overview>`__
-   1.1 `Intuition <#intuition>`__
-   1.2 `Mathematical Basis <#maths>`__
-2. `Example: T-gate <#example_t_gate>`__
-   2.1 `Creating the Circuit <#creating_the_circuit>`__
-   2.2 `Results <#results>`__
-3. `Getting More Precision <#getting_more_precision>`__
-   3.1 `The Problem <#the_problem>`__
-   3.2 `The Solution <#the_solution>`__
-4. `Experimenting on Real Devices <#real_devices>`__
-   4.1 `With the Circuit from 2.1 <#circuit_2.1>`__
-   4.2 `Phase Estimation of a CNOT <#qpe_cnot>`__
-5. `Exercises <#exercises>`__
-6. `Looking Forward <#looking_forward>`__
-7. `References <#references>`__
+Contents
+--------
+
+.. contents:: Quick links throoughout the document:
 
 Quantum phase estimation is one of the most important subroutines in
 quantum computation. It serves as a central building block for many
@@ -33,9 +22,7 @@ Since :math:`U` is unitary, all of its eigenvalues have a norm of 1.
 
 The general quantum circuit for phase estimation is shown below. The top
 register contains :math:`t` ‘counting’ qubits, and the bottom contains
-qubits in the state :math:`|\psi\rangle`: |qpe_text_qz|
-
-.. |qpe_text_qz| image:: images/qpe_tex_qz.png
+qubits in the state :math:`|\psi\rangle`:
 
 1.1 Intuition 
 ~~~~~~~~~~~~~~
@@ -51,11 +38,6 @@ qubit completes one full rotation when counting between :math:`0` and
 :math:`2^t`, we rotate this qubit by :math:`\tfrac{x}{2^t}` around the
 z-axis. For the next qubit we rotate by :math:`\tfrac{2x}{2^t}`, then
 :math:`\tfrac{4x}{2^t}` for the third qubit.
-
-.. figure:: images/qpe_intuition.png
-   :alt: intuition
-
-   intuition
 
 When we use a qubit to control the :math:`U`-gate, the qubit will turn
 (due to kickback) proportionally to the phase :math:`e^{2i\pi\theta}`.
@@ -101,19 +83,16 @@ Applying all the :math:`n` controlled operations :math:`C − U^{2^j}`
 with :math:`0\leq j\leq n-1`, and using the relation
 :math:`|0\rangle \otimes |\psi \rangle +|1\rangle \otimes e^{2\pi i\theta }|\psi \rangle =\left(|0\rangle +e^{2\pi i\theta }|1\rangle \right)\otimes |\psi \rangle`:
 
-\\begin{aligned} :raw-latex:`\psi`\ *{2} &
-=:raw-latex:`\frac {1}{2^{\frac {n}{2}}}`
-:raw-latex:`\left`(|0:raw-latex:`\rangle`+{e^{:raw-latex:`\boldsymbol{2\pi i}`
-:raw-latex:`\theta `2^{n-1}}}|1:raw-latex:`\rangle `:raw-latex:`\right`)
-:raw-latex:`\otimes `:raw-latex:`\cdots `:raw-latex:`\otimes `:raw-latex:`\left`(|0:raw-latex:`\rangle`+{e^{:raw-latex:`\boldsymbol{2\pi i}`
-:raw-latex:`\theta `2^{1}}}:raw-latex:`\vert`1:raw-latex:`\rangle `:raw-latex:`\right`)
-:raw-latex:`\otimes `:raw-latex:`\left`(|0:raw-latex:`\rangle`+{e^{:raw-latex:`\boldsymbol{2\pi i}`
-:raw-latex:`\theta `2^{0}}}:raw-latex:`\vert`1:raw-latex:`\rangle `:raw-latex:`\right`)
-:raw-latex:`\otimes `\|:raw-latex:`\psi`:raw-latex:`\rangle`\\\\ & =
-:raw-latex:`\frac{1}{2^{\frac {n}{2}}}`:raw-latex:`\sum `*\ {k=0}:sup:`{2`\ {n}-1}e^{:raw-latex:`\boldsymbol{2\pi i}`
-:raw-latex:`\theta `k}|k:raw-latex:`\rangle `:raw-latex:`\otimes `:raw-latex:`\vert`:raw-latex:`\psi`:raw-latex:`\rangle`
-\\end{aligned} where :math:`k` denotes the integer representation of
-n-bit binary numbers.
+.. math::
+
+
+   \begin{aligned}
+   \psi_{2} & =\frac {1}{2^{\frac {n}{2}}} \left(|0\rangle+{e^{\boldsymbol{2\pi i} \theta 2^{n-1}}}|1\rangle \right) \otimes \cdots \otimes \left(|0\rangle+{e^{\boldsymbol{2\pi i} \theta 2^{1}}}\vert1\rangle \right) \otimes \left(|0\rangle+{e^{\boldsymbol{2\pi i} \theta 2^{0}}}\vert1\rangle \right) \otimes |\psi\rangle\\\\
+   & = \frac{1}{2^{\frac {n}{2}}}\sum _{k=0}^{2^{n}-1}e^{\boldsymbol{2\pi i} \theta k}|k\rangle \otimes \vert\psi\rangle
+   \end{aligned}
+
+where :math:`k` denotes the integer representation of n-bit binary
+numbers.
 
 3. **Inverse Fourier Transform**: Notice that the above expression is
    exactly the result of applying a quantum Fourier transform as we

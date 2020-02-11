@@ -24,11 +24,6 @@ The teleportation protocol is actually a flipped version of the
 superdense coding protocol, in the sense that Alice and Bob merely “swap
 their equipment.”
 
-.. figure:: images/superdense.png
-   :alt: superdense
-
-   superdense
-
 2. The Process
 --------------
 
@@ -82,11 +77,6 @@ gates/rules
    |11                |$ZX$          | $|10\rangle - |01\rangle$        |
    --->
 
-.. figure:: images/superdense_table1.png
-   :alt: table1
-
-   table1
-
 Thus if she wants to send a 00, she does nothing to her qubit (apply the
 identity (:math:`I`) gate). If she sends a 01, then she applies the
 :math:`X` gate. Depending on what she wants to send, she applies the
@@ -116,11 +106,6 @@ Alice’s qubit.
    | $|00\rangle - |11\rangle$ | $|00\rangle - |10\rangle$ | $|10\rangle$   |
    | $|10\rangle - |01\rangle$ | $|11\rangle - |01\rangle$ | $|11\rangle$   |
    --->
-
-.. figure:: images/superdense_table2.png
-   :alt: table2
-
-   table2
 
 When Bob performs the measurements, he ends up with four possible
 outcomes with probability of 1 each. Note that the last outcome has a
