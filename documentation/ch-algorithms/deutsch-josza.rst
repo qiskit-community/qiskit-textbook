@@ -25,7 +25,7 @@ Contents
 5. `References <#references>`__
 
 1. Introduction 
----------------
+----------------
 
 The Deutsch-Josza algorithm, first introduced in Reference [1], was the
 first example of a quantum algorithm that performs better than the best
@@ -33,7 +33,7 @@ classical algorithm. It showed that there can be advantages in using a
 quantum computer as a computational tool for a specific problem.
 
 1a. Deutsch-Josza Problem  
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We are given a hidden Boolean function :math:`f`, which takes as input a
 string of bits, and returns either :math:`0` or :math:`1`, that is
@@ -55,7 +55,7 @@ Note that the Deutsch-Josza problem is an :math:`n`-bit extension of the
 single bit Deutsch problem.
 
 1b. Deutsch-Josza Algorithm  
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Classical Solution
 ^^^^^^^^^^^^^^^^^^
@@ -82,7 +82,7 @@ inputs as:
 
 .. math::  P_\textrm{constant}(k) = 1 - \frac{1}{2^{k-1}} \qquad \textrm{for } k \leq 2^{n-1}
 
-Realistically, we could opt to truncate our classical algorithm early,
+ Realistically, we could opt to truncate our classical algorithm early,
 say if we were over x% confident. But if we want to be 100% confident,
 we would need to check :math:`2^{n-1}+1` inputs.
 
@@ -97,6 +97,11 @@ to $ :raw-latex:`\vert `x:raw-latex:`\rangle `:raw-latex:`\vert `y
 :raw-latex:`\oplus `f(x):raw-latex:`\rangle`$, where :math:`\oplus` is
 addition modulo :math:`2`. Below is the generic circuit for the
 Deutsh-Josza algorithm.
+
+.. figure:: images/deutsch_steps.png
+   :alt: deutsch_steps
+
+   deutsch_steps
 
 Now, let’s go through the steps of the algorithm:
 
@@ -139,9 +144,9 @@ $:raw-latex:`\vert `x:raw-latex:`\rangle `:raw-latex:`\vert `y:raw-latex:`\rangl
 to $ :raw-latex:`\vert `x:raw-latex:`\rangle `:raw-latex:`\vert `y
 :raw-latex:`\oplus `f(x):raw-latex:`\rangle`$: \\begin{aligned}
 :raw-latex:`\lvert `:raw-latex:`\psi`\ *2 :raw-latex:`\rangle  ` & =
-:raw-latex:`\frac{1}{\sqrt{2^{n+1}}}`:raw-latex:`\sum`*\ {x=0}\ :sup:`{2`\ n-1}
+:raw-latex:`\frac{1}{\sqrt{2^{n+1}}}`:raw-latex:`\sum`*\ {x=0}:sup:`{2`\ n-1}
 :raw-latex:`\vert `x:raw-latex:`\rangle `(:raw-latex:`\vert `f(x):raw-latex:`\rangle `-
-:raw-latex:`\vert 1` :raw-latex:`\oplus `f(x):raw-latex:`\rangle`) \\
+:raw-latex:`\vert `1 :raw-latex:`\oplus `f(x):raw-latex:`\rangle`) \\
 & =
 :raw-latex:`\frac{1}{\sqrt{2^{n+1}}}`:raw-latex:`\sum`\_{x=0}\ :sup:`{2`\ n-1}(-1)^{f(x)}|x:raw-latex:`\rangle `(
 \|0:raw-latex:`\rangle `- \|1:raw-latex:`\rangle `) \\end{aligned} since
@@ -158,7 +163,7 @@ for each :math:`x,f(x)` is either :math:`0` or :math:`1`.
 At this point the second single qubit register may be ignored. Apply a
 Hadamard gate to each qubit in the first register: \\begin{aligned}
 :raw-latex:`\lvert `:raw-latex:`\psi`\ *3 :raw-latex:`\rangle ` & =
-:raw-latex:`\frac{1}{2^n}`:raw-latex:`\sum`*\ {x=0}\ :sup:`{2`\ n-1}(-1)^{f(x)}
+:raw-latex:`\frac{1}{2^n}`:raw-latex:`\sum`*\ {x=0}:sup:`{2`\ n-1}(-1)^{f(x)}
 :raw-latex:`\left[ \sum_{y=0}^{2^n-1}(-1)^{x \cdot y} 
                     \vert y \rangle \right] `\\ & =
 :raw-latex:`\frac{1}{2^n}`:raw-latex:`\sum`\_{y=0}\ :sup:`{2`\ n-1}
@@ -219,8 +224,13 @@ For a constant function, it is simple:
 For a balanced function, there are many different circuits we can
 create, one is shown below:
 
+.. figure:: images/deutsch_balanced.png
+   :alt: deutsch_balanced
+
+   deutsch_balanced
+
 2. Example 
-----------
+-----------
 
 Let’s go through a specfic example for a two bit balanced function with
 hidden bitstring :math:`a = 3`.
@@ -273,22 +283,22 @@ as :math:`\text{Q}_f = CX_{1a}CX_{2a}`, :raw-latex:`\begin{align*}
 Thus \\begin{aligned} :raw-latex:`\lvert `:raw-latex:`\psi`\_2
 :raw-latex:`\rangle `& = :raw-latex:`\frac{1}{2\sqrt{2}}`
 :raw-latex:`\left[ \lvert 0 0 \rangle_1 \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right) - \lvert 0 1 \rangle_1  \left( \lvert 0 \rangle_2 - \lvert  1 \rangle_2 \right) - \lvert 1 0 \rangle_1  \left( \lvert 0  \rangle_2 - \lvert 1 \rangle_2 \right) + \lvert 1 1 \rangle_1  \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right)  \right] `\\
-& = :raw-latex:`\frac{1}{2}` :raw-latex:`\left`( :raw-latex:`\lvert 0` 0
-:raw-latex:`\rangle`\_1 - :raw-latex:`\lvert 0` 1
-:raw-latex:`\rangle`\_1 - :raw-latex:`\lvert 1` 0
-:raw-latex:`\rangle`\ *1 + :raw-latex:`\lvert 1` 1
+& = :raw-latex:`\frac{1}{2}` :raw-latex:`\left`( :raw-latex:`\lvert `0 0
+:raw-latex:`\rangle`\_1 - :raw-latex:`\lvert `0 1
+:raw-latex:`\rangle`\_1 - :raw-latex:`\lvert `1 0
+:raw-latex:`\rangle`\ *1 + :raw-latex:`\lvert `1 1
 :raw-latex:`\rangle`\ 1 :raw-latex:`\right`)
 :raw-latex:`\frac{1}{\sqrt{2}}` :raw-latex:`\left`(
-:raw-latex:`\lvert 0` :raw-latex:`\rangle`\ 2 - :raw-latex:`\lvert 1`
+:raw-latex:`\lvert `0 :raw-latex:`\rangle`\ 2 - :raw-latex:`\lvert `1
 :raw-latex:`\rangle`\ 2 :raw-latex:`\right`) \\ & =
 :raw-latex:`\frac{1}{\sqrt{2}}` :raw-latex:`\left`(
-:raw-latex:`\lvert 0` :raw-latex:`\rangle`\ {10} - :raw-latex:`\lvert 1`
+:raw-latex:`\lvert `0 :raw-latex:`\rangle`\ {10} - :raw-latex:`\lvert `1
 :raw-latex:`\rangle`\ {10}
 :raw-latex:`\right`):raw-latex:`\frac{1}{\sqrt{2}}` :raw-latex:`\left`(
-:raw-latex:`\lvert 0` :raw-latex:`\rangle`\ {11} - :raw-latex:`\lvert 1`
+:raw-latex:`\lvert `0 :raw-latex:`\rangle`\ {11} - :raw-latex:`\lvert `1
 :raw-latex:`\rangle`*\ {11}
 :raw-latex:`\right`):raw-latex:`\frac{1}{\sqrt{2}}` :raw-latex:`\left`(
-:raw-latex:`\lvert 0` :raw-latex:`\rangle`\_2 - :raw-latex:`\lvert 1`
+:raw-latex:`\lvert `0 :raw-latex:`\rangle`\_2 - :raw-latex:`\lvert `1
 :raw-latex:`\rangle`\_2 :raw-latex:`\right`) \\end{aligned}
 
 .. raw:: html
@@ -323,143 +333,185 @@ indicating a balanced function.
    </ol>
 
 3. Qiskit Implementation 
-------------------------
+-------------------------
 
 We now implement the Deutsch-Josza algorithm for the example of a two
 bit balanced function with hidden bitstring :math:`a = 3`.
 
-.. code:: python
+.. code:: ipython3
 
-   # initialization
-   %matplotlib inline
-   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
-   import numpy as np
+    # initialization
+    %matplotlib inline
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    import numpy as np
+    
+    # importing Qiskit
+    from qiskit import IBMQ, BasicAer
+    from qiskit.providers.ibmq import least_busy
+    from qiskit import QuantumCircuit, execute
+    
+    # import basic plot tools
+    from qiskit.visualization import plot_histogram
 
-   # importing Qiskit
-   from qiskit import IBMQ, BasicAer
-   from qiskit.providers.ibmq import least_busy
-   from qiskit import QuantumCircuit, execute
+.. code:: ipython3
 
-   # import basic plot tools
-   from qiskit.visualization import plot_histogram
+    # set the length of the $n$-bit string. 
+    n = 2
+    
+    # set the oracle, b for balanced, c for constant
+    oracle = "b"
+    
+    # if the oracle is balanced, set the hidden bitstring, b
+    if oracle == "b":
+        b = 3 # np.random.randint(1,2**n) uncomment for a random value
+    
+    # if the oracle is constant, set c = 0 or 1 randomly.
+    if oracle == "c":
+        c = np.random.randint(2)
 
-.. code:: python
+.. code:: ipython3
 
-   # set the length of the $n$-bit string. 
-   n = 2
+    # Creating registers
+    # n qubits for querying the oracle and one qubit for storing the answer
+    djCircuit = QuantumCircuit(n+1, n)
+    barriers = True
+    
+    # Since all qubits are initialized to |0>, we need to flip the second register qubit to the the |1> state
+    djCircuit.x(n)
+    
+    # Apply barrier
+    if barriers:
+        djCircuit.barrier()
+    
+    # Apply Hadamard gates to all qubits
+    djCircuit.h(range(n+1))
+        
+    # Apply barrier 
+    if barriers:
+        djCircuit.barrier()
+    
+    # Query the oracle
+    if oracle == "c": # if the oracle is constant, return c
+        if c == 1:
+            djCircuit.x(n)
+        else:
+            djCircuit.iden(n)
+    else: # otherwise, the oracle is balanced and it returns the inner product of the input with b (non-zero bitstring) 
+        for i in range(n):
+            if (b & (1 << i)):
+                djCircuit.cx(i, n)
+    
+    # Apply barrier 
+    if barriers:
+        djCircuit.barrier()
+    
+    # Apply Hadamard gates to the first register after querying the oracle
+    djCircuit.h(range(n))
+    
+    # Measure the first register
+    djCircuit.measure(range(n), range(n))
 
-   # set the oracle, b for balanced, c for constant
-   oracle = "b"
 
-   # if the oracle is balanced, set the hidden bitstring, b
-   if oracle == "b":
-       b = 3 # np.random.randint(1,2**n) uncomment for a random value
 
-   # if the oracle is constant, set c = 0 or 1 randomly.
-   if oracle == "c":
-       c = np.random.randint(2)
 
-.. code:: python
+.. parsed-literal::
 
-   # Creating registers
-   # n qubits for querying the oracle and one qubit for storing the answer
-   djCircuit = QuantumCircuit(n+1, n)
-   barriers = True
+    <qiskit.circuit.instructionset.InstructionSet at 0x7fa8f8d35110>
 
-   # Since all qubits are initialized to |0>, we need to flip the second register qubit to the the |1> state
-   djCircuit.x(n)
 
-   # Apply barrier
-   if barriers:
-       djCircuit.barrier()
 
-   # Apply Hadamard gates to all qubits
-   djCircuit.h(range(n+1))
-       
-   # Apply barrier 
-   if barriers:
-       djCircuit.barrier()
+.. code:: ipython3
 
-   # Query the oracle
-   if oracle == "c": # if the oracle is constant, return c
-       if c == 1:
-           djCircuit.x(n)
-       else:
-           djCircuit.iden(n)
-   else: # otherwise, the oracle is balanced and it returns the inner product of the input with b (non-zero bitstring) 
-       for i in range(n):
-           if (b & (1 << i)):
-               djCircuit.cx(i, n)
+    djCircuit.draw(output='mpl')
 
-   # Apply barrier 
-   if barriers:
-       djCircuit.barrier()
 
-   # Apply Hadamard gates to the first register after querying the oracle
-   djCircuit.h(range(n))
 
-   # Measure the first register
-   djCircuit.measure(range(n), range(n))
 
-.. code:: python
+.. image:: deutsch-josza_files/deutsch-josza_16_0.svg
 
-   djCircuit.draw(output='mpl')
+
 
 3a. Experiment with Simulators 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can run the above circuit on the simulator.
 
-.. code:: python
+.. code:: ipython3
 
-   # use local simulator
-   backend = BasicAer.get_backend('qasm_simulator')
-   shots = 1024
-   results = execute(djCircuit, backend=backend, shots=shots).result()
-   answer = results.get_counts()
+    # use local simulator
+    backend = BasicAer.get_backend('qasm_simulator')
+    shots = 1024
+    results = execute(djCircuit, backend=backend, shots=shots).result()
+    answer = results.get_counts()
+    
+    plot_histogram(answer)
 
-   plot_histogram(answer)
+
+
+
+.. image:: deutsch-josza_files/deutsch-josza_18_0.svg
+
+
 
 We can see that the result of the measurement is :math:`11` as expected.
 
 3b. Experiment with Real Devices 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can run the circuit on the real device as shown below. We first look
 for the least-busy device that can handle our circuit.
 
-.. code:: python
+.. code:: ipython3
 
-   # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to (n+1) qubits
-   IBMQ.load_account()
-   provider = IBMQ.get_provider(hub='ibm-q')
-   backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= (n+1) and
-                                      not x.configuration().simulator and x.status().operational==True))
-   print("least busy backend: ", backend)
+    # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to (n+1) qubits
+    IBMQ.load_account()
+    provider = IBMQ.get_provider(hub='ibm-q')
+    backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= (n+1) and
+                                       not x.configuration().simulator and x.status().operational==True))
+    print("least busy backend: ", backend)
 
-.. code:: python
 
-   # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
-   from qiskit.tools.monitor import job_monitor
+.. parsed-literal::
 
-   shots = 1024
-   job = execute(djCircuit, backend=backend, shots=shots)
+    least busy backend:  ibmq_ourense
 
-   job_monitor(job, interval = 2)
 
-.. code:: python
+.. code:: ipython3
 
-   # Get the results of the computation
-   results = job.result()
-   answer = results.get_counts()
+    # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
+    from qiskit.tools.monitor import job_monitor
+    
+    shots = 1024
+    job = execute(djCircuit, backend=backend, shots=shots)
+    
+    job_monitor(job, interval = 2)
 
-   plot_histogram(answer)
+
+.. parsed-literal::
+
+    Job Status: job has successfully run
+
+
+.. code:: ipython3
+
+    # Get the results of the computation
+    results = job.result()
+    answer = results.get_counts()
+    
+    plot_histogram(answer)
+
+
+
+
+.. image:: deutsch-josza_files/deutsch-josza_23_0.svg
+
+
 
 As we can see, most of the results are :math:`11`. The other results are
 due to errors in the quantum computation.
 
 4. Problems 
------------
+------------
 
 1. The above `implementation <#implementation>`__ of Deutsch-Josza is
    for a balanced function with a two bit input of :math:`a = 3`. Modify
@@ -470,7 +522,7 @@ due to errors in the quantum computation.
    you expect? Explain.
 
 5. References 
--------------
+--------------
 
 1. David Deutsch and Richard Jozsa (1992). “Rapid solutions of problems
    by quantum computation”. Proceedings of the Royal Society of London
@@ -481,9 +533,22 @@ due to errors in the quantum computation.
    454: 339–354.
    `doi:10.1098/rspa.1998.0164 <https://doi.org/10.1098%2Frspa.1998.0164>`__.
 
-.. code:: python
+.. code:: ipython3
 
-   import qiskit
-   qiskit.__qiskit_version__
+    import qiskit
+    qiskit.__qiskit_version__
 
-.. code:: python
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.12.0',
+     'qiskit-aer': '0.4.0',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.6',
+     'qiskit-aqua': '0.6.4',
+     'qiskit': '0.15.0'}
+
+
+

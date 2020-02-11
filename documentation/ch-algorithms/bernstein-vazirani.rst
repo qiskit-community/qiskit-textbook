@@ -25,7 +25,7 @@ Contents
 5. `References <#references>`__
 
 1. Introduction 
----------------
+----------------
 
 The Bernstein-Vazirani algorithm, first introduced in Reference [1], can
 be seen as an extension of the Deutsch-Josza algorithm covered in the
@@ -34,7 +34,7 @@ computer as a computational tool for more complex problems compared to
 the Deutsch-Josza problem.
 
 1a. Bernstein-Vazirani Problem  
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We are again given a hidden function Boolean :math:`f`, which takes as
 as input a string of bits, and returns either :math:`0` or :math:`1`,
@@ -44,7 +44,7 @@ that is:
 
    <center>
 
-$f({x_0,x_1,x_2,…}) :raw-latex:`\rightarrow 0`
+$f({x_0,x_1,x_2,…}) :raw-latex:`\rightarrow `0
 :raw-latex:`\textrm{ or }` 1 :raw-latex:`\textrm{ where }` x_n
 :raw-latex:`\textrm{ is }`0 :raw-latex:`\textrm{ or }` 1 $.
 
@@ -56,7 +56,7 @@ words, given an input :math:`x`,
 :math:`s`.
 
 1b. Bernstein-Vazirani Algorithm  
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Classical Solution
 ^^^^^^^^^^^^^^^^^^
@@ -79,6 +79,8 @@ Bernstein-Vazirani algorithm to find the hidden integer is very simple:
 (1) start from a :math:`|0\rangle^{\otimes n}` state, (2) apply Hadamard
 gates, (3) query the oracle, (4) apply Hadamard gates, and (5) measure,
 generically illustrated below:
+
+|image0|
 
 The correctness of the algorithm is best explained by looking at the
 transformation of a quantum register :math:`|a \rangle` by :math:`n`
@@ -128,12 +130,10 @@ Because the inverse of the :math:`n` Hadamard gates is again the
 
    \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} (-1)^{a\cdot x}|x\rangle \xrightarrow{H^{\otimes n}} |a\rangle.
 
-.. raw:: html
-
-   <!-- #region -->
+.. |image0| image:: images/bernsteinvazirani_steps.jpeg%22%20width=%22300
 
 2. Example 
-----------
+-----------
 
 Let’s go through a specific example for :math:`n=2` qubits and a secret
 string :math:`s=11`. Note that we are following the formulation in
@@ -207,148 +207,186 @@ Measure to find the secret string :math:`s=11`
 
    </ol>
 
-.. raw:: html
-
-   <!-- #endregion -->
-
 3. Qiskit Implementation 
-------------------------
+-------------------------
 
 We now implement the Bernstein-Vazirani algorithm with Qiskit for a two
 bit function with :math:`s=11`.
 
-.. code:: python
+.. code:: ipython3
 
-   # initialization
-   import matplotlib.pyplot as plt
-   %matplotlib inline
-   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
-   import numpy as np
-
-   # importing Qiskit
-   from qiskit import IBMQ, BasicAer
-   from qiskit.providers.ibmq import least_busy
-   from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute
-
-   # import basic plot tools
-   from qiskit.visualization import plot_histogram
+    # initialization
+    import matplotlib.pyplot as plt
+    %matplotlib inline
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    import numpy as np
+    
+    # importing Qiskit
+    from qiskit import IBMQ, BasicAer
+    from qiskit.providers.ibmq import least_busy
+    from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute
+    
+    # import basic plot tools
+    from qiskit.visualization import plot_histogram
 
 We first set the number of qubits used in the experiment, and the hidden
 integer :math:`s` to be found by the algorithm. The hidden integer
 :math:`s` determines the circuit for the quantum oracle.
 
-.. code:: python
+.. code:: ipython3
 
-   nQubits = 2 # number of physical qubits used to represent s
-   s = 3       # the hidden integer 
-
-   # make sure that a can be represented with nqubits
-   s = s % 2**(nQubits)
+    nQubits = 2 # number of physical qubits used to represent s
+    s = 3       # the hidden integer 
+    
+    # make sure that a can be represented with nqubits
+    s = s % 2**(nQubits)
 
 We then use Qiskit to program the Bernstein-Vazirani algorithm.
 
-.. code:: python
+.. code:: ipython3
 
-   # Creating registers
-   # qubits for querying the oracle and finding the hidden integer
-   qr = QuantumRegister(nQubits)
-   # bits for recording the measurement on qr
-   cr = ClassicalRegister(nQubits)
+    # Creating registers
+    # qubits for querying the oracle and finding the hidden integer
+    qr = QuantumRegister(nQubits)
+    # bits for recording the measurement on qr
+    cr = ClassicalRegister(nQubits)
+    
+    bvCircuit = QuantumCircuit(qr, cr)
+    barriers = True
+    
+    # Apply Hadamard gates before querying the oracle
+    for i in range(nQubits):
+        bvCircuit.h(qr[i])
+        
+    # Apply barrier 
+    if barriers:
+        bvCircuit.barrier()
+    
+    # Apply the inner-product oracle
+    for i in range(nQubits):
+        if (s & (1 << i)):
+            bvCircuit.z(qr[i])
+        else:
+            bvCircuit.iden(qr[i])
+            
+    # Apply barrier 
+    if barriers:
+        bvCircuit.barrier()
+    
+    #Apply Hadamard gates after querying the oracle
+    for i in range(nQubits):
+        bvCircuit.h(qr[i])
+        
+    # Apply barrier 
+    if barriers:
+        bvCircuit.barrier()
+    
+    # Measurement
+    bvCircuit.measure(qr, cr)
 
-   bvCircuit = QuantumCircuit(qr, cr)
-   barriers = True
 
-   # Apply Hadamard gates before querying the oracle
-   for i in range(nQubits):
-       bvCircuit.h(qr[i])
-       
-   # Apply barrier 
-   if barriers:
-       bvCircuit.barrier()
 
-   # Apply the inner-product oracle
-   for i in range(nQubits):
-       if (s & (1 << i)):
-           bvCircuit.z(qr[i])
-       else:
-           bvCircuit.iden(qr[i])
-           
-   # Apply barrier 
-   if barriers:
-       bvCircuit.barrier()
 
-   #Apply Hadamard gates after querying the oracle
-   for i in range(nQubits):
-       bvCircuit.h(qr[i])
-       
-   # Apply barrier 
-   if barriers:
-       bvCircuit.barrier()
+.. parsed-literal::
 
-   # Measurement
-   bvCircuit.measure(qr, cr)
+    <qiskit.circuit.instructionset.InstructionSet at 0x7fd3c9659550>
 
-.. code:: python
 
-   bvCircuit.draw(output='mpl')
+
+.. code:: ipython3
+
+    bvCircuit.draw(output='mpl')
+
+
+
+
+.. image:: bernstein-vazirani_files/bernstein-vazirani_13_0.svg
+
+
 
 3a. Experiment with Simulators 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can run the above circuit on the simulator.
 
-.. code:: python
+.. code:: ipython3
 
-   # use local simulator
-   backend = BasicAer.get_backend('qasm_simulator')
-   shots = 1024
-   results = execute(bvCircuit, backend=backend, shots=shots).result()
-   answer = results.get_counts()
+    # use local simulator
+    backend = BasicAer.get_backend('qasm_simulator')
+    shots = 1024
+    results = execute(bvCircuit, backend=backend, shots=shots).result()
+    answer = results.get_counts()
+    
+    plot_histogram(answer)
 
-   plot_histogram(answer)
+
+
+
+.. image:: bernstein-vazirani_files/bernstein-vazirani_15_0.svg
+
+
 
 We can see that the result of the measurement is the binary
 representation of the hidden integer :math:`3` :math:`(11)`.
 
 3b. Experiment with Real Devices 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can run the circuit on the real device as below.
 
-.. code:: python
+.. code:: ipython3
 
-   # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to 5 qubits
-   IBMQ.load_account()
-   provider = IBMQ.get_provider(hub='ibm-q')
-   provider.backends()
-   backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits <= 5 and
-                                      x.configuration().n_qubits >= 2 and
-                                      not x.configuration().simulator and x.status().operational==True))
-   print("least busy backend: ", backend)
+    # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to 5 qubits
+    IBMQ.load_account()
+    provider = IBMQ.get_provider(hub='ibm-q')
+    provider.backends()
+    backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits <= 5 and
+                                       x.configuration().n_qubits >= 2 and
+                                       not x.configuration().simulator and x.status().operational==True))
+    print("least busy backend: ", backend)
 
-.. code:: python
 
-   # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
-   from qiskit.tools.monitor import job_monitor
+.. parsed-literal::
 
-   shots = 1024
-   job = execute(bvCircuit, backend=backend, shots=shots)
+    least busy backend:  ibmqx2
 
-   job_monitor(job, interval = 2)
 
-.. code:: python
+.. code:: ipython3
 
-   # Get the results from the computation
-   results = job.result()
-   answer = results.get_counts()
+    # Run our circuit on the least busy backend. Monitor the execution of the job in the queue
+    from qiskit.tools.monitor import job_monitor
+    
+    shots = 1024
+    job = execute(bvCircuit, backend=backend, shots=shots)
+    
+    job_monitor(job, interval = 2)
 
-   plot_histogram(answer)
+
+.. parsed-literal::
+
+    Job Status: job has successfully run
+
+
+.. code:: ipython3
+
+    # Get the results from the computation
+    results = job.result()
+    answer = results.get_counts()
+    
+    plot_histogram(answer)
+
+
+
+
+.. image:: bernstein-vazirani_files/bernstein-vazirani_20_0.svg
+
+
 
 As we can see, most of the results are :math:`11`. The other results are
 due to errors in the quantum computation.
 
 4. Problems 
------------
+------------
 
 1. The above `implementation <#implementation>`__ of Bernstein-Vazirani
    is for a secret bit string of :math:`s = 11`. Modify the
@@ -360,7 +398,7 @@ due to errors in the quantum computation.
    results what you expect? Explain.
 
 5. References 
--------------
+--------------
 
 1. Ethan Bernstein and Umesh Vazirani (1997) “Quantum Complexity Theory”
    SIAM Journal on Computing, Vol. 26, No. 5: 1411-1473,
@@ -373,9 +411,22 @@ due to errors in the quantum computation.
    `10.1103/PhysRevA.64.042306 <https://doi.org/10.1103/PhysRevA.64.042306>`__,
    `arXiv:quant-ph/0012114 <https://arxiv.org/abs/quant-ph/0012114>`__.
 
-.. code:: python
+.. code:: ipython3
 
-   import qiskit
-   qiskit.__qiskit_version__
+    import qiskit
+    qiskit.__qiskit_version__
 
-.. code:: python
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.12.0',
+     'qiskit-aer': '0.4.0',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.6',
+     'qiskit-aqua': '0.6.4',
+     'qiskit': '0.15.0'}
+
+
+

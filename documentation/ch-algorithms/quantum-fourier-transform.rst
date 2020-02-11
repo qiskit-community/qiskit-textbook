@@ -23,7 +23,7 @@ Contents
 9. `References <#references>`__
 
 1. Introduction 
----------------
+----------------
 
 The Fourier transform occurs in many different versions throughout
 classical computing, in areas ranging from signal processing to data
@@ -38,7 +38,7 @@ The discrete Fourier transform acts on a vector
 
 .. math:: y_k = \frac{1}{\sqrt{N}}\sum_{j=0}^{N-1}x_j\omega_N^{jk}
 
-where :math:`\omega_N^{jk} = e^{2\pi i \frac{jk}{N}}`.
+ where :math:`\omega_N^{jk} = e^{2\pi i \frac{jk}{N}}`.
 
 Similarly, the quantum Fourier transform acts on a quantum state
 :math:`\sum_{i=0}^{N-1} x_i \vert i \rangle` and maps it to the quantum
@@ -47,7 +47,7 @@ formula
 
 .. math:: y_k = \frac{1}{\sqrt{N}}\sum_{j=0}^{N-1}x_j\omega_N^{jk}
 
-with :math:`\omega_N^{jk}` defined as above. Note that only the
+ with :math:`\omega_N^{jk}` defined as above. Note that only the
 amplitudes of the state were affected by this transformation.
 
 This can also be expressed as the map:
@@ -59,7 +59,7 @@ Or the unitary matrix:
 .. math::  U_{QFT} = \frac{1}{\sqrt{N}} \sum_{x=0}^{N-1} \sum_{y=0}^{N-1} \omega_N^{xy} \vert y \rangle \langle x \vert
 
 2. Example 1: 1-qubit QFT 
--------------------------
+--------------------------
 
 Consider how the QFT operator as defined above acts on a single qubit
 state
@@ -105,7 +105,7 @@ is the most significant bit.
 
 \\begin{aligned} QFT_N:raw-latex:`\vert `x :raw-latex:`\rangle `& =
 :raw-latex:`\frac{1}{\sqrt{N}}`
-:raw-latex:`\sum`\ *{y=0}\ {N-1}:raw-latex:`\omega`\ N^{xy}
+:raw-latex:`\sum`\ *{y=0}{N-1}:raw-latex:`\omega`\ N^{xy}
 :raw-latex:`\vert `y :raw-latex:`\rangle ` \\ & =
 :raw-latex:`\frac{1}{\sqrt{N}}` :raw-latex:`\sum`\ {y=0}\ {N-1} e^{2
 :raw-latex:`\pi `i xy / 2^n} :raw-latex:`\vert `y
@@ -124,32 +124,32 @@ y_k/2^k \\ & = :raw-latex:`\frac{1}{\sqrt{N}}`
 :raw-latex:`\ldots `y_n
 :raw-latex:`\rangle `::raw-latex:`\text{after expanding the exponential of a sum to a product of exponentials}`
 \\ & = :raw-latex:`\frac{1}{\sqrt{N}}` :raw-latex:`\bigotimes`*\ {k=1}^n
-:raw-latex:`\left`(:raw-latex:`\vert0`:raw-latex:`\rangle `+ e^{2
+:raw-latex:`\left`(:raw-latex:`\vert`0:raw-latex:`\rangle `+ e^{2
 :raw-latex:`\pi `i x /2^k }
-:raw-latex:`\vert1`:raw-latex:`\rangle `:raw-latex:`\right`)
+:raw-latex:`\vert`1:raw-latex:`\rangle `:raw-latex:`\right`)
 ::raw-latex:`\text{after rearranging the sum and products, and expanding}`
 :raw-latex:`\sum`\ *{y=0}^{N-1} =
-:raw-latex:`\sum`*\ {y_1=0}\ :sup:`{1}:raw-latex:`\sum`\ {y_2=0}^{1}:raw-latex:`\ldots`:raw-latex:`\sum`\ {y_n=0}`\ {1}
+:raw-latex:`\sum`*\ {y_1=0}:sup:`{1}:raw-latex:`\sum`\ {y_2=0}^{1}:raw-latex:`\ldots`:raw-latex:`\sum`\ {y_n=0}`\ {1}
 \\ & = :raw-latex:`\frac{1}{\sqrt{N}}`
-:raw-latex:`\left`(:raw-latex:`\vert0`:raw-latex:`\rangle `+
+:raw-latex:`\left`(:raw-latex:`\vert`0:raw-latex:`\rangle `+
 e^{:raw-latex:`\frac{2\pi i}{2}`x}
-:raw-latex:`\vert1`:raw-latex:`\rangle`:raw-latex:`\right`)
+:raw-latex:`\vert`1:raw-latex:`\rangle`:raw-latex:`\right`)
 :raw-latex:`\otimes`
-:raw-latex:`\left`(:raw-latex:`\vert0`:raw-latex:`\rangle `+
+:raw-latex:`\left`(:raw-latex:`\vert`0:raw-latex:`\rangle `+
 e^{:raw-latex:`\frac{2\pi i}{2^2}`x}
-:raw-latex:`\vert1`:raw-latex:`\rangle`:raw-latex:`\right`)
+:raw-latex:`\vert`1:raw-latex:`\rangle`:raw-latex:`\right`)
 :raw-latex:`\otimes  ` :raw-latex:`\ldots` :raw-latex:`\otimes`
-:raw-latex:`\left`(:raw-latex:`\vert0`:raw-latex:`\rangle `+
+:raw-latex:`\left`(:raw-latex:`\vert`0:raw-latex:`\rangle `+
 e^{:raw-latex:`\frac{2\pi i}{2^{n-1}}`x}
-:raw-latex:`\vert1`:raw-latex:`\rangle`:raw-latex:`\right`)
+:raw-latex:`\vert`1:raw-latex:`\rangle`:raw-latex:`\right`)
 :raw-latex:`\otimes`
-:raw-latex:`\left`(:raw-latex:`\vert0`:raw-latex:`\rangle `+
+:raw-latex:`\left`(:raw-latex:`\vert`0:raw-latex:`\rangle `+
 e^{:raw-latex:`\frac{2\pi i}{2^n}`x}
-:raw-latex:`\vert1`:raw-latex:`\rangle`:raw-latex:`\right`)
+:raw-latex:`\vert`1:raw-latex:`\rangle`:raw-latex:`\right`)
 \\end{aligned}
 
 4. The circuit that implements QFT 
-----------------------------------
+-----------------------------------
 
 The circuit that implements QFT makes use of two gates. The first one is
 a single-qubit Hadamard gate, :math:`H`, that you already know. From the
@@ -169,7 +169,7 @@ block-diagonal form as
    0&UROT_k\\
    \end{matrix}\right]
 
-where
+ where
 
 .. math::
 
@@ -184,12 +184,17 @@ second is the target is given by
 
 .. math:: CROT_k\vert 0x_j\rangle = \vert 0x_j\rangle
 
-and
+ and
 
 .. math:: CROT_k\vert 1x_j\rangle = \exp\left( \frac{2\pi i}{2^k}x_j \right)\vert 1x_j\rangle
 
 Given these two gates, a circuit that implements `an n-qubit
 QFT <#qfteqn>`__ is shown below.
+
+.. figure:: images/qft.png
+   :alt: qft
+
+   qft
 
 The circuit operates as follows. We start with an n-qubit input state
 :math:`\vert x_1x_2\ldots x_n\rangle`.
@@ -313,7 +318,7 @@ After the application of a similar sequence of gates for qubits
    \right)
    \vert1\rangle\right]
 
-which is exactly the QFT of the input state as derived above with the
+ which is exactly the QFT of the input state as derived above with the
 caveat that the order of the qubits is reversed in the output state.
 
 .. raw:: html
@@ -321,7 +326,7 @@ caveat that the order of the qubits is reversed in the output state.
    </ol>
 
 5. Example 2: 3-qubit QFT 
--------------------------
+--------------------------
 
 The steps to creating the circuit for
 :math:`\vert y_1y_2y_3\rangle = QFT_8\vert x_1x_2x_3\rangle` would be:
@@ -496,7 +501,7 @@ desired QFT. Therefore, measure the bits in reverse order, that is
 :math:`y_3 = x_1, y_2 = x_2, y_1 = x_3`.
 
 6. A note about the form of the QFT circuit 
--------------------------------------------
+--------------------------------------------
 
 The example above demonstrates a very useful form of the QFT for
 :math:`N=2^n`. Note that only the last qubit depends on the values of
@@ -504,10 +509,6 @@ all the other input qubits and each further bit depends less and less on
 the input qubits. This becomes important in physical implementations of
 the QFT, where nearest-neighbor couplings are easier to achieve than
 distant couplings between qubits.
-
-.. raw:: html
-
-   <!-- #region -->
 
 7. Qiskit Implementation
 ------------------------
@@ -555,85 +556,104 @@ generalized as:
            for k in range(j+1,n):
                circ.cu1(math.pi/float(2**(k-j)), k, j)
 
-.. raw:: html
-
-   <!-- #endregion -->
-
 We will now implement the three-qubit QFT as discussed above. We first
 create a state whose QFT is known. The output after a QFT is applied to
 this special state is :math:`\vert001\rangle`.
 
-.. code:: python
+.. code:: ipython3
 
-   import numpy as np
-   pi = np.pi
-
-   # importing Qiskit
-   from qiskit import BasicAer, IBMQ
-   from qiskit import QuantumCircuit, execute
-   %config InlineBackend.figure_format = 'svg' # Makes the images look nice
-
-   from qiskit.providers.ibmq import least_busy
-   from qiskit.tools.monitor import job_monitor
-   from qiskit.visualization import plot_histogram
+    import numpy as np
+    pi = np.pi
+    
+    # importing Qiskit
+    from qiskit import BasicAer, IBMQ
+    from qiskit import QuantumCircuit, execute
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
+    
+    from qiskit.providers.ibmq import least_busy
+    from qiskit.tools.monitor import job_monitor
+    from qiskit.visualization import plot_histogram
 
 First let’s define the QFT function, as well as a function that creates
 a state from which a QFT will return 001:
 
-.. code:: python
+.. code:: ipython3
 
-   def input_state(circ, n):
-       """special n-qubit input state for QFT that produces output 1."""
-       for j in range(n):
-           circ.h(j)
-           circ.u1(-pi/float(2**(j)), j)
-           
-   def qft(circ, n):
-       """n-qubit QFT on the qubits in circ."""
-       for j in range(n):
-           circ.h(j)
-           for k in range(j+1,n):
-               circ.cu1(pi/float(2**(k-j)), k, j)
-           circ.barrier()
-       swap_registers(circ, n)
-       
-   def swap_registers(circ, n):
-       for j in range(int(np.floor(n/2.))):
-           circ.swap(j, n-j-1)
-       return circ
+    def input_state(circ, n):
+        """special n-qubit input state for QFT that produces output 1."""
+        for j in range(n):
+            circ.h(j)
+            circ.u1(-pi/float(2**(j)), j)
+            
+    def qft(circ, n):
+        """n-qubit QFT on the qubits in circ."""
+        for j in range(n):
+            circ.h(j)
+            for k in range(j+1,n):
+                circ.cu1(pi/float(2**(k-j)), k, j)
+            circ.barrier()
+        swap_registers(circ, n)
+        
+    def swap_registers(circ, n):
+        for j in range(int(np.floor(n/2.))):
+            circ.swap(j, n-j-1)
+        return circ
 
 Let’s now implement a QFT on a prepared three qubit input state that
 should return :math:`001`:
 
-.. code:: python
+.. code:: ipython3
 
-   n = 3
-   qft_circuit = QuantumCircuit(n)
+    n = 3
+    qft_circuit = QuantumCircuit(n)
+    
+    # first, prepare the state that should return 001 and draw that circuit
+    input_state(qft_circuit, n)
+    
+    qft_circuit.draw(output='mpl')
 
-   # first, prepare the state that should return 001 and draw that circuit
-   input_state(qft_circuit, n)
 
-   qft_circuit.draw(output='mpl')
 
-.. code:: python
 
-   # next, do a qft on the prepared state and draw the entire circuit
-   qft_circuit.barrier()
-   qft(qft_circuit, n)
-   qft_circuit.measure_all()
-       
-   qft_circuit.draw(output='mpl')
+.. image:: quantum-fourier-transform_files/quantum-fourier-transform_17_0.svg
+
+
+
+.. code:: ipython3
+
+    # next, do a qft on the prepared state and draw the entire circuit
+    qft_circuit.barrier()
+    qft(qft_circuit, n)
+    qft_circuit.measure_all()
+        
+    qft_circuit.draw(output='mpl')
+
+
+
+
+.. image:: quantum-fourier-transform_files/quantum-fourier-transform_18_0.svg
+
+
 
 7a. Running QFT on a simulator
 ------------------------------
 
-.. code:: python
+.. code:: ipython3
 
-   # run on local simulator
-   backend = BasicAer.get_backend("qasm_simulator")
+    # run on local simulator
+    backend = BasicAer.get_backend("qasm_simulator")
+    
+    simulate = execute(qft_circuit, backend=backend, shots=1024).result()
+    simulate.get_counts()
 
-   simulate = execute(qft_circuit, backend=backend, shots=1024).result()
-   simulate.get_counts()
+
+
+
+.. parsed-literal::
+
+    {'100': 1024}
+
+
 
 We indeed see that the outcome is always :math:`001` when we execute the
 code on the simulator. Note the reversed order of the output value
@@ -646,25 +666,44 @@ as well, since the output register contains the reversed QFT values.
 We then see how the same circuit can be executed on real-device
 backends.
 
-.. code:: python
+.. code:: ipython3
 
-   # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to n qubits
-   IBMQ.load_account()
-   provider = IBMQ.get_provider(hub='ibm-q')
-   backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= n and
-                                      not x.configuration().simulator and x.status().operational==True))
-   print("least busy backend: ", backend)
+    # Load our saved IBMQ accounts and get the least busy backend device with less than or equal to n qubits
+    IBMQ.load_account()
+    provider = IBMQ.get_provider(hub='ibm-q')
+    backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= n and
+                                       not x.configuration().simulator and x.status().operational==True))
+    print("least busy backend: ", backend)
 
-.. code:: python
 
-   shots = 2048
-   job_exp = execute(qft_circuit, backend=backend, shots=shots)
-   job_monitor(job_exp)
+.. parsed-literal::
 
-.. code:: python
+    least busy backend:  ibmq_vigo
 
-   results = job_exp.result()
-   plot_histogram(results.get_counts())
+
+.. code:: ipython3
+
+    shots = 2048
+    job_exp = execute(qft_circuit, backend=backend, shots=shots)
+    job_monitor(job_exp)
+
+
+.. parsed-literal::
+
+    Job Status: job has successfully run
+
+
+.. code:: ipython3
+
+    results = job_exp.result()
+    plot_histogram(results.get_counts())
+
+
+
+
+.. image:: quantum-fourier-transform_files/quantum-fourier-transform_26_0.svg
+
+
 
 We see that the highest probability outcome is still :math:`100` on a
 real device. Recall again that the output of the QFT circuit has the
@@ -687,7 +726,21 @@ qubits in reverse order.
    Information, Cambridge Series on Information and the Natural Sciences
    (Cambridge University Press, Cambridge, 2000).
 
-.. code:: python
+.. code:: ipython3
 
-   import qiskit
-   qiskit.__qiskit_version__
+    import qiskit
+    qiskit.__qiskit_version__
+
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
+
+
