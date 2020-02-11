@@ -57,9 +57,32 @@ To use these properties you need to include them on the meta block
 ```
 
 ## Contributions
-Contributions of all types are always welcome. Please [start a pull request](https://help.github.com/en/articles/creating-a-pull-request) to submit changes, or create an issue to request updates.
+Contributions of all types are always welcome. Please read "Editing Jupyter Notebooks" below to make sure they can be converted properly for the IBMQX. Please [start a pull request](https://help.github.com/en/articles/creating-a-pull-request) to submit changes, or create an issue to request updates.
 
 For a list of contributors, see the [.bib](https://github.com/Qiskit/qiskit-textbook/blob/master/content/qiskit-textbook.bib) file.
+
+## Editing Jupyter Notebooks
+The automatic conversion process between the notebooks and the IBMQX website requires certain conventions are followed:
+1. The contents at the top of the notebook should be of the form below, note the blank lines:
+```
+## Contents
+
+1. [Title](#link)
+2. [Title](#link)
+
+```
+2. Attention needs to be paid to the dollar signs in the display mathematics, they need one blank line above and below the display equation:
+```
+
+$$
+\equation{}
+$$
+
+```
+
+3. Images _need_ a caption, and cannot be in html:
+```![essential_caption](link_to_image)
+
 
 ## License
 The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
