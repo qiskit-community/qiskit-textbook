@@ -126,15 +126,19 @@ Apply a Hadamard gate to each qubit:
 Apply the quantum oracle
 $:raw-latex:`\vert `x:raw-latex:`\rangle `:raw-latex:`\vert `y:raw-latex:`\rangle `$
 to $ :raw-latex:`\vert `x:raw-latex:`\rangle `:raw-latex:`\vert `y
-:raw-latex:`\oplus `f(x):raw-latex:`\rangle`$: \\begin{aligned}
-:raw-latex:`\lvert `:raw-latex:`\psi`\ *2 :raw-latex:`\rangle  ` & =
-:raw-latex:`\frac{1}{\sqrt{2^{n+1}}}`:raw-latex:`\sum`*\ {x=0}:sup:`{2`\ n-1}
-:raw-latex:`\vert `x:raw-latex:`\rangle `(:raw-latex:`\vert `f(x):raw-latex:`\rangle `-
-:raw-latex:`\vert `1 :raw-latex:`\oplus `f(x):raw-latex:`\rangle`) \\\\
-& =
-:raw-latex:`\frac{1}{\sqrt{2^{n+1}}}`:raw-latex:`\sum`\_{x=0}\ :sup:`{2`\ n-1}(-1)^{f(x)}|x:raw-latex:`\rangle `(
-\|0:raw-latex:`\rangle `- \|1:raw-latex:`\rangle `) \\end{aligned} since
-for each :math:`x,f(x)` is either :math:`0` or :math:`1`.
+:raw-latex:`\oplus `f(x):raw-latex:`\rangle`$:
+
+.. math::
+
+
+           \begin{aligned}
+               \lvert \psi_2 \rangle  
+                   & = \frac{1}{\sqrt{2^{n+1}}}\sum_{x=0}^{2^n-1} \vert x\rangle (\vert f(x)\rangle - \vert 1 \oplus f(x)\rangle) \\  
+                   & = \frac{1}{\sqrt{2^{n+1}}}\sum_{x=0}^{2^n-1}(-1)^{f(x)}|x\rangle ( |0\rangle - |1\rangle ) 
+           \end{aligned}
+           
+
+since for each :math:`x,f(x)` is either :math:`0` or :math:`1`.
 
 .. raw:: html
 
@@ -145,14 +149,23 @@ for each :math:`x,f(x)` is either :math:`0` or :math:`1`.
    <li>
 
 At this point the second single qubit register may be ignored. Apply a
-Hadamard gate to each qubit in the first register: \\begin{aligned}
-:raw-latex:`\lvert `:raw-latex:`\psi`\ *3 :raw-latex:`\rangle ` & =
-:raw-latex:`\frac{1}{2^n}`:raw-latex:`\sum`*\ {x=0}:sup:`{2`\ n-1}(-1)^{f(x)}
-:raw-latex:`\left[ \sum_{y=0}^{2^n-1}(-1)^{x \cdot y} 
-                    \vert y \rangle \right] `\\ & =
-:raw-latex:`\frac{1}{2^n}`:raw-latex:`\sum`\_{y=0}\ :sup:`{2`\ n-1}
-:raw-latex:`\left[ \sum_{x=0}^{2^n-1}(-1)^{f(x)}(-1)^{x \cdot y} \right]`
-:raw-latex:`\vert `y :raw-latex:`\rangle` \\end{aligned} where
+Hadamard gate to each qubit in the first register:
+
+.. math::
+
+
+           \begin{aligned}
+               \lvert \psi_3 \rangle 
+                   & = \frac{1}{2^n}\sum_{x=0}^{2^n-1}(-1)^{f(x)}
+                       \left[ \sum_{y=0}^{2^n-1}(-1)^{x \cdot y} 
+                       \vert y \rangle \right] \\\\
+                   & = \frac{1}{2^n}\sum_{y=0}^{2^n-1}
+                       \left[ \sum_{x=0}^{2^n-1}(-1)^{f(x)}(-1)^{x \cdot y} \right]
+                       \vert y \rangle
+           \end{aligned}
+           
+
+where
 :math:`x \cdot y = x_0y_0 \oplus x_1y_1 \oplus \ldots \oplus x_{n-1}y_{n-1}`
 is the sum of the bitwise product.
 
@@ -252,37 +265,38 @@ Apply Hadamard on all qubits
    <li>
 
 For :math:`a=3`, (11 in binary) the oracle function can be implemented
-as :math:`\text{Q}_f = CX_{1a}CX_{2a}`, :raw-latex:`\begin{align*}
-            \lvert \psi_2 \rangle =  \frac{1}{2\sqrt{2}} \left[ \lvert 0 0 \rangle_1 \left( \lvert 0 \oplus 0 \oplus 0 \rangle_2 - \lvert 1 \oplus 0 \oplus 0 \rangle_2 \right) \\\\
-                  + \lvert 0 1 \rangle_1 \left( \lvert 0 \oplus 0 \oplus 1 \rangle_2 - \lvert 1 \oplus 0 \oplus 1 \rangle_2 \right) \\\\
-                  + \lvert 1 0 \rangle_1 \left( \lvert 0 \oplus 1 \oplus 0 \rangle_2 - \lvert 1 \oplus 1 \oplus 0 \rangle_2 \right) \\\\
-                  + \lvert 1 1 \rangle_1 \left( \lvert 0 \oplus 1 \oplus 1 \rangle_2 - \lvert 1 \oplus 1 \oplus 1 \rangle_2 \right) \right]
-        \end{align*}`
+as :math:`\text{Q}_f = CX_{1a}CX_{2a}`,
+
+.. math::
+
+
+          \begin{align*}
+               \lvert \psi_2 \rangle =  \frac{1}{2\sqrt{2}} \left[ \lvert 0 0 \rangle_1 \left( \lvert 0 \oplus 0 \oplus 0 \rangle_2 - \lvert 1 \oplus 0 \oplus 0 \rangle_2 \right) \\\\
+                     + \lvert 0 1 \rangle_1 \left( \lvert 0 \oplus 0 \oplus 1 \rangle_2 - \lvert 1 \oplus 0 \oplus 1 \rangle_2 \right) \\\\
+                     + \lvert 1 0 \rangle_1 \left( \lvert 0 \oplus 1 \oplus 0 \rangle_2 - \lvert 1 \oplus 1 \oplus 0 \rangle_2 \right) \\\\
+                     + \lvert 1 1 \rangle_1 \left( \lvert 0 \oplus 1 \oplus 1 \rangle_2 - \lvert 1 \oplus 1 \oplus 1 \rangle_2 \right) \right]
+           \end{align*}
+           
 
 .. raw:: html
 
    </li>
 
-Thus \\begin{aligned} :raw-latex:`\lvert `:raw-latex:`\psi`\_2
-:raw-latex:`\rangle `& = :raw-latex:`\frac{1}{2\sqrt{2}}`
-:raw-latex:`\left[ \lvert 0 0 \rangle_1 \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right) - \lvert 0 1 \rangle_1  \left( \lvert 0 \rangle_2 - \lvert  1 \rangle_2 \right) - \lvert 1 0 \rangle_1  \left( \lvert 0  \rangle_2 - \lvert 1 \rangle_2 \right) + \lvert 1 1 \rangle_1  \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right)  \right] `\\\\
-& = :raw-latex:`\frac{1}{2}` :raw-latex:`\left`( :raw-latex:`\lvert `0 0
-:raw-latex:`\rangle`\_1 - :raw-latex:`\lvert `0 1
-:raw-latex:`\rangle`\_1 - :raw-latex:`\lvert `1 0
-:raw-latex:`\rangle`\ *1 + :raw-latex:`\lvert `1 1
-:raw-latex:`\rangle`\ 1 :raw-latex:`\right`)
-:raw-latex:`\frac{1}{\sqrt{2}}` :raw-latex:`\left`(
-:raw-latex:`\lvert `0 :raw-latex:`\rangle`\ 2 - :raw-latex:`\lvert `1
-:raw-latex:`\rangle`\ 2 :raw-latex:`\right`) \\ & =
-:raw-latex:`\frac{1}{\sqrt{2}}` :raw-latex:`\left`(
-:raw-latex:`\lvert `0 :raw-latex:`\rangle`\ {10} - :raw-latex:`\lvert `1
-:raw-latex:`\rangle`\ {10}
-:raw-latex:`\right`):raw-latex:`\frac{1}{\sqrt{2}}` :raw-latex:`\left`(
-:raw-latex:`\lvert `0 :raw-latex:`\rangle`\ {11} - :raw-latex:`\lvert `1
-:raw-latex:`\rangle`*\ {11}
-:raw-latex:`\right`):raw-latex:`\frac{1}{\sqrt{2}}` :raw-latex:`\left`(
-:raw-latex:`\lvert `0 :raw-latex:`\rangle`\_2 - :raw-latex:`\lvert `1
-:raw-latex:`\rangle`\_2 :raw-latex:`\right`) \\end{aligned}
+.. raw:: html
+
+   <li>
+
+Thus
+
+.. math::
+
+
+          \begin{aligned}
+           \lvert \psi_2 \rangle & = \frac{1}{2\sqrt{2}} \left[ \lvert 0 0 \rangle_1 \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right) - \lvert 0 1 \rangle_1  \left( \lvert 0 \rangle_2 - \lvert  1 \rangle_2 \right) - \lvert 1 0 \rangle_1  \left( \lvert 0  \rangle_2 - \lvert 1 \rangle_2 \right) + \lvert 1 1 \rangle_1  \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right)  \right] \\\\
+           & = \frac{1}{2} \left( \lvert 0 0 \rangle_1 - \lvert 0 1 \rangle_1 - \lvert 1 0 \rangle_1 + \lvert 1 1 \rangle_1 \right) \frac{1}{\sqrt{2}} \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right)  \\\\
+           & = \frac{1}{\sqrt{2}} \left( \lvert 0 \rangle_{10} - \lvert 1 \rangle_{10} \right)\frac{1}{\sqrt{2}} \left( \lvert 0 \rangle_{11} - \lvert 1 \rangle_{11} \right)\frac{1}{\sqrt{2}} \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right)
+           \end{aligned}
+           
 
 .. raw:: html
 

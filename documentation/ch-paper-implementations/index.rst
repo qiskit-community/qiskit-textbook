@@ -6,6 +6,9 @@ Implementations of Recent Quantum Algorithms
 .. contents:: Contents
    :local:
 
+.. contents:: Contents
+   :local:
+
 .. contents::
    :local:
 

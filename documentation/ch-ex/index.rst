@@ -6,6 +6,9 @@ Problem sets
 .. contents:: Contents
    :local:
 
+.. contents:: Contents
+   :local:
+
 .. contents::
    :local:
 

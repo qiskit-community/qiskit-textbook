@@ -6,6 +6,9 @@ Quantum Algorithms for Applications
 .. contents:: Contents
    :local:
 
+.. contents:: Contents
+   :local:
+
 .. contents::
    :local:
 
