@@ -44,10 +44,11 @@ simply multiplying matrices, we find that
 
 .. math::
 
+
    H X H = Z,\\\\
    H Z H = X.
 
- The same trick can be used to transform a CNOT into a
+The same trick can be used to transform a CNOT into a
 controlled-\ :math:`Z`. All we need to do is precede and follow the CNOT
 with a Hadamard on the target qubit. This will transform any :math:`X`
 applied to that qubit into a :math:`Z`.
@@ -229,9 +230,10 @@ To see why this is true, let’s remind ourselves of what the Z gate is:
 
 .. math::
 
+
    Z= \begin{pmatrix} 1&0 \\\\\\\\ 0&-1 \end{pmatrix}.
 
- We can think of this as multiplying the state by :math:`-1`, but only
+We can think of this as multiplying the state by :math:`-1`, but only
 when it is :math:`|1\rangle`.
 
 For a controlled-\ :math:`Z` gate, the control qubit must be in state
@@ -286,9 +288,10 @@ Here is another way to write the CNOT gate:
 
 .. math::
 
+
    {\rm CX}_{c,t} = |0\rangle \langle0| \otimes I + |1\rangle \langle1| \otimes X.
 
- Here the :math:`|1\rangle \langle1|` ensures that the second term only
+Here the :math:`|1\rangle \langle1|` ensures that the second term only
 affects those parts of a superposition for which the control qubit
 :math:`c` is in state :math:`|1\rangle`. For those, the effect on the
 target qubit t is :math:`X`. The first terms similarly address those
@@ -303,30 +306,34 @@ them in spectral form as
 
 .. math::
 
+
    X = |+\rangle \langle+| \, \, - \, \, |-\rangle \langle-|, \, \, \, \,  I = |+\rangle \langle+| \, \,  + \, \,  |-\rangle \langle-|
 
- Substituting these into the expression above gives us
+Substituting these into the expression above gives us
 
 .. math::
 
+
    {\rm CX}_{c,t} = |0\rangle \langle0| \otimes |+\rangle \langle+| \, \,  + \, \, |0\rangle \langle0| \otimes |-\rangle \langle-| \, \,  + \, \, |1\rangle \langle1| \otimes |+\rangle \langle+| \, \,  - \, \, |1\rangle \langle1| \otimes |-\rangle \langle-|
 
- Using the states :math:`|0\rangle` and :math:`|1\rangle`, we can write
+Using the states :math:`|0\rangle` and :math:`|1\rangle`, we can write
 the :math:`Z` gate in spectral form, and also use an alternative (but
 completely equivalent) spectral form for :math:`I`:
 
 .. math::
 
+
    Z = |0\rangle \langle0| ~-~ |1\rangle \langle1|, ~~~ I = |0\rangle \langle0| ~+~ |1\rangle \langle1|.
 
- With these, we can factorize the parts of the CNOT expressed with the
+With these, we can factorize the parts of the CNOT expressed with the
 :math:`|0\rangle` and :math:`|1\rangle` state:
 
 .. math::
 
+
    {\rm CX}_{c,t} = I \otimes |+\rangle \langle+| \, \,  + \, \, Z \otimes |-\rangle \langle-|
 
- This gives us a whole new way to interpret the effect of the CNOT. The
+This gives us a whole new way to interpret the effect of the CNOT. The
 $Z :raw-latex:`\otimes `\|-:raw-latex:`\rangle `:raw-latex:`\langle`-\|
 $ term addresses the parts of a superposition for which qubit :math:`t`
 is in state :math:`|-\rangle` and then applies a :math:`Z` gate to qubit
@@ -464,9 +471,10 @@ and a phase :math:`\alpha` such that
 
 .. math::
 
+
    ABC = I, ~~~e^{i\alpha}AZBZC = U
 
- We then use controlled-Z gates to cause the first of these relations to
+We then use controlled-Z gates to cause the first of these relations to
 happen whenever the control is in state :math:`|0\rangle`, and the
 second to happen when the control is state :math:`|1\rangle`. An
 :math:`R_z(2\alpha)` rotation is also used on the control to get the
@@ -659,9 +667,10 @@ to the same slice), the angle for :math:`n_2-n_1` repetitions satisfies
 
 .. math::
 
+
    \theta_{n_2-n_1} \neq 0, ~~~~-\frac{2\pi}{n} \leq \theta_{n_2-n_1} \leq \frac{2\pi}{n} .
 
- We therefore have the ability to do rotations around small angles. We
+We therefore have the ability to do rotations around small angles. We
 can use this to rotate around angles that are as small as we like, just
 by increasing the number of times we repeat this gate.
 
@@ -703,3 +712,23 @@ References
 
 [2] `Shende and Markov,
 2009 <http://dl.acm.org/citation.cfm?id=2011799>`__
+
+.. code:: ipython3
+
+    import qiskit
+    qiskit.__qiskit_version__
+
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.12.0',
+     'qiskit-aer': '0.4.0',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.6',
+     'qiskit-aqua': '0.6.4',
+     'qiskit': '0.15.0'}
+
+
+

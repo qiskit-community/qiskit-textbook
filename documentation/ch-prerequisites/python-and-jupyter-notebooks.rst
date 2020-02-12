@@ -374,7 +374,7 @@ It’s used as follows
 
 
 If you give a function an object, and the function calls a method of
-that object to alter it’s state, the effect will persist. So if that’s
+that object to alter its state, the effect will persist. So if that’s
 all you want to do, you don’t need to ``return`` anything. For example,
 let’s do it with the ``append`` method of a list.
 

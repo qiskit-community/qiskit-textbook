@@ -34,22 +34,23 @@ def remove_figure_captions(filename):
 def replace_contents(filename):
     out = ""
     in_contents = False
-    saving_lines = True
+    emptylines = 0
     with open(filename) as f:
         for line in f:
             if line == "Contents\n":
                 in_contents = True
-            if in_contents and not saving_lines and line == "\n":
-                saving_lines = True
-                in_contents = False
-                out += "\n.. contents:: Quick links throughout the document:\n\n"
             if in_contents and line == "\n":
-                saving_lines = False
-            if saving_lines:
+                if emptylines == 0:
+                    emptylines += 1
+                else:
+                    out += ".. contents::\n   :local:\n\n"
+                    in_contents = False
+            if not in_contents:
                 out += line
     with open(filename, 'w') as f:
         f.write(out)
     return 0
+
 
 def fix_matrices(filename):
     out = ""

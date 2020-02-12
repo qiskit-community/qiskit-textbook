@@ -31,7 +31,9 @@ In quantum counting, we simply use the quantum phase estimation
 algorithm to find an eigenvalue of a Grover search iteration. You will
 remember that an iteration of Grover’s algorithm, :math:`G`, rotates the
 state vector by :math:`\theta` in the :math:`|\omega\rangle`,
-:math:`|s’\rangle` basis:
+:math:`|s’\rangle` basis: |image1|
+
+.. |image1| image:: images/quantum_counting1.svg
 
 The percentage number of solutions in our search space affects the
 difference between :math:`|s\rangle` and :math:`|s’\rangle`. For
@@ -86,6 +88,10 @@ As a result, the output of the QPE algorithm will be a superposition of
 the two phases, and when we measure the register we will obtain one of
 these two values! We can then use some simple maths to get our estimate
 of :math:`M`.
+
+.. figure:: images/quantum_counting2.svg
+   :alt: image2
+
 
 2. The Code 
 ------------
@@ -376,6 +382,10 @@ Or, in code:
 
 You may remember that we can get the angle :math:`\theta/2` can from the
 inner product of :math:`|s\rangle` and :math:`|s’\rangle`:
+
+.. figure:: images/quantum_counting3.svg
+   :alt: image3
+
 
 .. math::
 

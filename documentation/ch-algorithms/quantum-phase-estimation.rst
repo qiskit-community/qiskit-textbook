@@ -32,7 +32,9 @@ Since :math:`U` is unitary, all of its eigenvalues have a norm of 1.
 
 The general quantum circuit for phase estimation is shown below. The top
 register contains :math:`t` ‘counting’ qubits, and the bottom contains
-qubits in the state :math:`|\psi\rangle`:
+qubits in the state :math:`|\psi\rangle`: |image1|
+
+.. |image1| image:: images/qpe_tex_qz.png
 
 1.1 Intuition 
 ~~~~~~~~~~~~~~
@@ -48,6 +50,10 @@ qubit completes one full rotation when counting between :math:`0` and
 :math:`2^t`, we rotate this qubit by :math:`\tfrac{x}{2^t}` around the
 z-axis. For the next qubit we rotate by :math:`\tfrac{2x}{2^t}`, then
 :math:`\tfrac{4x}{2^t}` for the third qubit.
+
+.. figure:: images/qpe_intuition.png
+   :alt: image2
+
 
 When we use a qubit to control the :math:`U`-gate, the qubit will turn
 (due to kickback) proportionally to the phase :math:`e^{2i\pi\theta}`.

@@ -5,10 +5,8 @@ In this tutorial, we introduce the Variational Quantum Eigensolver
 (VQE), motivate its use, explain the necessary theory, and demonstrate
 its implementation in finding the ground state energy of molecules.
 
-Contents
---------
-
-.. contents:: Quick links throughout the document:
+.. contents::
+   :local:
 
 
    1. `Mathematical Background <#backgroundmath>`__
@@ -204,9 +202,7 @@ implemented by appropriately setting these parameters. Consequently, for
 the single qubit case, a variational form capable of generating any
 possible state is given by the circuit:
 
-.. figure:: images/U3_var_form.png
-   :alt: u3_var_form
-
+|image1| alt=“U3 Variational Form” width=“350”/>
 
 Moreover, this universal ‘variational form’ only has 3 parameters and
 thus can be efficiently optimized. It is worth emphasising that the
@@ -222,9 +218,7 @@ considered to achieve universality. Based on the work presented by
 *Shende et al.* [3] the following is an example of a universal
 parameterized 2 qubit circuit:
 
-.. figure:: images/two_qubit_var_form.png
-   :alt: 2qubit_var_form
-
+|image2| alt=“Two Qubit Variational Form” width=“800”/>
 
 Allow the transformation performed by the above circuit to be
 represented by :math:`U(\theta)`. When optimized variationally, the
@@ -292,6 +286,9 @@ that it outputs a probability distribution that is close to
 distance between the two probability vectors).
 
 We first create the random probability vector in python:
+
+.. |image1| image:: ./images/U3_var_form.png
+.. |image2| image:: ./images/two_qubit_var_form.png
 
 .. code:: ipython3
 
@@ -375,9 +372,9 @@ increase the accuracy of the output.
 .. parsed-literal::
 
     Target Distribution: [0.51357006 0.48642994]
-    Obtained Distribution: [0.5206, 0.4794]
-    Output Error (Manhattan Distance): 0.008659881261160907
-    Parameters Found: [1.54305723 0.1226433  0.48569819]
+    Obtained Distribution: [0.5195, 0.4805]
+    Output Error (Manhattan Distance): 0.019459881261160827
+    Parameters Found: [1.6124448  1.05596402 0.65378055]
 
 
 Structure of Common Variational Forms
@@ -526,6 +523,7 @@ The following libraries must first be imported.
     from qiskit.aqua.algorithms import VQE, ExactEigensolver
     import matplotlib.pyplot as plt
     %matplotlib inline
+    %config InlineBackend.figure_format = 'svg' # Makes the images look nice
     import numpy as np
     from qiskit.chemistry.components.variational_forms import UCCSD
     from qiskit.chemistry.components.initial_states import HartreeFock
@@ -536,9 +534,9 @@ The following libraries must first be imported.
     from qiskit.chemistry.drivers import PySCFDriver, UnitsType
     from qiskit.chemistry import FermionicOperator
     from qiskit import IBMQ
-    from qiskit.providers.aer import noise
     from qiskit.aqua import QuantumInstance
     from qiskit.ignis.mitigation.measurement import CompleteMeasFitter
+    from qiskit.providers.aer.noise import NoiseModel
 
 Running VQE on a Statevector Simulator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -642,46 +640,49 @@ completion.
 
 .. parsed-literal::
 
-    Interatomic Distance: 0.5 VQE Result: -7.039710215565218 Exact Energy: -7.0397325216352
-    Interatomic Distance: 0.6 VQE Result: -7.31334430290689 Exact Energy: -7.313345828761003
-    Interatomic Distance: 0.7 VQE Result: -7.500921095751998 Exact Energy: -7.500922090905937
-    Interatomic Distance: 0.8 VQE Result: -7.630976914888905 Exact Energy: -7.630978249333209
-    Interatomic Distance: 0.9 VQE Result: -7.7208107948706335 Exact Energy: -7.720812412134779
-    Interatomic Distance: 1.0 VQE Result: -7.782240655507769 Exact Energy: -7.782242402637009
-    Interatomic Distance: 1.1 VQE Result: -7.823597493067004 Exact Energy: -7.823599276362815
-    Interatomic Distance: 1.2 VQE Result: -7.850696622555617 Exact Energy: -7.8506983775960215
-    Interatomic Distance: 1.3 VQE Result: -7.867561602360669 Exact Energy: -7.867563290110055
-    Interatomic Distance: 1.4 VQE Result: -7.876999876625421 Exact Energy: -7.877001491818371
-    Interatomic Distance: 1.5 VQE Result: -7.881014173736876 Exact Energy: -7.881015715646997
-    Interatomic Distance: 1.6 VQE Result: -7.881070663268204 Exact Energy: -7.8810720440309145
-    Interatomic Distance: 1.7 VQE Result: -7.878267161938819 Exact Energy: -7.878268167584997
-    Interatomic Distance: 1.8 VQE Result: -7.873440112088826 Exact Energy: -7.873440293132828
-    Interatomic Distance: 1.9 VQE Result: -7.8672336666975875 Exact Energy: -7.867233964816027
-    Interatomic Distance: 2.0 VQE Result: -7.860152328052092 Exact Energy: -7.8601532073787785
-    Interatomic Distance: 2.1 VQE Result: -7.852595105573739 Exact Energy: -7.852595827876739
-    Interatomic Distance: 2.2 VQE Result: -7.844878726257743 Exact Energy: -7.844879093009718
-    Interatomic Distance: 2.3 VQE Result: -7.837257439559378 Exact Energy: -7.837257967615506
-    Interatomic Distance: 2.4 VQE Result: -7.829935044964875 Exact Energy: -7.829937002623397
-    Interatomic Distance: 2.5 VQE Result: -7.823070191793284 Exact Energy: -7.823076642134093
-    Interatomic Distance: 2.6 VQE Result: -7.8167825917026885 Exact Energy: -7.8167951504729345
-    Interatomic Distance: 2.7 VQE Result: -7.811153437700115 Exact Energy: -7.811168284803364
-    Interatomic Distance: 2.8 VQE Result: -7.806218298530634 Exact Energy: -7.8062295600898475
-    Interatomic Distance: 2.9 VQE Result: -7.801962397110541 Exact Energy: -7.80197360233255
-    Interatomic Distance: 3.0 VQE Result: -7.798352411524604 Exact Energy: -7.7983634309151295
-    Interatomic Distance: 3.1 VQE Result: -7.7953268158537385 Exact Energy: -7.795340451637538
-    Interatomic Distance: 3.2 VQE Result: -7.792800697723607 Exact Energy: -7.7928348067386075
-    Interatomic Distance: 3.3 VQE Result: -7.790603800220275 Exact Energy: -7.790774009971013
-    Interatomic Distance: 3.4 VQE Result: -7.788715355351082 Exact Energy: -7.789088897991485
-    Interatomic Distance: 3.5 VQE Result: -7.787215777163667 Exact Energy: -7.787716973466142
-    Interatomic Distance: 3.6 VQE Result: -7.786080385670116 Exact Energy: -7.786603763673839
-    Interatomic Distance: 3.7 VQE Result: -7.785203496927196 Exact Energy: -7.785702912499905
-    Interatomic Distance: 3.8 VQE Result: -7.78447953997175 Exact Energy: -7.784975591698672
-    Interatomic Distance: 3.9 VQE Result: -7.783853365855263 Exact Energy: -7.784389611675315
+    Interatomic Distance: 0.5 VQE Result: -7.039710214022651 Exact Energy: -7.039732521635199
+    Interatomic Distance: 0.6 VQE Result: -7.313344302875791 Exact Energy: -7.313345828761002
+    Interatomic Distance: 0.7 VQE Result: -7.500921095664164 Exact Energy: -7.500922090905933
+    Interatomic Distance: 0.8 VQE Result: -7.630976915015178 Exact Energy: -7.630978249333208
+    Interatomic Distance: 0.9 VQE Result: -7.720810794782946 Exact Energy: -7.7208124121347765
+    Interatomic Distance: 1.0 VQE Result: -7.7822406552139896 Exact Energy: -7.782242402637011
+    Interatomic Distance: 1.1 VQE Result: -7.8235974930545105 Exact Energy: -7.8235992763628115
+    Interatomic Distance: 1.2 VQE Result: -7.850696622684379 Exact Energy: -7.850698377596023
+    Interatomic Distance: 1.3 VQE Result: -7.86756160202507 Exact Energy: -7.86756329011005
+    Interatomic Distance: 1.4 VQE Result: -7.876999876501396 Exact Energy: -7.877001491818365
+    Interatomic Distance: 1.5 VQE Result: -7.881014173828513 Exact Energy: -7.8810157156469955
+    Interatomic Distance: 1.6 VQE Result: -7.881070663197581 Exact Energy: -7.881072044030919
+    Interatomic Distance: 1.7 VQE Result: -7.878267162022751 Exact Energy: -7.878268167584995
+    Interatomic Distance: 1.8 VQE Result: -7.873440112073885 Exact Energy: -7.873440293132823
+    Interatomic Distance: 1.9 VQE Result: -7.867233666630739 Exact Energy: -7.8672339648160285
+    Interatomic Distance: 2.0 VQE Result: -7.860152327951687 Exact Energy: -7.860153207378775
+    Interatomic Distance: 2.1 VQE Result: -7.852595105557609 Exact Energy: -7.852595827876735
+    Interatomic Distance: 2.2 VQE Result: -7.844878726138799 Exact Energy: -7.844879093009717
+    Interatomic Distance: 2.3 VQE Result: -7.8372574395978996 Exact Energy: -7.837257967615504
+    Interatomic Distance: 2.4 VQE Result: -7.829935044891065 Exact Energy: -7.82993700262339
+    Interatomic Distance: 2.5 VQE Result: -7.823070191830957 Exact Energy: -7.8230766421340885
+    Interatomic Distance: 2.6 VQE Result: -7.816782591567235 Exact Energy: -7.816795150472929
+    Interatomic Distance: 2.7 VQE Result: -7.811153437932534 Exact Energy: -7.8111682848033706
+    Interatomic Distance: 2.8 VQE Result: -7.806218297918316 Exact Energy: -7.806229560089847
+    Interatomic Distance: 2.9 VQE Result: -7.801962398097704 Exact Energy: -7.8019736023325486
+    Interatomic Distance: 3.0 VQE Result: -7.798352410789593 Exact Energy: -7.798363430915124
+    Interatomic Distance: 3.1 VQE Result: -7.795326815962968 Exact Energy: -7.79534045163753
+    Interatomic Distance: 3.2 VQE Result: -7.792800695646012 Exact Energy: -7.792834806738606
+    Interatomic Distance: 3.3 VQE Result: -7.7906037936688435 Exact Energy: -7.790774009971015
+    Interatomic Distance: 3.4 VQE Result: -7.788715355920877 Exact Energy: -7.789088897991478
+    Interatomic Distance: 3.5 VQE Result: -7.7872157787821665 Exact Energy: -7.787716973466143
+    Interatomic Distance: 3.6 VQE Result: -7.786080391119175 Exact Energy: -7.786603763673841
+    Interatomic Distance: 3.7 VQE Result: -7.78520350042346 Exact Energy: -7.785702912499934
+    Interatomic Distance: 3.8 VQE Result: -7.784479534655066 Exact Energy: -7.784975591697901
+    Interatomic Distance: 3.9 VQE Result: -7.783853360515218 Exact Energy: -7.784389611670773
     All energies have been calculated
 
 
 .. code:: ipython3
 
+    # Note: If you experience BrokenProcessPool error in the next 
+    #       chapter, delete this cell and re-run the notebook.
+    #       The error is due to a bug in qiskit and is being looked into.
     plt.plot(distances, exact_energies, label="Exact Energy")
     plt.plot(distances, vqe_energies, label="VQE Energy")
     plt.xlabel('Atomic distance (Angstrom)')
@@ -692,7 +693,7 @@ completion.
 
 
 
-.. image:: vqe-molecules_files/vqe-molecules_21_0.png
+.. image:: vqe-molecules_files/vqe-molecules_21_0.svg
 
 
 Note that the VQE results are very close to the exact results, and so
@@ -725,7 +726,7 @@ provider and create a quantum instance, enabling error mitigation:
     backend = Aer.get_backend("qasm_simulator")
     device = provider.get_backend("ibmqx2")
     coupling_map = device.configuration().coupling_map
-    noise_model = noise.device.basic_device_noise_model(device.properties())
+    noise_model = NoiseModel.from_backend(device.properties())
     quantum_instance = QuantumInstance(backend=backend, shots=1000, 
                                        noise_model=noise_model, 
                                        coupling_map=coupling_map,
@@ -753,8 +754,8 @@ The following code may take a few minutes to run to completion.
 
 .. parsed-literal::
 
-    Exact Result: -1.8671209783412681
-    VQE Result: -1.8429114965754119
+    Exact Result: -1.8671209783412634
+    VQE Result: -1.8626866641642543
 
 
 When noise mitigation is enabled, even though the result does not fall
@@ -767,9 +768,9 @@ Problems
 1. You are given a Hamiltonian :math:`H` with the promise that its
    ground state is close to a maximally entangled :math:`n` qubit state.
    Explain which variational form (or forms) is likely to efficiently
-   and accurately learn the the ground state energy of :math:`H`. You
-   may also answer by creating your own variational form, and explaining
-   why it is appropriate for use with this Hamiltonian.
+   and accurately learn the ground state energy of :math:`H`. You may
+   also answer by creating your own variational form, and explaining why
+   it is appropriate for use with this Hamiltonian.
 2. Calculate the number of circuit evaluations performed per
    optimization iteration, when using the COBYLA optimizer, the
    ``qasm_simulator`` with 1000 shots, and a Hamiltonian with 60 Pauli
@@ -801,3 +802,23 @@ References
 4. Kandala, Abhinav, et al. “Hardware-efficient variational quantum
    eigensolver for small molecules and quantum magnets.” Nature 549.7671
    (2017): 242.
+
+.. code:: ipython3
+
+    import qiskit
+    qiskit.__qiskit_version__
+
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.12.0',
+     'qiskit-aer': '0.4.0',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.6',
+     'qiskit-aqua': '0.6.4',
+     'qiskit': '0.15.0'}
+
+
+

@@ -75,10 +75,10 @@ of this section, the number of samples taken for each circuit will be
 
 .. parsed-literal::
 
-    00 becomes {'01': 94, '00': 9812, '10': 94}
-    01 becomes {'01': 9813, '10': 1, '00': 102, '11': 84}
-    10 becomes {'01': 2, '10': 9809, '00': 105, '11': 84}
-    11 becomes {'01': 117, '10': 97, '00': 2, '11': 9784}
+    00 becomes {'01': 88, '00': 9785, '10': 126, '11': 1}
+    01 becomes {'01': 9815, '00': 80, '10': 1, '11': 104}
+    10 becomes {'01': 2, '00': 97, '10': 9771, '11': 130}
+    11 becomes {'01': 98, '00': 1, '10': 92, '11': 9809}
 
 
 Here we find that the correct output is certainly the most dominant.
@@ -123,7 +123,7 @@ fluctuations).
 
 .. parsed-literal::
 
-    {'01': 89, '10': 86, '00': 4936, '11': 4889}
+    {'01': 105, '00': 4860, '10': 94, '11': 4941}
 
 
 In this example we first looked at results for each of the definite
@@ -143,6 +143,7 @@ rewritten as
 
 .. math::
 
+
    C = 
    \begin{pmatrix}
        9808 \\\\
@@ -151,7 +152,7 @@ rewritten as
        1
    \end{pmatrix}.
 
- Here the first element is that for ``'00'``, the next is that for
+Here the first element is that for ``'00'``, the next is that for
 ``'01'``, and so on.
 
 The information gathered from the basis states
@@ -179,6 +180,7 @@ This gives us the following matrix.
 
 .. math::
 
+
    M = 
    \begin{pmatrix}
        0.9808&0.0107&0.0095&0.0001 \\\\
@@ -187,7 +189,7 @@ This gives us the following matrix.
        0.0001&0.0103&0.0090&0.9805
    \end{pmatrix}
 
- If we now take the vector describing the perfect results for a given
+If we now take the vector describing the perfect results for a given
 state, applying this matrix gives us a good approximation of the results
 when measurement noise is present.
 
@@ -199,6 +201,7 @@ As an example, let’s apply this process for the state
 :math:`(\left|00\right\rangle+\left|11\right\rangle)/\sqrt{2}`,
 
 .. math::
+
 
    \begin{pmatrix}
        0.9808&0.0107&0.0095&0.0001 \\\\
@@ -220,7 +223,7 @@ As an example, let’s apply this process for the state
        96.5
    \end{pmatrix}.
 
- In code, we can express this as follows.
+In code, we can express this as follows.
 
 .. code:: ipython3
 
@@ -309,6 +312,7 @@ rounded. This gives us a very nice result.
 
 .. math::
 
+
    C_{mitigated} = 
    \begin{pmatrix}
        0 \\\\
@@ -317,7 +321,7 @@ rounded. This gives us a very nice result.
        0
    \end{pmatrix}
 
- This is exactly the true result we desire. Our mitigation worked
+This is exactly the true result we desire. Our mitigation worked
 extremely well!
 
 Error mitigation in Qiskit
@@ -454,10 +458,10 @@ Again we can run the circuits, and look at the calibration matrix,
 
 .. parsed-literal::
 
-    [[0.831 0.097 0.105 0.014]
-     [0.076 0.791 0.016 0.091]
-     [0.084 0.013 0.776 0.069]
-     [0.009 0.099 0.103 0.826]]
+    [[0.82  0.102 0.093 0.008]
+     [0.095 0.788 0.006 0.098]
+     [0.078 0.012 0.809 0.092]
+     [0.007 0.098 0.092 0.802]]
 
 
 This time we find a more interesting matrix, and one that is not
@@ -481,7 +485,7 @@ test.
 
 .. parsed-literal::
 
-    {'01': 892, '10': 943, '00': 4144, '11': 4021}
+    {'01': 909, '00': 4233, '10': 892, '11': 3966}
 
 
 In Qiskit we mitigate for the noise by creating a measurement filter
@@ -521,3 +525,23 @@ qubits with a simple noise model. For more qubits, and more complex
 noise models or data from real devices, the mitigation will have more of
 a challenge. Perhaps you might find methods that are better than those
 Qiskit uses!
+
+.. code:: ipython3
+
+    import qiskit
+    qiskit.__qiskit_version__
+
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.12.0',
+     'qiskit-aer': '0.4.0',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.6',
+     'qiskit-aqua': '0.6.4',
+     'qiskit': '0.15.0'}
+
+
+

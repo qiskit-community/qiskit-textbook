@@ -86,10 +86,18 @@ Here’s an example of what a circuit looks like for standard, bit-based
 computers. You aren’t expected to understand what it does. It is simply
 to give you an idea of what these circuits look like.
 
+.. figure:: images/classical_circuit.png
+   :alt: image1
+
+
 For quantum computers we use the same basic idea, but we have different
 conventions for how to represent inputs, outputs, and the symbols used
 for operations. Here is the quantum circuit that represents the same
 process as above.
+
+.. figure:: images/quantum_circuit.png
+   :alt: image2
+
 
 In the rest of this section, we will explain how to build circuits. At
 the end, you’ll know how to create the circuit above, what it does, and
@@ -418,6 +426,8 @@ and a part that extracts the result. The first part will need to be
 changed whenever we want to use a new input, but the rest will always
 remain the same.
 
+.. figure:: https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/04498f84a69d4e859afd19b2760ced24atoms6.png
+   :alt: image3
 
 
 The two bits we want to add are encoded in the qubits 0 and 1. The above

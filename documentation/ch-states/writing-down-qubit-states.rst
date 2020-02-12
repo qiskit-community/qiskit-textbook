@@ -47,11 +47,12 @@ vectors.
 
 .. math::
 
+
    |0\rangle = \begin{pmatrix} 1 \\\\\\\\\\\\ 0 \end{pmatrix} \, \, \, \, |1\rangle =\begin{pmatrix} 0 \\\\\\\\\\\\ 1 \end{pmatrix}.
 
- This is a lot of notation to take in all at once. First let’s unpack
-the weird :math:`|` and :math:`\rangle` . Their job is essentially just
-to remind us that we are talking about the vectors that represent qubit
+This is a lot of notation to take in all at once. First let’s unpack the
+weird :math:`|` and :math:`\rangle` . Their job is essentially just to
+remind us that we are talking about the vectors that represent qubit
 states labelled :math:`0` and :math:`1`. This helps us distinguish them
 from things like the bit values ``0`` and ``1`` or the numbers 0 and 1.
 It is part of the bra-ket notation, introduced by Dirac.
@@ -74,9 +75,10 @@ Horizontal lists are called *row vectors*. In Dirac notation they are
 
 .. math::
 
+
    \langle 0| = \begin{pmatrix} 1 & 0\end{pmatrix} \, \, \, \, \langle 1| =\begin{pmatrix} 0 & 1 \end{pmatrix}.
 
- The rules on how to manipulate vectors define what it means to add or
+The rules on how to manipulate vectors define what it means to add or
 multiply them. For example, to add two vectors we need them to be the
 same type (either both column vectors, or both row vectors) and the same
 length. Then we add each element in one list to the corresponding
@@ -85,24 +87,27 @@ element in the other. For a couple of arbitrary vectors that we’ll call
 
 .. math::
 
+
    \begin{pmatrix} a_0 \\\\\\\\ a_1 \end{pmatrix} +\begin{pmatrix} b_0 \\\\\\\\ b_1 \end{pmatrix}=\begin{pmatrix} a_0+b_0 \\\\\\\\ a_1+b_1 \end{pmatrix}.
 
- To multiple a vector by a number, we simply multiply every element in
+To multiple a vector by a number, we simply multiply every element in
 the list by that number:
 
 .. math::
 
+
    x \times\begin{pmatrix} a_0 \\\\\\\\ a_1 \end{pmatrix} = \begin{pmatrix} x \times a_0 \\\\\\\\ x \times a_1 \end{pmatrix}
 
- Multiplying a vector with another vector is a bit more tricky, since
+Multiplying a vector with another vector is a bit more tricky, since
 there are multiple ways we can do it. One is called the ‘inner product’,
 and works as follows.
 
 .. math::
 
+
    \begin{pmatrix} a_0 & a_1 \end{pmatrix} \begin{pmatrix} b_0 \\\\\\\\ b_1 \end{pmatrix}= a_0~b_0 + a_1~b_1.
 
- Note that the right hand side of this equation contains only normal
+Note that the right hand side of this equation contains only normal
 numbers being multipled and added in a normal way. The inner product of
 two vectors therefore yields just a number. As we’ll see, we can
 interpret this as a measure of how similar the vectors are.
@@ -119,11 +124,12 @@ find
 
 .. math::
 
+
    \langle 0 | 0\rangle = \langle 1 | 1\rangle = 1,\\\\
    \langle 0 | 1\rangle = \langle 1 | 0\rangle = 0.
 
- Here we are using a concise way of writing the inner products where,
-for example, :math:`\langle 0 | 1 \rangle` is the inner product of
+Here we are using a concise way of writing the inner products where, for
+example, :math:`\langle 0 | 1 \rangle` is the inner product of
 :math:`\langle 0 |` with :math:`| 1 \rangle`. The top line shows us that
 the inner product of these states with themselves always gives a 1. When
 done with two orthogonal states, as on the bottom line, we get the
@@ -145,16 +151,18 @@ either. But let’s hedge our bets a little and multiply it by some number
 
 .. math::
 
+
    x ~ (|0\rangle + |1\rangle) = \begin{pmatrix} x \\\\\\\\ x \end{pmatrix}
 
- We can choose the value of :math:`x` to make sure that the state plays
+We can choose the value of :math:`x` to make sure that the state plays
 nicely in our calculations. For example, think about the inner product,
 
 .. math::
 
+
    \begin{pmatrix} x & x \end{pmatrix} \times \begin{pmatrix} x \\\\\\\\ x \end{pmatrix}= 2x^2.
 
- We can get any value for the inner product that we want, just by
+We can get any value for the inner product that we want, just by
 choosing the appropriate value of :math:`x`.
 
 As mentioned earlier, we are going to use the inner product as a measure
@@ -170,9 +178,10 @@ is, so here’s a few ways of writing it down.
 
 .. math::
 
+
    \begin{pmatrix} \frac{1}{\sqrt{2}} \\\\\\\\ \frac{1}{\sqrt{2}} \end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\\\\\\\ 1 \end{pmatrix} = \frac{ |0\rangle + |1\rangle}{\sqrt{2}}
 
- This state is essentially just :math:`|0\rangle` and :math:`|1\rangle`
+This state is essentially just :math:`|0\rangle` and :math:`|1\rangle`
 added together and then normalized, so we will give it a name to reflect
 that origin. We call it :math:`|+\rangle` .
 
@@ -185,27 +194,30 @@ of each with :math:`\langle 0 |` is
 
 .. math::
 
+
    \langle 0 | 0\rangle = 1 \\\\ \langle 0 | 1\rangle = 0 \\\\ \, \, \, \, \langle 0 | +\rangle = \frac{1}{\sqrt{2}}.
 
- We also know the probabilities of getting various outcomes from a z
+We also know the probabilities of getting various outcomes from a z
 measurement for these states. For example, let’s use :math:`p^z_0` to
 denote the probability of the result ``0`` for a z measurement. The
 values this has for our three states are
 
 .. math::
 
+
    p_0^z( | 0\rangle) = 1,\\\\ p_0^z( | 1\rangle) = 0, \\\\ p_0^z( | +\rangle) = \frac{1}{2}.
 
- As you might have noticed, there’s a lot of similarlity between the
+As you might have noticed, there’s a lot of similarlity between the
 numbers we get from the inner products and those we get for the
 probabilities. Specifically, the three probabilities can all be written
 as the square of the inner products:
 
 .. math::
 
+
    p_0^z(|a\rangle) = (~\langle0|a\rangle~)^2.
 
- Here :math:`|a\rangle` represents any generic qubit state.
+Here :math:`|a\rangle` represents any generic qubit state.
 
 This property doesn’t just hold for the ``0`` outcome. If we compare the
 inner products with :math:`\langle 1 |` with the probabilities of the
@@ -213,10 +225,11 @@ inner products with :math:`\langle 1 |` with the probabilities of the
 
 .. math::
 
+
    \\\\
    p_1^z(|a\rangle) = (~\langle1|a\rangle~)^2.
 
- The same also holds true for other types of measurement. All
+The same also holds true for other types of measurement. All
 probabilities in quantum mechanics can be expressed in this way. It is
 known as the *Born rule*.
 
@@ -235,18 +248,20 @@ Let’s find an example. Consider a state that looks like this:
 
 .. math::
 
+
    |\tilde 0\rangle = \begin{pmatrix} -1 \\\\\\\\ 0 \end{pmatrix} = -|0\rangle.
 
- This is equivalent to multiplying the state :math:`|0\rangle` by
+This is equivalent to multiplying the state :math:`|0\rangle` by
 :math:`-1`. It means that every inner product we could calculate with
 :math:`|\tilde0\rangle` is the same as for :math:`|0\rangle`, but
 multplied by :math:`-1`.
 
 .. math::
 
+
    \langle a|\tilde 0\rangle = -\langle a| 0\rangle
 
- As you probably know, any negative number squares to the same value as
+As you probably know, any negative number squares to the same value as
 its positive counterpart: :math:`(-x)^2 =x^2`.
 
 Since we square inner products to get probabilities, this means that any
@@ -267,26 +282,29 @@ example:
 
 .. math::
 
+
    \begin{pmatrix} a_0 \\\\\\\\ a_1 \end{pmatrix} \rightarrow \begin{pmatrix} a_0 \\\\\\\\ -a_1 \end{pmatrix}.
 
- Doing this with the :math:`|+\rangle` state gives us a new state. We’ll
+Doing this with the :math:`|+\rangle` state gives us a new state. We’ll
 call it :math:`|-\rangle`.
 
 .. math::
 
+
    |-\rangle = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\\\\\\\ -1 \end{pmatrix} = \frac{ |0\rangle - |1\rangle}{\sqrt{2}}
 
- The values :math:`p_0^z` and :math:`p_1^z` for :math:`|-\rangle` are
-the same as for :math:`|+\rangle`. These two states are thus
+The values :math:`p_0^z` and :math:`p_1^z` for :math:`|-\rangle` are the
+same as for :math:`|+\rangle`. These two states are thus
 indistinguishable when we make only z measurements. But there are other
 ways to distinguish them. To see how, consider the inner product of
 :math:`|+\rangle` and :math:`|-\rangle`.
 
 .. math::
 
+
    \langle-|+\rangle = \langle+|-\rangle = 0
 
- The inner product is 0, just as it is for :math:`|0\rangle` and
+The inner product is 0, just as it is for :math:`|0\rangle` and
 :math:`|1\rangle`. This means that the :math:`|+\rangle` and
 :math:`|-\rangle` states are orthogonal: they represent a pair of
 mutually exclusive possible ways for a qubit to be a qubit.
@@ -305,9 +323,10 @@ If it is :math:`|0\rangle`, we get the result ``0``. For
 
 .. math::
 
+
    |+\rangle = \frac{|0\rangle+|1\rangle}{\sqrt{2}}.
 
- For a superposition, the qubit needs to randomly choose between the two
+For a superposition, the qubit needs to randomly choose between the two
 possibilities according to the Born rule.
 
 We can similarly define a measurement based on :math:`|+\rangle` and
@@ -319,18 +338,20 @@ superposition of the two. This includes the states :math:`|0\rangle` and
 
 .. math::
 
+
    |0\rangle = \frac{|+\rangle+|-\rangle}{\sqrt{2}}, \, \, \, \, |1\rangle = \frac{|+\rangle-|-\rangle}{\sqrt{2}}.
 
- For these, and any other superpositions of :math:`|+\rangle` and
+For these, and any other superpositions of :math:`|+\rangle` and
 :math:`|-\rangle`, the qubit chooses its outcome randomly with
 probabilities
 
 .. math::
 
+
    p_0^x(|a\rangle) = (~\langle+|a\rangle~)^2,\\\\
    p_1^x(|a\rangle) = (~\langle-|a\rangle~)^2.
 
- This is the x measurement.
+This is the x measurement.
 
 The conservation of certainty
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -367,9 +388,10 @@ that underlies this behavior:
 
 .. math::
 
+
    (p^z_0-p^z_1)^2 + (p^x_0-p^x_1)^2 = 1.
 
- This is a version of Heisenberg’s famous uncertainty principle. The
+This is a version of Heisenberg’s famous uncertainty principle. The
 :math:`(p^z_0-p^z_1)^2` term measures how certain the qubit is about the
 outcome of a z measurement. The :math:`(p^x_0-p^x_1)^2` term measures
 the same for the x measurement. Their sum is the total certainty of the
@@ -408,7 +430,7 @@ statistical noise).
 
 .. parsed-literal::
 
-    The total uncertainty is 0.9984327554702759
+    The total uncertainty is 0.9975615292787552
 
 
 Now we have found this rule, let’s try to break it! Then we can hope to
@@ -451,13 +473,14 @@ apparent reason.
 
 .. math::
 
+
    |\circlearrowleft\rangle = c_0 | 0 \rangle + c_1 | 1 \rangle
 
- Now the job is to find the right values for :math:`c_0` and
-:math:`c_1`. You could try to do this with standard positive and
-negative numbers, but you’ll never be able to find a state that is
-completely random for both x and z measurements. To achieve this, we
-need to use complex numbers.
+Now the job is to find the right values for :math:`c_0` and :math:`c_1`.
+You could try to do this with standard positive and negative numbers,
+but you’ll never be able to find a state that is completely random for
+both x and z measurements. To achieve this, we need to use complex
+numbers.
 
 Complex numbers
 ~~~~~~~~~~~~~~~
@@ -477,9 +500,10 @@ can then be written
 
 .. math::
 
+
    x = x_r + i~x_i .
 
- Here :math:`x_r` and :math:`x_i` are both normal numbers (positive or
+Here :math:`x_r` and :math:`x_i` are both normal numbers (positive or
 negative), where :math:`x_r` is known as the real part and :math:`x_i`
 as the imaginary part.
 
@@ -488,16 +512,18 @@ conjugate :math:`x^*`
 
 .. math::
 
+
    x^* = x_r - i~x_i .
 
- Multiplying :math:`x` by :math:`x^*` gives us a real number. It’s most
+Multiplying :math:`x` by :math:`x^*` gives us a real number. It’s most
 useful to write this as
 
 .. math::
 
+
    |x| = \sqrt{x~x^*}.
 
- Here :math:`|x|` is known as the magnitude of :math:`x` (or,
+Here :math:`|x|` is known as the magnitude of :math:`x` (or,
 equivalently, of :math:`x^*` ).
 
 If we are going to allow the numbers in our quantum states to be
@@ -509,20 +535,22 @@ be defined as follows:
 
 .. math::
 
+
    |a\rangle = \begin{pmatrix} a_0 \\\\\\\\ a_1 \end{pmatrix}, ~~~ \langle a| = \begin{pmatrix} a_0^* & a_1^* \end{pmatrix}.
 
- Then we just need a small change to the Born rule, where we square the
+Then we just need a small change to the Born rule, where we square the
 magnitudes of inner products, rather than just the inner products
 themselves.
 
 .. math::
+
 
    p_0^z(|a\rangle) = |~\langle0|a\rangle~|^2,\\\\
    p_1^z(|a\rangle) = |~\langle1|a\rangle~|^2,\\\\
    p_0^x(|a\rangle) = |~\langle+|a\rangle~|^2,\\\\
    p_1^x(|a\rangle) = |~\langle-|a\rangle~|^2.
 
- The irrelevance of the global phase also needs an upgrade. Previously,
+The irrelevance of the global phase also needs an upgrade. Previously,
 we only talked about multiplying by -1. In fact, we can multiply a state
 by any complex number whose magnitude is 1. This will give us a state
 that will look different, but which is actually completely equivalent.
@@ -537,9 +565,10 @@ states.
 
 .. math::
 
+
    |\circlearrowright\rangle = \frac{ | 0 \rangle + i | 1 \rangle}{\sqrt{2}}, ~~~~ |\circlearrowleft\rangle = \frac{ | 0 \rangle -i | 1 \rangle}{\sqrt{2}}
 
- You can verify yourself that they both give random outputs for x and z
+You can verify yourself that they both give random outputs for x and z
 measurements. They are also orthogonal to each other. They therefore
 define a new measurement, and that basis is mutally unbiased with x and
 z. This is the third and final fundamental measurement for a single
@@ -558,9 +587,10 @@ Whatever operations we apply, a single isolated qubit will always obey
 
 .. math::
 
+
    (p^z_0-p^z_1)^2 + (p^y_0-p^y_1)^2 + (p^x_0-p^x_1)^2 = 1.
 
- To see this, we can incorporate the y measurement into our measure of
+To see this, we can incorporate the y measurement into our measure of
 total certainty.
 
 .. code:: ipython3
@@ -589,7 +619,7 @@ total certainty.
 
 .. parsed-literal::
 
-    The total uncertainty is 1.0074288547039032
+    The total uncertainty is 1.0046265721321106
 
 
 For more than one qubit, this relation will need another upgrade. This

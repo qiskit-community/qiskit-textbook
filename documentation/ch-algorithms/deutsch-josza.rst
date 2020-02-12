@@ -5,25 +5,9 @@ In this section, we first introduce the Deutsch-Josza problem, and
 classical and quantum algorithms to solve it. We then implement the
 quantum algorithm using Qiskit, and run on a simulator and device.
 
-Contents
---------
+.. contents::
+   :local:
 
-.. contents:: Quick links throughout the document:
-
-
-   -  `Deutsch-Josza Problem <#djproblem>`__
-   -  `Deutsch-Josza Algorithm <#djalgorithm>`__
-
-2. `Example <#example>`__
-
-3. `Qiskit Implementation <#implementation>`__
-
-   -  `Simulation <#simulation>`__
-   -  `Device <#device>`__
-
-4. `Problems <#problems>`__
-
-5. `References <#references>`__
 
 1. Introduction 
 ----------------
@@ -83,7 +67,7 @@ inputs as:
 
 .. math::  P_\textrm{constant}(k) = 1 - \frac{1}{2^{k-1}} \qquad \textrm{for } k \leq 2^{n-1}
 
- Realistically, we could opt to truncate our classical algorithm early,
+Realistically, we could opt to truncate our classical algorithm early,
 say if we were over x% confident. But if we want to be 100% confident,
 we would need to check :math:`2^{n-1}+1` inputs.
 
@@ -98,6 +82,10 @@ to $ :raw-latex:`\vert `x:raw-latex:`\rangle `:raw-latex:`\vert `y
 :raw-latex:`\oplus `f(x):raw-latex:`\rangle`$, where :math:`\oplus` is
 addition modulo :math:`2`. Below is the generic circuit for the
 Deutsh-Josza algorithm.
+
+.. figure:: images/deutsch_steps.png
+   :alt: image1
+
 
 Now, let’s go through the steps of the algorithm:
 
@@ -219,6 +207,10 @@ For a constant function, it is simple:
 
 For a balanced function, there are many different circuits we can
 create, one is shown below:
+
+.. figure:: images/deutsch_balanced.png
+   :alt: image2
+
 
 2. Example 
 -----------

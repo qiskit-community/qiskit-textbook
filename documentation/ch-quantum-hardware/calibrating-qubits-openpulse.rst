@@ -22,10 +22,8 @@ Each experiment gives us more information about the system, which is
 typically used in subsequent experiments. For this reason, this notebook
 has to be mostly executed in order.
 
-Contents
---------
-
-.. contents:: Quick links throughout the document:
+.. contents::
+   :local:
 
 
 Part 2. Calibrating and using a :math:`\pi` pulse A. `Calibrating
@@ -140,6 +138,9 @@ window of 40 MHz around the estimated qubit frequency in
                                                                         # warning: this will change in a future release
     print(f"Qubit {qubit} has an estimated frequency of {center_frequency_Hz / GHz} GHz.")
     
+    # scale factor to remove factors of 10 from the data
+    scale_factor = 1e-14
+    
     # We will sweep 40 MHz around the estimated frequency
     frequency_span_Hz = 40 * MHz
     # in steps of 1 MHz.
@@ -159,8 +160,8 @@ window of 40 MHz around the estimated qubit frequency in
 
 .. parsed-literal::
 
-    Qubit 0 has an estimated frequency of 4.974286302306341 GHz.
-    The sweep will go from 4.9542863023063415 GHz to 4.9942863023063415 GHz in steps of 1.0 MHz.
+    Qubit 0 has an estimated frequency of 4.97429139400153 GHz.
+    The sweep will go from 4.95429139400153 GHz to 4.99429139400153 GHz in steps of 1.0 MHz.
 
 
 Next, we define the pulses we will use for our experiment. We will start
@@ -196,42 +197,11 @@ pulse in terms of ``dt``.
                                      amp=drive_amp,
                                      name='freq_sweep_excitation_pulse')
 
-Next, we will create the instructions we need to measure our qubit. This
-actually consists of two pulses: one stimulates the readout with a
-Gaussian-Square pulse applied at the readout resonator frequency, and
-the other triggers the data acquisition instrument to acquire data for
-the duration of the pulse.
-
-.. code:: ipython3
-
-    ### Construct the measurement pulse
-    # Measurement pulse parameters
-    
-    meas_samples_us = 3.0
-    meas_sigma_us = 0.014     # The width of the gaussian part of the rise and fall
-    meas_risefall_us = 0.1    # and the truncating parameter: how many samples to dedicate to the risefall
-    
-    meas_samples = get_closest_multiple_of_16(meas_samples_us * us/dt)
-    meas_sigma = get_closest_multiple_of_16(meas_sigma_us * us/dt)       # The width of the gaussian part in units of dt
-    meas_risefall = get_closest_multiple_of_16(meas_risefall_us * us/dt) # The truncating parameter in units of dt
-    
-    meas_amp = 0.25
-    # Measurement pulse samples
-    meas_pulse = pulse_lib.gaussian_square(duration=meas_samples,
-                                           sigma=meas_sigma,
-                                           amp=meas_amp,
-                                           risefall=meas_risefall,
-                                           name='measurement_pulse')
-    
-    ### Construct the acquire pulse to trigger the acquisition
-    # Acquire pulse samples
-    acq_cmd = pulse.Acquire(duration=meas_samples)
-
-We have to check one additional thing in order to properly measure our
-qubits: the measurement map. This is a hardware constraint. When
-acquisition is done for one qubit, it is also done on other qubits. We
-have to respect this constraint when building our program in OpenPulse.
-Let’s check which group of qubits our qubit is in:
+In order to properly measure our qubits, we need to check the
+measurement map. This is a hardware constraint. When acquisition is done
+for one qubit, it is also done on other qubits. We have to respect this
+constraint when building our program in OpenPulse. Let’s check which
+group of qubits our qubit is in:
 
 .. code:: ipython3
 
@@ -242,6 +212,18 @@ Let’s check which group of qubits our qubit is in:
             meas_map_idx = i
             break
     assert meas_map_idx is not None, f"Couldn't find qubit {qubit} in the meas_map!"
+
+Now we can define our measurement pulse. Rather than hard coding the
+pulse, we can obtain a calibrated measurement pulse from the backend
+default instruction schedule map. Because it is frequently calibrated,
+it is more accurate than defining a measurement pulse ourselves. This
+measurement pulse also includes acquisition so we do not need to add
+that in manually.
+
+.. code:: ipython3
+
+    inst_sched_map = backend_defaults.instruction_schedule_map
+    measure = inst_sched_map.get('measure', qubits=backend_config.meas_map[meas_map_idx])
 
 Lastly, we specify the channels on which we will apply our pulses.
 Drive, measure, and acquire channels are indexed by qubit index.
@@ -269,15 +251,8 @@ array.
     # Start with drive pulse acting on the drive channel
     schedule = pulse.Schedule(name='Frequency sweep')
     schedule += drive_pulse(drive_chan)
-    
-    # In a new schedule, which we will use again later, add a measurement stimulus on the
-    # measure channel pulse to trigger readout
-    measure_schedule = meas_pulse(meas_chan)
-    # Trigger data acquisition, and store measured values into respective memory slots
-    measure_schedule += acq_cmd([pulse.AcquireChannel(i) for i in backend_config.meas_map[meas_map_idx]],
-                                [pulse.MemorySlot(i) for i in backend_config.meas_map[meas_map_idx]])
     # The left shift `<<` is special syntax meaning to shift the start time of the schedule by some duration
-    schedule += measure_schedule << schedule.duration
+    schedule += measure << schedule.duration
     
     # Create the frequency settings for the sweep (MUST BE IN HZ)
     frequencies_Hz = frequencies_GHz*GHz
@@ -288,7 +263,7 @@ schedule. This is done using ``schedule.draw()`` as shown below.
 
 .. code:: ipython3
 
-    schedule.draw(channels_to_plot=[drive_chan, meas_chan], label=True, scaling=1.0)
+    schedule.draw(channels_to_plot=[drive_chan, meas_chan, acq_chan], label=True, scaling=1.0)
 
 
 
@@ -360,7 +335,7 @@ We will extract the results and plot them using ``matplotlib``:
     sweep_values = []
     for i in range(len(frequency_sweep_results.results)):
         # Get the results from the ith experiment
-        res = frequency_sweep_results.get_memory(i)
+        res = frequency_sweep_results.get_memory(i)*scale_factor
         # Get the results for `qubit` from this experiment
         sweep_values.append(res[qubit])
     
@@ -397,7 +372,7 @@ is typically a Lorentzian shape.
     fit_params, y_fit = fit_function(frequencies_GHz,
                                      sweep_values, 
                                      lambda x, A, q_freq, B, C: (A / np.pi) * (B / ((x - q_freq)**2 + B**2)) + C,
-                                     [-2e10, 4.975, 1, 3e10] # initial parameters for curve_fit
+                                     [5, 4.975, 1, 3] # initial parameters for curve_fit
                                     )
 
 .. code:: ipython3
@@ -425,7 +400,7 @@ is typically a Lorentzian shape.
 
 .. parsed-literal::
 
-    We've updated our qubit frequency estimate from 4.97429 GHz to 4.97432 GHz.
+    We've updated our qubit frequency estimate from 4.97429 GHz to 4.97435 GHz.
 
 
 Part 2. Calibrating and using a :math:`\pi` pulse
@@ -448,7 +423,7 @@ shown on the Bloch sphere in the figure below – you can see that the
 sphere.
 
 .. figure:: https://github.com/aasfaw/qiskit-intros/blob/master/zero_to_one_X180.png?raw=true
-   :alt: bloch1
+   :alt: image1
 
 
 We will change the drive amplitude in small increments and measuring the
@@ -460,7 +435,7 @@ commonly named Rabi oscillations, as the qubit goes from
 
     # This experiment uses these values from the previous experiment:
         # `qubit`,
-        # `measure_schedule`, and
+        # `measure`, and
         # `rough_qubit_frequency`.
     
     # Rabi experiment parameters
@@ -482,8 +457,8 @@ commonly named Rabi oscillations, as the qubit goes from
                                         sigma=drive_sigma, name=f"Rabi drive amplitude = {drive_amp}")
         this_schedule = pulse.Schedule(name=f"Rabi drive amplitude = {drive_amp}")
         this_schedule += rabi_pulse(drive_chan)
-        # Reuse the measure_schedule from the frequency sweep experiment
-        this_schedule += measure_schedule << this_schedule.duration
+        # Reuse the measure instruction from the frequency sweep experiment
+        this_schedule += measure << this_schedule.duration
         rabi_schedules.append(this_schedule)
 
 The schedule will look essentially the same as the frequency sweep
@@ -552,7 +527,7 @@ this gives the calibrated amplitude that enacts a :math:`\pi` pulse.
     rabi_values = []
     for i in range(num_rabi_points):
         # Get the results for `qubit` from the ith experiment
-        rabi_values.append(rabi_results.get_memory(i)[qubit])
+        rabi_values.append(rabi_results.get_memory(i)[qubit]*scale_factor)
     
     rabi_values = np.real(baseline_remove(rabi_values))
     
@@ -571,7 +546,7 @@ this gives the calibrated amplitude that enacts a :math:`\pi` pulse.
     fit_params, y_fit = fit_function(drive_amps,
                                      rabi_values, 
                                      lambda x, A, B, drive_period, phi: (A*np.cos(2*np.pi*x/drive_period - phi) + B),
-                                     [1.5e10, 0.1e10, 0.5, 0])
+                                     [3, 0.1, 0.5, 0])
     
     plt.scatter(drive_amps, rabi_values, color='black')
     plt.plot(drive_amps, y_fit, color='red')
@@ -581,7 +556,7 @@ this gives the calibrated amplitude that enacts a :math:`\pi` pulse.
     plt.axvline(drive_period/2, color='red', linestyle='--')
     plt.axvline(drive_period, color='red', linestyle='--')
     plt.annotate("", xy=(drive_period, 0), xytext=(drive_period/2,0), arrowprops=dict(arrowstyle="<->", color='red'))
-    plt.annotate("$\pi$", xy=(drive_period/2-0.03, 0.1e10), color='red')
+    plt.annotate("$\pi$", xy=(drive_period/2-0.03, 0.1), color='red')
     
     plt.xlabel("Drive amp [a.u.]", fontsize=15)
     plt.ylabel("Measured signal [a.u.]", fontsize=15)
@@ -600,7 +575,7 @@ this gives the calibrated amplitude that enacts a :math:`\pi` pulse.
 
 .. parsed-literal::
 
-    Pi Amplitude = 0.2463992641781328
+    Pi Amplitude = 0.24926196161156502
 
 
 Our :math:`\pi` pulse!
@@ -633,12 +608,12 @@ is simply a function which takes a measured and kerneled complex value
     
     # Ground state schedule
     gnd_schedule = pulse.Schedule(name="ground state")
-    gnd_schedule += measure_schedule
+    gnd_schedule += measure
     
     # Excited state schedule
     exc_schedule = pulse.Schedule(name="excited state")
     exc_schedule += pi_pulse(drive_chan)  # We found this in Part 2A above
-    exc_schedule += measure_schedule << exc_schedule.duration
+    exc_schedule += measure << exc_schedule.duration
 
 .. code:: ipython3
 
@@ -703,12 +678,13 @@ the ``exc_schedule``.
 Now that we have the results, we can visualize the two populations which
 we have prepared on a simple scatter plot, showing results from the
 ground state program in blue and results from the excited state
-preparation program in red.
+preparation program in red. Note: If the populations irregularly shaped
+(not approximtely circular), try re-running the notebook.
 
 .. code:: ipython3
 
-    gnd_results = gnd_exc_results.get_memory(0)[:, qubit]
-    exc_results = gnd_exc_results.get_memory(1)[:, qubit]
+    gnd_results = gnd_exc_results.get_memory(0)[:, qubit]*scale_factor
+    exc_results = gnd_exc_results.get_memory(1)[:, qubit]*scale_factor
     
     plt.figure(figsize=[4,4])
     # Plot all the results
@@ -794,7 +770,7 @@ relaxation time, of the qubit!
     for delay in delay_times_dt:
         this_schedule = pulse.Schedule(name=f"T1 delay = {delay * dt/us} us")
         this_schedule += pi_pulse(drive_chan)
-        this_schedule |= measure_schedule << int(delay)
+        this_schedule |= measure << int(delay)
         t1_schedules.append(this_schedule)
 
 We can check out our :math:`T_1` schedule, too. To really get a sense of
@@ -847,7 +823,7 @@ will see the measurement pulse start later as you increase
 
     t1_values = []
     for i in range(len(times_us)):
-        t1_values.append(t1_results.get_memory(i)[qubit])
+        t1_values.append(t1_results.get_memory(i)[qubit]*scale_factor)
     
     plt.scatter(times_us, t1_values, color='black') 
     plt.title("$T_1$ Experiment", fontsize=15)
@@ -867,7 +843,7 @@ We can then fit the data to a decaying exponential, giving us T1!
     # Fit the data
     fit_params, y_fit = fit_function(times_us, t1_values, 
                 lambda x, A, C, T1: (A * np.exp(-x / T1) + C),
-                [-3e10, 3e10, 100]
+                [-3, 3, 100]
                 )
     
     _, _, T1 = fit_params
@@ -901,7 +877,7 @@ observe oscillations at the difference in frequency between the applied
 pulses and the qubit.
 
 .. figure:: https://github.com/aasfaw/qiskit-intros/blob/master/dephasing.png?raw=true
-   :alt: bloch2
+   :alt: image2
 
 
 .. code:: ipython3
@@ -931,7 +907,7 @@ pulses and the qubit.
         this_schedule = pulse.Schedule(name=f"Ramsey delay = {delay * dt / us} us")
         this_schedule |= x90_pulse(drive_chan)
         this_schedule |= x90_pulse(drive_chan) << int(this_schedule.duration + delay)
-        this_schedule |= measure_schedule << int(this_schedule.duration)
+        this_schedule |= measure << int(this_schedule.duration)
     
         ramsey_schedules.append(this_schedule)
 
@@ -993,7 +969,7 @@ qubit frequency.
 
     ramsey_values = []
     for i in range(len(times_us)):
-        ramsey_values.append(ramsey_results.get_memory(i)[qubit])
+        ramsey_values.append(ramsey_results.get_memory(i)[qubit]*scale_factor)
         
     plt.scatter(times_us, ramsey_values, color='black')
     plt.xlim(0, np.max(times_us))
@@ -1016,7 +992,7 @@ interested in – namely, :math:`\Delta f`.
                                      lambda x, A, del_f_MHz, C, B: (
                                               A * np.cos(2*np.pi*del_f_MHz*x - C) + B
                                              ),
-                                     [2e10, 1./0.4, 0, 0.25e10]
+                                     [5, 1./0.4, 0, 0.25]
                                     )
     
     # Off-resonance component
@@ -1048,7 +1024,7 @@ frequency.
 
 .. parsed-literal::
 
-    Our updated qubit frequency is now 4.974351 GHz. It used to be 4.974318 GHz
+    Our updated qubit frequency is now 4.974399 GHz. It used to be 4.974351 GHz
 
 
 B. Measuring :math:`T_2` using Hahn echoes 
@@ -1085,7 +1061,7 @@ The decay time for the Hahn echo experiment gives us the coherence time,
         this_schedule |= x90_pulse(drive_chan)
         this_schedule |= pi_pulse(drive_chan) << int(this_schedule.duration + tau)
         this_schedule |= x90_pulse(drive_chan) << int(this_schedule.duration + tau)
-        this_schedule |= measure_schedule << int(this_schedule.duration)
+        this_schedule |= measure << int(this_schedule.duration)
         
         t2_schedules.append(this_schedule)
 
@@ -1133,7 +1109,7 @@ The decay time for the Hahn echo experiment gives us the coherence time,
 
     t2_values = []
     for i in range(len(taus_us)):
-        t2_values.append(t2_results.get_memory(i)[qubit])
+        t2_values.append(t2_results.get_memory(i)[qubit]*scale_factor)
     
     plt.scatter(2*taus_us, t2_values, color='black')
     plt.xlabel('Delay between X90 pulse and $\pi$ pulse [$\mu$s]', fontsize=15)
@@ -1150,7 +1126,7 @@ The decay time for the Hahn echo experiment gives us the coherence time,
 
     fit_params, y_fit = fit_function(2*taus_us, t2_values,
                  lambda x, A, B, T2: (A * np.exp(-x / T2) + B),
-                 [-1.2e15, -2.4e15, 20])
+                 [-3, 0, 100])
     
     _, _, T2 = fit_params
     print()
@@ -1214,7 +1190,7 @@ and is used to extract longer coherence times from qubits.
             this_schedule |= pi_pulse(drive_chan) << int(this_schedule.duration + 2*delay)
     
         this_schedule |= x90_pulse(drive_chan) << int(this_schedule.duration + delay)
-        this_schedule |= measure_schedule << int(this_schedule.duration)
+        this_schedule |= measure << int(this_schedule.duration)
         
         T2DD_schedules.append(this_schedule)
 
@@ -1262,7 +1238,7 @@ and is used to extract longer coherence times from qubits.
     times_us = 2.*num_pi_pulses*taus_us
     DD_values = []
     for i in range(len(taus_us)):
-        DD_values.append(T2DD_results.get_memory(i)[qubit])
+        DD_values.append(T2DD_results.get_memory(i)[qubit]*scale_factor)
     
     plt.scatter(times_us, DD_values, color='black')
     plt.xlim(0, np.max(times_us))
@@ -1280,7 +1256,7 @@ and is used to extract longer coherence times from qubits.
 
     # Fit the data
     fit_func = lambda x, A, B, T2DD: (A * np.exp(-x / T2DD) + B)
-    fitparams, conv = curve_fit(fit_func, times_us, DD_values, [1.7e10, 0.8e10, 150])
+    fitparams, conv = curve_fit(fit_func, times_us, DD_values, [3.5, 0.8, 150])
     
     _, _, T2DD = fitparams
     plt.scatter(times_us, DD_values, color='black')
@@ -1349,7 +1325,7 @@ Part 4. References
 
 .. raw:: html
 
-    <h3>Version Information</h3><table><tr><th>Qiskit Software</th><th>Version</th></tr><tr><td>Qiskit</td><td>0.14.1</td></tr><tr><td>Terra</td><td>0.11.1</td></tr><tr><td>Aer</td><td>0.3.4</td></tr><tr><td>Ignis</td><td>0.2.0</td></tr><tr><td>Aqua</td><td>0.6.2</td></tr><tr><td>IBM Q Provider</td><td>0.4.5</td></tr><tr><th>System information</th></tr><tr><td>Python</td><td>3.7.4 (default, Aug 13 2019, 15:17:50) 
-    [Clang 4.0.1 (tags/RELEASE_401/final)]</td></tr><tr><td>OS</td><td>Darwin</td></tr><tr><td>CPUs</td><td>8</td></tr><tr><td>Memory (Gb)</td><td>32.0</td></tr><tr><td colspan='2'>Tue Jan 28 13:09:07 2020 GMT</td></tr></table>
+    <h3>Version Information</h3><table><tr><th>Qiskit Software</th><th>Version</th></tr><tr><td>Qiskit</td><td>0.15.0</td></tr><tr><td>Terra</td><td>0.12.0</td></tr><tr><td>Aer</td><td>0.4.0</td></tr><tr><td>Ignis</td><td>0.2.0</td></tr><tr><td>Aqua</td><td>0.6.4</td></tr><tr><td>IBM Q Provider</td><td>0.4.6</td></tr><tr><th>System information</th></tr><tr><td>Python</td><td>3.7.3 (default, Mar 27 2019, 16:54:48) 
+    [Clang 4.0.1 (tags/RELEASE_401/final)]</td></tr><tr><td>OS</td><td>Darwin</td></tr><tr><td>CPUs</td><td>8</td></tr><tr><td>Memory (Gb)</td><td>16.0</td></tr><tr><td colspan='2'>Sun Feb 09 17:56:06 2020 EST</td></tr></table>
 
 

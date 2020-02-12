@@ -71,9 +71,10 @@ Suppose we wish to implement the unitary
 
 .. math::
 
+
    U = e^{i(aX + bZ)},
 
- but the only gates we have are
+but the only gates we have are
 :math:`R_x(\theta) = e^{i \frac{\theta}{2} X}` and
 :math:`R_z(\theta) = e^{i \frac{\theta}{2} Z}`. The best way to solve
 this problem would be to use Euler angles. But let’s instead consider a
@@ -88,36 +89,40 @@ commute, this approach will not work.
 
 .. math::
 
+
    e^{i a X} e^{i b X} \neq e^{i(aX + bZ)}
 
- However, we could use the following modified version:
+However, we could use the following modified version:
 
 .. math::
 
+
    U = \lim_{n\rightarrow\infty} ~ \left(e^{iaX/n}e^{ibZ/n}\right)^n.
 
- Here we split :math:`U` up into :math:`n` small slices. For each slice,
+Here we split :math:`U` up into :math:`n` small slices. For each slice,
 it is a good approximation to say that
 
 .. math::
 
+
    e^{iaX/n}e^{ibZ/n} = e^{i(aX + bZ)/n}
 
- The error in this approximation scales as :math:`1/n^2`. When we
-combine the :math:`n` slices, we get an approximation of our target
-unitary whose error scales as :math:`1/n`. So by simply increasing the
-number of slices, we can get as close to :math:`U` as we need. Other
-methods of creating the sequence are also possible to get even more
-accurate versions of our target unitary.
+The error in this approximation scales as :math:`1/n^2`. When we combine
+the :math:`n` slices, we get an approximation of our target unitary
+whose error scales as :math:`1/n`. So by simply increasing the number of
+slices, we can get as close to :math:`U` as we need. Other methods of
+creating the sequence are also possible to get even more accurate
+versions of our target unitary.
 
 The power of this method is that it can be used in complex cases than
 just a single qubit. For example, consider the unitary
 
 .. math::
 
+
    U = e^{i(aX\otimes X\otimes X + bZ\otimes Z\otimes Z)}.
 
- We know how to create the unitary
+We know how to create the unitary
 :math:`e^{i\frac{\theta}{2} X\otimes X\otimes X}` from a single qubit
 :math:`R_x(\theta)` and two controlled-NOTs.
 
@@ -151,10 +156,11 @@ three-qubit :math:`U`:
 
 .. math::
 
+
    e^{iaX\otimes X\otimes X/n}e^{ibZ\otimes Z\otimes Z/n} = e^{i(aX\otimes X\otimes X + bZ\otimes Z\otimes Z)/n}.
 
- As before, we can then combine the slices together to get an
-arbitrarily accurate approximation of :math:`U`.
+As before, we can then combine the slices together to get an arbitrarily
+accurate approximation of :math:`U`.
 
 This method continues to work as we increase the number of qubits, and
 also the number of terms that need simulating. Care must be taken to
@@ -177,3 +183,23 @@ References
 
 [1] `“Factorization of a 1061-bit number by the Special Number Field
 Sieve” <https://eprint.iacr.org/2012/444.pdf>`__ by Greg Childers.
+
+.. code:: ipython3
+
+    import qiskit
+    qiskit.__qiskit_version__
+
+
+
+
+.. parsed-literal::
+
+    {'qiskit-terra': '0.12.0',
+     'qiskit-aer': '0.4.0',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.6',
+     'qiskit-aqua': '0.6.4',
+     'qiskit': '0.15.0'}
+
+
+

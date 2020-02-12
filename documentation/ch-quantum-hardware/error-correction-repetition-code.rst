@@ -181,7 +181,7 @@ With this we’ll now create such a noise model with a probability of
 
     noise_model = get_noise(0.01,0.01)
 
-Let’s see what affect this has when try to store a ``0`` using three
+Let’s see what effect this has when try to store a ``0`` using three
 qubits in state :math:`\left|0\right\rangle`. We’ll repeat the process
 ``shots=1024`` times to see how likely different results are.
 
@@ -201,7 +201,7 @@ qubits in state :math:`\left|0\right\rangle`. We’ll repeat the process
 
 .. parsed-literal::
 
-    {'010': 12, '000': 999, '100': 4, '001': 9}
+    {'100': 4, '001': 17, '000': 992, '010': 11}
 
 
 Here we see that almost all results still come out ``'000'``, as they
@@ -228,7 +228,7 @@ Now let’s try the same for storing a ``1`` using three qubits in state
 
 .. parsed-literal::
 
-    {'010': 1, '011': 25, '110': 13, '111': 962, '101': 23}
+    {'111': 983, '100': 1, '101': 12, '011': 12, '110': 16}
 
 
 The number of samples that come out with a majority in the wrong state
@@ -252,7 +252,7 @@ them to have a :math:`50/50` chance of applying the bit flip error,
 
 .. parsed-literal::
 
-    {'110': 120, '001': 126, '100': 128, '101': 117, '010': 141, '011': 137, '111': 142, '000': 113}
+    {'000': 128, '001': 127, '111': 115, '101': 133, '110': 140, '100': 127, '011': 126, '010': 128}
 
 
 With this noise, all outcomes occur with equal probability, with
@@ -599,10 +599,10 @@ simple results.
     def get_raw_results(code,noise_model=None):
     
         circuits = code.get_circuit_list()
-        job = execute( circuits, Aer.get_backend('qasm_simulator'), noise_model=noise_model )
         raw_results = {}
-        for log in ['0','1']:
-            raw_results[log] = job.result().get_counts(log)
+        for log in range(2):
+            job = execute( circuits[log], Aer.get_backend('qasm_simulator'), noise_model=noise_model)
+            raw_results[str(log)] = job.result().get_counts(str(log))
         return raw_results
     
     raw_results = get_raw_results(code)
@@ -683,9 +683,9 @@ case with some noise.
 
 .. parsed-literal::
 
-    Logical 0 : {'010 11': 3, '001 10': 3, '011 01': 1, '010 10': 3, '100 00': 49, '110 01': 1, '011 00': 6, '010 01': 22, '000 01': 84, '101 00': 3, '100 10': 3, '000 10': 50, '100 01': 9, '000 00': 686, '110 00': 4, '011 10': 1, '001 00': 45, '001 01': 3, '010 00': 44, '000 11': 4} 
+    Logical 0 : {'100 01': 4, '000 00': 642, '000 01': 78, '100 10': 5, '110 01': 4, '101 01': 1, '101 00': 1, '000 11': 5, '101 10': 1, '011 00': 6, '001 01': 5, '010 11': 4, '100 00': 46, '110 10': 1, '001 10': 2, '010 01': 24, '110 00': 4, '001 00': 57, '010 10': 6, '010 00': 57, '000 10': 71} 
     
-    Logical 1 : {'110 11': 3, '101 01': 19, '101 11': 25, '001 11': 1, '001 10': 4, '011 01': 3, '011 11': 4, '010 10': 2, '100 00': 6, '110 01': 23, '011 00': 46, '111 01': 67, '010 01': 6, '100 11': 1, '101 00': 43, '100 10': 1, '101 10': 7, '100 01': 1, '111 11': 12, '110 10': 6, '110 00': 42, '011 10': 25, '111 10': 76, '001 00': 3, '111 00': 589, '001 01': 4, '010 00': 5} 
+    Logical 1 : {'011 11': 4, '100 01': 2, '101 11': 22, '011 01': 4, '111 01': 69, '110 01': 19, '101 01': 26, '101 00': 49, '111 10': 75, '111 11': 6, '101 10': 5, '110 11': 3, '001 11': 4, '011 00': 48, '001 01': 2, '010 11': 1, '100 00': 7, '110 10': 10, '001 10': 2, '010 01': 3, '011 10': 19, '110 00': 35, '001 00': 1, '111 00': 603, '100 10': 2, '010 00': 3} 
     
 
 
@@ -740,10 +740,10 @@ gets good statistics for each possible outcome. We’ll use
 .. code:: ipython3
 
     circuits = code.get_circuit_list()
-    job = execute( circuits, Aer.get_backend('qasm_simulator'), noise_model=noise_model, shots=10000 )
     table_results = {}
-    for log in ['0','1']:
-        table_results[log] = job.result().get_counts(log)
+    for log in range(2):
+        job = execute( circuits[log], Aer.get_backend('qasm_simulator'), noise_model=noise_model, shots=10000 )
+        table_results[str(log)] = job.result().get_counts(str(log))
 
 With this data, which we call ``table_results``, we can now use the
 ``lookuptable_decoding`` function from Qiskit. This takes each outcome
@@ -759,7 +759,7 @@ this information to calculate :math:`P`.
 
 .. parsed-literal::
 
-    P = {'0': 0.0285, '1': 0.0184}
+    P = {'0': 0.0181, '1': 0.0193}
 
 
 Here we see that the values for :math:`P` are lower than those for
@@ -808,12 +808,12 @@ with 50 or more samples are shown for clarity.
 
     
     Logical 0:
-    raw results        {'000 00 01': 70, '000 00 00': 473}
-    processed results  {'0 0  01 01 00': 70, '0 0  00 00 00': 473}
+    raw results        {'000 10 00': 63, '000 00 00': 490, '000 00 01': 55}
+    processed results  {'0 0  00 10 10': 63, '0 0  00 00 00': 490, '0 0  01 01 00': 55}
     
     Logical 1:
-    raw results        {'111 01 00': 59, '111 00 00': 457}
-    processed results  {'1 1  00 01 01': 59, '1 1  00 00 00': 457}
+    raw results        {'111 00 00': 470}
+    processed results  {'1 1  00 00 00': 470}
 
 
 Here we can see that ``'000 00 00'`` has been transformed to
@@ -1241,7 +1241,7 @@ uses a group of qubits with either exceptionally low or high noise.
 
 
 
-.. image:: error-correction-repetition-code_files/error-correction-repetition-code_81_0.png
+.. image:: error-correction-repetition-code_files/error-correction-repetition-code_81_0.svg
 
 
 Another insight we can gain is to use the results to determine how
@@ -1257,9 +1257,10 @@ error event. Specifically, to first order it is clear that
 
 .. math::
 
+
    \frac{p}{1-p} \approx \frac{C_{11}}{C_{00}}
 
- Here :math:`p` is the probaility of the error corresponding to a
+Here :math:`p` is the probaility of the error corresponding to a
 particular edge, :math:`C_{11}` is the number of counts in the
 ``results[n]['0']`` correponding to the syndrome value of both adjacent
 nodes being ``1``, and :math:`C_{00}` is the same for them both being
@@ -1304,8 +1305,8 @@ standard devation, minimum, maximum and quartiles.
 .. parsed-literal::
 
     {'count': 29.0,
-     'mean': 0.18570187935383517,
-     'std': 0.12966061187100628,
+     'mean': 0.18570187935383514,
+     'std': 0.12966061187100625,
      'min': 0.014967523298503253,
      '25%': 0.05383187483426147,
      '50%': 0.1799797775530839,
@@ -1361,72 +1362,22 @@ these values from the benchmarking.
 
 
 
-If the results above are orders of magnitude different from those
-obtained in the repetition code, we would have cause to worry that one
-is seeing the effects of errors that the other does not. However, we
-typically see relatively good agreement.
+.. code:: ipython3
 
-Clearly, further analysis could be made. Such as comparing different
-runs, and using different possible choices for ``line``, to get a
-greater insight into a device. However, here we limit outselves to
-simply showing the most straightforward results that can be obtained
-from a repetition code.
+    import qiskit
+    qiskit.__qiskit_version__
 
-Summary
-~~~~~~~
 
-The repetition code is a simple example of the basic principles of
-quantum error correction. These are as follows.
 
-1. The information we wish to store and process takes the form of
-   ‘logical qubits’. The states of these are encoded across many of the
-   actual ‘physical qubits’ of a device.
 
-2. Information about errors is extracted constantly through a process of
-   ‘syndrome’ measurement. These consist of measurements that extract no
-   information about the logical stored information. Instead they assess
-   collective properties of groups of physical qubits, in order to
-   determine when faults arise in the encoding of the logical qubits.
+.. parsed-literal::
 
-3. The information from syndrome measurements allows the effects of
-   errors to be identified and mitigated for with high probability. This
-   requires a decoding method.
+    {'qiskit-terra': '0.11.1',
+     'qiskit-aer': '0.3.4',
+     'qiskit-ignis': '0.2.0',
+     'qiskit-ibmq-provider': '0.4.5',
+     'qiskit-aqua': '0.6.2',
+     'qiskit': '0.14.1'}
 
-There is another basic principle for which the repetition code is not
-such a good example.
 
-4. Manipulating stored information must require action on multiple
-   physical qubits. The minimum number required for any code is is known
-   as the distance of the code, :math:`d`. Possible manipulations
-   include performing an ``x`` operation on the logical qubit (flipping
-   an encoded :math:`\left|0\right\rangle` to an encoded
-   :math:`\left|1\right\rangle`, and vice-versa), or performing a
-   logical z measurement (distinguishing an encoded
-   :math:`\left|0\right\rangle` from an encoded
-   :math:`\left|1\right\rangle`).
-
-This makes it harder to perform operations on logical qubits when
-required: both for us, and for errors. The latter is, of course, the
-reason why this behaviour is required. If logical information could be
-acessed using only a single physical qubit, it would always be possible
-for single stray errors to disturb the logical qubit. The aim is usually
-to make it relatively straightforward for us to perform logical
-operations, given that we know how to do it, but hard for noise to
-achieve it by random chance.
-
-In terms of making it hard for noise to peform a logical ``x``, the
-repetition code cannot be beaten: All code qubits must be flipped to
-flip the logical value. From this perspective, :math:`d=n`. For a z
-measurement, however, the repetition code is very poor. In the ideal
-case of no errors, the logical z basis information is repeated across
-every code qubit. Measuring any single code qubit is therefore
-sufficient to deduce the logical value. For this logical operation, and
-the overal distance, is therefore :math:`d=1` for the repetition code.
-This is also reflected by the fact that the code is unable to detect and
-correct logical ``z`` errors.
-
-For a better example of quantum error correction, we therefore need to
-find alternatives to the repetition approach. One of the foremost
-examples is the surface code, which will be added to this textbook as
-soon as it is implemented in Ignis.
 

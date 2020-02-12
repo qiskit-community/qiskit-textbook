@@ -5,25 +5,9 @@ In this section, we introduce Grover’s algorithm and how it can be used
 to solve unstructured search problems. We then implement the quantum
 algorithm using Qiskit, and run on a simulator and device.
 
-Contents
---------
+.. contents::
+   :local:
 
-.. contents:: Quick links throughout the document:
-
-
-2. `Example: 2 Qubits <#2qubits>`__
-
-   -  `Simulation <#2qubits-simulation>`__
-   -  `Device <#2qubits-device>`__
-
-3. `Example: 3 Qubits <#3qubits>`__
-
-   -  `Simulation <#3qubits-simulation>`__
-   -  `Device <#3qubits-device>`__
-
-4. `Problems <#problems>`__
-
-5. `References <#references>`__
 
 1. Introduction 
 ----------------
@@ -44,6 +28,10 @@ there is one item with a unique property that we wish to locate; we will
 call this one the winner :math:`w`. Think of each item in the list as a
 box of a particular color. Say all items in the list are gray except the
 winner :math:`w`, which is pink.
+
+.. figure:: images/grover_search.png
+   :alt: image1
+
 
 To find the pink box – the *marked item* – using classical computation,
 one would have to check on average :math:`N/2` of these boxes, and in
@@ -116,6 +104,10 @@ perpendicular to :math:`| w \rangle` and is obtained from
 uniform superposition :math:`| s \rangle`, which is easily constructed
 from :math:`| s \rangle = H^{\otimes n} | 0 \rangle^n`.
 
+.. figure:: images/grover_step1.png
+   :alt: image2
+
+
 The left graphic corresponds to the two-dimensional plane spanned by
 perpendicular vectors :math:`|w\rangle` and :math:`|s'\rangle` which
 allows to express the initial state as
@@ -129,6 +121,10 @@ amplitude is indicated by a dashed line.
 **Step 2**: We apply the oracle reflection :math:`U_f` to the state
 :math:`|s\rangle`.
 
+.. figure:: images/grover_step2.png
+   :alt: image3
+
+
 Geometrically this corresponds to a reflection of the state
 :math:`|s\rangle` about :math:`|s'\rangle`. This transformation means
 that the amplitude in front of the :math:`|w\rangle` state becomes
@@ -140,6 +136,10 @@ state :math:`|s\rangle`:
 :math:`U_s = 2|s\rangle\langle s| - \mathbb{1}`. This transformation
 maps the state to :math:`U_s U_f| s \rangle` and completes the
 transformation.
+
+.. figure:: images/grover_step3.png
+   :alt: image4
+
 
 Two reflections always correspond to a rotation. The transformation
 :math:`U_s U_f` rotates the initial state :math:`|s\rangle` closer
@@ -166,6 +166,10 @@ not just the probability, that is being amplified in this procedure.
 
 In the case that there are multiple solutions, :math:`M`, it can be
 shown that roughly :math:`\sqrt{(N/M)}` rotations will suffice.
+
+.. figure:: images/grover_algorithm.png
+   :alt: image5
+
 
 2. Example: 2 Qubits 
 ---------------------
@@ -242,6 +246,10 @@ The oracle :math:`U_f` in this case acts as follows:
 simply need to apply a controlled Z gate to the initial state. This
 leads to the following circuit:
 
+.. figure:: images/grover_circuit_2qbuits_oracle_11.png
+   :alt: image6
+
+
 Oracle for :math:`\lvert w \rangle = \lvert 00 \rangle`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -254,12 +262,20 @@ In the case of :math:`\lvert w \rangle = \lvert 00 \rangle` the oracle
 need to apply an “inverted” controlled Z gate to the initial state
 leading to the following circuit:
 
+.. figure:: images/grover_circuit_2qbuits_oracle_00.png
+   :alt: image7
+
+
 Oracles for :math:`\lvert w \rangle = \lvert 01 \rangle` and :math:`\lvert w \rangle = \lvert 10 \rangle`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Following the above logic one can straight forwardly construct the
 oracles for :math:`\lvert w \rangle = \lvert 01 \rangle` (left circuit)
 and :math:`\lvert w \rangle = \lvert 10 \rangle` (right circuit):
+
+.. figure:: images/grover_circuit_2qbuits_oracle_01_10.png
+   :alt: image8
+
 
 Reflection :math:`U_s`
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -274,6 +290,10 @@ follows
 :math:`\lvert 00 \rangle`. As can easily be verified, one way of
 implementing :math:`U_s` is the following circuit:
 
+.. figure:: images/grover_circuit_2qbuits_reflection.png
+   :alt: image9
+
+
 Full Circuit for :math:`\lvert w \rangle = \lvert 00 \rangle`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -281,6 +301,10 @@ Since in the particular case of :math:`N=4` only one rotation is
 required we can combine the above components to build the full circuit
 for Grover’s algorithm for the case
 :math:`\lvert w \rangle = \lvert 00 \rangle`:
+
+.. figure:: images/grover_circuit_2qubits_full_00.png
+   :alt: image10
+
 
 The other three circuits can be constructed in the same way and will not
 be depicted here.
@@ -508,6 +532,10 @@ We now go through the example of Grover’s algorithm for 3 qubits with
 two marked states :math:`\lvert101\rangle` and :math:`\lvert110\rangle`,
 following the implementation found in Reference [2]. The quantum circuit
 to solve the problem using a phase oracle is:
+
+.. figure:: images/grover_circuit_3qubits.png
+   :alt: image11
+
 
 .. raw:: html
 

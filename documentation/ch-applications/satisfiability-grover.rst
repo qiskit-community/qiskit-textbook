@@ -4,19 +4,9 @@ Solving Satisfiability Problems using Grover’s Algorithm
 In this section, we demonstrate how to solve satisfiability problems
 using the implementation of Grover’s algorithm in Qiskit Aqua.
 
-Contents
---------
+.. contents::
+   :local:
 
-.. contents:: Quick links throughout the document:
-
-
-2. `3-Satisfiability Problem <#3satproblem>`__
-
-3. `Qiskit Implementation <#implementation>`__
-
-4. `Problems <#problems>`__
-
-5. `References <#references>`__
 
 1. Introduction 
 ----------------
@@ -219,7 +209,7 @@ get the result:
 
 .. parsed-literal::
 
-    [-1, -2, -3]
+    [1, -2, 3]
 
 
 As seen above, a satisfying solution to the specified 3-SAT problem is
@@ -273,8 +263,8 @@ QASM on real-device ``ibmq_16_melbourne`` backend as follows:
 
 .. parsed-literal::
 
-    gates =  OrderedDict([('cx', 370), ('u3', 169), ('u1', 71), ('u2', 56), ('measure', 3), ('barrier', 2)])
-    depth =  418
+    gates =  OrderedDict([('cx', 366), ('u3', 120), ('u2', 79), ('u1', 74), ('measure', 3), ('barrier', 2)])
+    depth =  408
 
 
 The number of gates needed is far above the limits regarding decoherence

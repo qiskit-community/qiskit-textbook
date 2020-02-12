@@ -5,17 +5,9 @@ In this tutorial, we introduce the quantum fourier transform (QFT),
 derive the circuit, and implement it using Qiskit. We show how to run
 QFT on a simulator and a five qubit device.
 
-Contents
---------
+.. contents::
+   :local:
 
-.. contents:: Quick links throughout the document:
-
-
-   -  `Running QFT on a simulator <#implementationsim>`__
-   -  `Running QFT on a real quantum device <#implementationdev>`__
-
-8. `Problems <#problems>`__
-9. `References <#references>`__
 
 1. Introduction 
 ----------------
@@ -185,6 +177,10 @@ second is the target is given by
 
 Given these two gates, a circuit that implements `an n-qubit
 QFT <#qfteqn>`__ is shown below.
+
+.. figure:: images/qft.png
+   :alt: image1
+
 
 The circuit operates as follows. We start with an n-qubit input state
 :math:`\vert x_1x_2\ldots x_n\rangle`.

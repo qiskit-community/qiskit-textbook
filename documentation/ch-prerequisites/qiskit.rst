@@ -24,7 +24,7 @@ documentation page
 here <https://qiskit.org/documentation/install.html>`__.
 
 **Note: The rest of this section is intended for people who already know
-the fundamental concepts of quantum computing.** It can be used for
+the fundamental concepts of quantum computing.** It can be used by
 readers who wish to skip straight to the later chapters in which those
 concepts are put to use. All other readers should read the `Introduction
 to Python and Jupyter
@@ -97,7 +97,7 @@ circuit to see what it looks like: ``draw()`` .
 
 
 Our qubits are ready to begin their journey, but are currently just
-sitting there in state ``|0>``.
+sitting there in state :math:`\left|0\right\rangle`.
 
 Applying Gates
 ^^^^^^^^^^^^^^
@@ -126,7 +126,7 @@ out ``h()``.
 
 Here we got an error, because we didn’t tell the operation which qubit
 it should act on. The two qubits in our register ``qr`` can be
-individially addressed as ``qr[0]`` and ``qr[1]``.
+individually addressed as ``qr[0]`` and ``qr[1]``.
 
 .. code:: ipython3
 
@@ -170,7 +170,7 @@ Statevector simulator
 ~~~~~~~~~~~~~~~~~~~~~
 
 We are now at the stage that we can actually look at an output from the
-circuit. Specifcially, we will use the ‘statevector simulator’ to see
+circuit. Specifically, we will use the ‘statevector simulator’ to see
 what is happening to the state vector of the two qubits.
 
 To get this simulator ready to go, we use the following line.
@@ -219,7 +219,7 @@ it on (in this case, a simulator).
 
 This creates an object that handles the job, which here has been called
 ``job``. All we need from this is to extract the result. Specifically,
-we want the statevector.
+we want the state vector.
 
 .. code:: ipython3
 
@@ -296,9 +296,9 @@ Let’s measure both qubits, and write their results in different bits.
 
 Now we can run this on a local simulator whose effect is to emulate a
 real quantum device. For this we need to add another input to the
-execute function, ``shots``, which determines how many times we run the
-circuit to take statistics. If you don’t provide any ``shots`` value,
-you get the default of 1024.
+``execute`` function, ``shots``, which determines how many times we run
+the circuit to take statistics. If you don’t provide any ``shots``
+value, you get the default of 1024.
 
 .. code:: ipython3
 
@@ -320,7 +320,7 @@ dictionary.
     {'00': 4077, '11': 4115}
 
 
-We can even get qiskit to plot it as a histogram.
+We can even get Qiskit to plot it as a histogram.
 
 .. code:: ipython3
 

@@ -5,10 +5,8 @@ In this section, we first introduce the Bernstein-Vazirani problem, and
 classical and quantum algorithms to solve it. We then implement the
 quantum algorithm using Qiskit, and run on a simulator and device.
 
-Contents
---------
-
-.. contents:: Quick links throughout the document:
+.. contents::
+   :local:
 
 
 1. Introduction 
@@ -27,7 +25,13 @@ We are again given a hidden function Boolean :math:`f`, which takes as
 as input a string of bits, and returns either :math:`0` or :math:`1`,
 that is:
 
-.. math:: f(\{x_0,x_1,x_2,...\}) \rightarrow 0 \textrm{ or } 1 \textrm{ where } x_n \textrm{ is }0 \textrm{ or } 1  
+.. raw:: html
+
+   <center>
+
+$f({x_0,x_1,x_2,…}) :raw-latex:`\rightarrow `0
+:raw-latex:`\textrm{ or }` 1 :raw-latex:`\textrm{ where }` x_n
+:raw-latex:`\textrm{ is }`0 :raw-latex:`\textrm{ or }` 1 $.
 
 Instead of the function being balanced or constant as in the
 Deutsch-Josza problem, now the function is guaranteed to return the
@@ -62,7 +66,7 @@ gates, (3) query the oracle, (4) apply Hadamard gates, and (5) measure,
 generically illustrated below:
 
 .. figure:: images/bernsteinvazirani_steps.jpeg
-   :alt: bz-steps
+   :alt: image1
 
 
 The correctness of the algorithm is best explained by looking at the

@@ -9,6 +9,8 @@ they just follow a different set of rules. Once we know what those rules
 are, we can use them to create new and powerful technology. Quantum
 computing will be the most revolutionary example of this.
 
+.. figure:: https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/b37a8ea62054452f83a2c051e7de12efatoms10.png
+   :alt: image1
 
 
 To get you started on your journey towards quantum computing, let’s test
@@ -40,6 +42,8 @@ some way of keeping track of what they are doing when we apply gates.
 The most powerful way to do this is to use the mathematical language of
 vectors and matrices.
 
+.. figure:: https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/d382d3105b154856bcb3a99656954ad2bloch.png
+   :alt: image2
 
 
 This chapter will be most effective for readers who are already familiar

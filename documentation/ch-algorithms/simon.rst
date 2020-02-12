@@ -5,27 +5,9 @@ In this section, we first introduce the Simon problem, and classical and
 quantum algorithms to solve it. We then implement the quantum algorithm
 using Qiskit, and run on a simulator and device.
 
-Contents
---------
+.. contents::
+   :local:
 
-.. contents:: Quick links throughout the document:
-
-
-   -  `Simon’s Problem <#problem>`__
-   -  `Simon’s Algorithm <#algorithm>`__
-
-2. `Example <#example>`__
-
-3. `Qiskit Implementation <#implementation>`__
-
-   -  `Simulation <#simulation>`__
-   -  `Device <#device>`__
-
-4. `Oracle <#oracle>`__
-
-5. `Problems <#problems>`__
-
-6. `References <#references>`__
 
 1. Introduction 
 ----------------
@@ -85,6 +67,10 @@ Quantum Solution
 ^^^^^^^^^^^^^^^^
 
 The quantum circuit that implements Simon’s algorithm is shown below.
+
+.. figure:: images/simon_steps.jpeg
+   :alt: image1
+
 
 Where the query function, :math:`\text{Q}_f` acts on two quantum
 registers as:
@@ -211,6 +197,10 @@ one.
 Let’s see the example of Simon’s algorithm for 2 qubits with the secret
 string :math:`s=11`, so that :math:`f(x) = f(y)` if
 :math:`y = x \oplus s`. The quantum circuit to solve the problem is:
+
+.. figure:: images/simon_example.jpeg
+   :alt: image2
+
 
 .. raw:: html
 

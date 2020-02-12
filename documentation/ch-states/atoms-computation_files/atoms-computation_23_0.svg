@@ -19,47 +19,47 @@ z
   </g>
   <g id="axes_1">
    <g id="line2d_1">
-    <path clip-path="url(#pd9712ecabc)" d="M 98.102 43.5608 
+    <path clip-path="url(#pb5bc6aca77)" d="M 98.102 43.5608 
 L 166.2785 43.5608 
 " style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
    </g>
    <g id="line2d_2">
-    <path clip-path="url(#pd9712ecabc)" d="M 98.102 89.0118 
+    <path clip-path="url(#pb5bc6aca77)" d="M 98.102 89.0118 
 L 166.2785 89.0118 
 " style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
    </g>
    <g id="line2d_3">
-    <path clip-path="url(#pd9712ecabc)" d="M 98.102 134.4628 
+    <path clip-path="url(#pb5bc6aca77)" d="M 98.102 134.4628 
 L 166.2785 134.4628 
 " style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
    </g>
    <g id="line2d_4">
-    <path clip-path="url(#pd9712ecabc)" d="M 98.102 179.9138 
+    <path clip-path="url(#pb5bc6aca77)" d="M 98.102 179.9138 
 L 166.2785 179.9138 
 " style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
    </g>
    <g id="line2d_5">
-    <path clip-path="url(#pd9712ecabc)" d="M 98.102 225.3648 
+    <path clip-path="url(#pb5bc6aca77)" d="M 98.102 225.3648 
 L 166.2785 225.3648 
 " style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
    </g>
    <g id="line2d_6">
-    <path clip-path="url(#pd9712ecabc)" d="M 98.102 270.8158 
+    <path clip-path="url(#pb5bc6aca77)" d="M 98.102 270.8158 
 L 166.2785 270.8158 
 " style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
    </g>
    <g id="line2d_7">
-    <path clip-path="url(#pd9712ecabc)" d="M 98.102 316.2668 
+    <path clip-path="url(#pb5bc6aca77)" d="M 98.102 316.2668 
 L 166.2785 316.2668 
 " style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
    </g>
    <g id="line2d_8">
-    <path clip-path="url(#pd9712ecabc)" d="M 98.102 361.7178 
+    <path clip-path="url(#pb5bc6aca77)" d="M 98.102 361.7178 
 L 166.2785 361.7178 
 " style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
    </g>
    <g id="patch_2">
-    <path clip-path="url(#pd9712ecabc)" d="M 106.055925 103.783375 
+    <path clip-path="url(#pb5bc6aca77)" d="M 106.055925 103.783375 
 L 135.599075 103.783375 
 L 135.599075 74.240225 
 L 106.055925 74.240225 
@@ -67,7 +67,7 @@ z
 " style="fill:#05bab6;"/>
    </g>
    <g id="patch_3">
-    <path clip-path="url(#pd9712ecabc)" d="M 106.055925 285.587375 
+    <path clip-path="url(#pb5bc6aca77)" d="M 106.055925 285.587375 
 L 135.599075 285.587375 
 L 135.599075 256.044225 
 L 106.055925 256.044225 
@@ -75,7 +75,7 @@ z
 " style="fill:#05bab6;"/>
    </g>
    <g id="text_1">
-    <g clip-path="url(#pd9712ecabc)">
+    <g clip-path="url(#pb5bc6aca77)">
      <!-- $X$ -->
      <defs>
       <path d="M 13.71875 72.90625 
@@ -99,7 +99,7 @@ z
     </g>
    </g>
    <g id="text_2">
-    <g clip-path="url(#pd9712ecabc)">
+    <g clip-path="url(#pb5bc6aca77)">
      <!-- $X$ -->
      <g transform="translate(116.3425 274.402987)scale(0.13 -0.13)">
       <use transform="translate(0 0.09375)" xlink:href="#DejaVuSans-Oblique-88"/>
@@ -107,7 +107,7 @@ z
     </g>
    </g>
    <g id="text_3">
-    <g clip-path="url(#pd9712ecabc)">
+    <g clip-path="url(#pb5bc6aca77)">
      <!-- $q_{0}$ -->
      <defs>
       <path d="M 41.703125 8.203125 
@@ -168,7 +168,7 @@ z
     </g>
    </g>
    <g id="text_4">
-    <g clip-path="url(#pd9712ecabc)">
+    <g clip-path="url(#pb5bc6aca77)">
      <!-- $q_{1}$ -->
      <defs>
       <path d="M 12.40625 8.296875 
@@ -192,7 +192,7 @@ z
     </g>
    </g>
    <g id="text_5">
-    <g clip-path="url(#pd9712ecabc)">
+    <g clip-path="url(#pb5bc6aca77)">
      <!-- $q_{2}$ -->
      <defs>
       <path d="M 19.1875 8.296875 
@@ -227,7 +227,7 @@ z
     </g>
    </g>
    <g id="text_6">
-    <g clip-path="url(#pd9712ecabc)">
+    <g clip-path="url(#pb5bc6aca77)">
      <!-- $q_{3}$ -->
      <defs>
       <path d="M 40.578125 39.3125 
@@ -270,7 +270,7 @@ z
     </g>
    </g>
    <g id="text_7">
-    <g clip-path="url(#pd9712ecabc)">
+    <g clip-path="url(#pb5bc6aca77)">
      <!-- $q_{4}$ -->
      <defs>
       <path d="M 37.796875 64.3125 
@@ -298,7 +298,7 @@ z
     </g>
    </g>
    <g id="text_8">
-    <g clip-path="url(#pd9712ecabc)">
+    <g clip-path="url(#pb5bc6aca77)">
      <!-- $q_{5}$ -->
      <defs>
       <path d="M 10.796875 72.90625 
@@ -333,7 +333,7 @@ z
     </g>
    </g>
    <g id="text_9">
-    <g clip-path="url(#pd9712ecabc)">
+    <g clip-path="url(#pb5bc6aca77)">
      <!-- $q_{6}$ -->
      <defs>
       <path d="M 33.015625 40.375 
@@ -374,7 +374,7 @@ z
     </g>
    </g>
    <g id="text_10">
-    <g clip-path="url(#pd9712ecabc)">
+    <g clip-path="url(#pb5bc6aca77)">
      <!-- $q_{7}$ -->
      <defs>
       <path d="M 8.203125 72.90625 
@@ -396,7 +396,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="pd9712ecabc">
+  <clipPath id="pb5bc6aca77">
    <rect height="381.7884" width="163.6236" x="7.2" y="7.2"/>
   </clipPath>
  </defs>

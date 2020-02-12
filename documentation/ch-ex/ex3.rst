@@ -99,7 +99,7 @@ For example, here are the results when both inputs are ``0``.
 
 .. parsed-literal::
 
-    {'0': 8994, '1': 1006}
+    {'1': 1001, '0': 8999}
 
 
 
@@ -126,18 +126,18 @@ We’ll compare across all results to find the most unreliable.
 
     
     Probability of correct answer for inputs 0 0
-    0.8979
-    
-    Probability of correct answer for inputs 0 1
     0.8993
     
+    Probability of correct answer for inputs 0 1
+    0.9015
+    
     Probability of correct answer for inputs 1 0
-    0.8932
+    0.8959
     
     Probability of correct answer for inputs 1 1
-    0.8997
+    0.8925
     
-    The lowest of these probabilities was 0.8932
+    The lowest of these probabilities was 0.8925
 
 
 The ``AND`` function above uses the ``ccx`` gate the implement the

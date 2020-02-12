@@ -19,11 +19,11 @@ An Introduction to Linear Algebra for Quantum Computing
 
 Linear algebra is the language of quantum computing. For this reason, it
 is crucial to develop a good understanding of the basic mathematical
-concepts that are built upon in order to arrive at many of the amazing
-and interesting constructions seen in quantum computation! The goal of
-this section of the textbook is to start at the absolute basics of
-linear algebra: vectors and vector spaces, and build a foundation that
-the reader can then leverage in their study of quantum computing.
+concepts that are built upon it in order to arrive at many of the
+amazing and interesting constructions seen in quantum computation! The
+goal of this section of the textbook is to start at the absolute basics
+of linear algebra: vectors and vector spaces, and build a foundation
+that the reader can then leverage in their study of quantum computing.
 
 **Vectors and Vector Spaces**
 
@@ -37,7 +37,7 @@ that a vector “is a mathematical quantity with both direction and
 magnitude”. For instance, consider a vector with :math:`x` and :math:`y`
 components of the form :math:`\begin{pmatrix} 3 \\\\ 5 \end{pmatrix}`.
 This vector can be visualized as an arrow pointing in the direction of
-:math:`3` unit down the :math:`x` axis and :math:`5` units up the
+:math:`3` units down the :math:`x` axis and :math:`5` units up the
 :math:`y` axis:
 
 .. code:: ipython3
@@ -104,10 +104,7 @@ We will now clarify this previous definition by working through a basic
 example. Let us demonstrate that the set :math:`\mathbb{R}^2` over the
 field :math:`\mathbb{R}` is a vector space. We assert that
 
-.. math::
-
-
-   \begin{pmatrix} x_1 \\\\ y_1 \end{pmatrix} \ + \ \begin{pmatrix} x_2 \\\\ y_2 \end{pmatrix} \ = \ \begin{pmatrix} x_1 \ + \ x_2 \\\\ y_1 \ + \ y_2 \end{pmatrix}
+.. math:: \begin{pmatrix} x_1 \\\\ y_1 \end{pmatrix} \ + \ \begin{pmatrix} x_2 \\\\ y_2 \end{pmatrix} \ = \ \begin{pmatrix} x_1 \ + \ x_2 \\\\ y_1 \ + \ y_2 \end{pmatrix}
 
 is contained within :math:`\mathbb{R}^2`. This is evidently the case, as
 the sum of two real numbers is a real number[1], making both components
@@ -140,7 +137,7 @@ multiplication. In general, matrix multiplication between two matrices
 involves taking the first row of the first matrix, and multiplying each
 element by its “partner” in the first column of the second matrix (the
 first number of the row is multiplied by the first number of the column,
-second number of the row and second number of column, etc.) These new
+second number of the row by the second number of column, etc.) These new
 numbers are then added up, and we have the first element of the first
 row of the new matrix! To fill in the rest of the first row, we repeat
 this process for the second, third, etc. columns of the second matrix.
@@ -165,7 +162,7 @@ sequences of **quantum gates**. As it turns out, we can express each of
 these quantum gates as a different matrix that can be “applied” to a
 state vector, thus changing the state. For instance, one of the most
 commonly seen quantum gates is the Pauli-X gate, which is represented by
-the follwing matrix:
+the following matrix:
 
 .. math:: \sigma_x \ = \ \begin{pmatrix} 0 & 1 \\\\ 1 & 0 \end{pmatrix}
 
@@ -345,7 +342,7 @@ In this sense, the basis of a vector space is the minimal possible set
 that spans the entire space. We call the size of the basis set the
 **dimension** of the vector space.
 
-The reason why bases and spanning sets are so important is becasue they
+The reason why bases and spanning sets are so important is because they
 allow us to “shrink down” vector spaces and express them in terms of
 only a few vectors rather than a ton! Oftentimes, we can come to certain
 conclusions about our basis set that we can generalize to the entire
@@ -395,15 +392,16 @@ One of the most important conditions for a Hilbert space representing a
 quantum system is that the inner product of a vector with itself is
 equal to one: :math:`\langle \psi | \psi \rangle \ = \ 1`. This is the
 so-called normalization condition, and essentially just states that the
-length of the vector squared (each componenet of the vector is squared
-and summed together, by defintion of the inner product) must be equal to
-one. The physical significance of this is that the length of a vector in
-a particular direction is representative of the “probability amplitude”
-of the quantum system with regards to being measured in that particular
-state. Obviously, the probability of the quantum system being measured
-in the state that it is actually in must be :math:`1`, after all, the
-sum of the probabilities of finding the quantum system in any particular
-state has to equal one (I mean, it has to be in **some** state!).
+length of the vector squared (each component of the vector is squared
+and summed together, by definition of the inner product) must be equal
+to one. The physical significance of this is that the length of a vector
+in a particular direction is representative of the “probability
+amplitude” of the quantum system with regards to being measured in that
+particular state. Obviously, the probability of the quantum system being
+measured in the state that it is actually in must be :math:`1`, after
+all, the sum of the probabilities of finding the quantum system in any
+particular state has to equal one (I mean, it has to be in **some**
+state!).
 
 Let’s consider the Bloch sphere:
 

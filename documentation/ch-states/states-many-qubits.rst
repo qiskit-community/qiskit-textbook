@@ -25,9 +25,10 @@ specify the state of two qubits:
 
 .. math::
 
+
    |a\rangle = a_{00}|00\rangle+ a_{01}|01\rangle+a_{10}|10\rangle+ a_{11}|11\rangle = \begin{pmatrix} a_{00} \\\\\\\\ a_{01} \\\\\\\\ a_{10} \\\\\\\\ a_{11} \end{pmatrix}.
 
- As in the single-qubit case, the elements of this vector are complex
+As in the single-qubit case, the elements of this vector are complex
 numbers. We require the state to be normalized so that
 :math:`\langle a|a\rangle = 1`, and probabilites are given by the Born
 rule (:math:`p_{00}^{zz} = |\langle00|a\rangle |^2`, etc).
@@ -59,7 +60,7 @@ qubits.
         state_latex = '\\\\begin{pmatrix}'
         for amplitude in state:
             state_latex += str(amplitude) + '\\\\'
-        state_latex  = state_latex[0:-4]
+        state_latex  = state_latex[0:-2]
         state_latex += '\end{pmatrix}'
         display(Markdown(state_latex))
     
@@ -69,7 +70,7 @@ qubits.
 
 .. raw:: latex
 
-   \begin{pmatrix}(0.5000000000000001+0j)\\\\(0.5+0j)\\\\(0.3536941345835999+0.353412590552683j)\\\\(0.35369413458359983+0.3534125905526829\end{pmatrix}
+   \begin{pmatrix}(0.5000000000000001+0j)\\\\(0.5+0j)\\\\(0.3536941345835999+0.353412590552683j)\\\\(0.35369413458359983+0.3534125905526829j)\end{pmatrix}
 
 
 Note that Python uses :math:`j` to denote :math:`\sqrt{-1}`, rather than
@@ -91,11 +92,10 @@ backwards from this probability, it makes sense for the
 :math:`|00\rangle` state to have the amplitude :math:`a_{0}b_0`.
 Repeating this principle, the whole state becomes.
 
-$$a_{0}b_0|00:raw-latex:`\rangle`+
-a_{0}b_1|01:raw-latex:`\rangle`+a_{1}b_0|10:raw-latex:`\rangle`+
-a_{1}b_1|11:raw-latex:`\rangle`.
+.. math::
 
-$$
+
+   a_{0}b_0|00\rangle+ a_{0}b_1|01\rangle+a_{1}b_0|10\rangle+ a_{1}b_1|11\rangle.
 
 This is exactly the result we would get when using the ‘tensor product’
 [1], which is a standard method for combining vectors and matrices in a
@@ -109,9 +109,10 @@ an :math:`X` that acts only on the qubit on the right:
 
 .. math::
 
+
    I \otimes X=  \begin{pmatrix} 1&0 \\\\\\\\ 0&1 \end{pmatrix} \otimes \begin{pmatrix} 0&1 \\\\\\\\ 1&0 \end{pmatrix} = \begin{pmatrix} 0&1&0&0 \\\\\\\\ 1&0&0&0\\\\\\\\0&0&0&1\\\\\\\\0&0&1&0 \end{pmatrix}, ~~~ I= \begin{pmatrix} 1&0 \\\\\\\\ 0&1 \end{pmatrix}.
 
- This was made by combining the :math:`X` matrix for the qubit on the
+This was made by combining the :math:`X` matrix for the qubit on the
 right with the single-qubit identity operator, :math:`I`, for the qubit
 on the left. The identity operator is the unique operator that does
 absolutely nothing to a vector. The two-qubit operation resulting from
@@ -129,9 +130,10 @@ example, for a general two qubit state :math:`|a\rangle`,
 
 .. math::
 
+
    \langle a|Z\otimes Z|a\rangle = P^{zz}_{0} - P^{zz}_{1}.
 
- The :math:`zz` in :math:`P^{zz}_{0}` and :math:`P^{zz}_{1}` refers to
+The :math:`zz` in :math:`P^{zz}_{0}` and :math:`P^{zz}_{1}` refers to
 the fact that these probabilities describe the outcomes when a z
 measurement is made on both qubits. A quantity such as
 :math:`\langle a|Z\otimes X|a\rangle` will reflect similar probabilities
@@ -150,9 +152,10 @@ independent qubit states. For example,
 
 .. math::
 
+
    |\Phi^+\rangle =\frac{1}{\sqrt{2}}\left(|00\rangle+|11\rangle\right).
 
- This represents a quantum form of correlated state, known as an
+This represents a quantum form of correlated state, known as an
 entangled state. The correlations can be easily seen from the fact that
 only the ``00`` and ``11`` outcomes are possible when making z
 measurements of both qubits, and so the outcomes of these measurements
@@ -163,7 +166,7 @@ will always agree. This can also be seen from the fact that
 
    \langle \Phi^+|Z\otimes Z|\Phi^+\rangle = 1, \quad \therefore P^{zz}_{0} = 1 .
 
- These aren’t the only correlations in this state. If you use x
+These aren’t the only correlations in this state. If you use x
 measurements, you’d find that the results still always agree. For y
 measurements, they always disagree. So we find that
 :math:`\langle \Phi^+|X\otimes X|\Phi^+\rangle = 1` and

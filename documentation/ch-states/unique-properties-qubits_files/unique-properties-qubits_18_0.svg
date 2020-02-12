@@ -19,12 +19,12 @@ z
   </g>
   <g id="axes_1">
    <g id="line2d_1">
-    <path clip-path="url(#p7cfaa66a8e)" d="M 65.37728 43.5608 
+    <path clip-path="url(#p8d63fc3ad5)" d="M 65.37728 43.5608 
 L 133.55378 43.5608 
 " style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
    </g>
    <g id="patch_2">
-    <path clip-path="url(#p7cfaa66a8e)" d="M 73.331205 58.332375 
+    <path clip-path="url(#p8d63fc3ad5)" d="M 73.331205 58.332375 
 L 102.874355 58.332375 
 L 102.874355 28.789225 
 L 73.331205 28.789225 
@@ -32,7 +32,7 @@ z
 " style="fill:#6fa4ff;"/>
    </g>
    <g id="text_1">
-    <g clip-path="url(#p7cfaa66a8e)">
+    <g clip-path="url(#p8d63fc3ad5)">
      <!-- $H$ -->
      <defs>
       <path d="M 16.890625 72.90625 
@@ -56,7 +56,7 @@ z
     </g>
    </g>
    <g id="text_2">
-    <g clip-path="url(#p7cfaa66a8e)">
+    <g clip-path="url(#p8d63fc3ad5)">
      <!-- $q$ -->
      <defs>
       <path d="M 41.703125 8.203125 
@@ -97,7 +97,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="p7cfaa66a8e">
+  <clipPath id="p8d63fc3ad5">
    <rect height="63.6314" width="130.89888" x="7.2" y="7.2"/>
   </clipPath>
  </defs>

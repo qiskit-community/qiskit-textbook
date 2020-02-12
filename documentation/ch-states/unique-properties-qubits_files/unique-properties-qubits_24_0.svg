@@ -19,12 +19,12 @@ z
   </g>
   <g id="axes_1">
    <g id="line2d_1">
-    <path clip-path="url(#p342d17fc69)" d="M 65.37728 43.5608 
+    <path clip-path="url(#pda11850f87)" d="M 65.37728 43.5608 
 L 133.55378 43.5608 
 " style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
    </g>
    <g id="patch_2">
-    <path clip-path="url(#p342d17fc69)" d="M 73.331205 58.332375 
+    <path clip-path="url(#pda11850f87)" d="M 73.331205 58.332375 
 L 102.874355 58.332375 
 L 102.874355 28.789225 
 L 73.331205 28.789225 
@@ -32,7 +32,7 @@ z
 " style="fill:#bb8bff;"/>
    </g>
    <g id="text_1">
-    <g clip-path="url(#p342d17fc69)">
+    <g clip-path="url(#pda11850f87)">
      <!-- $R_y$ -->
      <defs>
       <path d="M 25.203125 64.796875 
@@ -86,7 +86,7 @@ z
     </g>
    </g>
    <g id="text_2">
-    <g clip-path="url(#p342d17fc69)">
+    <g clip-path="url(#pda11850f87)">
      <!-- $-$0.785 -->
      <defs>
       <path d="M 10.59375 35.5 
@@ -206,7 +206,7 @@ z
     </g>
    </g>
    <g id="text_3">
-    <g clip-path="url(#p342d17fc69)">
+    <g clip-path="url(#pda11850f87)">
      <!-- $q$ -->
      <defs>
       <path d="M 41.703125 8.203125 
@@ -247,7 +247,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="p342d17fc69">
+  <clipPath id="pda11850f87">
    <rect height="63.6314" width="130.89888" x="7.2" y="7.2"/>
   </clipPath>
  </defs>

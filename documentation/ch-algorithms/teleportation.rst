@@ -5,6 +5,10 @@ This notebook demonstrates quantum teleportation. We first use Qiskit’s
 built-in simulator to test our quantum circuit, and then try it out on a
 real quantum computer.
 
+.. contents::
+   :local:
+
+
 The concept
 -----------
 

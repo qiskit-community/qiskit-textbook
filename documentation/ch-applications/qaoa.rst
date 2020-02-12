@@ -7,17 +7,9 @@ Approximate Optimization Algorithm (QAOA) works and present the
 implementation of an example that can be run on a simulator or on a 5
 qubit quantum chip
 
-Contents
---------
+.. contents::
+   :local:
 
-.. contents:: Quick links throughout the document:
-
-
-   -  5a `Running QAOA on a simulator <#implementationsim>`__
-   -  5b `Running QAOA on a real quantum device <#implementationdev>`__
-
-6. `Problems <#problems>`__
-7. `References <#references>`__
 
 1. Introduction 
 ----------------
@@ -85,16 +77,16 @@ others, i.e.
 .. math::  Z_i = \left(\begin{array}{cc} 1 & 0 \\ 0 & -1 \end{array}\right). 
 
 This means that the spin - Hamiltonian encoding the classical cost
-funtion is written as a :math:`|Q|` - local quantum spin Hamiltonain
+funtion is written as a :math:`|Q|` - local quantum spin Hamiltonian
 only involving Pauli :math:`Z`- operators.
 
 .. math::  H = \sum_{(Q,\overline{Q}) \subset [n]} w_{(Q,\overline{Q})} \; \frac{1}{2^{|Q| + |\overline{Q}|}}\prod_{i\in Q} \left(1 - Z_i\right) \; \prod_{j\in \overline{Q}} \left(1 + Z_j\right).
 
 Now, we will assume that only a few (polynomially many in :math:`n`)
-:math:`w_{(Q,\overline{Q})}` will be non-zero. Morover we will assume
+:math:`w_{(Q,\overline{Q})}` will be non-zero. Moreover we will assume
 that the set :math:`|(Q,\overline{Q})|` is bounded and not too large.
-This means we can write the cost function as well as the Hamiltonain
-:math:`H` as sum of :math:`m` local terms :math:`\hat{C}_k`,
+This means we can write the cost function as well as the Hamiltonian
+:math:`H` as the sum of :math:`m` local terms :math:`\hat{C}_k`,
 
 .. math::  H = \sum_{k = 1}^n \hat{C}_k, 
 
@@ -106,7 +98,7 @@ bounded.
 
 We consider 2 examples to illustrate combinatorial optimization
 problems. We will only implement the first example as in Qiskit, but
-provide a sequnce of excersises that give the instructions to implement
+provide a sequence of exercises that give the instructions to implement
 the second example as well.
 
 2.1 (weighted) :math:`MAXCUT`
@@ -123,7 +115,7 @@ to each node :math:`i`, one tries to maximize the global profit function
 
 .. math:: C(\textbf{x}) = \sum_{i,j = 1}^n w_{ij} x_i (1-x_j).
 
-To simplify notation, we assume unifrom weights $ w_{ij} = 1$ for
+To simplify notation, we assume uniform weights $ w_{ij} = 1$ for
 :math:`(i,j) \in E`. In order to find a solution to this problem on a
 quantum computer, one needs first to map it to a diagonal Hamiltonian as
 discussed above. We write the sum as a sum over edges in the set
@@ -131,7 +123,7 @@ discussed above. We write the sum as a sum over edges in the set
 
 .. math:: C(\textbf{x}) = \sum_{i,j = 1}^n w_{ij} x_i (1-x_j)  = \sum_{(i,j) \in E} \left( x_i (1-x_j) + x_j (1-x_i)\right)
 
-To map is to a spin Hamiltonain we make the assignment
+To map is to a spin Hamiltonian we make the assignment
 :math:`x_i\rightarrow (1-Z_i)/2`, where :math:`Z_i` is the Pauli Z
 operator that has eigenvalues :math:`\pm 1` and obtain
 :math:`X \rightarrow H`
@@ -146,10 +138,10 @@ This means that the Hamiltonian can be written as a sum of
 2.2 Constraint satisfaction problems and :math:`MAX \; 3-SAT`.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Another set of examples of a combinatorial optimizatino problem is
+Another example of a combinatorial optimization problem is
 :math:`3-SAT`. Here the cost function
 :math:`C(\textbf{x}) = \sum_{k = 1}^m c_k(\textbf{x})` is a sum of
-clasuses :math:`c_k(\textbf{x})` that constrain the values of :math:`3`
+clauses :math:`c_k(\textbf{x})` that constrain the values of :math:`3`
 bits of some :math:`\textbf{x} \in \{0,1\}^n` that participate in the
 clause. Consider for instance this example of a :math:`3-SAT` clause
 
@@ -172,7 +164,7 @@ which is again :math:`NP`-complete.
 3. Approximate optimization algorithms 
 ---------------------------------------
 
-Both the previsously considederd problems :math:`MAXCUT` and
+Both the previously considered problems :math:`MAXCUT` and
 :math:`MAX \; 3-SAT` are actually known to be a NP-hard problems
 `1 <#references>`__. In fact it turns out that many combinatorial
 optimization problems are computationally hard to solve in general. In
@@ -180,7 +172,7 @@ light of this fact, we can’t expect to find a provably efficient
 algorithm, i.e. an algorithm with polynomial runtime in the problem
 size, that solves these problems. This also applies to quantum
 algorithms. One possible approach to such problems is to develop
-heuristic algortihm that don’t have a polynomial runtime gurantee but
+heuristic algortihms that don’t have a polynomial runtime guarantee but
 appear to perform well on some instances of such problems. Another
 alternative are approximate algorithms.
 
@@ -189,7 +181,7 @@ Approximate optimization algorithms find approximate solutions to
 and provide a provable guarantee on how close the approximate solution
 is to the actual optimum of the problem.
 
-The guarantee typicall comes in form of an approximation ratio,
+The guarantee typically comes in the form of an approximation ratio,
 :math:`\alpha \leq 0`. A probabilistic approximate optimization
 algorithm guarantees that it produces a bit-string
 :math:`\textbf{x}^* \in \{0,1\}^n` so that *with high probability* we
@@ -201,11 +193,11 @@ have that with a postive
 For the :math:`MAXCUT` problem there is a famous approximate algorithm
 due to Goemans and Williamson `2 <#references>`__ . This algorithm is
 based on an SDP relaxation of the original problem combined with a
-probabilistic rounding techinque that yields an with high probabilty
-approxiamte solution :math:`\textbf{x}^*` that has an approximation
+probabilistic rounding technique that yields an with high probabilty
+approximate solution :math:`\textbf{x}^*` that has an approximation
 ratio of :math:`\alpha \approx 0.868`. This approximation ratio is
-actually believed to optimal so that we do not expect to see an
-improvement by using a quantum algorithm.
+actually believed to optimal so we do not expect to see an improvement
+by using a quantum algorithm.
 
 4. The QAOA algorithm 
 ----------------------
@@ -223,10 +215,10 @@ general idea of this approach.
 
 We want to find a quantum state
 :math:`|\psi_p(\vec{\gamma},\vec{\beta})\rangle`, that depends on some
-real paramters :math:`\vec{\gamma},\vec{\beta} \in \mathbb{R}^p`, which
-has the property that it maximizes the expectation vaue with repect to
+real parameters :math:`\vec{\gamma},\vec{\beta} \in \mathbb{R}^p`, which
+has the property that it maximizes the expectation value with respect to
 the problem Hamiltonian :math:`H`. Given this trial state we search for
-for parameters :math:`\vec{\gamma}^*,\vec{\beta}^*` that maximize
+parameters :math:`\vec{\gamma}^*,\vec{\beta}^*` that maximize
 :math:`F_p(\vec{\gamma},\vec{\beta}) = \langle \psi_p(\vec{\gamma},\vec{\beta})|H|\psi_p(\vec{\alpha},\vec{\beta})\rangle`.
 
 Once we have such a state and the corresponding parameters we prepare
@@ -280,11 +272,11 @@ follows from troterizing the adiabatic evolution with respect to
 :math:`H` and the transverse field Hamiltonian :math:`B`, c.f. Ref
 `3 <#references>`__.
 
-Converesely the disatvantage of this trial state is one would typically
-want a state that has been generated from a quantum cicruit that is not
+Conversely the disadvantage of this trial state is one would typically
+want a state that has been generated from a quantum circuit that is not
 too deep. Here depth is measured with respect to the gates that can be
-applied directly on the quantum chip. Hence there are other proposal
-that suggest using Ansatz trial state that are more tailerod to the
+applied directly on the quantum chip. Hence there are other proposals
+that suggest using Ansatz trial state that are more tailored to the
 Hardware of the quantum chip Ref. `4 <#references>`__, Ref.
 `5 <#references>`__.
 
@@ -299,7 +291,7 @@ or estimate the expectation value
     
    F_p(\vec{\gamma},\vec{\beta}) = \langle \psi_p(\vec{\gamma},\vec{\beta})|H|\psi_p(\vec{\alpha},\vec{\beta})\rangle 
 
-\ so we can optimize the parameters :math:`\vec{\gamma},\vec{\beta}`. We
+ so we can optimize the parameters :math:`\vec{\gamma},\vec{\beta}`. We
 will be considering two scenarios here.
 
 Classical evaluation
@@ -341,42 +333,41 @@ the support of the original :math:`\hat{C}_k`.
 Hence, for bounded degree interaction the support of
 :math:`e^{ i\gamma_1 H } e^{ i\beta_1 B } \hat{C}_k e^{ -i\beta_1 B } e^{ -i\gamma_1 H }`
 only expands by an amount given by the degree of the interaction in
-:math:`H` and is therefore independent of the sytem size. This means
+:math:`H` and is therefore independent of the system size. This means
 that for these smaller sub problems the expectation values are
-independedt of :math:`n` and can be evaluate classcially. The case of a
+independent of :math:`n` and can be evaluated classically. The case of a
 general degree :math:`3` is considered in `3 <#references>`__.
 
 This is a general observation, which means that if we have a problem
-where the circuit used for the trial state prepartion only increases the
-support of each term in the Hamiltonian by a constant amount the cost
-function an be directly evaluated.
+where the circuit used for the trial state preparation only increases
+the support of each term in the Hamiltonian by a constant amount the
+cost function can be directly evaluated.
 
 When this is the case, and only a few parameters :math:`\beta, \gamma`
-are needed in the pereparation of the trial state, these can be found
+are needed in the preparation of the trial state, these can be found
 easily by a simple grid search. Furthermore, an exact optimal value of
 :math:`M_p` can be used to bound the approximation ratio
 
 .. math::  \frac{M_p}{C_{max}} \geq \alpha 
 
 to obtain an estimate of :math:`\alpha`. For this case the QAOA
-algorithm has the same characteristcs as a conventional approximate
-optimization algorithm that comes with a garanteed approximation ratio
-that can be obtained with polynomail efficiency in the problem size.
+algorithm has the same characteristics as a conventional approximate
+optimization algorithm that comes with a guaranteed approximation ratio
+that can be obtained with polynomial efficiency in the problem size.
 
 Evaluation on a quantum computer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When the quantum circuit becomes to deep to be evalauted classically, or
-when the connectivity of the Problem Hamiltonian is too high we can
+When the quantum circuit becomes too deep to be evalauted classically,
+or when the connectivity of the Problem Hamiltonian is too high we can
 resort to other means of estimating the expectation value. This involves
 directly estimating :math:`F_p(\vec{\gamma},\vec{\beta})` on the quantum
 computer. The approach here follows the path of the conventional
-expectation value estimateion as used in -CITE - VQE, where a trial
-state :math:`| \psi(\vec{\gamma},\vec{\beta})` is prepared directly on
-the quantum computer and the expectation value is obtained from
-sampling.
+expectation value estimation as used in -CITE - VQE, where a trial state
+:math:`| \psi(\vec{\gamma},\vec{\beta})` is prepared directly on the
+quantum computer and the expectation value is obtained from sampling.
 
-Since QAOA has a diagonal Hamiltonain :math:`H` it is actually straight
+Since QAOA has a diagonal Hamiltonian :math:`H` it is actually straight
 forward to estimate the expectation value. We only need to obtain
 samples from the trial state in the computational basis. Recall that
 :math:`H = \sum_{x \in \{0,1\}^n} C(x) |x \rangle\langle x|` so that we
@@ -384,17 +375,17 @@ can obtain the sampling estimate of
 
 .. math::  \langle \psi_p(\vec{\gamma},\vec{\beta})|H|\psi_p(\vec{\alpha},\vec{\beta})\rangle = \sum_{x \in \{0,1\}^n} C(x) |\langle x| \psi_p(\vec{\gamma},\vec{\beta}) \rangle |^2
 
-by repreated single qubit measurements of the state $\|
+by repeated single qubit measurements of the state $\|
 :raw-latex:`\psi`\_p(:raw-latex:`\vec{\gamma}`,:raw-latex:`\vec{\beta}`)
 :raw-latex:`\rangle `$ in the :math:`Z` - basis. For every bit - string
 :math:`x` obtained from the distribution
 :math:`|\langle x| \psi_p(\vec{\gamma},\vec{\beta}) \rangle |^2` we
-evaluate the cost function :math:`C(x)` and avarage it over the the
-total number of samples. The resulting empirical avarage approximates
-the expectation value up to an additive sampling error that lies within
-the varaince of the state. The variance will be discussed below.
+evaluate the cost function :math:`C(x)` and average it over the total
+number of samples. The resulting empirical average approximates the
+expectation value up to an additive sampling error that lies within the
+variance of the state. The variance will be discussed below.
 
-With access to the expectaion value, we can now run a classical
+With access to the expectation value, we can now run a classical
 optimization algorithm, such as `6 <#references>`__, to optimize the
 :math:`F_p`.
 
@@ -427,6 +418,7 @@ all :math:`k = 1\ldots m`. Then consider
 
 .. math::
 
+
    \begin{eqnarray}
    \langle \psi_p(\vec{\gamma},\vec{\beta})|H^2|\psi_p(\vec{\alpha},\vec{\beta})\rangle - \langle \psi_p(\vec{\gamma},\vec{\beta})|H|\psi_p(\vec{\alpha},\vec{\beta})\rangle^2 &\leq & \langle \psi_p(\vec{\gamma},\vec{\beta})|H^2|\psi_p(\vec{\alpha},\vec{\beta})\rangle \\\nonumber
    &=& \sum_{k,l =1}^m  \langle \psi_p(\vec{\gamma},\vec{\beta})|\hat{C}_k \hat{C}_l |\psi_p(\vec{\alpha},\vec{\beta})\rangle \\\nonumber 
@@ -436,7 +428,7 @@ all :math:`k = 1\ldots m`. Then consider
 where we have used that
 :math:`\langle \psi_p(\vec{\gamma},\vec{\beta})|\hat{C}_k \hat{C}_l |\psi_p(\vec{\alpha},\vec{\beta})\rangle \leq \tilde{C}^2`.
 
-This means that the variance of any expetation
+This means that the variance of any expectation
 :math:`F_p(\vec{\gamma},\vec{\beta})` is bounded by
 :math:`m^2 \tilde{C}^2`. Hence this in particular applies for
 :math:`M_p`. Furthermore if :math:`m` only grows polynomially in the
@@ -535,16 +527,16 @@ In this example we consider the case for :math:`p = 1`, i.e. only layer
 of gates. The expectation value
 :math:`F_1(\gamma,\beta) = \langle \psi_1(\beta,\gamma)|H|\psi_1{\beta,\gamma}`
 can be calculated analytically for this simple setting. Let us discuss
-the steps explicityly for the Hamiltonian
+the steps explicitly for the Hamiltonian
 :math:`H = \sum_{(j,k) \in E} \frac{1}{2}\left(1 - Z_i Z_k)\right)`. Due
-to the linearity of the expectation value we can compute the expectaion
+to the linearity of the expectation value we can compute the expectation
 value for the edges individually
 
 .. math:: f_{(i,k)}(\beta,\alpha) =  \langle \psi_1(\gamma,\beta)|\;\frac{1}{2}\left(1 - Z_i Z_k)\right)\;|\psi_1(\gamma,\beta)\rangle. 
 
 For the butterfly graph as plotted above, we observe that there are only
 two kinds of edges :math:`A = \{(0,1),(3,4)\}` and
-:math:`B = \{(0,2),(1,2),(2,3),(2,4)\}`. The edges is :math:`A` only
+:math:`B = \{(0,2),(1,2),(2,3),(2,4)\}`. The edges in :math:`A` only
 have two neighboring edges, while the edges in :math:`B` have four. You
 can convince yourself that we only need to compute the expectation of a
 single edge in each set since the other expectation values will be the
@@ -575,7 +567,7 @@ and
 
 .. math:: f_B(\gamma,\beta) = \frac{1}{2}\left(1 - sin^2(2\beta)sin^2(2\gamma)cos^2(4\gamma) - \frac{1}{4}sin(4\beta)sin(4\gamma)(1+cos^2(4\gamma))\right) 
 
-These results can now be combined as discribed above, and we the
+These results can now be combined as described above, and the
 expectation value is therefore given by
 
 .. math::  F_1(\gamma,\beta) = 3 - \left(sin^2(2\beta)sin^2(2\gamma)- \frac{1}{2}sin(4\beta)sin(4\gamma)\right)\left(1  + cos^2(4\gamma)\right),
@@ -614,7 +606,7 @@ the expectation value.
     
     plt.show()
     
-    #The smallest paramters and the expectation can be extracted
+    #The smallest parameters and the expectation can be extracted
     print('\n --- OPTIMAL PARAMETERS --- \n')
     print('The maximal expectation value is:  M1 = %.03f' % np.amax(F1))
     print('This is attained for gamma = %.03f and beta = %.03f' % (gamma,beta))
@@ -636,7 +628,7 @@ the expectation value.
 5.3 Quantum circuit
 ~~~~~~~~~~~~~~~~~~~
 
-With these paramters we can now construct the circuit that prepares the
+With these parameters we can now construct the circuit that prepares the
 trial state for the Graph or the Graph :math:`G = (V,E)` described above
 with vertex set :math:`V = \{0,1,2,3,4\}` and the edges are
 :math:`E = \{(0,1),(0,2),(1,2),(3,2),(3,4),(4,2)\}`. The circuit is
@@ -653,7 +645,7 @@ generate the circuit we follow these steps:
 
 -  This is follow by :math:`6` Ising type gates :math:`U_{k,l}(\gamma)`
    with angle :math:`\gamma` along the edges :math:`(k,l) \in E`. This
-   gate can be extressed in terms of the native Qiskit gates as
+   gate can be expressed in terms of the native Qiskit gates as
 
 .. math::  U_{k,l}(\gamma) = C_{u1}(-2\gamma)_{k,l}u1(\gamma)_k u1(\gamma)_l
 
@@ -662,13 +654,13 @@ generate the circuit we follow these steps:
    gate directly parametrized as :math:`X_k(\beta) = R_x(2\beta)_k` in
    Qiskit.
 
--  In the last srep we measure the qubits in the computational basis,
+-  In the last step we measure the qubits in the computational basis,
    i.e. we perfrom a :math:`Z` - measurement and record the resulting
    bit-string :math:`x \in \{0,1\}^5`.
 
 .. code:: ipython3
 
-    # preapre the quantum and classical resisters
+    # prepare the quantum and classical resisters
     QAOA = QuantumCircuit(len(V), len(V))
     
     # apply the layer of Hadamard gates to all qubits
@@ -708,7 +700,7 @@ Finally, we need a routine to compute the cost function value from the
 bit string. This is necessary to decide whether we have found a “good
 candidate” bitstring :math:`x` but could also be used to estimate the
 expectation value :math:`F_1(\gamma,\beta)` in settings where the
-expectation value can not be evlautated directly.
+expectation value can not be evalutated directly.
 
 .. code:: ipython3
 
@@ -762,8 +754,8 @@ simulated data. We will use the obtained results to
    theoretical prediction
 -  Report the sampled bitstring :math:`x^*` with the largest observed
    cost function :math:`C(x^*)`
--  Plot the Historgram of the energies to see whether is indeed
-   concentrates around the prediceted mean
+-  Plot the Histogram of the energies to see whether it indeed
+   concentrates around the predicted mean
 
 .. code:: ipython3
 
@@ -806,9 +798,9 @@ simulated data. We will use the obtained results to
     
      --- SIMULATION RESULTS ---
     
-    The sampled mean value is M1_sampled = 3.29 while the true value is M1 = 3.43 
+    The sampled mean value is M1_sampled = 3.28 while the true value is M1 = 3.43 
     
-    The approximate solution is x* = 00101 with C(x*) = 4 
+    The approximate solution is x* = 10100 with C(x*) = 4 
     
     The cost function is distributed as: 
     
@@ -903,7 +895,7 @@ experimental result.
     
     The sampled mean value is M1_sampled = 3.04 while the true value is M1 = 3.43 
     
-    The approximate solution is x* = 00101 with C(x*) = 4 
+    The approximate solution is x* = 10100 with C(x*) = 4 
     
     The cost function is distributed as: 
     
@@ -919,7 +911,7 @@ experimental result.
 -----------
 
 0. The QAOA algortihm produces a bit string, is this string the optimal
-   solution for this graph? Compare the experiemental results from the
+   solution for this graph? Compare the experimental results from the
    superconducting chip with the results from the local QASM simulation.
 
 1. We have computed the cost function :math:`F_1` analytically in
@@ -936,7 +928,7 @@ experimental result.
    section `5.a / 5.b <#implementationsim>`__)
 
    -Use an optimizaion routine,e.g. SPSA from the VQE example in this
-   tutorial, to optimize the parmeters in the sampled
+   tutorial, to optimize the parameters in the sampled
    :math:`F_1(\gamma,\beta)` numerically. Do you find the same values
    for :math:`\gamma^*,\beta^*` ?
 
@@ -944,7 +936,7 @@ experimental result.
    corresponds to depth :math:`p=1` and was directly aimed at being
    compatible with the Hardware.
 
-   -Use the routine from exercise 2 to evaluate the the cost functions
+   -Use the routine from exercise 2 to evaluate the cost functions
    :math:`F_p(\gamma,\beta)` for :math:`p=2,3`. What do you expect to
    see in the actual Hardware?
 

@@ -16,9 +16,10 @@ operations. A prominent example is the Hadamard gate:
 
 .. math::
 
+
    H = |+\rangle\langle0|~+~ |-\rangle\langle1| = |0\rangle\langle+|~+~ |1\rangle\langle-|.
 
- This gate is expressed above using outer products, as described in the
+This gate is expressed above using outer products, as described in the
 last section. When expressed in this form, its famous effect becomes
 obvious: it takes :math:`|0\rangle`, and rotates it to
 :math:`|+\rangle`. More generally, we can say it rotates the basis
@@ -44,6 +45,7 @@ operations, for example:
 
 .. math::
 
+
    H X H = Z,\\\\
    H Z H = X.
 
@@ -58,11 +60,12 @@ conjugate,
 
 .. math::
 
+
    S X S^{\dagger} = Y,\\\\
    S Y S^{\dagger} = -X,\\\\
    S Z S^{\dagger} = Z.
 
- This has a similar effect to the Hadamard, except that it swaps
+This has a similar effect to the Hadamard, except that it swaps
 :math:`X` and :math:`Y` instead of :math:`X` and :math:`Z`. In
 combination with the Hadamard, we could then make a composite gate that
 shifts information between y and z. This therefore gives us full control
@@ -81,11 +84,12 @@ with. For example,
 
 .. math::
 
+
    Z X Z = -X,\\\\
    Z Y Z = -Y,\\\\
    Z Z Z= ~~~~Z.
 
- You may have noticed that a similar phase also arose in the effect of
+You may have noticed that a similar phase also arose in the effect of
 the :math:`S` gate. By combining this with a Pauli, we could make a
 composite gate that would cancel this phase, and swap :math:`X` and
 :math:`Y` in a way more similar to the Hadamard’s swap of :math:`X` and
@@ -98,9 +102,10 @@ property of this that we will make use of in this chapter is
 
 .. math::
 
+
    { CX}_{j,k}~ (X \otimes 1)~{ CX}_{j,k} = X \otimes X.
 
- This effectively ‘copies’ an :math:`X` from the control qubit over to
+This effectively ‘copies’ an :math:`X` from the control qubit over to
 the target.
 
 The process of sandwiching a matrix between a unitary and its Hermitian
@@ -124,18 +129,20 @@ matrix. For this gate, we find
 
 .. math::
 
+
    R_x(\theta) = e^{i \frac{\theta}{2} X}.
 
- The last section also showed us that the unitary and its corresponding
+The last section also showed us that the unitary and its corresponding
 Hermitian matrix have the same eigenstates. In this section, we’ve seen
 that conjugation by a unitary transforms eigenstates and leaves
 eigenvalues unchanged. With this in mind, it can be shown that
 
 .. math::
 
+
    U R_x(\theta)U^\dagger = e^{i \frac{\theta}{2} ~U X U^\dagger}.
 
- By conjugating this rotation by a Clifford, we can therefore transform
+By conjugating this rotation by a Clifford, we can therefore transform
 it to the same rotation around another axis. So even if we didn’t have a
 direct way to perform :math:`R_y(\theta)` and :math:`R_z(\theta)`, we
 could do it with :math:`R_x(\theta)` combined with Clifford gates. This
@@ -158,9 +165,10 @@ let’s conjugate it with a CNOT.
 
 .. math::
 
+
    CX_{j,k} ~(R_x(\theta) \otimes 1)~ CX_{j,k} = CX_{j,k} ~ e^{i \frac{\theta}{2} ~ (X\otimes 1)}~ CX_{j,k} = e^{i \frac{\theta}{2} ~CX_{j,k} ~ (X\otimes 1)~ CX_{j,k}} = e^{i \frac{\theta}{2} ~ X\otimes X}
 
- This transforms our simple, single-qubit rotation into a much more
+This transforms our simple, single-qubit rotation into a much more
 powerful two-qubit gate. This is not just equivalent to performing the
 same rotation independently on both qubits. Instead, it is a gate
 capable of generating and manipulating entangled states.
@@ -176,16 +184,18 @@ there into a :math:`Y`:
 
 .. math::
 
+
    S ~e^{i \frac{\theta}{2} ~ X\otimes X}~S^\dagger = e^{i \frac{\theta}{2} ~ X\otimes Y}.
 
- With these techniques, we can make complex entangling operations that
+With these techniques, we can make complex entangling operations that
 act on any arbitrary number of qubits, of the form
 
 .. math::
 
+
    U = e^{i\frac{\theta}{2} ~ P_{n-1}\otimes P_{n-2}\otimes...\otimes P_0}, ~~~ P_j \in \{I,X,Y,Z\}.
 
- This all goes to show that combining the single and two-qubit Clifford
+This all goes to show that combining the single and two-qubit Clifford
 gates with rotations around the x axis gives us a powerful set of
 possibilities. What’s left to demonstrate is that we can use them to do
 anything.
