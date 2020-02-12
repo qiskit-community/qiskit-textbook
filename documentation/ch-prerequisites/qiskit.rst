@@ -1,5 +1,8 @@
 Basic Qiskit Syntax
 ===================
+.. contents:: Contents
+   :local:
+
 
 Installation
 ~~~~~~~~~~~~

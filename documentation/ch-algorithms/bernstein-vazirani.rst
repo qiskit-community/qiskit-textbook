@@ -5,7 +5,7 @@ In this section, we first introduce the Bernstein-Vazirani problem, and
 classical and quantum algorithms to solve it. We then implement the
 quantum algorithm using Qiskit, and run on a simulator and device.
 
-.. contents::
+.. contents:: Contents
    :local:
 
 

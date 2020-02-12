@@ -1,5 +1,8 @@
 Upcoming topics
 ===============
+.. contents:: Contents
+   :local:
+
 
 The following topics are currently being developed for addition to the
 textbook.

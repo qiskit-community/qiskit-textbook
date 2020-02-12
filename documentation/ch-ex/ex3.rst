@@ -1,5 +1,10 @@
 Building the Best AND Gate
 ==========================
+.. contents:: Contents
+   :local:
+
+
+Let’s import everything:
 
 .. code:: ipython3
 

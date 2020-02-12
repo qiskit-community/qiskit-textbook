@@ -4,7 +4,7 @@ Solving Satisfiability Problems using Grover’s Algorithm
 In this section, we demonstrate how to solve satisfiability problems
 using the implementation of Grover’s algorithm in Qiskit Aqua.
 
-.. contents::
+.. contents:: Contents
    :local:
 
 

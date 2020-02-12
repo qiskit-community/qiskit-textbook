@@ -1,5 +1,8 @@
 Quantum Gates
 =============
+.. contents:: Contents
+   :local:
+
 
 .. code:: ipython3
 

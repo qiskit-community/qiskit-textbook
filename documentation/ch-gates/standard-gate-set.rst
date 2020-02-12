@@ -1,5 +1,8 @@
 The Standard Gate Set
 =====================
+.. contents:: Contents
+   :local:
+
 
 For every possible realization of fault-tolerant quantum computing,
 there is a set of quantum operations that are most straightforward to

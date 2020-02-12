@@ -5,7 +5,7 @@ In this tutorial, we introduce the quantum fourier transform (QFT),
 derive the circuit, and implement it using Qiskit. We show how to run
 QFT on a simulator and a five qubit device.
 
-.. contents::
+.. contents:: Contents
    :local:
 
 

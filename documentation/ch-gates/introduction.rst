@@ -1,5 +1,8 @@
 Introduction
 ============
+.. contents:: Contents
+   :local:
+
 
 Just having some qubits is not enough: We also need to manipulate them.
 All possible ways of doing this can be compiled down to a basic set of

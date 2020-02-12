@@ -1,5 +1,8 @@
 Introduction to Python and Jupyter notebooks
 --------------------------------------------
+.. contents:: Contents
+   :local:
+
 
 Python is a programming language where you don’t need to compile. You
 can just run it line by line (which is how we can use it in a notebook).

@@ -1,5 +1,8 @@
 The Atoms of Computation
 ========================
+.. contents:: Contents
+   :local:
+
 
 Programming a quantum computer is now something that anyone can do in
 the comfort of their own home.

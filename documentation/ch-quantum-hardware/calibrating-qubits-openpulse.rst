@@ -22,7 +22,7 @@ Each experiment gives us more information about the system, which is
 typically used in subsequent experiments. For this reason, this notebook
 has to be mostly executed in order.
 
-.. contents::
+.. contents:: Contents
    :local:
 
 

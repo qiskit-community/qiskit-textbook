@@ -1,20 +1,9 @@
 Quantum Phase Estimation
 ========================
 
-1. `Overview <#overview>`__
-   1.1 `Intuition <#intuition>`__
-   1.2 `Mathematical Basis <#maths>`__
-2. `Example: T-gate <#example_t_gate>`__
-   2.1 `Creating the Circuit <#creating_the_circuit>`__
-   2.2 `Results <#results>`__
-3. `Getting More Precision <#getting_more_precision>`__
-   3.1 `The Problem <#the_problem>`__
-   3.2 `The Solution <#the_solution>`__
-4. `Experimenting on Real Devices <#real_devices>`__
-   4.1 `With the Circuit from 2.1 <#circuit_2.1>`__
-5. `Exercises <#exercises>`__
-6. `Looking Forward <#looking_forward>`__
-7. `References <#references>`__
+.. contents:: Contents
+   :local:
+
 
 Quantum phase estimation is one of the most important subroutines in
 quantum computation. It serves as a central building block for many
@@ -477,7 +466,7 @@ The two most likely measurements are now ``01011`` (decimal 11) and
 
    \theta = \frac{11}{2^5} = 0.344,\;\text{  or  }\;\; \theta = \frac{10}{2^5} = 0.313
 
- These two results differ from :math:`\frac{1}{3}` by 3% and 6%
+These two results differ from :math:`\frac{1}{3}` by 3% and 6%
 respectively. A much better precision!
 
 4. Experiment with Real Devices 

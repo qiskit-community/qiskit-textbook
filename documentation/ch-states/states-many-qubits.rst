@@ -1,5 +1,8 @@
 States for Many Qubits
 ======================
+.. contents:: Contents
+   :local:
+
 
 .. code:: ipython3
 

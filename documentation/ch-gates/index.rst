@@ -1,5 +1,14 @@
 Single Qubits and Multi-Qubits gates
 ====================================
+.. contents:: Contents
+   :local:
+
+.. contents:: Contents
+   :local:
+
+.. contents::
+   :local:
+
 
 .. toctree::
   :hidden:

@@ -5,7 +5,7 @@ In this section, we introduce Grover’s algorithm and how it can be used
 to solve unstructured search problems. We then implement the quantum
 algorithm using Qiskit, and run on a simulator and device.
 
-.. contents::
+.. contents:: Contents
    :local:
 
 

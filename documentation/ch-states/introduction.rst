@@ -1,5 +1,8 @@
 Introduction
 ============
+.. contents:: Contents
+   :local:
+
 
 If you think quantum mechanics sounds challenging, you are not alone.
 All of our intuitions are based on day-to-day experiences, and so are

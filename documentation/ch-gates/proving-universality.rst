@@ -1,5 +1,8 @@
 Proving Universality
 ====================
+.. contents:: Contents
+   :local:
+
 
 What does it mean for a computer to do everything that it could possibly
 do? This was a question tackled by Alan Turing before we even had a good

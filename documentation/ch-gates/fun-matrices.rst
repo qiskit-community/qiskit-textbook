@@ -1,5 +1,8 @@
 Fun with Matrices
 =================
+.. contents:: Contents
+   :local:
+
 
 Manipulating matrices is the heart of how we analyze quantum programs.
 In this section we’ll look at some of the most common tools that can be

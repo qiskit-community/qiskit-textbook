@@ -5,7 +5,7 @@ This notebook demonstrates Superdense Coding (SDC) in quantum computing.
 We first use Qiskit’s simulator to test our quantum circuit, and then
 try it out on a real quantum computer.
 
-.. contents::
+.. contents:: Contents
    :local:
 
 

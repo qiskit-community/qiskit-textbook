@@ -1,5 +1,8 @@
 Basic Circuit Identities
 ========================
+.. contents:: Contents
+   :local:
+
 
 .. code:: ipython3
 

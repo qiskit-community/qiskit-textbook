@@ -1,5 +1,8 @@
 Basic Synthesis of Single-Qubit Gates
 =====================================
+.. contents:: Contents
+   :local:
+
 
 .. code:: ipython3
 

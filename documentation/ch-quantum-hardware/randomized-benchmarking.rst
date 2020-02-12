@@ -1,5 +1,8 @@
 Randomized Benchmarking
 =======================
+.. contents:: Contents
+   :local:
+
 
 Introduction
 ------------

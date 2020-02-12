@@ -1,12 +1,8 @@
-.. raw:: html
-
-   <h1>
-
 An Introduction to Linear Algebra for Quantum Computing
+=======================================================
+.. contents:: Contents
+   :local:
 
-.. raw:: html
-
-   </h1>
 
 .. code:: ipython3
 

@@ -1,5 +1,8 @@
 The Unique Properties of Qubits
 ===============================
+.. contents:: Contents
+   :local:
+
 
 .. code:: ipython3
 

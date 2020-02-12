@@ -5,7 +5,7 @@ In this tutorial, we introduce the Variational Quantum Eigensolver
 (VQE), motivate its use, explain the necessary theory, and demonstrate
 its implementation in finding the ground state energy of molecules.
 
-.. contents::
+.. contents:: Contents
    :local:
 
 

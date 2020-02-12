@@ -8,7 +8,7 @@ the quantum counting algorithm tells us how many of these solutions
 there are. This algorithm is interesting as it combines both quantum
 search and quantum phase estimation.
 
-.. contents::
+.. contents:: Contents
    :local:
 
 

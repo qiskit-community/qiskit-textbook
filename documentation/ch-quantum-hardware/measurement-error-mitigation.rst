@@ -1,5 +1,8 @@
 Measurement Error Mitigation
 ============================
+.. contents:: Contents
+   :local:
+
 
 .. code:: ipython3
 

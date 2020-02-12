@@ -1,5 +1,8 @@
 Pauli Matrices and the Bloch Sphere
 ===================================
+.. contents:: Contents
+   :local:
+
 
 .. code:: ipython3
 

@@ -1,5 +1,8 @@
 Measuring Quantum Volume
 ========================
+.. contents:: Contents
+   :local:
+
 
 Introduction
 ------------

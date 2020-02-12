@@ -1,5 +1,14 @@
 Introduction to Python and Jupyter notebooks
 ============================================
+.. contents:: Contents
+   :local:
+
+.. contents:: Contents
+   :local:
+
+.. contents::
+   :local:
+
 
 .. toctree::
   :hidden:

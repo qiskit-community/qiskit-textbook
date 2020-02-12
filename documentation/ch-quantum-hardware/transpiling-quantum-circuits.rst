@@ -1,5 +1,8 @@
 Transpiling Quantum Circuits
 ============================
+.. contents:: Contents
+   :local:
+
 
 In this chapter we will investigate how quantum circuits are transformed
 when run on quantum devices. That we need to modify the circuits at all

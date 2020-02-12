@@ -35,6 +35,7 @@ def replace_contents(filename):
     out = ""
     in_contents = False
     emptylines = 0
+    contents_added = False
     with open(filename) as f:
         for line in f:
             if line == "Contents\n":
@@ -43,10 +44,24 @@ def replace_contents(filename):
                 if emptylines == 0:
                     emptylines += 1
                 else:
-                    out += ".. contents::\n   :local:\n\n"
+                    out += ".. contents:: Contents\n   :local:\n\n"
                     in_contents = False
+                    contents_added = True
             if not in_contents:
                 out += line
+    with open(filename, 'w') as f:
+        f.write(out)
+    return contents_added
+
+def add_contents(filename):
+    out = ""
+    count = 0
+    with open(filename) as f:
+        for line in f:
+            count += 1
+            out += line
+            if count == 2: 
+                out += ".. contents:: Contents\n   :local:\n\n"
     with open(filename, 'w') as f:
         f.write(out)
     return 0
@@ -72,5 +87,7 @@ for directory in os.listdir(filepath):
             if str(file)[-4:] == ".rst":
                 fullpath = filepath + directory + "/" + file
                 remove_figure_captions(fullpath)
-                replace_contents(fullpath)
+                contents_added = replace_contents(fullpath)
+                if not contents_added:
+                    add_contents(fullpath)
                 fix_matrices(fullpath)

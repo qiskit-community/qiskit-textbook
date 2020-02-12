@@ -7,7 +7,7 @@ Approximate Optimization Algorithm (QAOA) works and present the
 implementation of an example that can be run on a simulator or on a 5
 qubit quantum chip
 
-.. contents::
+.. contents:: Contents
    :local:
 
 
@@ -288,10 +288,10 @@ or estimate the expectation value
 
 .. math::
 
-    
+
    F_p(\vec{\gamma},\vec{\beta}) = \langle \psi_p(\vec{\gamma},\vec{\beta})|H|\psi_p(\vec{\alpha},\vec{\beta})\rangle 
 
- so we can optimize the parameters :math:`\vec{\gamma},\vec{\beta}`. We
+so we can optimize the parameters :math:`\vec{\gamma},\vec{\beta}`. We
 will be considering two scenarios here.
 
 Classical evaluation

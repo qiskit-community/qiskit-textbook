@@ -1,5 +1,8 @@
 Writing Down Qubit States
 =========================
+.. contents:: Contents
+   :local:
+
 
 .. code:: ipython3
 

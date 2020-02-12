@@ -1,5 +1,8 @@
 .. raw:: html
 
+.. contents:: Contents
+   :local:
+
    <h1>
 
 The Variational Quantum Linear Solver

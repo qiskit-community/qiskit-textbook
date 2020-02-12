@@ -1,5 +1,8 @@
 Introduction to Quantum Error Correction via the Repetition Code
 ================================================================
+.. contents:: Contents
+   :local:
+
 
 Introduction
 ------------

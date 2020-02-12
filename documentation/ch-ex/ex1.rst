@@ -1,5 +1,8 @@
 Classical Logic Gates with Quantum Circuits
 ===========================================
+.. contents:: Contents
+   :local:
+
 
 .. code:: ipython3
 
