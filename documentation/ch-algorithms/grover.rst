@@ -242,7 +242,7 @@ The oracle :math:`U_f` in this case acts as follows:
 
 .. math:: U_f \lvert s \rangle = U_f\frac{1}{2}\left( \lvert 00 \rangle + \lvert 01 \rangle + \lvert 10 \rangle + \lvert 11 \rangle \right) = \frac{1}{2}\left( \lvert 00 \rangle + \lvert 01 \rangle + \lvert 10 \rangle - \lvert 11 \rangle \right).
 
-\ In order to realize the sign flip for :math:`\lvert 11 \rangle` we
+In order to realize the sign flip for :math:`\lvert 11 \rangle` we
 simply need to apply a controlled Z gate to the initial state. This
 leads to the following circuit:
 
@@ -258,9 +258,9 @@ In the case of :math:`\lvert w \rangle = \lvert 00 \rangle` the oracle
 
 .. math:: U_f \lvert s \rangle = U_f\frac{1}{2}\left( \lvert 00 \rangle + \lvert 01 \rangle + \lvert 10 \rangle + \lvert 11 \rangle \right) = \frac{1}{2}\left( -\lvert 00 \rangle + \lvert 01 \rangle + \lvert 10 \rangle + \lvert 11 \rangle \right).
 
-\ In order to realize the sign flip for :math:`\lvert 00 \rangle` we
-need to apply an “inverted” controlled Z gate to the initial state
-leading to the following circuit:
+In order to realize the sign flip for :math:`\lvert 00 \rangle` we need
+to apply an “inverted” controlled Z gate to the initial state leading to
+the following circuit:
 
 .. figure:: images/grover_circuit_2qbuits_oracle_00.png
    :alt: image7
@@ -286,7 +286,7 @@ follows
 
 .. math:: U_s \frac{1}{2}\left( \lvert 00 \rangle + \lvert 01 \rangle + \lvert 10 \rangle + \lvert 11 \rangle \right) = \frac{1}{2}\left( \lvert 00 \rangle - \lvert 01 \rangle - \lvert 10 \rangle - \lvert 11 \rangle \right),
 
-\ i.e. the signs of each state are flipped except for
+i.e. the signs of each state are flipped except for
 :math:`\lvert 00 \rangle`. As can easily be verified, one way of
 implementing :math:`U_s` is the following circuit:
 

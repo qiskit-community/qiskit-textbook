@@ -130,7 +130,7 @@ x :raw-latex:`\oplus `s $. Therefore the first register becomes:
 
 .. math:: \lvert \psi_4 \rangle = \frac{1}{\sqrt{2}}  \left( \lvert x \rangle + \lvert y \rangle \right)
 
- where we omitted the second register since it has been measured.
+where we omitted the second register since it has been measured.
 
 .. raw:: html
 
@@ -156,7 +156,7 @@ Measuring the first register will give an output of:
 
 .. math::  (-1)^{x \cdot z} = (-1)^{y \cdot z} 
 
- which means:
+which means:
 
 .. math::
 
@@ -168,11 +168,11 @@ Measuring the first register will give an output of:
 A string :math:`z` whose inner product with :math:`s` will be measured.
 Thus, repeating the algorithm :math:`\approx n` times, we will be able
 to obtain :math:`n` different values of :math:`z` and the following
-system of equation can be written
+system of equation can be written:
 
 .. math::  \begin{cases} s \cdot z_1 = 0 \\ s \cdot z_2 = 0 \\ ... \\ s \cdot z_n = 0 \end{cases}
 
- From which :math:`s` can be determined, for example by Gaussian
+From which :math:`s` can be determined, for example by Gaussian
 elimination.
 
 .. raw:: html
@@ -296,12 +296,11 @@ Apply Hadamard on the first register
 
    <li>
 
-| Measuring the first register will give either
-  :math:`\lvert 0, 0 \rangle` or :math:`\lvert 1, 1 \rangle` with equal
-  probability. If we see :math:`\lvert 1, 1 \rangle`, then:
-| 
+Measuring the first register will give either
+:math:`\lvert 0, 0 \rangle` or :math:`\lvert 1, 1 \rangle` with equal
+probability. If we see :math:`\lvert 1, 1 \rangle`, then:
 
-  .. math::  s \cdot 11 = 0 
+.. math::  s \cdot 11 = 0 
 
 This is one equation, but :math:`s` has two variables. Therefore, we
 need to repeat the algorithm at least another time to have enough

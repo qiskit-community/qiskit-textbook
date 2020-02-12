@@ -8,18 +8,9 @@ the quantum counting algorithm tells us how many of these solutions
 there are. This algorithm is interesting as it combines both quantum
 search and quantum phase estimation.
 
-1. `Overview <#overview>`__
-   1.1 `Intuition <#intuition>`__
-   1.2 `A Closer Look <#closer_look>`__
-2. `The Code <#code>`__
-   2.1 `Initialising our Code <#init_code>`__
-   2.2 `The Controlled-Grover Iteration <#cont_grover>`__
-   2.3 `The Inverse QFT <#inv_qft>`__
-   2.4 `Putting it Together <#putting_together>`__
-3. `Simulating <#simulating>`__
-4. `Finding the Number of Solutions <#finding_m>`__
-5. `Exercises <#exercises>`__
-6. `References <#references>`__
+.. contents::
+   :local:
+
 
 1. Overview 
 ------------

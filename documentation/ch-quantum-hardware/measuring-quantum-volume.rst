@@ -50,7 +50,7 @@ More precisely, a **QV circuit** with **depth :math:`d`** and **width
 
 .. math::  U^{(t)} = U^{(t)}_{\pi_t(m'-1),\pi_t(m)} \otimes ... \otimes U^{(t)}_{\pi_t(1),\pi_t(2)} 
 
- each labeled by times :math:`t = 1 ... d` and acting on
+each labeled by times :math:`t = 1 ... d` and acting on
 :math:`m' = 2 \lfloor n/2 \rfloor` qubits. Each layer is specified by
 choosing a uniformly random permutation :math:`\pi_t \in S_m` of the
 :math:`m` qubit indices and sampling each :math:`U^{(t)}_{a,b}`, acting
@@ -254,7 +254,7 @@ the *heavy outputs* are
 
 .. math::  H_U = \{ x \in \{0,1\}^m \text{ such that } p_U(x)>p_{med} \}.
 
- The heavy output generation problem is to produce a set of output
+The heavy output generation problem is to produce a set of output
 strings such that more than two-thirds are heavy.
 
 As an illustration, we print the heavy outputs from various depths and

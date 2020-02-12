@@ -174,7 +174,7 @@ modeled by the operation:
 
 .. math:: \textit{S}_{\textbf{i}_\textbf{m}} = \bigcirc_{j=1}^{m+1} (\Lambda_{i_j,j} \circ C_{i_j})
 
- where :math:`{\textbf{i}_\textbf{m}} = (i_1,...,i_m)` and
+where :math:`{\textbf{i}_\textbf{m}} = (i_1,...,i_m)` and
 :math:`i_{m+1}` is uniquely determined by
 :math:`{\textbf{i}_\textbf{m}}`.
 
@@ -215,11 +215,11 @@ the averaged sequence **fidelity**,
 
 .. math:: F_{seq}(m,|\psi{\rangle}) = Tr[E_\psi \textit{S}_{K_m}(\rho_\psi)]
 
- where
+where
 
 .. math:: \textit{S}_{K_m} = \frac{1}{K_m} \sum_{\textbf{i}_\textbf{m}} \textit{S}_{\textbf{i}_\textbf{m}}
 
- is the average sequence operation.
+is the average sequence operation.
 
 Step 5: Fit the results
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -229,7 +229,7 @@ results for the averaged sequence fidelity to the model:
 
 .. math::  \textit{F}_{seq}^{(0)} \big(m,{|}\psi {\rangle} \big) = A_0 \alpha^m +B_0
 
- where :math:`A_0` and :math:`B_0` absorb state preparation and
+where :math:`A_0` and :math:`B_0` absorb state preparation and
 measurement errors as well as an edge effect from the error on the final
 gate.
 
@@ -238,7 +238,7 @@ also called **Error per Clifford (EPC)** according to the relation
 
 .. math::  r = 1-\alpha-\frac{1-\alpha}{2^n} = \frac{2^n-1}{2^n}(1-\alpha)
 
- (where :math:`n=nQ` is the number of qubits).
+(where :math:`n=nQ` is the number of qubits).
 
 As an example, we calculate the average sequence fidelity for each of
 the RB sequences, fit the results to the exponential curve, and compute
@@ -346,8 +346,8 @@ a *twirl*:
 
 .. math::  W_G(\bar \Lambda) \frac{1}{|G|} \sum_{u \in G} U^{\dagger} \circ  \bar \Lambda \circ U
 
- Twirling over the entire unitary group yields exactly the same result
-as the Clifford group. The Clifford group is a *2-design* of the unitary
+Twirling over the entire unitary group yields exactly the same result as
+the Clifford group. The Clifford group is a *2-design* of the unitary
 group.
 
 Simultaneous Randomized Benchmarking

@@ -5,7 +5,8 @@ Created on Mon Jan 27 16:27:23 2020
 
 @author: frankharkins
 
-This belongs in the "scripts" folder, it removes the figure captions put there by nbconvert
+This belongs in the "scripts" folder, it fixes some issues present in the notebooks
+This should not be run!
 
 """
 
@@ -30,9 +31,21 @@ def html_img_to_md(filename):
     with open(filename, 'w') as f:
         f.write(out)
 
+def space_equations(filename):
+    out = ""
+    with open(filename) as f:
+        for line in f:
+            if line.count("$$") == 2:
+                splitline = line.split("$$")
+                line = splitline[0] + "\\n$$" + splitline[1] + "$$\\n" + splitline[2]
+            out += line
+    with open(filename, 'w') as f:
+        f.write(out)
+
 print("\nPreprocessing Notebooks Before Conversion...")
 for directory in os.listdir(filepath):
     if os.path.isdir(filepath + directory):
         for file in os.listdir(filepath + directory):
             if str(file)[-6:] == ".ipynb":
                 html_img_to_md(filepath + directory + "/" + file)
+                space_equations(filepath + directory + "/" + file)

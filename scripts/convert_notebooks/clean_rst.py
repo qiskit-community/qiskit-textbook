@@ -5,7 +5,7 @@ Created on Mon Jan 27 16:27:23 2020
 
 @author: frankharkins
 
-This belongs in the "scripts" folder, it removes the figure captions put there by nbconvert
+This belongs in the "scripts" folder, it sorts out some formatting issues in the conversion between .ipynb and .rst
 
 """
 

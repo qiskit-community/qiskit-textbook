@@ -251,11 +251,11 @@ Hamiltonian
 
 .. math::  H = \sum_{k = 1}^m \hat{C}_k 
 
- diagonal in the computational basis and a transverse field Hamiltonian
+diagonal in the computational basis and a transverse field Hamiltonian
 
 .. math::  B = \sum_{i = 1}^n X_i 
 
- the trial state is prepared by applying :math:`p` alternating unitaries
+the trial state is prepared by applying :math:`p` alternating unitaries
 
 .. math::  |\psi_p(\vec{\gamma},\vec{\beta})\rangle = e^{ -i\beta_p B } e^{ -i\gamma_p H } \ldots e^{ -i\beta_1 B } e^{ -i\gamma_1 H } |+\rangle^n 
 
