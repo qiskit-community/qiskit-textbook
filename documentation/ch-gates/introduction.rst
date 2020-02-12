@@ -23,3 +23,4 @@ Toffoli from single- and two-qubit operations.
 .. figure:: https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/640242cc209e48a699164d98922cc60ebasic3.png
    :alt: A Toffoli made from single- and two-qubit gates
 
+

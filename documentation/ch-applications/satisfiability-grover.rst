@@ -10,7 +10,6 @@ Contents
 .. contents:: Quick links throughout the document:
 
 
-
 2. `3-Satisfiability Problem <#3satproblem>`__
 
 3. `Qiskit Implementation <#implementation>`__

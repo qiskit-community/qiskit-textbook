@@ -48,6 +48,7 @@ below.
 .. figure:: images/transpiling_core_steps.png
    :alt: core_steps
 
+
 Our goal in this section is to see what each of these “passes” does at a
 high-level, and then begin exploring their usage on a set of common
 circuits.

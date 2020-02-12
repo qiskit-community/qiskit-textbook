@@ -4,11 +4,11 @@ Quantum States and Qubits
 .. toctree::
   :hidden:
 
-  The Atoms of Computation. <atoms-computation>
-  The Unique Properties of Qubits. <unique-properties-qubits>
-  Writing Down Qubit States. <writing-down-qubit-states>
-  Pauli Matrices and the Bloch Sphere. <pauli-matrices-bloch-sphere>
-  States for Many Qubits. <states-many-qubits>
+  The Atoms of Computation <atoms-computation>
+  The Unique Properties of Qubits <unique-properties-qubits>
+  Writing Down Qubit States <writing-down-qubit-states>
+  Pauli Matrices and the Bloch Sphere <pauli-matrices-bloch-sphere>
+  States for Many Qubits <states-many-qubits>
 
 If you think quantum mechanics sounds challenging, you are not alone.
 All of our intuitions are based on day-to-day experiences, and so are

@@ -485,6 +485,7 @@ states.
 .. figure:: https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/4efe86a907a64a59a720b4dc54a98a88iden1.png
    :alt: A controlled version of a gate V
 
+
 Here ``A``, ``B`` and ``C`` are gates that implement :math:`A` ,
 :math:`B` and :math:`C`, respectively, and must be defined as custom
 gates. For example, if we wanted :math:`A` to be :math:`R_x(\pi/4)`, the
@@ -532,6 +533,7 @@ controls are qubits :math:`a` and :math:`b`, and the target is qubit
 .. figure:: https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/693974b222d24dba9111e02ae25e9151iden2.png
    :alt: A doubly controlled version of a gate V
 
+
 By tracing through each value of the two control qubits, you can
 convince yourself that a U gate is applied to the target qubit if and
 only if both controls are 1. Using ideas we have already described, you
@@ -541,6 +543,7 @@ CNOT gates required to implement the Toffoli gate is six [2].
 
 .. figure:: https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/b3cbeb9b7d674d60a75bed351e4f2bcbiden3.png
    :alt: A Toffoli
+
 
 The Toffoli is not the unique way to implement an AND gate in quantum
 computing. We could also define other gates that have the same effect,

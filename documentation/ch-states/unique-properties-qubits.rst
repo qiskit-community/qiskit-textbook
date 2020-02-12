@@ -70,6 +70,7 @@ operation looks like this.
 .. figure:: https://s3.us-south.cloud-object-storage.appdomain.cloud/strapi/e8401fb5e3ff4cd18590010209203bc4uni1.png
    :alt: A z measurement
 
+
 This version has a small ‘z’ written in the box that represents the
 operation. This hints at the fact that this kind of measurement is not
 the only one. In fact, it is only one of an infinite number of possible

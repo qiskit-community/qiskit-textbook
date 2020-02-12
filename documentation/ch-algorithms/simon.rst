@@ -11,6 +11,21 @@ Contents
 .. contents:: Quick links throughout the document:
 
 
+   -  `Simon’s Problem <#problem>`__
+   -  `Simon’s Algorithm <#algorithm>`__
+
+2. `Example <#example>`__
+
+3. `Qiskit Implementation <#implementation>`__
+
+   -  `Simulation <#simulation>`__
+   -  `Device <#device>`__
+
+4. `Oracle <#oracle>`__
+
+5. `Problems <#problems>`__
+
+6. `References <#references>`__
 
 1. Introduction 
 ----------------
@@ -39,15 +54,15 @@ functions have the following properties:
 
    .. math::
 
+
       \textrm{where:  given }x_1,x_2: \quad f(x_1) = f(x_2) \\\\
       \textrm{it is guaranteed }: \quad x_1 \oplus x_2 = s
 
-    Thus, given this blackbox :math:`f`, how quickly can we determine if
-   :math:`f` is one-to-one or two-to-one? Then, if :math:`f` turns out
-   to be two-to-one, how quickly can we determine :math:`s`? As it turns
-   out, both cases boil down to the same problem of finding :math:`s`,
-   where a bitstring of :math:`s={000...}` represents the one-to-one
-   :math:`f`.
+Thus, given this blackbox :math:`f`, how quickly can we determine if
+:math:`f` is one-to-one or two-to-one? Then, if :math:`f` turns out to
+be two-to-one, how quickly can we determine :math:`s`? As it turns out,
+both cases boil down to the same problem of finding :math:`s`, where a
+bitstring of :math:`s={000...}` represents the one-to-one :math:`f`.
 
 1b. Simon’s Algorithm  
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -410,7 +425,7 @@ We can run the above circuit on the simulator.
 
 .. parsed-literal::
 
-    {'11': 526, '00': 498}
+    {'11': 515, '00': 509}
 
 
 
@@ -461,7 +476,7 @@ We can run the circuit on the real device as below.
 
 .. parsed-literal::
 
-    least busy backend:  ibmq_burlington
+    least busy backend:  ibmqx2
 
 
 .. code:: ipython3
@@ -498,7 +513,7 @@ We can run the circuit on the real device as below.
 
 .. parsed-literal::
 
-    {'11': 526, '00': 498}
+    {'11': 515, '00': 509}
 
 
 
@@ -558,6 +573,7 @@ Such a blackbox function can be realized by the following procedures.
 
    .. math::
 
+
       |x\rangle|0\rangle \rightarrow |x\rangle|x\rangle
 
 -  **(Creating 1-to-1 or 2-to-1 mapping)** If :math:`s` is not all-zero,
@@ -567,12 +583,14 @@ Such a blackbox function can be realized by the following procedures.
 
    .. math::
 
+
       |x\rangle|x\rangle \rightarrow |x\rangle|x \oplus s\rangle~\mbox{if}~x_j = 0~\mbox{for the least index j}
 
 -  **(Creating random permutation)** Randomly permute and flip the
    qubits of the second register.
 
    .. math::
+
 
       |x\rangle|y\rangle \rightarrow |x\rangle|f_s(y)\rangle
 

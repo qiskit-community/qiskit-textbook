@@ -11,7 +11,6 @@ Contents
 .. contents:: Quick links throughout the document:
 
 
-
    1. `Mathematical Background <#backgroundmath>`__
    2. `Bounding the Ground State <#groundstate>`__
 
@@ -208,6 +207,7 @@ possible state is given by the circuit:
 .. figure:: images/U3_var_form.png
    :alt: u3_var_form
 
+
 Moreover, this universal ‘variational form’ only has 3 parameters and
 thus can be efficiently optimized. It is worth emphasising that the
 ability to generate an arbitrary state ensures that during the
@@ -224,6 +224,7 @@ parameterized 2 qubit circuit:
 
 .. figure:: images/two_qubit_var_form.png
    :alt: 2qubit_var_form
+
 
 Allow the transformation performed by the above circuit to be
 represented by :math:`U(\theta)`. When optimized variationally, the

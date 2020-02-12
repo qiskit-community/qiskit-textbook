@@ -104,7 +104,10 @@ We will now clarify this previous definition by working through a basic
 example. Let us demonstrate that the set :math:`\mathbb{R}^2` over the
 field :math:`\mathbb{R}` is a vector space. We assert that
 
-.. math:: \begin{pmatrix} x_1 \\\\ y_1 \end{pmatrix} \ + \ \begin{pmatrix} x_2 \\\\ y_2 \end{pmatrix} \ = \ \begin{pmatrix} x_1 \ + \ x_2 \\\\ y_1 \ + \ y_2 \end{pmatrix}
+.. math::
+
+
+   \begin{pmatrix} x_1 \\\\ y_1 \end{pmatrix} \ + \ \begin{pmatrix} x_2 \\\\ y_2 \end{pmatrix} \ = \ \begin{pmatrix} x_1 \ + \ x_2 \\\\ y_1 \ + \ y_2 \end{pmatrix}
 
 is contained within :math:`\mathbb{R}^2`. This is evidently the case, as
 the sum of two real numbers is a real number[1], making both components

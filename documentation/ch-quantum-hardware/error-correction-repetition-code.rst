@@ -1063,6 +1063,7 @@ coupling map of the device, and find a line.
 .. figure:: images/melbourne.png
    :alt: Fig. 1. The coupling map of the IBM Q Melbourne device.
 
+
 For Melbourne it is possible to find a line that covers all 15 qubits.
 The choice one specified in the list ``line`` below is designed to avoid
 the most error prone ``cx`` gates. For the 53 qubit *Rochester* device,

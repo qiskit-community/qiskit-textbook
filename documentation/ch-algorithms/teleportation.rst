@@ -169,7 +169,7 @@ fraction of the results to be 1. We’ll see how it looks.
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7f877895b890>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7f8bd19d2590>
 
 
 
@@ -200,7 +200,7 @@ code. Let’s draw it below.
 
 .. parsed-literal::
 
-    {'000': 230, '001': 268, '011': 263, '010': 263}
+    {'001': 268, '010': 263, '000': 251, '011': 242}
 
 
 
@@ -273,7 +273,7 @@ the teleportation process is lost.
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7f877895b1d0>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7f8bd19d2210>
 
 
 
@@ -338,7 +338,7 @@ for a total of three qubits.
 
 .. parsed-literal::
 
-    {'110': 188, '100': 464, '001': 1757, '011': 1082, '111': 118, '000': 2268, '010': 1809, '101': 506}
+    {'111': 198, '011': 2065, '101': 410, '001': 1647, '110': 106, '100': 254, '010': 1556, '000': 1956}
 
 
 
@@ -362,7 +362,7 @@ error-free teleportation.
 
 .. parsed-literal::
 
-    The experimental error rate :  15.576171875 %
+    The experimental error rate :  11.81640625 %
 
 
 3. References

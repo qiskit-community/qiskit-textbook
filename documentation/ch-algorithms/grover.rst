@@ -11,6 +11,19 @@ Contents
 .. contents:: Quick links throughout the document:
 
 
+2. `Example: 2 Qubits <#2qubits>`__
+
+   -  `Simulation <#2qubits-simulation>`__
+   -  `Device <#2qubits-device>`__
+
+3. `Example: 3 Qubits <#3qubits>`__
+
+   -  `Simulation <#3qubits-simulation>`__
+   -  `Device <#3qubits-device>`__
+
+4. `Problems <#problems>`__
+
+5. `References <#references>`__
 
 1. Introduction 
 ----------------
@@ -316,7 +329,7 @@ above. First, Initialize the state :math:`|s\rangle`:
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3d8bf4b10>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7fdb819fe490>
 
 
 
@@ -333,7 +346,7 @@ Apply the Oracle for :math:`|w\rangle = |00\rangle`:
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3f8752390>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7fdb81a0d110>
 
 
 
@@ -348,7 +361,7 @@ Apply a Hadamard operation to both qubits:
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3f8752450>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7fdb81a0d250>
 
 
 
@@ -364,7 +377,7 @@ Apply the reflection :math:`U_s`:
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3f8758090>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7fdb81a0da50>
 
 
 
@@ -379,7 +392,7 @@ Apply the final Hadamard to both qubits:
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3f8758610>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7fdb81a0dbd0>
 
 
 
@@ -454,7 +467,7 @@ We can run the circuit on the real device as below.
 
 .. parsed-literal::
 
-    Running on current least busy device:  ibmq_burlington
+    Running on current least busy device:  ibmqx2
 
 
 .. code:: ipython3
@@ -734,7 +747,7 @@ need to run one iteration.
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3a88b1550>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7fdb81ab4c10>
 
 
 
@@ -786,7 +799,7 @@ We can run the circuit on the real device as below.
 
 .. parsed-literal::
 
-    least busy backend:  ibmq_burlington
+    least busy backend:  ibmqx2
 
 
 .. code:: ipython3

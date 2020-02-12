@@ -1,4 +1,3 @@
-python3 ./preprocess_notebooks.py
 
 for i in ../../documentation/**/*.ipynb; do 
     echo "$i"

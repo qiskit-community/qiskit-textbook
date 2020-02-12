@@ -64,6 +64,7 @@ algorithm, as illustrated in this image from the original paper:
 .. figure:: images/bro.png
    :alt: bro
 
+
 So essentially, we start off with a qubit register, with each qubit
 initialized to :math:`|0\rangle`. Our algorithm takes its inputs, then
 prepares and evaluates the cost function, starting with the creation of

@@ -12,17 +12,14 @@ This belongs in the "scripts" folder, it removes the figure captions put there b
 import os
 filepath = "../../documentation/"
 
-def add_newlines_to_equations(filename):
+def html_img_to_md(filename):
     out = ""
-    in_equation = False
     with open(filename) as f:
+        image_number = 0
         for line in f:
-            if line == "    \"$$\\n\",\n":
-                if not in_equation:
-                    line.replace("$$","$$\\n")
-                else:
-                    line.replace("$$","\\n$$")
-                in_equation = not in_equation
+            if "<img src=" in line:
+                img_path = line.split("\"")[2]
+                line = "    \"![" + "image" + str(image_number) + "](" + img_path[:-1] + ")\\n\",\n"
             out += line
     with open(filename, 'w') as f:
         f.write(out)
@@ -32,4 +29,4 @@ for directory in os.listdir(filepath):
     if os.path.isdir(filepath + directory):
         for file in os.listdir(filepath + directory):
             if str(file)[-6:] == ".ipynb":
-                add_newlines_to_equations(filepath + directory + "/" + file)
+                html_img_to_md(filepath + directory + "/" + file)

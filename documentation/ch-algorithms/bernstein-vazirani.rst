@@ -11,7 +11,6 @@ Contents
 .. contents:: Quick links throughout the document:
 
 
-
 1. Introduction 
 ----------------
 
@@ -28,13 +27,7 @@ We are again given a hidden function Boolean :math:`f`, which takes as
 as input a string of bits, and returns either :math:`0` or :math:`1`,
 that is:
 
-.. raw:: html
-
-   <center>
-
-$f({x_0,x_1,x_2,…}) :raw-latex:`\rightarrow `0
-:raw-latex:`\textrm{ or }` 1 :raw-latex:`\textrm{ where }` x_n
-:raw-latex:`\textrm{ is }`0 :raw-latex:`\textrm{ or }` 1 $.
+.. math:: f(\{x_0,x_1,x_2,...\}) \rightarrow 0 \textrm{ or } 1 \textrm{ where } x_n \textrm{ is }0 \textrm{ or } 1  
 
 Instead of the function being balanced or constant as in the
 Deutsch-Josza problem, now the function is guaranteed to return the
@@ -68,6 +61,10 @@ Bernstein-Vazirani algorithm to find the hidden integer is very simple:
 gates, (3) query the oracle, (4) apply Hadamard gates, and (5) measure,
 generically illustrated below:
 
+.. figure:: images/bernsteinvazirani_steps.jpeg
+   :alt: bz-steps
+
+
 The correctness of the algorithm is best explained by looking at the
 transformation of a quantum register :math:`|a \rangle` by :math:`n`
 Hadamard gates, each applied to the qubit of the register. It can be
@@ -75,17 +72,19 @@ shown that:
 
 .. math::
 
+
    |a\rangle \xrightarrow{H^{\otimes n}} \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} (-1)^{a\cdot x}|x\rangle.
 
- In particular, when we start with a quantum register :math:`|0\rangle`
+In particular, when we start with a quantum register :math:`|0\rangle`
 and apply :math:`n` Hadamard gates to it, we have the familiar quantum
 superposition:
 
 .. math::
 
+
    |0\rangle \xrightarrow{H^{\otimes n}} \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} |x\rangle,
 
- which is slightly different from the Hadamard transform of the reqister
+which is slightly different from the Hadamard transform of the reqister
 :math:`|a \rangle` by the phase :math:`(-1)^{a\cdot x}`.
 
 Now, the quantum oracle :math:`f_a` returns :math:`1` on input :math:`x`
@@ -94,20 +93,23 @@ otherwise. This means we have the following transformation:
 
 .. math::
 
+
    |x \rangle \xrightarrow{f_a} | x \rangle = (-1)^{a\cdot x} |x \rangle. 
 
- The algorithm to reveal the hidden integer follows naturally by
-querying the quantum oracle :math:`f_a` with the quantum superposition
-obtained from the Hadamard transformation of :math:`|0\rangle`. Namely,
+The algorithm to reveal the hidden integer follows naturally by querying
+the quantum oracle :math:`f_a` with the quantum superposition obtained
+from the Hadamard transformation of :math:`|0\rangle`. Namely,
 
 .. math::
+
 
    |0\rangle \xrightarrow{H^{\otimes n}} \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} |x\rangle \xrightarrow{f_a} \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} (-1)^{a\cdot x}|x\rangle.
 
- Because the inverse of the :math:`n` Hadamard gates is again the
+Because the inverse of the :math:`n` Hadamard gates is again the
 :math:`n` Hadamard gates, we can obtain :math:`a` by
 
 .. math::
+
 
    \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} (-1)^{a\cdot x}|x\rangle \xrightarrow{H^{\otimes n}} |a\rangle.
 
@@ -268,7 +270,7 @@ We then use Qiskit to program the Bernstein-Vazirani algorithm.
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7ff6782de6d0>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7fbc60286ed0>
 
 
 
@@ -327,7 +329,7 @@ We can run the circuit on the real device as below.
 
 .. parsed-literal::
 
-    least busy backend:  ibmq_burlington
+    least busy backend:  ibmqx2
 
 
 .. code:: ipython3

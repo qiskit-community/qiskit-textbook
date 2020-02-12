@@ -6,7 +6,7 @@ Introduction to Python and Jupyter notebooks
 
    Qiskit <qiskit>
    Linear Algebra <linear_algebra>
-
+   
 Python is a programming language where you don’t need to compile. You
 can just run it line by line (which is how we can use it in a notebook).
 So if you are quite new to programming, Python is a great place to

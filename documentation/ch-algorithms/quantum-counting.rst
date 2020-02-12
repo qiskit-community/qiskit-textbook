@@ -8,12 +8,18 @@ the quantum counting algorithm tells us how many of these solutions
 there are. This algorithm is interesting as it combines both quantum
 search and quantum phase estimation.
 
-Contents
---------
-
-.. contents:: Quick links throughout the document:
-
-
+1. `Overview <#overview>`__
+   1.1 `Intuition <#intuition>`__
+   1.2 `A Closer Look <#closer_look>`__
+2. `The Code <#code>`__
+   2.1 `Initialising our Code <#init_code>`__
+   2.2 `The Controlled-Grover Iteration <#cont_grover>`__
+   2.3 `The Inverse QFT <#inv_qft>`__
+   2.4 `Putting it Together <#putting_together>`__
+3. `Simulating <#simulating>`__
+4. `Finding the Number of Solutions <#finding_m>`__
+5. `Exercises <#exercises>`__
+6. `References <#references>`__
 
 1. Overview 
 ------------
@@ -25,9 +31,7 @@ In quantum counting, we simply use the quantum phase estimation
 algorithm to find an eigenvalue of a Grover search iteration. You will
 remember that an iteration of Grover’s algorithm, :math:`G`, rotates the
 state vector by :math:`\theta` in the :math:`|\omega\rangle`,
-:math:`|s’\rangle` basis: |quantum_counting1|
-
-.. |quantum_counting1| image:: images/quantum_counting1.svg
+:math:`|s’\rangle` basis:
 
 The percentage number of solutions in our search space affects the
 difference between :math:`|s\rangle` and :math:`|s’\rangle`. For
@@ -45,6 +49,7 @@ the Grover iterator as the matrix:
 
 .. math::
 
+
    G =
    \begin{pmatrix}
    \cos{\theta} && -\sin{\theta}\\\\
@@ -54,6 +59,7 @@ the Grover iterator as the matrix:
 The matrix :math:`G` has eigenvectors:
 
 .. math::
+
 
    \begin{pmatrix}
    -i\\\\
@@ -73,15 +79,13 @@ of the two vectors.
 
 .. math::
 
+
    |s\rangle = \alpha |\omega\rangle + \beta|s'\rangle
 
 As a result, the output of the QPE algorithm will be a superposition of
 the two phases, and when we measure the register we will obtain one of
 these two values! We can then use some simple maths to get our estimate
 of :math:`M`.
-
-.. figure:: images/quantum_counting2.svg
-   :alt: quantum_counting2
 
 2. The Code 
 ------------
@@ -254,7 +258,7 @@ Next we apply our inverse QFT to the counting qubits:
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7fd4307771d0>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3fcee4650>
 
 
 
@@ -271,7 +275,7 @@ classical register:
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7fd43078ac50>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7ff3fcf03190>
 
 
 
@@ -354,9 +358,10 @@ need to do:
 
 .. math::
 
+
    \theta = \text{value}\times\frac{2\pi}{2^t}
 
- Or, in code:
+Or, in code:
 
 .. code:: ipython3
 
@@ -371,9 +376,6 @@ need to do:
 
 You may remember that we can get the angle :math:`\theta/2` can from the
 inner product of :math:`|s\rangle` and :math:`|s’\rangle`:
-
-.. figure:: images/quantum_counting3.svg
-   :alt: counting3
 
 .. math::
 

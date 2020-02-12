@@ -4,11 +4,11 @@ Single Qubits and Multi-Qubits gates
 .. toctree::
   :hidden:
 
-  Quantum Gates. <quantum-gates>
-  Fun with Matrices. <fun-matrices>
-  The Standard Gate Set. <standard-gate-set>
-  Proving Universality. <proving-universality>
-  Basic Circuit Identities. <basic-circuit-identities>
+  Quantum Gates <quantum-gates>
+  Fun with Matrices <fun-matrices>
+  The Standard Gate Set <standard-gate-set>
+  Proving Universality <proving-universality>
+  Basic Circuit Identities <basic-circuit-identities>
 
 Just having some qubits is not enough: We also need to manipulate them.
 All possible ways of doing this can be compiled down to a basic set of

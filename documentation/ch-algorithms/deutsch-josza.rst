@@ -11,6 +11,19 @@ Contents
 .. contents:: Quick links throughout the document:
 
 
+   -  `Deutsch-Josza Problem <#djproblem>`__
+   -  `Deutsch-Josza Algorithm <#djalgorithm>`__
+
+2. `Example <#example>`__
+
+3. `Qiskit Implementation <#implementation>`__
+
+   -  `Simulation <#simulation>`__
+   -  `Device <#device>`__
+
+4. `Problems <#problems>`__
+
+5. `References <#references>`__
 
 1. Introduction 
 ----------------
@@ -354,7 +367,7 @@ bit balanced function with hidden bitstring :math:`a = 3`.
     djCircuit = QuantumCircuit(n+1, n)
     barriers = True
     
-    # Since all qubits are initialized to |0>, we need to flip the second register qubit to the the |1> state
+    # Since all qubits are initialized to |0>, we need to flip the second register qubit to the |1> state
     djCircuit.x(n)
     
     # Apply barrier
@@ -394,7 +407,7 @@ bit balanced function with hidden bitstring :math:`a = 3`.
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7fc5b891de50>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7ffcc0026cd0>
 
 
 
@@ -451,7 +464,7 @@ for the least-busy device that can handle our circuit.
 
 .. parsed-literal::
 
-    least busy backend:  ibmq_vigo
+    least busy backend:  ibmqx2
 
 
 .. code:: ipython3

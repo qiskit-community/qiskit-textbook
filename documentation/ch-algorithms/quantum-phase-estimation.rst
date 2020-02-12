@@ -1,12 +1,20 @@
 Quantum Phase Estimation
 ========================
 
-Contents
---------
-
-.. contents:: Quick links throughout the document:
-
-
+1. `Overview <#overview>`__
+   1.1 `Intuition <#intuition>`__
+   1.2 `Mathematical Basis <#maths>`__
+2. `Example: T-gate <#example_t_gate>`__
+   2.1 `Creating the Circuit <#creating_the_circuit>`__
+   2.2 `Results <#results>`__
+3. `Getting More Precision <#getting_more_precision>`__
+   3.1 `The Problem <#the_problem>`__
+   3.2 `The Solution <#the_solution>`__
+4. `Experimenting on Real Devices <#real_devices>`__
+   4.1 `With the Circuit from 2.1 <#circuit_2.1>`__
+5. `Exercises <#exercises>`__
+6. `Looking Forward <#looking_forward>`__
+7. `References <#references>`__
 
 Quantum phase estimation is one of the most important subroutines in
 quantum computation. It serves as a central building block for many
@@ -85,15 +93,19 @@ Applying all the :math:`n` controlled operations :math:`C − U^{2^j}`
 with :math:`0\leq j\leq n-1`, and using the relation
 :math:`|0\rangle \otimes |\psi \rangle +|1\rangle \otimes e^{2\pi i\theta }|\psi \rangle =\left(|0\rangle +e^{2\pi i\theta }|1\rangle \right)\otimes |\psi \rangle`:
 
-.. math::
-
-   \begin{aligned}
-   \psi_{2} & =\frac {1}{2^{\frac {n}{2}}} \left(|0\rangle+{e^{\boldsymbol{2\pi i} \theta 2^{n-1}}}|1\rangle \right) \otimes \cdots \otimes \left(|0\rangle+{e^{\boldsymbol{2\pi i} \theta 2^{1}}}\vert1\rangle \right) \otimes \left(|0\rangle+{e^{\boldsymbol{2\pi i} \theta 2^{0}}}\vert1\rangle \right) \otimes |\psi\rangle\\\\
-   & = \frac{1}{2^{\frac {n}{2}}}\sum _{k=0}^{2^{n}-1}e^{\boldsymbol{2\pi i} \theta k}|k\rangle \otimes \vert\psi\rangle
-   \end{aligned}
-
- where :math:`k` denotes the integer representation of n-bit binary
-numbers.
+\\begin{aligned} :raw-latex:`\psi`\ *{2} &
+=:raw-latex:`\frac {1}{2^{\frac {n}{2}}}`
+:raw-latex:`\left`(|0:raw-latex:`\rangle`+{e^{:raw-latex:`\boldsymbol{2\pi i}`
+:raw-latex:`\theta `2^{n-1}}}|1:raw-latex:`\rangle `:raw-latex:`\right`)
+:raw-latex:`\otimes `:raw-latex:`\cdots `:raw-latex:`\otimes `:raw-latex:`\left`(|0:raw-latex:`\rangle`+{e^{:raw-latex:`\boldsymbol{2\pi i}`
+:raw-latex:`\theta `2^{1}}}:raw-latex:`\vert`1:raw-latex:`\rangle `:raw-latex:`\right`)
+:raw-latex:`\otimes `:raw-latex:`\left`(|0:raw-latex:`\rangle`+{e^{:raw-latex:`\boldsymbol{2\pi i}`
+:raw-latex:`\theta `2^{0}}}:raw-latex:`\vert`1:raw-latex:`\rangle `:raw-latex:`\right`)
+:raw-latex:`\otimes `\|:raw-latex:`\psi`:raw-latex:`\rangle`\\\\ & =
+:raw-latex:`\frac{1}{2^{\frac {n}{2}}}`:raw-latex:`\sum `*\ {k=0}:sup:`{2`\ {n}-1}e^{:raw-latex:`\boldsymbol{2\pi i}`
+:raw-latex:`\theta `k}|k:raw-latex:`\rangle `:raw-latex:`\otimes `:raw-latex:`\vert`:raw-latex:`\psi`:raw-latex:`\rangle`
+\\end{aligned} where :math:`k` denotes the integer representation of
+n-bit binary numbers.
 
 3. **Inverse Fourier Transform**: Notice that the above expression is
    exactly the result of applying a quantum Fourier transform as we
@@ -102,6 +114,7 @@ numbers.
    state :math:`\vert x\rangle` into an output as
 
 .. math::
+
 
    QFT\vert x \rangle = \frac{1}{2^\frac{n}{2}}
    \left(\vert0\rangle + e^{\frac{2\pi i}{2}x} \vert1\rangle\right) 
@@ -114,20 +127,15 @@ numbers.
    \otimes
    \left(\vert0\rangle + e^{\frac{2\pi i}{2^n}x} \vert1\rangle\right) 
 
- Replacing :math:`x` by :math:`2^n\theta` in the above expression gives
+Replacing :math:`x` by :math:`2^n\theta` in the above expression gives
 exactly the expression derived in step 2 above. Therefore, to recover
 the state :math:`\vert2^n\theta\rangle`, apply an inverse Fourier
 transform on the ancilla register. Doing so, we find
 
-$$:raw-latex:`\vert`:raw-latex:`\psi`\ *3:raw-latex:`\rangle `=
-:raw-latex:`\frac {1}{2^{\frac {n}{2}}}`:raw-latex:`\sum `*\ {k=0}:sup:`{2`\ {n}-1}e^{:raw-latex:`\boldsymbol{2\pi i}`
-:raw-latex:`\theta `k}|k:raw-latex:`\rangle `:raw-latex:`\otimes `\|
-:raw-latex:`\psi `:raw-latex:`\rangle `:raw-latex:`\xrightarrow{\mathcal{QFT}_n^{-1}}`
-:raw-latex:`\frac {1}{2^n}`:raw-latex:`\sum `\ *{x=0}{2\ {n}-1}:raw-latex:`\sum `*\ {k=0}:sup:`{2`\ {n}-1}
-e^{-:raw-latex:`\frac{2\pi i k}{2^n}`(x - 2^n :raw-latex:`\theta`)}
-\|x:raw-latex:`\rangle `:raw-latex:`\otimes `\|:raw-latex:`\psi`:raw-latex:`\rangle`
+.. math::
 
-$$
+
+   \vert\psi_3\rangle = \frac {1}{2^{\frac {n}{2}}}\sum _{k=0}^{2^{n}-1}e^{\boldsymbol{2\pi i} \theta k}|k\rangle \otimes | \psi \rangle \xrightarrow{\mathcal{QFT}_n^{-1}} \frac {1}{2^n}\sum _{x=0}^{2^{n}-1}\sum _{k=0}^{2^{n}-1} e^{-\frac{2\pi i k}{2^n}(x - 2^n \theta)} |x\rangle \otimes |\psi\rangle
 
 4. **Measurement**: The above expression peaks near
    :math:`x = 2^n\theta`. For the case when :math:`2^n\theta` is an
@@ -282,7 +290,7 @@ classical bits in reverse order to fix this:
 
 .. parsed-literal::
 
-    <qiskit.circuit.instructionset.InstructionSet at 0x7fdd23956650>
+    <qiskit.circuit.instructionset.InstructionSet at 0x7fa8008e2ad0>
 
 
 
@@ -387,9 +395,9 @@ example:
 
 
 We are expecting the result :math:`\theta = 0.3333\dots`, and we see our
-most likely results are ``010 = 2`` and ``011 = 3``. These two results
-would tell us that :math:`\theta = 0.25` (off by 25%) and
-:math:`\theta = 0.375` (off by 13%) respectively. The true value of
+most likely results are ``010(bin) = 2(dec)`` and ``011(bin) = 3(dec)``.
+These two results would tell us that :math:`\theta = 0.25` (off by 25%)
+and :math:`\theta = 0.375` (off by 13%) respectively. The true value of
 :math:`\theta` lies between the values we can get from our counting
 bits, and this gives us uncertainty and imprecision.
 
@@ -460,9 +468,10 @@ The two most likely measurements are now ``01011`` (decimal 11) and
 
 .. math::
 
+
    \theta = \frac{11}{2^5} = 0.344,\;\text{  or  }\;\; \theta = \frac{10}{2^5} = 0.313
 
-\ These two results differ from :math:`\frac{1}{3}` by 3% and 6%
+ These two results differ from :math:`\frac{1}{3}` by 3% and 6%
 respectively. A much better precision!
 
 4. Experiment with Real Devices 
@@ -495,15 +504,15 @@ ourselves of the circuit:
     backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= 4 and not x.configuration().simulator and x.status().operational==True))
     print("least busy backend: ", backend)
     
-    # Run with 3072 shots
-    shots = 4096
-    job_exp = execute(qpe, backend=backend, shots=shots)
+    # Run with 2048 shots
+    shots = 2048
+    job_exp = execute(qpe, backend=backend, shots=shots, optimization_level=3)
     job_monitor(job_exp)
 
 
 .. parsed-literal::
 
-    least busy backend:  ibmq_london
+    least busy backend:  ibmq_ourense
     Job Status: job has successfully run
 
 
@@ -521,100 +530,21 @@ ourselves of the circuit:
 
 
 
-We can hopefully see that the most likely result is ``011`` which is the
-result we would expect from the simulator. More likely, the results
-above are completely random. This is due to the many difficulties in
-building and running a real quantum computer. Some of the errors will
-occur from creating the controlled-\ :math:`T`-gates, so let’s try using
-a CNOT for our controlled-\ :math:`U` instead:
-
-4.2 Phase Estimation of a CNOT 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code:: ipython3
-
-    # Create and set up circuit
-    qpe4 = QuantumCircuit(4, 3)
-    
-    # Apply H-Gates to counting qubits:
-    for qubit in range(3):
-        qpe4.h(qubit)
-    
-    # Prepare our eigenstate |psi>:
-    qpe4.x(3)
-    qpe4.h(3)
-    
-    # Do the controlled-U operations:
-    angle = math.pi
-    repetitions = 2**2
-    for counting_qubit in range(3):
-        for i in range(repetitions):
-            qpe4.cx(counting_qubit, 3);
-        repetitions //= 2
-    
-    # Do the inverse QFT:
-    qft_dagger(qpe4, 3)
-    
-    # Measure of course!
-    qpe4.measure(0,2)
-    qpe4.measure(1,1)
-    qpe4.measure(2,0)
-    
-    qpe4.draw(output='mpl')
-
-
-
-
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_36_0.svg
-
-
-
-.. code:: ipython3
-
-    backend = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits >= 4 and not x.configuration().simulator and x.status().operational==True))
-    print("least busy backend: ", backend)
-    
-    # Run with 2048 shots
-    shots = 2048
-    job_exp = execute(qpe4, backend=backend, shots=shots)
-    job_monitor(job_exp)
-
-
-.. parsed-literal::
-
-    least busy backend:  ibmq_london
-    Job Status: job has successfully run
-
-
-.. code:: ipython3
-
-    # get the results from the computation
-    results = job_exp.result()
-    answer = results.get_counts(qpe4)
-    plot_histogram(answer)
-
-
-
-
-.. image:: quantum-phase-estimation_files/quantum-phase-estimation_38_0.svg
-
-
-
-You can *hopefully* see we are most likely to measure ``100``, the
-expected result of running QPE on a CNOT-gate. The results are still
-erratic but they are useful to illustrate the capabilities of current
-quantum computers.
+We can hopefully see that the most likely result is ``001`` which is the
+result we would expect from the simulator. Unlike the simulator, there
+is a probability of measuring something other than ``001``, this is due
+to noise and gate errors in the quantum computer.
 
 5. Exercises 
 -------------
 
-1. Try the experiments above with different gates (:math:`S`,
-   :math:`T^\dagger`), what results do you expect? What results do you
-   get?
+1. Try the experiments above with different gates (:math:`\text{CNOT}`,
+   :math:`S`, :math:`T^\dagger`), what results do you expect? What
+   results do you get?
 
 2. Try the experiment with a :math:`Y`-gate, do you get the correct
-   result? (Remember to make sure :math:`|\psi\rangle` is an eigenstate
-   of :math:`Y`!)
+   result? (Hint: Remember to make sure :math:`|\psi\rangle` is an
+   eigenstate of :math:`Y`!)
 
 6. Looking Forward 
 -------------------
