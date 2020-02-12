@@ -123,15 +123,13 @@ Apply a Hadamard gate to each qubit:
 
    <li>
 
-Apply the quantum oracle
-$:raw-latex:`\vert `x:raw-latex:`\rangle `:raw-latex:`\vert `y:raw-latex:`\rangle `$
-to $ :raw-latex:`\vert `x:raw-latex:`\rangle `:raw-latex:`\vert `y
-:raw-latex:`\oplus `f(x):raw-latex:`\rangle`$:
+Apply the quantum oracle :math:`\vert x\rangle \vert y\rangle` to
+:math:`\vert x\rangle \vert y \oplus f(x)\rangle`:
 
 .. math::
 
 
-           \begin{aligned}
+               \begin{aligned}
                \lvert \psi_2 \rangle  
                    & = \frac{1}{\sqrt{2^{n+1}}}\sum_{x=0}^{2^n-1} \vert x\rangle (\vert f(x)\rangle - \vert 1 \oplus f(x)\rangle) \\  
                    & = \frac{1}{\sqrt{2^{n+1}}}\sum_{x=0}^{2^n-1}(-1)^{f(x)}|x\rangle ( |0\rangle - |1\rangle ) 

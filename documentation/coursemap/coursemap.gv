@@ -1,0 +1,77 @@
+digraph G {
+
+    graph [fontsize=10 fontname="Veranda" compound=true];
+    node [shape=record fontsize=10 fontname="Verdana"];
+
+    subgraph cluster_prereq {
+        node [style=filled];
+        "Python" "Qiskit" "Linear Algebra"[href="ch-prerequisites/linear_algebra.html"];
+        label = "Prerequisites";
+        color=blue;
+    }
+
+    subgraph cluster_intro {
+        node [style=filled];
+        "Quantum States and Qubits" "Single and Multi- Qubit Gates";
+        label = "Introduction to Quantum Computing";
+        color=blue;
+    }
+
+    subgraph cluster_cqa {
+        node [style=filled];
+        "Deutsch-Joza" "QFT";
+        label = "Core Quantum Algorithms";
+        color=blue;
+    }
+
+    subgraph cluster_cqa_supp {
+    	node [style=filled];
+	"Oracle Design"
+	subgraph cluster_extra_qa{
+		node [style=filled];
+		"Superdense Coding" "Bernstein-Vazirani";
+		label = "Extra Quantum Algorithms";
+		color = pink;
+		}
+	label = "Supplementary Material";
+	color = blue;
+    }
+
+    subgraph cluster_fqa {
+        node [style=filled];
+        "VQE" "Shor";
+        label = "Further Quantum Algorithms";
+        color=blue;
+    }
+    
+    subgraph cluster_errmit {
+    	node [style=filled];
+	"Transpiling" "Error Repetition Code";
+	label = "Transpiling and Error Mitigation";
+	color = blue;
+	}
+    
+    "Quantum Mechanics (Prerequisite)";
+
+    subgraph cluster_qhw {
+        node [style=filled];
+	"Pulse" "Metal";
+	label = "Hardware";
+	color = blue;
+	}
+
+
+    // Connect Intro
+    "Quantum States and Qubits" -> "Single and Multi- Qubit Gates";
+
+    // Connect Clusters
+    "Qiskit" -> "Quantum States and Qubits" [ltail=cluster_prereq lhead=cluster_intro];
+    "Single and Multi- Qubit Gates" -> "Deutsch-Joza" [ltail=cluster_intro lhead=cluster_cqa];
+    "Deutsch-Joza" -> "Oracle Design" [ltail=cluster_cqa lhead=cluster_cqa_supp];
+    "QFT" -> "Shor" [ltail=cluster_cqa lhead=cluster_fqa];
+    "QFT" -> "Transpiling" [ltail=cluster_cqa lhead=cluster_errmit];
+    "QFT" -> "Quantum Mechanics (Prerequisite)" [ltail=cluster_cqa];
+    "Quantum Mechanics (Prerequisite)" -> "Pulse" [lhead=cluster_qhw];
+    
+}
+

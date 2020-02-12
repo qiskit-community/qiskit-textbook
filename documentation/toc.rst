@@ -1,7 +1,9 @@
 .. toctree::
   :maxdepth: 6
   :includehidden:
-
+  
+  Learn Quantum Computing using Qiskit <index.rst>
+  Course Map <coursemap/coursemap.rst>
   Prerequisites <ch-prerequisites/index.rst>
   Quantum States and Qubits <ch-states/index.rst>
   Single Qubits and Multi-Qubits gates <ch-gates/index.rst>
