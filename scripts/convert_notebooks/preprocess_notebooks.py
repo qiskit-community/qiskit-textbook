@@ -15,11 +15,17 @@ filepath = "../../documentation/"
 def html_img_to_md(filename):
     out = ""
     with open(filename) as f:
-        image_number = 0
+        image_number = 1
         for line in f:
             if "<img src=" in line:
                 img_path = line.split("\"")[2]
-                line = "    \"![" + "image" + str(image_number) + "](" + img_path[:-1] + ")\\n\",\n"
+                new_line = "    \"![" + "image" + str(image_number) + "](" + img_path[:-1] + ")\\n\""
+                if line[-2] == ",":
+                    new_line += ",\n"
+                else:
+                    new_line += "\n"
+                line = new_line
+                image_number += 1
             out += line
     with open(filename, 'w') as f:
         f.write(out)
