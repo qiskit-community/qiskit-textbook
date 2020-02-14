@@ -10,3 +10,4 @@ documentation/api
 documentation/qiskit
 documentation/stubs
 documentation/**/*.py
+.ipynb_checkpoints
