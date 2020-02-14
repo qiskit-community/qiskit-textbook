@@ -2,6 +2,11 @@ language: python
 
 python: 3.8
 
+add-ons:
+  apt:
+    packages:
+      - pandoc
+
 install:
   - pip install --upgrade pip
   - pip install jupyter

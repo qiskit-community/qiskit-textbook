@@ -7,7 +7,7 @@ setup_git() {
 
 commit_rst_files() {
   git checkout "$1"
-  git add . *.rst
+  git add documentation/\*.rst
   git commit --message "Update RST files [skip ci]: $TRAVIS_BUILD_NUMBER"
 }
 
