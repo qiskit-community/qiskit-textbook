@@ -5,21 +5,12 @@ In this section, we first introduce the Bernstein-Vazirani problem, and
 classical and quantum algorithms to solve it. We then implement the
 quantum algorithm using Qiskit, and run on a simulator and device.
 
-Contents
---------
+.. contents:: Contents
+   :local:
 
-1. `Introduction <#introduction>`__
-   1.1 `Bernstein-Vazirani Problem <#bvproblem>`__
-   1.2 `Bernstein-Vazirani Algorithm <#bvalgorithm>`__
-2. `Example <#example>`__
-3. `Qiskit Implementation <#implementation>`__
-   3.1 `Simulation <#simulation>`__
-   3.2 `Device <#device>`__
-4. `Problems <#problems>`__
-5. `References <#references>`__
 
 1. Introduction 
----------------
+----------------
 
 The Bernstein-Vazirani algorithm, first introduced in Reference [1], can
 be seen as an extension of the Deutsch-Josza algorithm covered in the
@@ -28,9 +19,9 @@ computer as a computational tool for more complex problems compared to
 the Deutsch-Josza problem.
 
 1a. Bernstein-Vazirani Problem  
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We are again given a hidden boolean function :math:`f`, which takes as
+We are again given a hidden function Boolean :math:`f`, which takes as
 as input a string of bits, and returns either :math:`0` or :math:`1`,
 that is:
 
@@ -38,7 +29,7 @@ that is:
 
    <center>
 
-$f({x_0,x_1,x_2,…}) :raw-latex:`\rightarrow 0`
+$f({x_0,x_1,x_2,…}) :raw-latex:`\rightarrow `0
 :raw-latex:`\textrm{ or }` 1 :raw-latex:`\textrm{ where }` x_n
 :raw-latex:`\textrm{ is }`0 :raw-latex:`\textrm{ or }` 1 $.
 
@@ -50,7 +41,7 @@ words, given an input :math:`x`,
 :math:`s`.
 
 1b. Bernstein-Vazirani Algorithm  
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Classical Solution
 ^^^^^^^^^^^^^^^^^^
@@ -77,7 +68,6 @@ generically illustrated below:
 .. figure:: images/bernsteinvazirani_steps.jpeg
    :alt: image1
 
-   image1
 
 The correctness of the algorithm is best explained by looking at the
 transformation of a quantum register :math:`|a \rangle` by :math:`n`
@@ -128,7 +118,7 @@ Because the inverse of the :math:`n` Hadamard gates is again the
    \frac{1}{\sqrt{2^n}} \sum_{x\in \{0,1\}^n} (-1)^{a\cdot x}|x\rangle \xrightarrow{H^{\otimes n}} |a\rangle.
 
 2. Example 
-----------
+-----------
 
 Let’s go through a specific example for :math:`n=2` qubits and a secret
 string :math:`s=11`. Note that we are following the formulation in
@@ -203,7 +193,7 @@ Measure to find the secret string :math:`s=11`
    </ol>
 
 3. Qiskit Implementation 
-------------------------
+-------------------------
 
 We now implement the Bernstein-Vazirani algorithm with Qiskit for a two
 bit function with :math:`s=11`.
@@ -300,7 +290,7 @@ We then use Qiskit to program the Bernstein-Vazirani algorithm.
 
 
 3a. Experiment with Simulators 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can run the above circuit on the simulator.
 
@@ -325,7 +315,7 @@ We can see that the result of the measurement is the binary
 representation of the hidden integer :math:`3` :math:`(11)`.
 
 3b. Experiment with Real Devices 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can run the circuit on the real device as below.
 
@@ -381,7 +371,7 @@ As we can see, most of the results are :math:`11`. The other results are
 due to errors in the quantum computation.
 
 4. Problems 
------------
+------------
 
 1. The above `implementation <#implementation>`__ of Bernstein-Vazirani
    is for a secret bit string of :math:`s = 11`. Modify the
@@ -393,7 +383,7 @@ due to errors in the quantum computation.
    results what you expect? Explain.
 
 5. References 
--------------
+--------------
 
 1. Ethan Bernstein and Umesh Vazirani (1997) “Quantum Complexity Theory”
    SIAM Journal on Computing, Vol. 26, No. 5: 1411-1473,
