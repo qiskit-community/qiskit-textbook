@@ -1,14 +1,17 @@
 language: python
 
-addons:
-  apt_packages:
-    - pandoc
+python: 3.8
 
 install:
-  - pip install -r requirements.txt
-  - npm install --global npm
-  - npm install --global yarn
-  - yarn
+  - pip install --upgrade pip
+  - pip install jupyter
+  - pip install nbconvert
 
 script:
-  - npm run build
+  - bash scripts/travis/convert-modified-notebooks.sh $TRAVIS_COMMIT_RANGE
+
+deploy:
+  provider: script
+  script: scripts/travis/push-rst.sh a-la-iqx
+  on:
+    branch: a-la-iqx
