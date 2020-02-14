@@ -12,7 +12,7 @@ commit_rst_files() {
 }
 
 upload_files() {
-  git remote add upstream https://${GH_TOKEN}@github.com/qiskit/qiskit-textbook.git > /dev/null 2>&1
+  git remote add upstream https://${GITHUB_TOKEN}@github.com/qiskit/qiskit-textbook.git > /dev/null 2>&1
   git push upstream "$1"
 }
 
