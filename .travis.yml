@@ -13,7 +13,6 @@ install:
   - pip install nbconvert
 
 script:
-  - echo $TRAVIS_COMMIT_RANGE
   - bash scripts/travis/convert-modified-notebooks.sh $TRAVIS_COMMIT_RANGE
 
 deploy:
