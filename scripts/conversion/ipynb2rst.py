@@ -32,11 +32,12 @@ def convert_file(filepath):
   subprocess.run(
     ['jupyter', 'nbconvert', '--to', 'rst', filepath, '--output', os.path.basename(outputpath)])
 
-  print('Fixing conversion issues...')
   _postprocess(outputpath)
 
 
 def _postprocess(filepath):
+  print('Fixing conversion issues...')
+
   with open(filepath) as file_:
     lines = map(str.rstrip, file_.readlines())
 
