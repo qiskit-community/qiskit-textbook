@@ -18,7 +18,7 @@ import itertools
 def convert_all_files(dirpath):
   for root, _, files in os.walk(dirpath):
     for file_ in files:
-      name, ext = os.path.splitext(filepath)
+      name, ext = os.path.splitext(file_)
       if ext != '.ipynb':
         continue
 
