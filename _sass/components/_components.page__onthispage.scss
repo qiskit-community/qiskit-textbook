@@ -1,5 +1,5 @@
 /**
- * Styling for the sidebar.
+ * Styling for the onthispage elements.
  *
  * [1]: The sidebar is implemented as ul and li elements so we need to remove
  *   the bullets and margins. Also make chapter fonts a bit bigger.
@@ -42,13 +42,16 @@ li.c-sidebar__chapter > a {
 }
 
 /* [1] */
-.c-sidebar__sections {
+.c-sidebar__sections, .c-sidebar__subsections {
   list-style: none;
-  margin-left: $spacing-unit-small;
   margin-bottom: 0;
 }
 
-li.c-sidebar__subsection {
+.c-sidebar__sections {
+  margin-left: $spacing-unit-small;
+}
+
+.c-sidebar__subsections {
   margin-left: 20px;
 }
 
