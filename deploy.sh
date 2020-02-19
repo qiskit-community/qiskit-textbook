@@ -1,8 +1,5 @@
 #!/bin/bash
 
-user=delapuente
-org=qiskit
-repo=qiskit.org
 path=textbook
 
 if [[ $TRAVIS_BRANCH != "stable" ]] && [[ $TRAVIS_BRANCH != "" ]]
@@ -10,30 +7,18 @@ then
     path="${path}-${TRAVIS_BRANCH}"
 fi
 
-download_repo () {
-  root=$1
-  mkdir -p $root
-  pushd $root || return
-  git clone --depth 1 "https://${user}:${GITHUB_TOKEN}@github.com/${org}/${repo}.git"
-  popd || return
-}
-
-push_repo () {
-  root=$1
-  pushd $root/$repo || return
-  git add static/${path}
-  git add .
-  git commit -m"Updating ${path} to ${TRAVIS_REPO_SLUG}@${TRAVIS_COMMIT}"
-  git push origin master
-  popd || return
+install_rclone () {
+  curl https://downloads.rclone.org/rclone-current-linux-amd64.deb -o rclone.deb
+  sudo apt-get install -y ./rclone.deb
+  CONFIG_PATH=$(rclone config file | tail -1)
+  echo "Decrypting config into ${CONFIG_PATH}"
+  openssl aes-256-cbc -K $encrypted_rclone_key -iv $encrypted_rclone_iv -in rclone.conf.enc -out $CONFIG_PATH -d
 }
 
 main () {
-  echo "Deploy in ${path}"
-  download_repo _repo
-  mkdir -p _repo/$repo/static/${path}
-  rsync -r --delete _site/ _repo/$repo/static/${path}
-  push_repo _repo
+  echo "Updating ${path} to ${TRAVIS_REPO_SLUG}@${TRAVIS_COMMIT}"
+  install_rclone
+  rclone sync _site/ IBMCOS:qiskit-org-website/${path}
 }
 
 main

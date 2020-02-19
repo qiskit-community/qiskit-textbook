@@ -25,7 +25,6 @@
 # generate a demo book by running `jupyter-book create mybook --demo`
 # ==============================
 
-
 - title: Preface
   not_numbered: true
   url: /preface
@@ -34,7 +33,8 @@
   url: /upcoming
 
 - title: Prerequisites
-  url: /ch-prerequisites/python-and-jupyter-notebooks
+  url: /ch-prerequisites/python-and-jupyter-notebooks.html
+  external: true
   expand_sections: true
   sections:
     - title: Python and Jupyter Notebooks
@@ -45,7 +45,8 @@
       url: /ch-prerequisites/linear_algebra
 
 - title: Quantum States and Qubits
-  url: /ch-states/introduction
+  url: /ch-states/introduction.html
+  external: true
   expand_sections: true
   sections:
     - title: Introduction
@@ -62,7 +63,8 @@
       url: /ch-states/states-many-qubits
 
 - title: Single Qubits and Multi-Qubits gates
-  url: /ch-gates/introduction
+  url: /ch-gates/introduction.html
+  external: true
   expand_sections: true
   sections:
     - title: Introduction
@@ -79,7 +81,8 @@
       url: /ch-gates/basic-circuit-identities
 
 - title: Problems
-  url: /ch-ex/ex1
+  url: /ch-ex/ex1.html
+  external: true
   not_numbered: true
   expand_sections: true
   sections:
@@ -94,11 +97,14 @@
       not_numbered: true
 
 - title: Quantum Algorithms
-  url: /ch-algorithms/teleportation
+  url: /ch-algorithms/teleportation.html
+  external: true
   expand_sections: true
   sections:
     - title: Quantum Teleportation
       url: /ch-algorithms/teleportation
+    - title: Superdense Coding
+      url: /ch-algorithms/superdense-coding
     - title: Deutsch-Josza Algorithm
       url: /ch-algorithms/deutsch-josza
     - title: Bernstein-Vazirani Algorithm
@@ -111,9 +117,12 @@
       url: /ch-algorithms/quantum-phase-estimation
     - title: Grover's Algorithm
       url: /ch-algorithms/grover
+    - title: Quantum Counting
+      url: /ch-algorithms/quantum-counting
 
 - title: Quantum Algorithms for Applications
-  url: /ch-applications/vqe-molecules
+  url: /ch-applications/vqe-molecules.html
+  external: true
   expand_sections: true
   sections:
     - title: Simulating Molecules using VQE
@@ -124,7 +133,8 @@
       url: /ch-applications/satisfiability-grover
 
 - title: Investigating Quantum Hardware Using Qiskit
-  url: /ch-quantum-hardware/calibrating-qubits-openpulse
+  url: /ch-quantum-hardware/calibrating-qubits-openpulse.html
+  external: true
   expand_sections: true
   sections:
     - title: Calibrating Qubits with OpenPulse
@@ -139,7 +149,8 @@
       url: /ch-quantum-hardware/measuring-quantum-volume
 
 - title: Implementations of Recent Quantum Algorithms
-  url: /ch-paper-implementations/vqls
+  url: /ch-paper-implementations/vqls.html
+  external: true
   expand_sections: true
   sections:
     - title: Variational Quantum Linear Solver
