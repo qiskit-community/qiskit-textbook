@@ -26,6 +26,35 @@ div.jb_cell {
   @include mq($from: laptop) {
     width: $textbook-page-with-sidebar-width;
   }
+
+  // Add some empty space before headers for anchor links
+  h1, h2, h3, h4, h5 {
+    &:before {
+      display: block;
+      content: " ";
+      margin-top: -80px;
+      height: 80px;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+}
+
+#page-title {
+  font-size: 2.2em;
+  font-weight: lighter;
+  line-height: 1em;
+}
+
+#page-author {
+  font-size: 1.4em;
+  font-style: italic;
+  font-weight: lighter;
+}
+
+#page-info {
+  margin-bottom: 20px;
+  max-width: $textbook-page-with-sidebar-width;
 }
 
 // Right margin
@@ -35,9 +64,10 @@ div.jb_cell {
       border-left: 3px solid #c3c3c3;
       padding-left: 5%
     }
-    
+
     // On laptops, pop out to the right instead of in-line
     @include mq($from: laptop) {
+      z-index: 999;
       width: calc(100% - #{$textbook-page-with-sidebar-width});
       font-size: .8em;
       position: relative;
@@ -53,7 +83,7 @@ div.jb_cell {
       & + div.tag_popout {
         height: 0px;
       }
-      
+
       // Remove the border when we pop-out to the right
       .cell {
         border-left: none;
@@ -63,11 +93,20 @@ div.jb_cell {
   }
 
   &.tag_full_width {
-    width: 100%;
+      width: 100%;
+      div.input {
+          // Input sections of cells should stay the same width, only outputs are wide
+          width: 70%;
+      }
 
     img {
       max-width: 100%;
     }
+  }
+    
+  &.tag_output_scroll div.output_wrapper {
+      max-height: 24em;
+      overflow-y: auto;
   }
 }
 
@@ -82,8 +121,8 @@ div.highlighter-rouge {
   position: relative;
 }
 
-div.inner_cell div.highlight > pre,
-div.highlighter-rouge > div.highlight > pre,
+div.inner_cell > div > div > pre,
+div.inner_cell > div > pre
 div.output_wrapper pre {
   background-color: $color-light-gray;
   font-size: 0.9em;
@@ -96,6 +135,11 @@ div.output_wrapper pre {
 // If we've got intentionally non-highlighted markup, make sure that the lines wrap
 pre code.language-no-highlight {
   white-space: pre-wrap;
+}
+
+div.output_wrapper {
+  position: relative;
+  margin-bottom: $spacing-unit-small;
 }
 
 div.output_wrapper pre {
@@ -111,8 +155,8 @@ div.output_wrapper pre {
 /* [5] */
 code {
   padding: 4px;
-  overflow-x: auto;
-  @include inuit-font-size(14px);
+  background: #F7F7F7;
+  font-size: inherit;
 }
 
 pre > code {
@@ -123,13 +167,9 @@ pre.highlight code {
   display: block;
 }
 
-blockquote {
-  margin: $spacing-unit-small;
-  padding: $spacing-unit-med;
-  border-left: 4px solid $color-dark-gray;
-
-  p:last-child {
-    margin-bottom: 0;
+h1, h2, h3, h4, h5, h6 {
+  code {
+    font-size: inherit;
   }
 }
 
@@ -159,8 +199,11 @@ blockquote {
   padding: 1em 1.5em !important;
 }
 
+// Images that are on their own should be centered
+// For text cells, only apply to images that are in their own <p>
 .output_png img,
-p img {
+div.text_cell_render > p > img,
+div.text_cell_render > p > a > img {
   max-width: 500px;
   display: block;
   margin-left: auto;
@@ -216,3 +259,53 @@ div.output_subarea {
   display: none;
 }
 
+// Quotation cells
+
+// Default
+blockquote {
+  margin: $spacing-unit-small;
+  border-left: 4px solid $color-dark-gray;
+  padding: $spacing-unit-tiny $spacing-unit-med;
+
+  p {
+    margin-bottom: $spacing-unit-small;
+  }
+
+  ul, ol {
+    margin-bottom: $spacing-unit-tiny;
+  }
+
+  // This should only trigger if the last child of a blockquote is an ul/ol
+  > :last-child li {
+    text-align: right;
+    list-style-type: none;
+    margin: none;
+    padding-right: 5%;
+
+    &:before {
+      content: "—";
+      padding-right: 10px;
+    }
+  }
+}
+
+// Epigraph adds new styling
+div.jb_cell.tag_epigraph blockquote {
+
+  font-style: italic;
+  font-size: 1.2em;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  border-left: none;
+
+  ul {
+    font-style: normal;
+  }
+}
+
+// MathJax blocks
+
+.MathJax_Display {
+  padding: 20px 0px;
+}
