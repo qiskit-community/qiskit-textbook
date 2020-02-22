@@ -16,7 +16,7 @@ Contributions of all types are always welcome. Please [start a pull request](htt
 For a list of contributors, see the [.bib](https://github.com/Qiskit/qiskit-textbook/blob/master/content/qiskit-textbook.bib) file.
 
 # License
-The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](http://github.com/Qiskit/qiskit-textbook/blob/master/LICENSE.txt).
 
 # Contact
 For any issues, please contact Abraham Asfaw (abraham.asfaw@ibm.com).
