@@ -115,6 +115,10 @@ code {
   @include inuit-font-size(14px);
 }
 
+pre > code {
+    padding: 0px;
+}
+
 pre.highlight code {
   display: block;
 }
