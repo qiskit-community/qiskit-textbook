@@ -1,4 +1,4 @@
-# Learn Quantum Computing using Qiskit
+# Learn Quantum Computation using Qiskit
 
 <img
   src="images/logo/logo.png"
