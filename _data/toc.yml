@@ -139,6 +139,8 @@
   sections:
     - title: Calibrating Qubits with OpenPulse
       url: /ch-quantum-hardware/calibrating-qubits-openpulse
+    - title: Accessing Higher Energy States
+      url: /ch-quantum-hardware/accessing_higher_energy_states
     - title: Introduction to Quantum Error Correction using Repetition Codes
       url: /ch-quantum-hardware/error-correction-repetition-code
     - title: Measurement Error Mitigation
