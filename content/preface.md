@@ -1,9 +1,9 @@
-# Learn Quantum Computing using Qiskit
+# Learn Quantum Computation using Qiskit
 
 <img
   src="images/logo/logo.png"
   alt="Learn Quantum Computinb using Qiskit cover"
-  style="width: 300px; margin-left: -35px"
+  style="width: 300px; margin-left: -35px" 
 />
 
 Greetings from the Qiskit Community team! We initiated this open-source textbook in collaboration with IBM Research as a university quantum algorithms/computation course supplement based on Qiskit.
