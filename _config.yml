@@ -21,9 +21,9 @@ author: The Qiskit Team
 description: >- # this means to ignore newlines until "baseurl:"
   A university quantum algorithms/computation course supplement based on Qiskit
 
-baseurl: "" # the subpath of your site, e.g. /blog. If there is no subpath for your site, use an empty string ""
-url: "https://textbook.ngrok.io" # the base hostname & protocol for your site, e.g. http://example.com
-port: 3000
+baseurl: "/textbook" # the subpath of your site, e.g. /blog. If there is no subpath for your site, use an empty string ""
+url: "https://community.qiskit.org" # the base hostname & protocol for your site, e.g. http://example.com
+port: 80
 
 #######################################################################################
 # Jupyter Book settings
@@ -68,7 +68,7 @@ binderhub_url                    : "https://mybinder.org"  # The URL for your Bi
 binder_repo_base                 : "https://github.com/"  # The site on which the textbook repository is hosted
 binder_repo_org                  : "qiskit"  # The username or organization that owns this repository
 binder_repo_name                 : "qiskit-textbook"  # The name of the repository on the web
-binder_repo_branch               : "interactive"  # The branch on which your textbook is hosted.
+binder_repo_branch               : "stable"  # The branch on which your textbook is hosted.
 binderhub_interact_text          : "Interact"  # The text that interact buttons will contain.
 
 # Thebelab settings
