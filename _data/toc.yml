@@ -53,14 +53,6 @@
       url: /ch-states/introduction
     - title: The Atoms of Computation
       url: /ch-states/atoms-computation
-    - title: The Unique Properties of Qubits
-      url: /ch-states/unique-properties-qubits
-    - title: Writing Down Qubit States
-      url: /ch-states/writing-down-qubit-states
-    - title: Pauli Matrices and the Bloch Sphere
-      url: /ch-states/pauli-matrices-bloch-sphere
-    - title: States for Many Qubits
-      url: /ch-states/states-many-qubits
 
 - title: Single Qubits and Multi-Qubits gates
   url: /ch-gates/introduction.html
@@ -69,16 +61,8 @@
   sections:
     - title: Introduction
       url: /ch-gates/introduction
-    - title: Quantum Gates
-      url: /ch-gates/quantum-gates
-    - title: Fun with Matrices
-      url: /ch-gates/fun-matrices
-    - title: The Standard Gate Set
-      url: /ch-gates/standard-gate-set
-    - title: Proving Universality
-      url: /ch-gates/proving-universality
-    - title: Basic Circuit Identities
-      url: /ch-gates/basic-circuit-identities
+    - title: Single Qubit Gates
+      url: /ch-states/single-qubit-gates
 
 - title: Problems
   url: /ch-ex/ex1.html
