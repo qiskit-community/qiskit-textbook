@@ -9,6 +9,6 @@
 {% capture interact_url_iqx %}{{ page.interact_link | relative_url }}{% endcapture %}
 {% capture interact_icon_qiskit %}{{ site.images_url | relative_url }}/logo_qiskit.svg{% endcapture %}
 
-<a href="{{ site.iqx_url }}../{{ interact_url_iqx }}"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="{{ interact_icon_qiskit }}" alt="Interact" />{{ site.binderhub_interact_text }}</button></a>
+<a href="{{ site.iqx_url }}/..{{ interact_url_iqx }}"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="{{ interact_icon_qiskit }}" alt="Interact" />{{ site.binderhub_interact_text }}</button></a>
 
 {%- endif %}
