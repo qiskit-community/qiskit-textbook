@@ -7,15 +7,12 @@ help:
 	@echo "  clean       to clean out site build files"
 	@echo "  runall      to run all notebooks in-place, capturing outputs with the notebook"
 	@echo "  serve       to serve the repository locally with Jekyll"
-	@echo "  build       to build the site HTML locally with Jekyll and store in _site/"
+	@echo "  build       to build the site HTML and store in _site/"
+	@echo "  site        to build the site HTML, store in _site/, and serve with Jekyll"
 
 
 install:
-	# Check to see whether bundler is already installed. If not, install it.
-	if [ hash bundler 2>/dev/null ]; then \
-	gem install bundler;\
-	fi
-	bundle install
+	jupyter-book install ./
 
 book:
 	jupyter-book build ./
@@ -30,4 +27,8 @@ serve:
 	bundle exec guard
 
 build:
-	bash build.sh
+	jupyter-book build ./ --overwrite
+
+site: build
+	bundle exec jekyll build
+	touch _site/.nojekyll
