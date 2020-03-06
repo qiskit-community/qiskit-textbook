@@ -8,9 +8,10 @@ install:
   - make install
 script:
   - make book
-  - make build
+  - make site
 before_deploy:
-  - git config --global user.email salva@unoyunodiez.com
+  - git config --global user.email "travis@travis-ci.org"
+  - git config --global user.name "Travis CI"
 deploy:
   provider: script
   script: bash deploy.sh
