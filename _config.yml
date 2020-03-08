@@ -69,8 +69,8 @@ iqx_url                          : "https://quantum-computing.ibm.com/jupyter/us
 binder_repo_base                 : "https://github.com/"  # The site on which the textbook repository is hosted
 binder_repo_org                  : "qiskit"  # The username or organization that owns this repository
 binder_repo_name                 : "qiskit-textbook"  # The name of the repository on the web
-binder_repo_branch               : "master"  # The branch on which your textbook is hosted.
-binderhub_interact_text          : "Interact on IQX"  # The text that interact buttons will contain.
+binder_repo_branch               : "stable"  # The branch on which your textbook is hosted.
+binderhub_interact_text          : "Interact"  # The text that interact buttons will contain.
 
 # Thebelab settings
 use_thebelab_button              : true  # If 'true', display a button to allow in-page running code cells with Thebelab
