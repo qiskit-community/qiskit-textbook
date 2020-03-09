@@ -24,7 +24,7 @@
                 return;
             }
 
-            // Find all non-hardware code cells, replace with Thebelab interactive code cells
+            // Find all non-hardware, code cells, replace with Thebelab interactive code cells
             const notHardwareCells = document.querySelectorAll('div.jb_cell:not(.tag_uses-hardware)')
 	    notHardwareCells.forEach((notHWCell, index) => {
 	    const codeCells = notHWCell.querySelectorAll('.input_area pre')
@@ -48,11 +48,17 @@
 	    // Add warning and link to IQX on uses-hardware cells
 	    const hardwareCells = document.querySelectorAll('.tag_uses-hardware')
 	    hardwareCells.forEach((hardwareCell, index) => {
-		    var hardwareWarning = "<code>"
-		    hardwareWarning += "{{ site.hardware_warning_message }}"
-		    hardwareWarning += '<a href="{{ site.iqx_url }}/{{ page.interact_link }}" target="_blank">'
-		    hardwareWarning += "{{ site.hardware_warning_linktxt }}"
-		    hardwareWarning += "</a></code>"
+		    var iqxLink = window.location.pathname
+		    iqxLink = iqxLink.slice(9,-4)
+		    iqxLink += "ipynb"
+		    iqxLink = "{{ site.iqx_url }}/content" + iqxLink
+	
+		    var hardwareWarning = '<code>'
+		    hardwareWarning += '{{ site.hardware_warning_message }}'
+		    hardwareWarning += '<a href="' + iqxLink + '" target="_blank">'
+		    hardwareWarning += '{{ site.hardware_warning_linktxt }}'
+		    hardwareWarning += '</a></code>'
+
 		    hardwareCell.innerHTML = hardwareWarning + hardwareCell.innerHTML
 	    });
 
