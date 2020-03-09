@@ -131,6 +131,8 @@
       url: /ch-applications/qaoa
     - title: Solving Satisfiability Problems using Grover's Algorithm
       url: /ch-applications/satisfiability-grover
+    - title: Hybrid quantum-classical Neural Networks with PyTorch and Qiskit
+      url: /ch-machine-learning/machine-learning-qiskit-pytorch
 
 - title: Investigating Quantum Hardware Using Qiskit
   url: /ch-quantum-hardware/calibrating-qubits-openpulse.html
