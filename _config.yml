@@ -60,7 +60,7 @@ use_jupyterlab                   : true  # If 'true', interact links will use Ju
 # Jupyterhub link settings
 use_jupyterhub_button            : false  # If 'true', display a button that will direct users to a JupyterHub (that you provide)
 jupyterhub_url                   : ""  # The URL for your JupyterHub. If no URL, use ""
-jupyterhub_interact_text         : "Interact"  # The text that interact buttons will contain.
+jupyterhub_interact_text         : "Interact on IQX"  # The text that interact buttons will contain.
 
 # Binder link settings
 use_binder_button                : true  # If 'true', add a binder button for interactive links
