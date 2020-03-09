@@ -1,6 +1,6 @@
 # Each entry has the following schema:
 #
-# - title: mytitle   # Title of chapter or section
+# - title: mytitle   # Title of chapter or section.
 #   url: /myurl  # URL of section relative to the /content/ folder.
 #   sections:  # Contains a list of more entries that make up the chapter's sections
 #   not_numbered: true  # if the section shouldn't have a number in the sidebar
