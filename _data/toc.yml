@@ -86,6 +86,9 @@
   not_numbered: true
   expand_sections: true
   sections:
+    - title: Set 0. Hello Qiskit
+      url: /ch-ex/hello-qiskit
+      not_numbered: true
     - title: Set 1. Classical Logic Gates with Quantum Circuits
       url: /ch-ex/ex1
       not_numbered: true
