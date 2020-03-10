@@ -75,7 +75,7 @@ binderhub_interact_text          : "Interact"  # The text that interact buttons 
 # Thebelab settings
 use_thebelab_button              : true  # If 'true', display a button to allow in-page running code cells with Thebelab
 thebelab_button_text             : "Make interactive"  # The text to display inside the Thebelab initialization button
-hardware_warning_message         : "This cell uses IBM hardware, to run it please " # message to display above hardware-using cells
+hardware_warning_message         : "This cell uses the IBMQ backend, to run it please " # message to display above hardware-using cells
 hardware_warning_linktxt         : "go to the IQX Jupyter Hub." # text to appear in the link next to the warning
 codemirror_theme                 : "abcdef"  # Theme for codemirror cells, for options see https://codemirror.net/doc/manual.html#config
 
