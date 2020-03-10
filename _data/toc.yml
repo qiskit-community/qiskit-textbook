@@ -1,6 +1,6 @@
 # Each entry has the following schema:
 #
-# - title: mytitle   # Title of chapter or section
+# - title: mytitle   # Title of chapter or section.
 #   url: /myurl  # URL of section relative to the /content/ folder.
 #   sections:  # Contains a list of more entries that make up the chapter's sections
 #   not_numbered: true  # if the section shouldn't have a number in the sidebar
@@ -115,6 +115,8 @@
       url: /ch-applications/qaoa
     - title: Solving Satisfiability Problems using Grover's Algorithm
       url: /ch-applications/satisfiability-grover
+    - title: Hybrid quantum-classical Neural Networks with PyTorch and Qiskit
+      url: /ch-machine-learning/machine-learning-qiskit-pytorch
 
 - title: Investigating Quantum Hardware Using Qiskit
   url: /ch-quantum-hardware/calibrating-qubits-openpulse.html

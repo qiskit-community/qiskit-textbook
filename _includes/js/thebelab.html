@@ -24,23 +24,43 @@
                 return;
             }
 
-            // Find all code cells, replace with Thebelab interactive code cells
-            const codeCells = document.querySelectorAll('.input_area pre')
+            // Find all non-hardware, code cells, replace with Thebelab interactive code cells
+            const notHardwareCells = document.querySelectorAll('div.jb_cell:not(.tag_uses-hardware)')
+	    notHardwareCells.forEach((notHWCell, index) => {
+	    const codeCells = notHWCell.querySelectorAll('.input_area pre')
             codeCells.forEach((codeCell, index) => {
                 const id = codeCellId(index)
-
-                // Clean up the language to make it work w/ CodeMirror and add it to the cell
+                
+		// Clean up the language to make it work w/ CodeMirror and add it to the cell
                 dataLanguage = "{{ kernelName }}"
                 dataLanguage = detectLanguage(dataLanguage);
                 codeCell.setAttribute('data-language', dataLanguage)
                 codeCell.setAttribute('data-executable', 'true')
-
+		
                 // If the code cell is hidden, show it
                 var inputCheckbox = document.querySelector(`input#hidebtn${codeCell.id}`);
                 if (inputCheckbox !== null) {
                     setCodeCellVisibility(inputCheckbox, 'visible');
                 }
             });
+	    });
+
+	    // Add warning and link to IQX on uses-hardware cells
+	    const hardwareCells = document.querySelectorAll('.tag_uses-hardware')
+	    hardwareCells.forEach((hardwareCell, index) => {
+		    var iqxLink = window.location.pathname
+		    iqxLink = iqxLink.slice(9,-4)
+		    iqxLink += "ipynb"
+		    iqxLink = "{{ site.iqx_url }}/content" + iqxLink
+	
+		    var hardwareWarning = '<code>'
+		    hardwareWarning += '{{ site.hardware_warning_message }}'
+		    hardwareWarning += '<a href="' + iqxLink + '" target="_blank">'
+		    hardwareWarning += '{{ site.hardware_warning_linktxt }}'
+		    hardwareWarning += '</a></code>'
+
+		    hardwareCell.innerHTML = hardwareWarning + hardwareCell.innerHTML
+	    });
 
             // Remove the event listener from the page so keyboard press doesn't
             // Change page

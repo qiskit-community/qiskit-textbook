@@ -23,7 +23,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 
 baseurl: "/textbook" # the subpath of your site, e.g. /blog. If there is no subpath for your site, use an empty string ""
 url: "https://community.qiskit.org" # the base hostname & protocol for your site, e.g. http://example.com
-port: 80
+port: 3005
 
 #######################################################################################
 # Jupyter Book settings
@@ -60,7 +60,7 @@ use_jupyterlab                   : true  # If 'true', interact links will use Ju
 # Jupyterhub link settings
 use_jupyterhub_button            : false  # If 'true', display a button that will direct users to a JupyterHub (that you provide)
 jupyterhub_url                   : ""  # The URL for your JupyterHub. If no URL, use ""
-jupyterhub_interact_text         : "Interact"  # The text that interact buttons will contain.
+jupyterhub_interact_text         : "Interact on IQX"  # The text that interact buttons will contain.
 
 # Binder link settings
 use_binder_button                : true  # If 'true', add a binder button for interactive links
@@ -69,12 +69,14 @@ iqx_url                          : "https://quantum-computing.ibm.com/jupyter/us
 binder_repo_base                 : "https://github.com/"  # The site on which the textbook repository is hosted
 binder_repo_org                  : "qiskit"  # The username or organization that owns this repository
 binder_repo_name                 : "qiskit-textbook"  # The name of the repository on the web
-binder_repo_branch               : "master"  # The branch on which your textbook is hosted.
-binderhub_interact_text          : "Interact on IQX"  # The text that interact buttons will contain.
+binder_repo_branch               : "stable"  # The branch on which your textbook is hosted.
+binderhub_interact_text          : "Interact"  # The text that interact buttons will contain.
 
 # Thebelab settings
 use_thebelab_button              : true  # If 'true', display a button to allow in-page running code cells with Thebelab
 thebelab_button_text             : "Make interactive"  # The text to display inside the Thebelab initialization button
+hardware_warning_message         : "This cell uses quantum hardware. To run it in your browser, please " # message to display above hardware-using cells
+hardware_warning_linktxt         : "click here to go to the IBM Quantum Experience." # text to appear in the link next to the warning
 codemirror_theme                 : "abcdef"  # Theme for codemirror cells, for options see https://codemirror.net/doc/manual.html#config
 
 # nbinteract settings
