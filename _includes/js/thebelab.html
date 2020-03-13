@@ -44,7 +44,6 @@
                 }
             });
 
-
             // Create link to IQX and hardware notice template
             const currentPath = '{{ page.url }}'
             const notebookPath = currentPath.replace(/\.html$/, '.ipynb')
@@ -90,6 +89,25 @@
                 console.log("Initializing ThebeLab with cell: " + cell.id);
                 cell.querySelector('.thebelab-run-button').click();
             });
+
+            // Add analytics per cell
+            const thebelabRunButtons = document.querySelectorAll('.thebelab-run-button');
+            thebelabRunButtons.forEach((runButton) => {
+                runButton.addEventListener('click', (evt) => {
+                    window.trackCta(`Run ${getInputCell(evt.target)}`)
+                })
+            });
+
+            function getInputCell(button) {
+                const parent = button.parentElement;
+                if (parent === null) {
+                    return 'unknown';
+                }
+                if (parent.id.startsWith('inputcell')) {
+                    return parent.id;
+                }
+                return getInputCell(parent);
+            }
         }
 
         // Add event listener for the function to modify code cells
@@ -100,6 +118,10 @@
                 return
             };
             thebelabButton.addEventListener('click', addThebelabToCodeCells);
+            // Add segment analytics
+            thebelabButton.addEventListener('click', () => {
+                window.trackCta('Make Interactive');
+            });
         });
     }
 
