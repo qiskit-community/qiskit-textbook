@@ -62,6 +62,12 @@
             const hardwareCells = document.querySelectorAll(hardwareQuery)
             hardwareCells.forEach((cell) => {
                 cell.prepend(usesHardwareNotice.content.cloneNode(true))
+                cell.querySelector('a').addEventListener('click', (evt) => {
+                    try {
+                        window.trackCta(`Hardware Cell ${getInputCell(evt.target)}`)
+                    } catch {}
+                    return true;
+                })
             });
 
             // Remove the event listener from the page so keyboard press doesn't
@@ -98,17 +104,6 @@
                     window.trackCta(`Run ${getInputCell(evt.target)}`)
                 })
             });
-
-            function getInputCell(button) {
-                const parent = button.parentElement;
-                if (parent === null) {
-                    return 'unknown';
-                }
-                if (parent.id.startsWith('inputcell')) {
-                    return parent.id;
-                }
-                return getInputCell(parent);
-            }
         }
 
         // Add event listener for the function to modify code cells
@@ -124,6 +119,17 @@
                 window.trackCta('Make Interactive');
             });
         });
+
+        function getInputCell(button) {
+            const parent = button.parentElement;
+            if (parent === null) {
+                return 'unknown';
+            }
+            if (parent.id.startsWith('inputcell')) {
+                return parent.id;
+            }
+            return getInputCell(parent);
+        }
     }
 
     // Initialize Thebelab
