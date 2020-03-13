@@ -45,9 +45,10 @@
             });
 
             // Create link to IQX and hardware notice template
-            const currentPath = '{{ page.url }}'
-            const notebookPath = currentPath.replace(/\.html$/, '.ipynb')
-            const iqxUrl = `{{ site.iqx_url }}/content/${notebookPath}`
+            const currentPath = window.location.pathname
+            const contentPath = currentPath.slice('{{ site.baseurl }}'.length)
+            const notebookPath = contentPath.replace(/\.html$/, '.ipynb')
+            const iqxUrl = `{{ site.iqx_url }}/content${notebookPath}`
 
             const usesHardwareNotice = document.createElement('template')
             usesHardwareNotice.innerHTML = `
