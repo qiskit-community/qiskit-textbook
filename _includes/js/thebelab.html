@@ -30,20 +30,20 @@
 	    const codeCells = notHWCell.querySelectorAll('.input_area pre')
             codeCells.forEach((codeCell, index) => {
                 const id = codeCellId(index)
-                
+
 		// Clean up the language to make it work w/ CodeMirror and add it to the cell
                 dataLanguage = "{{ kernelName }}"
                 dataLanguage = detectLanguage(dataLanguage);
                 codeCell.setAttribute('data-language', dataLanguage)
                 codeCell.setAttribute('data-executable', 'true')
-		
+
                 // If the code cell is hidden, show it
                 var inputCheckbox = document.querySelector(`input#hidebtn${codeCell.id}`);
                 if (inputCheckbox !== null) {
                     setCodeCellVisibility(inputCheckbox, 'visible');
                 }
             });
-	    });
+        });
 
 	    // Add warning and link to IQX on uses-hardware cells
 	    const hardwareCells = document.querySelectorAll('.tag_uses-hardware')
@@ -52,7 +52,7 @@
 		    iqxLink = iqxLink.slice(9,-4)
 		    iqxLink += "ipynb"
 		    iqxLink = "{{ site.iqx_url }}/content" + iqxLink
-	
+
 		    var hardwareWarning = '<code>'
 		    hardwareWarning += '{{ site.hardware_warning_message }}'
 		    hardwareWarning += '<a href="' + iqxLink + '" target="_blank">'
@@ -88,6 +88,25 @@
                 console.log("Initializing ThebeLab with cell: " + cell.id);
                 cell.querySelector('.thebelab-run-button').click();
             });
+
+            // Add analytics per cell
+            const thebelabRunButtons = document.querySelectorAll('.thebelab-run-button');
+            thebelabRunButtons.forEach((runButton) => {
+                runButton.addEventListener('click', (evt) => {
+                    window.trackCta(`Run ${getInputCell(evt.target)}`)
+                })
+            });
+
+            function getInputCell(button) {
+                const parent = button.parentElement;
+                if (parent === null) {
+                    return 'unknown';
+                }
+                if (parent.id.startsWith('inputcell')) {
+                    return parent.id;
+                }
+                return getInputCell(parent);
+            }
         }
 
         // Add event listener for the function to modify code cells
@@ -98,6 +117,10 @@
                 return
             };
             thebelabButton.addEventListener('click', addThebelabToCodeCells);
+            // Add segment analytics
+            thebelabButton.addEventListener('click', () => {
+                window.trackCta('Make Interactive');
+            });
         });
     }
 
