@@ -3,7 +3,8 @@
 
 <!-- Display Thebelab button in each code cell -->
 {% include js/thebelab-cell-button.html %}
-<script src="https://unpkg.com/thebelab@latest/lib/index.js" async></script>
+
+<script src="{{ site.vendor_url | relative_url }}/thebelab/index.js" async></script>
 <script>
     /**
      * Add attributes to Thebelab blocks

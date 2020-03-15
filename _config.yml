@@ -66,9 +66,9 @@ jupyterhub_interact_text         : "Interact"  # The text that interact buttons 
 use_binder_button                : true  # If 'true', add a binder button for interactive links
 binderhub_url                    : "https://mybinder.org"  # The URL for your BinderHub. If no URL, use ""
 binder_repo_base                 : "https://github.com/"  # The site on which the textbook repository is hosted
-binder_repo_org                  : "qiskit"  # The username or organization that owns this repository
+binder_repo_org                  : "frankharkins"  # The username or organization that owns this repository
 binder_repo_name                 : "qiskit-textbook"  # The name of the repository on the web
-binder_repo_branch               : "master"  # The branch on which your textbook is hosted.
+binder_repo_branch               : "restructure"  # The branch on which your textbook is hosted.
 binderhub_interact_text          : "Interact"  # The text that interact buttons will contain.
 
 # Thebelab settings
@@ -106,6 +106,7 @@ images_url                : "/assets/images" # Path to static image files
 css_url                   : "/assets/css" # Path to static CSS files
 js_url                    : "/assets/js" # Path to JS files
 custom_static_url         : "/assets/custom" # Path to user's custom CSS/JS files
+vendor_url                : "/assets/vendor" # Path to 3rd party libs
 
 
 #######################################################################################
