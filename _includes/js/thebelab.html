@@ -8,7 +8,6 @@
     /**
      * Add attributes to Thebelab blocks
      */
-
     const initThebelab = () => {
         const addThebelabToCodeCells = () => {
             console.log("Adding thebelab to code cells...");
@@ -25,42 +24,51 @@
             }
 
             // Find all non-hardware, code cells, replace with Thebelab interactive code cells
-            const notHardwareCells = document.querySelectorAll('div.jb_cell:not(.tag_uses-hardware)')
-	    notHardwareCells.forEach((notHWCell, index) => {
-	    const codeCells = notHWCell.querySelectorAll('.input_area pre')
+            const hardwareTag = 'uses-hardware'
+            const hardwareQuery = `.jb_cell.tag_${hardwareTag}`
+            const noHardwareQuery = `.jb_cell:not(.tag_${hardwareTag})`
+            const codeCells = document.querySelectorAll(`${noHardwareQuery} pre`)
             codeCells.forEach((codeCell, index) => {
                 const id = codeCellId(index)
-                
-		// Clean up the language to make it work w/ CodeMirror and add it to the cell
+
+                // Clean up the language to make it work w/ CodeMirror and add it to the cell
                 dataLanguage = "{{ kernelName }}"
                 dataLanguage = detectLanguage(dataLanguage);
                 codeCell.setAttribute('data-language', dataLanguage)
                 codeCell.setAttribute('data-executable', 'true')
-		
+
                 // If the code cell is hidden, show it
                 var inputCheckbox = document.querySelector(`input#hidebtn${codeCell.id}`);
                 if (inputCheckbox !== null) {
                     setCodeCellVisibility(inputCheckbox, 'visible');
                 }
             });
-	    });
 
-	    // Add warning and link to IQX on uses-hardware cells
-	    const hardwareCells = document.querySelectorAll('.tag_uses-hardware')
-	    hardwareCells.forEach((hardwareCell, index) => {
-		    var iqxLink = window.location.pathname
-		    iqxLink = iqxLink.slice(9,-4)
-		    iqxLink += "ipynb"
-		    iqxLink = "{{ site.iqx_url }}/content" + iqxLink
-	
-		    var hardwareWarning = '<code>'
-		    hardwareWarning += '{{ site.hardware_warning_message }}'
-		    hardwareWarning += '<a href="' + iqxLink + '" target="_blank">'
-		    hardwareWarning += '{{ site.hardware_warning_linktxt }}'
-		    hardwareWarning += '</a></code>'
+            // Create link to IQX and hardware notice template
+            const currentPath = window.location.pathname
+            const contentPath = currentPath.slice('{{ site.baseurl }}'.length)
+            const notebookPath = contentPath.replace(/\.html$/, '.ipynb')
+            const iqxUrl = `{{ site.iqx_url }}/content${notebookPath}`
 
-		    hardwareCell.innerHTML = hardwareWarning + hardwareCell.innerHTML
-	    });
+            const usesHardwareNotice = document.createElement('template')
+            usesHardwareNotice.innerHTML = `
+            <div class="uses-hardware-notice">
+                {{ site.hardware_warning_message }}
+                <a href="${iqxUrl}" target="_blank">{{ site.hardware_warning_linktxt }}</a>
+            </div>
+            `
+
+            // Add warning and link to IQX on uses-hardware cells
+            const hardwareCells = document.querySelectorAll(hardwareQuery)
+            hardwareCells.forEach((cell) => {
+                cell.prepend(usesHardwareNotice.content.cloneNode(true))
+                cell.querySelector('a').addEventListener('click', (evt) => {
+                    try {
+                        window.trackCta(`Hardware Cell ${getInputCell(evt.target)}`)
+                    } catch {}
+                    return true;
+                })
+            });
 
             // Remove the event listener from the page so keyboard press doesn't
             // Change page
@@ -71,7 +79,7 @@
             thebelab.bootstrap();
 
             // Remove copy buttons since they won't work anymore
-            const copyAndThebeButtons = document.querySelectorAll('.copybtn, .thebebtn')
+            const copyAndThebeButtons = document.querySelectorAll(`${noHardwareQuery} .copybtn, .thebebtn`)
             copyAndThebeButtons.forEach((button, index) => {
                 button.remove();
             });
@@ -88,6 +96,14 @@
                 console.log("Initializing ThebeLab with cell: " + cell.id);
                 cell.querySelector('.thebelab-run-button').click();
             });
+
+            // Add analytics per cell
+            const thebelabRunButtons = document.querySelectorAll('.thebelab-run-button');
+            thebelabRunButtons.forEach((runButton) => {
+                runButton.addEventListener('click', (evt) => {
+                    window.trackCta(`Run ${getInputCell(evt.target)}`)
+                })
+            });
         }
 
         // Add event listener for the function to modify code cells
@@ -98,7 +114,22 @@
                 return
             };
             thebelabButton.addEventListener('click', addThebelabToCodeCells);
+            // Add segment analytics
+            thebelabButton.addEventListener('click', () => {
+                window.trackCta('Make Interactive');
+            });
         });
+
+        function getInputCell(button) {
+            const parent = button.parentElement;
+            if (parent === null) {
+                return 'unknown';
+            }
+            if (parent.id.startsWith('inputcell')) {
+                return parent.id;
+            }
+            return getInputCell(parent);
+        }
     }
 
     // Initialize Thebelab
