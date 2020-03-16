@@ -2,6 +2,7 @@ import ipywidgets as widgets
 from IPython.display import display, clear_output
 from qiskit.visualization import plot_bloch_vector
 from numpy import sqrt, cos, sin, pi
+from io import BytesIO
 
 class _pre():
 
