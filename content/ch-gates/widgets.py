@@ -6,7 +6,7 @@ def Vector2Latex(vector, precision=5, pretext="", display_output=True):
     out_latex += "\\begin{bmatrix}\n"
     for amplitude in vector:
         amplitude = np.real_if_close(amplitude)
-        amp_mod = np.mod(amplitude, 1)
+        amp_mod = np.mod(np.real(amplitude), 1)
         if (np.isclose(amp_mod, 0) or np.isclose(amp_mod, 1)) and type(amplitude) == np.ndarray:
             out_latex += str(int(np.round(amplitude))) + " \\\\\n"
         else:
@@ -25,7 +25,7 @@ def Unitary2Latex(unitary, precision=5, pretext="", display_output=True):
         out_latex += "\t" # This makes the latex source more readable
         for amplitude in row:
             amplitude = np.real_if_close(amplitude)
-            amp_mod = np.mod(amplitude, 1)
+            amp_mod = np.mod(np.real(amplitude), 1)
             if (np.isclose(amp_mod, 0) or np.isclose(amp_mod, 1)) and type(amplitude) == np.ndarray:
                 out_latex += str(int(np.round(amplitude))) + " & "
             else:
