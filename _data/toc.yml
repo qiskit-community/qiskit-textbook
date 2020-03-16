@@ -53,16 +53,26 @@
       url: /ch-states/introduction
     - title: The Atoms of Computation
       url: /ch-states/atoms-computation
+    - title: Representing Qubit States
+      url : /ch-states/representing-qubit-states
+    - title: Single Qubit Gates
+      url: /ch-states/single-qubit-gates
 
-- title: Single Qubits and Multi-Qubits gates
+- title: Multiple Qubits and Entanglement
   url: /ch-gates/introduction.html
   external: true
   expand_sections: true
   sections:
     - title: Introduction
       url: /ch-gates/introduction
-    - title: Single Qubit Gates
-      url: /ch-states/single-qubit-gates
+    - title: Multiple Qubits and Entangled States
+      url: /ch-gates/multiple-qubits-entangled-states
+    - title: Phase Kickback
+      url: /ch-gates/phase-kickback
+    - title: Proving Universality
+      url: /ch-gates/proving-universality
+    - title: More Circuit Identities
+      url: /ch-gates/more-circuit-identities
 
 - title: Problems
   url: /ch-ex/ex1.html
