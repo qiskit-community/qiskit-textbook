@@ -48,5 +48,19 @@
       title: document.title
     })
   })
+
+  window.trackCta = (action) => {
+    if (!window.bluemixAnalytics || !window.digitalData) { return }
+
+    const category = window.digitalData.page.pageInfo.analytics.category
+    const productTitle = window.digitalData.page.pageInfo.productTitle
+
+    window.bluemixAnalytics.trackEvent('CTA Clicked', {
+      productTitle,
+      category,
+      CTA: action
+    })
+  }
+
 }());
 </script>

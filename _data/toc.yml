@@ -165,3 +165,11 @@
   sections:
     - title: Variational Quantum Linear Solver
       url: /ch-paper-implementations/vqls
+      
+- title: Demos
+  url: /ch-demos/piday-code.html
+  external: true
+  expand_sections: true
+  sections:
+    - title: Estimating Pi Using Quantum Phase Estimation Algorithm
+      url: /ch-demos/piday-code
