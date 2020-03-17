@@ -1,32 +1,56 @@
 # Learn Quantum Computation using Qiskit
 
-<img
-  src="images/logo/logo.png"
-  alt="Learn Quantum Computinb using Qiskit cover"
-  style="width: 300px; margin-left: -35px" 
-/>
-
-Greetings from the Qiskit Community team! We initiated this open-source textbook in collaboration with IBM Research as a university quantum algorithms/computation course supplement based on Qiskit.
 
 <img
-  src="images/qiskit_textbook_skills.png"
-  alt="To the traditional quantum computation course, the textbook adds Python and Qiskit foundations, quantum programming and quantum algorithms on today's hardware."
-  width="800px"
+  src="images/logo/logo_long.png"
+  alt="Learn Quantum Computing using Qiskit"
+  style="max-width: 600px; margin-bottom: 3em; margin-left: 35px;"
+  align="center"
 />
 
-The goal of the textbook is to develop skills in the following areas.
+<p>
+Greetings from the Qiskit Community team! We initiated this open-source textbook in collaboration with IBM Research as a university quantum algorithms/computation course supplement based on Qiskit. The Qiskit textbook helps you:
+</p>
 
-1. The mathematics behind quantum algorithms
-2. Details about today's non-fault-tolerant quantum devices
-3. Writing code in Qiskit to implement quantum algorithms on IBM's cloud quantum systems
+<table style="width:100%; margin: 2em; margin-left: 35px;">
+  <tr style="font-size: large; border: None;">
+    <th style="text-align: center; border: None;">Learn Quantum Computing Theory</th>
+    <th style="text-align: center; border: None;">Learn to Code Quantum Programs</th>
+    <th style="text-align: center; border: None;">Experiment with Real Devices</th>
+  </tr>
+  <tr style="background-color: White;">
+    <td style="border: None;">
+        <img
+          src="images/preface_algs.png"
+          alt="Learn Quantum Computing Theory"
+          style="width:100%; border-radius: 2px;"
+        />
+    </td>
+    <td style="border: None;">
+        <img
+          src="images/preface_code.png"
+          alt="Learn to Code Quantum Programs"
+          style="width:100%; border-radius: 2px;"
+        />
+    </td>
+    <td style="border: None;">
+        <img
+          src="images/preface_hardware.png"
+          alt="Experiment with Real Devices"
+          style="width:100%; border-radius: 2px;"
+        />
+    </td>
+  </tr>
+</table>
 
-While this textbook does not attempt to be an expansive survey of the field, it does attempt to be as self-contained as possible.
-
-If you have any questions or suggestions about the textbook or would like to incorporate it into your curriculum, please contact Abraham Asfaw ([abraham.asfaw@ibm.com](mailto:abraham.asfaw@ibm.com)). In the true spirit of open-source, any chapter contributions are welcome in [this GitHub repository](https://github.com/Qiskit/qiskit-textbook).
-
-## Contributors in Alphabetical Order
-
-**Learn Quantum Computation using Qiskit** is the work of several individuals. If you use it in your work, cite it using this [bib file](qiskit-textbook.bib) or directly as:
+<div align="center" style="font-size: 250%; margin: 1em;">
+    <a href="using-the-textbook.html">
+        Get Started!
+    </a>
+</div>
 
 
-> Abraham Asfaw, Luciano Bello, Yael Ben-Haim, Sergey Bravyi, Lauren Capelluto, Almudena Carrera Vazquez, Jack Ceroni, Francis Harkins, Jay Gambetta, Shelly Garion, Leron Gil, Salvador De La Puente Gonzalez, David McKay, Zlatko Minev, Paul Nation, Anna Phan, Arthur Rattew, Joachim Schaefer, Javad Shabani, John Smolin, Kristan Temme, Madeleine Tod, James Wootton.
+
+```python
+
+```
