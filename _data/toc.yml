@@ -28,6 +28,12 @@
 - title: Preface
   not_numbered: true
   url: /preface
+- title: Using the Textbook
+  not_numbered: true
+  url: /using-the-textbook
+- title: About
+  not_numbered: true
+  url: /about
 - title: Upcoming
   not_numbered: true
   url: /upcoming
