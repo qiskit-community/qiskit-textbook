@@ -23,7 +23,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 
 baseurl: "/textbook" # the subpath of your site, e.g. /blog. If there is no subpath for your site, use an empty string ""
 url: "https://community.qiskit.org" # the base hostname & protocol for your site, e.g. http://example.com
-port: 3005
+port: 80
 
 #######################################################################################
 # Jupyter Book settings
@@ -109,6 +109,7 @@ images_url                : "/assets/images" # Path to static image files
 css_url                   : "/assets/css" # Path to static CSS files
 js_url                    : "/assets/js" # Path to JS files
 custom_static_url         : "/assets/custom" # Path to user's custom CSS/JS files
+vendor_url                : "/assets/vendor" # Path to 3rd party libs
 
 
 #######################################################################################
