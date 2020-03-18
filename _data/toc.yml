@@ -28,9 +28,17 @@
 - title: Preface
   not_numbered: true
   url: /preface
+- title: Using the Textbook
+  not_numbered: true
+  url: /using-the-textbook
+- title: About
+  not_numbered: true
+  url: /about
 - title: Upcoming
   not_numbered: true
   url: /upcoming
+
+- divider: true
 
 - title: Prerequisites
   url: /ch-prerequisites/python-and-jupyter-notebooks.html
@@ -53,32 +61,26 @@
       url: /ch-states/introduction
     - title: The Atoms of Computation
       url: /ch-states/atoms-computation
-    - title: The Unique Properties of Qubits
-      url: /ch-states/unique-properties-qubits
-    - title: Writing Down Qubit States
-      url: /ch-states/writing-down-qubit-states
-    - title: Pauli Matrices and the Bloch Sphere
-      url: /ch-states/pauli-matrices-bloch-sphere
-    - title: States for Many Qubits
-      url: /ch-states/states-many-qubits
+    - title: Representing Qubit States
+      url : /ch-states/representing-qubit-states
+    - title: Single Qubit Gates
+      url: /ch-states/single-qubit-gates
 
-- title: Single Qubits and Multi-Qubits gates
+- title: Multiple Qubits and Entanglement
   url: /ch-gates/introduction.html
   external: true
   expand_sections: true
   sections:
     - title: Introduction
       url: /ch-gates/introduction
-    - title: Quantum Gates
-      url: /ch-gates/quantum-gates
-    - title: Fun with Matrices
-      url: /ch-gates/fun-matrices
-    - title: The Standard Gate Set
-      url: /ch-gates/standard-gate-set
+    - title: Multiple Qubits and Entangled States
+      url: /ch-gates/multiple-qubits-entangled-states
+    - title: Phase Kickback
+      url: /ch-gates/phase-kickback
     - title: Proving Universality
       url: /ch-gates/proving-universality
-    - title: Basic Circuit Identities
-      url: /ch-gates/basic-circuit-identities
+    - title: More Circuit Identities
+      url: /ch-gates/more-circuit-identities
 
 - title: Problems
   url: /ch-ex/ex1.html
@@ -96,7 +98,7 @@
       url: /ch-ex/ex3
       not_numbered: true
 
-- title: Quantum Algorithms
+- title: Quantum Protocols and Basic Quantum Algorithms 
   url: /ch-algorithms/teleportation.html
   external: true
   expand_sections: true
@@ -117,32 +119,39 @@
       url: /ch-algorithms/quantum-phase-estimation
     - title: Grover's Algorithm
       url: /ch-algorithms/grover
-    - title: Quantum Counting
-      url: /ch-algorithms/quantum-counting
 
-- title: Quantum Algorithms for Applications
+- title: Advanced Quantum Algorithms and Applications
   url: /ch-applications/vqe-molecules.html
   external: true
   expand_sections: true
   sections:
-    - title: Simulating Molecules using VQE
-      url: /ch-applications/vqe-molecules
-    - title: Solving combinatorial optimization problems using QAOA
-      url: /ch-applications/qaoa
-    - title: Solving Satisfiability Problems using Grover's Algorithm
-      url: /ch-applications/satisfiability-grover
-    - title: Hybrid quantum-classical Neural Networks with PyTorch and Qiskit
-      url: /ch-machine-learning/machine-learning-qiskit-pytorch
+    - title: Advanced Quantum Algorithms
+      url: /ch-applications/algs_index
+      subsections:
+        - title: Quantum Counting
+          url: /ch-algorithms/quantum-counting
+    - title: Applied Quantum Algorithms
+      url: /ch-applications/apps_index
+      subsections:
+         - title: Simulating Molecules using VQE
+           url: /ch-applications/vqe-molecules
+         - title: Solving combinatorial optimization problems using QAOA
+           url: /ch-applications/qaoa
+         - title: Solving Satisfiability Problems using Grover's Algorithm
+           url: /ch-applications/satisfiability-grover
+         - title: Hybrid quantum-classical Neural Networks with PyTorch and Qiskit
+           url: /ch-machine-learning/machine-learning-qiskit-pytorch
+    - title: Implementations of Recent Quantum Algorithms
+      url: /ch-applications/imp_index
+      subsections:
+         - title: Variational Quantum Linear Solver
+           url: /ch-paper-implementations/vqls
 
-- title: Investigating Quantum Hardware Using Qiskit
+- title: Investigating Quantum Hardware Using Quantum Circuits
   url: /ch-quantum-hardware/calibrating-qubits-openpulse.html
   external: true
   expand_sections: true
   sections:
-    - title: Calibrating Qubits with OpenPulse
-      url: /ch-quantum-hardware/calibrating-qubits-openpulse
-    - title: Accessing Higher Energy States
-      url: /ch-quantum-hardware/accessing_higher_energy_states
     - title: Introduction to Quantum Error Correction using Repetition Codes
       url: /ch-quantum-hardware/error-correction-repetition-code
     - title: Measurement Error Mitigation
@@ -152,14 +161,16 @@
     - title: Measuring Quantum Volume
       url: /ch-quantum-hardware/measuring-quantum-volume
 
-- title: Implementations of Recent Quantum Algorithms
-  url: /ch-paper-implementations/vqls.html
+- title: Investigating Quantum Hardware Using Microwave Pulses
+  url: /ch-quantum-hardware/calibrating-qubits-openpulse.html
   external: true
   expand_sections: true
   sections:
-    - title: Variational Quantum Linear Solver
-      url: /ch-paper-implementations/vqls
-      
+    - title: Calibrating Qubits with OpenPulse
+      url: /ch-quantum-hardware/calibrating-qubits-openpulse
+    - title: Accessing Higher Energy States
+      url: /ch-quantum-hardware/accessing_higher_energy_states
+
 - title: Demos
   url: /ch-demos/piday-code.html
   external: true
