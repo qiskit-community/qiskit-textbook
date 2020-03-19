@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
+
 from IPython.display import display, Markdown, Latex
 import numpy as np
 
-def Vector2Latex(vector, precision=5, pretext="", display_output=True):
+def vector2latex(vector, precision=5, pretext="", display_output=True):
     out_latex = "\n$$ " + pretext
     out_latex += "\\begin{bmatrix}\n"
     for amplitude in vector:
@@ -18,7 +20,7 @@ def Vector2Latex(vector, precision=5, pretext="", display_output=True):
     else:
         return out_latex
 
-def Unitary2Latex(unitary, precision=5, pretext="", display_output=True):
+def unitary2latex(unitary, precision=5, pretext="", display_output=True):
     out_latex = "\n$$ " + pretext
     out_latex += "\\begin{bmatrix}\n"
     for row in unitary:
