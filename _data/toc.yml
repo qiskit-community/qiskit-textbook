@@ -34,9 +34,6 @@
 - title: About
   not_numbered: true
   url: /about
-- title: Upcoming
-  not_numbered: true
-  url: /upcoming
 
 - divider: true
 
@@ -97,10 +94,12 @@
     - title: Set 3. Building the Best AND Gate
       url: /ch-ex/ex3
       not_numbered: true
+    - title: Hello Qiskit Game
+      url: /ch-ex/hello-qiskit
+      not_numbered: true
 
 - title: Quantum Protocols and Basic Quantum Algorithms 
-  url: /ch-algorithms/teleportation.html
-  external: true
+  url: /ch-algorithms/index
   expand_sections: true
   sections:
     - title: Quantum Teleportation
@@ -121,17 +120,18 @@
       url: /ch-algorithms/grover
 
 - title: Advanced Quantum Algorithms and Applications
-  url: /ch-applications/vqe-molecules.html
-  external: true
+  url: /ch-applications/advanced-quantum-algs-index
   expand_sections: true
   sections:
     - title: Advanced Quantum Algorithms
       url: /ch-applications/algs_index
+      expand_subsections: true
       subsections:
         - title: Quantum Counting
           url: /ch-algorithms/quantum-counting
     - title: Applied Quantum Algorithms
       url: /ch-applications/apps_index
+      expand_subsections: true
       subsections:
          - title: Simulating Molecules using VQE
            url: /ch-applications/vqe-molecules
@@ -143,12 +143,13 @@
            url: /ch-machine-learning/machine-learning-qiskit-pytorch
     - title: Implementations of Recent Quantum Algorithms
       url: /ch-applications/imp_index
+      expand_subsections: true
       subsections:
          - title: Variational Quantum Linear Solver
            url: /ch-paper-implementations/vqls
 
 - title: Investigating Quantum Hardware Using Quantum Circuits
-  url: /ch-quantum-hardware/calibrating-qubits-openpulse.html
+  url: /ch-quantum-hardware/index-circuits
   external: true
   expand_sections: true
   sections:
@@ -162,7 +163,7 @@
       url: /ch-quantum-hardware/measuring-quantum-volume
 
 - title: Investigating Quantum Hardware Using Microwave Pulses
-  url: /ch-quantum-hardware/calibrating-qubits-openpulse.html
+  url: /ch-quantum-hardware/index-pulses
   external: true
   expand_sections: true
   sections:
