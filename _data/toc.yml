@@ -98,7 +98,7 @@
       url: /ch-ex/hello-qiskit
       not_numbered: true
 
-- title: Quantum Protocols and Basic Quantum Algorithms 
+- title: Quantum Protocols and Quantum Algorithms
   url: /ch-algorithms/index
   expand_sections: true
   sections:
@@ -118,17 +118,14 @@
       url: /ch-algorithms/quantum-phase-estimation
     - title: Grover's Algorithm
       url: /ch-algorithms/grover
+    - title: Quantum Counting
+      url: /ch-algorithms/quantum-counting
 
-- title: Advanced Quantum Algorithms and Applications
-  url: /ch-applications/advanced-quantum-algs-index
+
+- title: Quantum Algorithms for Applications
+  url: /ch-applications/algs_for_apps_index
   expand_sections: true
   sections:
-    - title: Advanced Quantum Algorithms
-      url: /ch-applications/algs_index
-      expand_subsections: true
-      subsections:
-        - title: Quantum Counting
-          url: /ch-algorithms/quantum-counting
     - title: Applied Quantum Algorithms
       url: /ch-applications/apps_index
       expand_subsections: true
