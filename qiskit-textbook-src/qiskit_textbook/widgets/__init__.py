@@ -4,7 +4,8 @@ import ipywidgets as widgets
 from IPython.display import display, clear_output
 from qiskit.visualization import plot_bloch_vector
 from numpy import sqrt, cos, sin, pi
-from io import BytesIO
+
+from ._helpers import _pre, _img
 
 def binary_widget(nbits=5):
     nbits = max(min(10, nbits), 2) # Keep nbits between 2 and 10
@@ -85,7 +86,6 @@ def bloch_calc():
                              disabled=False)
 
     label = widgets.Label(value="Define a qubit state using $\\theta$ and $\phi$:")
-    data = BytesIO()
     image = _img(value=plot_bloch_vector([0, 0, 1]))
     def on_button_click(b):
         from math import pi, sqrt

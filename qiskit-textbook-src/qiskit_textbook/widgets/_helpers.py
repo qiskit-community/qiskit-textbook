@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 
+from io import BytesIO
+
+import ipywidgets as widgets
+
+
 class _pre():
 
     def __init__(self, value=''):
