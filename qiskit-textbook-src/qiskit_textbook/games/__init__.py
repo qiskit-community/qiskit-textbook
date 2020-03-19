@@ -1,35 +1,18 @@
+#!/usr/bin/env python3
+
+import copy
+from io import BytesIO
+
 from qiskit import BasicAer as Aer
 from qiskit import ClassicalRegister, QuantumRegister, QuantumCircuit
 from qiskit import execute
-
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle, Rectangle
-import copy
 from ipywidgets import widgets
 from IPython.display import display
-from io import BytesIO
 
-class _img():
-
-    def __init__(self, value=None):
-        self.widget = widgets.Image(format='png')
-        self.value = value
-
-    @property
-    def value(self):
-        return self._value
-
-    @value.setter
-    def value(self, value):
-        self._value = value
-        if value is None:
-            return
-
-        data = BytesIO()
-        value.savefig(data, format='png', facecolor=self.value.get_facecolor())
-        data.seek(0)
-        self.widget.value = data.read()
+from qiskit_textbook.widgets._helpers import _img
 
 class run_game():
     # Implements a puzzle, which is defined by the given inputs.

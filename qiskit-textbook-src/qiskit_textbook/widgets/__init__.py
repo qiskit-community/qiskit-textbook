@@ -1,46 +1,10 @@
+#!/usr/bin/env python3
+
 import ipywidgets as widgets
 from IPython.display import display, clear_output
 from qiskit.visualization import plot_bloch_vector
 from numpy import sqrt, cos, sin, pi
 from io import BytesIO
-
-class _pre():
-
-    def __init__(self, value=''):
-        self.widget = widgets.HTML()
-        self.value = value
-
-    @property
-    def value(self):
-        return self._value
-
-    @value.setter
-    def value(self, value):
-        self._value = value
-        self.widget.value = '<pre>{}</pre>'.format(value)
-
-
-class _img():
-
-    def __init__(self, value=None):
-        self.widget = widgets.Image(format='png')
-        self.value = value
-
-    @property
-    def value(self):
-        return self._value
-
-    @value.setter
-    def value(self, value):
-        self._value = value
-        if value is None:
-            return
-
-        data = BytesIO()
-        value.savefig(data, format='png')
-        data.seek(0)
-        self.widget.value = data.read()
-
 
 def binary_widget(nbits=5):
     nbits = max(min(10, nbits), 2) # Keep nbits between 2 and 10
@@ -235,6 +199,4 @@ def gate_demo(gates='full'):
 
     display(main_box)
     display(image.widget)
-
-
 
