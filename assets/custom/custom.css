@@ -1,5 +1,12 @@
 /* Put your custom CSS here */
+
 .left {
     margin: 5px 2px 2px 0px !important;
     float: left !important;
+}
+
+details {
+	margin-bottom: 12px;
+	border: 1px solid black;
+	padding: 12px;
 }
