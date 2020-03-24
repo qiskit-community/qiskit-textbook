@@ -12,6 +12,14 @@ The notebooks are compiled into html and exported to [the website](http://commun
 
 # Contributors Guide
 
+## General Guidelines 
+
+We love contributions and need them to ensure the textbook is a high-quality resource. If you notice any mistakes and want to fix them, then feel free to go ahead and make a pull request. If you want to contribute original content, there are a few things you can do to make sure your efforts have the biggest impact:
+
+- Please open an issue explaining your proposed additions. Here we can discuss where your contribution will fit in, as well as making sure it fits the style and format of the rest of the textbook.
+- Create a pull request while your chapter is in progress, this way we can review it in the process of writing instead of asking for large changes after you have already written it.
+- Try to follow the formatting and tone of the existing notebooks to ensure everything renders correctly and the textbook is coherent.
+
 ## How to Edit the Textbook
 
 The textbook uses jupyter book to generate the site from jupyter notebooks. To edit the pages you will first need to install jupyter and Qiskit, you can use the links below to help you do this:
@@ -26,14 +34,6 @@ If you are unfamiliar with git, you can follow this guide to making contribution
 You will need to fork the textbook, make changes in your own branch, then submit a pull request which we will review before merging. You must use jupyter notebook to edit the pages. If you change any code, please re-run the notebook (you can do this using the ⏭  button at the top of the notebook editor) to update the cell outputs.
 
 **Important:** The notebooks to edit are inside the `content` folder.
-
-## General Guidelines 
-
-We love contributions and need them to ensure the textbook is a high-quality resource. If you notice any mistakes and want to fix them, then feel free to go ahead and make a pull request. If you want to contribute original content, there are a few things you can do to make sure your efforts have the biggest impact:
-
-- Please open an issue explaining your proposed additions. Here we can discuss where your contribution will fit in, as well as making sure it fits the style and format of the rest of the textbook.
-- Create a pull request while your chapter is in progress, this way we can review it in the process of writing instead of asking for large changes after you have already written it.
-- Try to follow the formatting and tone of the existing notebooks to ensure everything renders correctly and the textbook is coherent.
 
 For a list of contributors, see the [.bib](https://github.com/Qiskit/qiskit-textbook/blob/master/content/qiskit-textbook.bib) file.
 
