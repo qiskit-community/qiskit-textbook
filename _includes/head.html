@@ -45,8 +45,13 @@
 
   <!-- Include Turbolinks to make page loads fast -->
   <!-- https://github.com/turbolinks/turbolinks -->
+  <!-- Turbolinks were causing problems with equations in details tags, I have
+	  removed them for now as I didn't notice a siginificant difference in
+	  loading time, but maybe someone more knowledgeable than me can sort
+	  the problem properly and re-enable -Frank 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" async></script>
   <meta name="turbolinks-cache-control" content="no-cache">
+  -->
 
   <!-- Load nbinteract for widgets -->
   {% include js/nbinteract.html %}
