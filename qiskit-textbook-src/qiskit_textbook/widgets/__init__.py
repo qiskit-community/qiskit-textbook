@@ -7,6 +7,18 @@ from numpy import sqrt, cos, sin, pi
 
 from ._helpers import _pre, _img
 
+def scalable_circuit(func):
+    """Makes a scalable circuit interactive. Function must take 
+    qc (QuantumCircuit) and number of qubits (int) as positional inputs"""
+    from qiskit import QuantumCircuit
+    def interactive_function(n):
+        qc = QuantumCircuit(n)
+        func(qc, n)
+        return qc.draw('mpl')
+    from ipywidgets import interact, IntSlider
+    interact(interactive_function, n=IntSlider(min=1,max=8,step=1,value=4))
+
+
 def binary_widget(nbits=5):
     nbits = max(min(10, nbits), 2) # Keep nbits between 2 and 10
 
