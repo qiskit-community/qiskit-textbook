@@ -129,6 +129,28 @@ def plot_bloch_vector_spherical(coords):
     return plot_bloch_vector([x,y,z])
 
 
+def scalable_circuit(func):
+    """Makes a scalable circuit interactive. Function must take 
+    qc (QuantumCircuit) and number of qubits (int) as positional inputs"""
+    from qiskit import QuantumCircuit
+    def interactive_function(n):
+        qc = QuantumCircuit(n)
+        func(qc, n)
+        return qc.draw('mpl')
+    
+    from ipywidgets import IntSlider
+    # Ideally this would use `interact` from ipywidgets but this is
+    # incompatible with thebe lab
+    image = _img()
+    n_slider = IntSlider(min=1,max=8,step=1,value=4)
+    image.value = interactive_function(n_slider.value)
+    def update_output(b):
+        image.value = interactive_function(n_slider.value)
+    n_slider.observe(update_output)
+    display(n_slider)
+    display(image.widget)
+
+
 def gate_demo(gates='full'):
     from qiskit import QuantumCircuit, execute, Aer
     from qiskit.visualization import plot_bloch_multivector

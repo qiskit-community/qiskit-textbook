@@ -130,6 +130,8 @@
       url: /ch-applications/apps_index
       expand_subsections: true
       subsections:
+         - title: Solving Linear Systems of Equations using HHL
+           url: /ch-applications/hhl_tutorial
          - title: Simulating Molecules using VQE
            url: /ch-applications/vqe-molecules
          - title: Solving combinatorial optimization problems using QAOA
