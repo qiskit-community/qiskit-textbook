@@ -39,3 +39,22 @@ def unitary2latex(unitary, precision=5, pretext="", display_output=True):
         display(Markdown(out_latex))
     else:
         return out_latex
+
+
+def random_state(nqubits):
+    """Creates a random nqubit state vector"""
+    from numpy import append, array, sqrt
+    from numpy.random import random
+    real_parts = array([])
+    im_parts = array([])
+    for amplitude in range(2**nqubits):
+        real_parts = append(real_parts, (random()*2)-1)
+        im_parts = append(im_parts, (random()*2)-1)
+    # Combine into list of complex numbers:
+    amps = real_parts + 1j*im_parts
+    # Normalise
+    magnitude_squared = 0
+    for a in amps:
+        magnitude_squared += abs(a)**2
+    amps /= sqrt(magnitude_squared)
+    return amps
