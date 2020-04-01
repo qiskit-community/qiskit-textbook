@@ -61,3 +61,27 @@ img.textbook_logo {
 #dropdown-button-trigger {
 	background-color: black;
 }
+
+.thebelab-cell {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border: 1px solid #ccc;
+	background-color: #f7f7f7;
+	border-radius: 0px;
+}
+
+.jp-OutputArea-child {
+	background-color: white;
+}
+
+.thebelab-button {
+	font-family: 'IBM Plex Sans', sans-serif;
+	border-radius: 0px;
+	margin-top: 1em;
+	margin-left: 0px;
+}
+
+.CodeMirror {
+	padding: 12px;
+	font-size: 0.9em;
+}
