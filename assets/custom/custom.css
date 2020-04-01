@@ -32,8 +32,13 @@ svg {
 
 .c-textbook__sidebar {
 	background-color: #212121;
-	scrollbar-color:  gray #212121;
+	scrollbar-color:  #212121 #212121;
 	opacity: 1;
+	transition: scrollbar-color 0.2s ease-in-out;
+}
+
+.c-textbook__sidebar:hover {
+	scrollbar-color: gray #212121;
 }
 
 .c-sidebar__entry, .c-sidebar__entry:visited, .c-sidebar__entry:hover {
@@ -64,7 +69,7 @@ img.textbook_logo {
 
 .thebelab-cell {
 	margin-top: 0px;
-	margin-bottom: 0px;
+	margin-bottom: 12px;
 	border: 1px solid #ccc;
 	background-color: #f7f7f7;
 	border-radius: 0px;
@@ -77,11 +82,15 @@ img.textbook_logo {
 .thebelab-button {
 	font-family: 'IBM Plex Sans', sans-serif;
 	border-radius: 0px;
-	margin-top: 1em;
+	margin-top: .5em;
 	margin-left: 0px;
 }
 
 .CodeMirror {
 	padding: 12px;
 	font-size: 0.9em;
+}
+
+.jp-RenderedText pre {
+	padding: 1em;
 }
