@@ -5,7 +5,7 @@
 body {
   // Use system font stack:
   // https://css-tricks.com/snippets/css/system-font-stack/
-  font-family: $global-font-family  !important;
+  font-family: $global-font-family;
   $color: $color-text;
 }
 
@@ -33,7 +33,6 @@ h5,
 h6 {
   margin: 2em 0 0.5em;
   line-height: 1.2;
-  font-family: $header-font-family !important;
   font-weight: bold;
 }
 
@@ -51,13 +50,13 @@ h3 {
 }
 
 h4 {
-  font-size: $type-size-6;
+  font-size: $type-size-5;
 }
 
 h5 {
-  font-size: $type-size-6;
+  font-size: $type-size-5;
 }
 
 h6 {
-  font-size: $type-size-6;
+  font-size: $type-size-5;
 }
