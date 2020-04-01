@@ -1,5 +1,11 @@
 /* Put your custom CSS here */
 
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+
+body {
+	font-family: 'IBM Plex Sans', sans-serif;
+}
+
 .left {
     margin: 5px 2px 2px 0px !important;
     float: left !important;
@@ -9,4 +15,49 @@ details {
 	margin-bottom: 12px;
 	border: 1px solid black;
 	padding: 12px;
+}
+
+code {
+	font-size: 0.85em;
+}
+
+pre {
+	font-size: 0.85em;
+	padding: 12px;
+}
+
+svg {
+	max-width: 55vw;
+}
+
+.c-textbook__sidebar {
+	background-color: #212121;
+	scrollbar-color:  gray #212121;
+	opacity: 1;
+}
+
+.c-sidebar__entry, .c-sidebar__entry:visited, .c-sidebar__entry:hover {
+	color: white;
+}
+
+.c-sidebar__title {
+	color: white;
+}
+
+.sidebar_footer {
+	color: gray;
+}
+
+img.textbook_logo {
+	margin: 0px 10vw 0px auto;
+}
+
+.buttons, .interact-button {
+	font-family: 'IBM Plex Sans', sans-serif;
+	background-color: white;
+	transition: background-color .2s linear, color .2s linear, fill .2s linear;
+}
+
+#dropdown-button-trigger {
+	background-color: black;
 }
