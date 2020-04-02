@@ -13,9 +13,20 @@ body {
 
 details {
 	margin-bottom: 12px;
-	border: 1px solid black;
+	border: 1px solid #ccc;
+	background-color: #f7f7f7;
 	padding: 12px;
+	padding-bottom: 0px;
 }
+
+details > p {
+	padding-bottom: 12px;
+}
+
+summary {
+	margin-bottom: 12px;
+}
+
 
 code {
 	font-size: 0.85em;
@@ -87,7 +98,7 @@ img.textbook_logo {
 }
 
 .CodeMirror {
-	padding: 12px;
+	padding: 7px;
 	font-size: 0.9em;
 }
 
