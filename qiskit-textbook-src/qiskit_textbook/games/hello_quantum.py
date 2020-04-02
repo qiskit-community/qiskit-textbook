@@ -236,16 +236,16 @@ class run_game():
         qubit.observe(given_qubit)
         action.observe(given_action)
 
-def get_circuit(puzzle):
+    def get_circuit(self):
 
-    q = QuantumRegister(2,'q')
-    b = ClassicalRegister(2,'b')
-    qc = QuantumCircuit(q,b)
+        q = QuantumRegister(2,'q')
+        b = ClassicalRegister(2,'b')
+        qc = QuantumCircuit(q,b)
 
-    for line in puzzle.program:
-        eval(line)
+        for line in self.program:
+            eval(line)
 
-    return qc
+        return qc
 
 class pauli_grid():
     # Allows a quantum circuit to be created, modified and implemented, and visualizes the output in the style of 'Hello Quantum'.
@@ -289,20 +289,21 @@ class pauli_grid():
         else:
             self.colors = [(1.6/255,72/255,138/255),(132/255,177/255,236/255),(33/255,114/255,216/255)]
 
-        self.fig = plt.figure(figsize=(5,5),facecolor=self.colors[0])
+        if self.mode!='y':
+            figsize=(5,5)
+        else:
+            figsize=(6,6)
+     
+        self.fig = plt.figure(figsize=(6,6),facecolor=self.colors[0])
         self.ax = self.fig.add_subplot(111)
         plt.axis('off')
 
         self.bottom = self.ax.text(-3,1,"",size=9,va='top',color='w')
 
-        self.lines = {}
+        self.points = {}
         for pauli in self.box:
-            w = plt.plot( [self.box[pauli][0],self.box[pauli][0]], [self.box[pauli][1],self.box[pauli][1]], color=(1.0,1.0,1.0), lw=0 )
-            b = plt.plot( [self.box[pauli][0],self.box[pauli][0]], [self.box[pauli][1],self.box[pauli][1]], color=(0.0,0.0,0.0), lw=0 )
-            c = {}
-            c['w'] = self.ax.add_patch( Circle(self.box[pauli], 0.0, color=(0,0,0), zorder=10) )
-            c['b'] = self.ax.add_patch( Circle(self.box[pauli], 0.0, color=(1,1,1), zorder=10) )
-            self.lines[pauli] = {'w':w,'b':b,'c':c}
+            self.points[pauli] = [ self.ax.add_patch( Circle(self.box[pauli], 0.0, color=(0,0,0), zorder=10) ) ]
+            self.points[pauli].append( self.ax.add_patch( Circle(self.box[pauli], 0.0, color=(1,1,1), zorder=10) ) )
 
 
     def get_rho(self):
@@ -314,6 +315,9 @@ class pauli_grid():
         else:
             corr = ['ZZ','ZX','XZ','XX']
             ps = ['X','Z']
+
+            
+        self.rho = {}
 
         results = {}
         for basis in corr:
@@ -355,6 +359,10 @@ class pauli_grid():
 
         for pauli in prob:
             self.rho[pauli] = 1-2*prob[pauli]
+             
+            
+            
+        
 
     def update_grid(self,rho=None,labels=False,bloch=None,hidden=[],qubit=True,corr=True,message="",output=None):
         """
@@ -388,6 +396,8 @@ class pauli_grid():
             # third: is it a correlation pauli when these are not allowed
             if corr==False:
                 unhidden = unhidden and ((pauli[0]=='I') or (pauli[1]=='I'))
+            # finally: is it actually in rho
+            unhidden = unhidden and (pauli in self.rho)
             return unhidden
 
         def add_line(line,pauli_pos,pauli):
@@ -400,38 +410,47 @@ class pauli_grid():
             """
 
             unhidden = see_if_unhidden(pauli)
-            coord = None
             p = (1-self.rho[pauli])/2 # prob of 1 output
             # in the following, white lines goes from a to b, and black from b to c
             if unhidden:
-                if line=='Z':
-                    a = ( self.box[pauli_pos][0], self.box[pauli_pos][1]+l/2 )
-                    c = ( self.box[pauli_pos][0], self.box[pauli_pos][1]-l/2 )
-                    b = ( (1-p)*a[0] + p*c[0] , (1-p)*a[1] + p*c[1] )
-                    lw = 8
-                    coord = (b[1] - (a[1]+c[1])/2)*1.2 + (a[1]+c[1])/2
-                elif line=='X':
-                    a = ( self.box[pauli_pos][0]+l/2, self.box[pauli_pos][1] )
-                    c = ( self.box[pauli_pos][0]-l/2, self.box[pauli_pos][1] )
-                    b = ( (1-p)*a[0] + p*c[0] , (1-p)*a[1] + p*c[1] )
-                    lw = 9
-                    coord = (b[0] - (a[0]+c[0])/2)*1.1 + (a[0]+c[0])/2
+                if line=='X':
+                    
+                    a = ( self.box[pauli_pos][0]-length/2, self.box[pauli_pos][1]-width/2 )
+                    c = ( self.box[pauli_pos][0]+length/2, self.box[pauli_pos][1]-width/2 )
+                    b = ( p*a[0] + (1-p)*c[0] , p*a[1] + (1-p)*c[1] )
+                    
+                    self.ax.add_patch( Rectangle( a, length*(1-p), width, angle=0, color=(0.0,0.0,0.0)) )
+                    self.ax.add_patch( Rectangle( b, length*p, width, angle=0, color=(1.0,1.0,1.0)) )
+                    
+                elif line=='Z':
+                    
+                    a = ( self.box[pauli_pos][0]-width/2, self.box[pauli_pos][1]-length/2 )
+                    c = ( self.box[pauli_pos][0]-width/2, self.box[pauli_pos][1]+length/2 )
+                    b = ( p*a[0] + (1-p)*c[0] , p*a[1] + (1-p)*c[1] )
+                    
+                    self.ax.add_patch( Rectangle( a, width, length*(1-p), angle=0, color=(0.0,0.0,0.0)) )
+                    self.ax.add_patch( Rectangle( b, width, length*p, angle=0, color=(1.0,1.0,1.0)) )
+                    
                 else:
-                    a = ( self.box[pauli_pos][0]+l/(2*np.sqrt(2)), self.box[pauli_pos][1]+l/(2*np.sqrt(2)) )
-                    c = ( self.box[pauli_pos][0]-l/(2*np.sqrt(2)), self.box[pauli_pos][1]-l/(2*np.sqrt(2)) )
-                    b = ( (1-p)*a[0] + p*c[0] , (1-p)*a[1] + p*c[1] )
-                    lw = 9
-                self.lines[pauli]['w'].pop(0).remove()
-                self.lines[pauli]['b'].pop(0).remove()
-                self.lines[pauli]['w'] = plt.plot( [a[0],b[0]], [a[1],b[1]], color=(1.0,1.0,1.0), lw=lw )
-                self.lines[pauli]['b'] = plt.plot( [b[0],c[0]], [b[1],c[1]], color=(0.0,0.0,0.0), lw=lw )
-                return coord
+                    
+                    
+                    a = ( self.box[pauli_pos][0]-length/(2*np.sqrt(2)), self.box[pauli_pos][1]-length/(2*np.sqrt(2)) )
+                    c = ( self.box[pauli_pos][0]+length/(2*np.sqrt(2)), self.box[pauli_pos][1]+length/(2*np.sqrt(2)) )
+                    b = ( p*a[0] + (1-p)*c[0] , p*a[1] + (1-p)*c[1] )
+                    
+                    self.ax.add_patch( Rectangle( a, width, length*(1-p), angle=-45, color=(0.0,0.0,0.0)) )
+                    self.ax.add_patch( Rectangle( b, width, length*p, angle=-45, color=(1.0,1.0,1.0)) )
+                
+            return p
 
-        l = 0.9 # line length
-        r = 0.6 # circle radius
         L = 0.98*np.sqrt(2) # box height and width
+        length = 0.75*L # line length
+        width = 0.12*L # line width
+        r = 0.6 # circle radius
 
-        if rho==None:
+        # set the state
+        self.rho = rho
+        if self.rho=={} or self.rho==None:
             self.get_rho()
 
         # draw boxes
@@ -450,7 +469,8 @@ class pauli_grid():
                     self.ax.add_patch( Circle(self.box[pauli], r, color=(0.5,0.5,0.5)) )
                 else:
                     prob = (1-self.rho[pauli])/2
-                    self.ax.add_patch( Circle(self.box[pauli], r, color=(prob,prob,prob)) )
+                    color=(prob,prob,prob) 
+                    self.ax.add_patch( Circle(self.box[pauli], r, color=color) )
 
         # update bars if required
         if self.mode=='line':
@@ -458,19 +478,19 @@ class pauli_grid():
                 for other in 'IXZ':
                     px = other*(bloch=='1') + 'X' + other*(bloch=='0')
                     pz = other*(bloch=='1') + 'Z' + other*(bloch=='0')
-                    z_coord = add_line('Z',pz,pz)
-                    x_coord = add_line('X',pz,px)
-                    for j in self.lines[pz]['c']:
-                        self.lines[pz]['c'][j].center = (x_coord,z_coord)
-                        self.lines[pz]['c'][j].radius = (j=='w')*0.05 + (j=='b')*0.04
+                    prob_z = add_line('Z',pz,pz)
+                    prob_x = add_line('X',pz,px)
+                    for j,point in enumerate(self.points[pz]):
+                        point.center = (self.box[pz][0]-(prob_x-0.5)*length, self.box[pz][1]-(prob_z-0.5)*length)
+                        point.radius = (j==0)*0.05 + (j==1)*0.04
                 px = 'I'*(bloch=='0') + 'X' + 'I'*(bloch=='1')
                 pz = 'I'*(bloch=='0') + 'Z' + 'I'*(bloch=='1')
                 add_line('Z',pz,pz)
                 add_line('X',px,px)
             else:
                 for pauli in self.box:
-                    for j in self.lines[pauli]['c']:
-                        self.lines[pauli]['c'][j].radius = 0.0
+                    for point in self.points[pauli]:
+                        point.radius = 0.0
                     if pauli in ['ZI','IZ','ZZ']:
                         add_line('Z',pauli,pauli)
                     if pauli in ['XI','IX','XX']:
