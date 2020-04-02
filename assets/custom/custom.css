@@ -72,6 +72,7 @@ img.textbook_logo {
 	font-family: 'IBM Plex Sans', sans-serif;
 	background-color: white;
 	transition: background-color .2s linear, color .2s linear, fill .2s linear;
+	margin-bottom: 3px;
 }
 
 #dropdown-button-trigger {
