@@ -4,12 +4,29 @@
 <!-- Display Thebelab button in each code cell -->
 {% include js/thebelab-cell-button.html %}
 
-<script src="{{ site.vendor_url | relative_url }}/thebelab/index.js" async></script>
 <script>
+    /**
+     * Thebelab loads "reset CSS" after the theme styles load and so,
+     * it invalidates part of the theme rules. To make the theme CSS to take
+     * the correct precedence, we listen for Thebelab to finish loading, then
+     * relocate the theme CSS and start Thebelab.
+     */
+    const thebeLabScript = document.createElement('script');
+    thebeLabScript.src = "{{ site.vendor_url | relative_url }}/thebelab/index.js"
+    thebeLabScript.async = true
+    thebeLabScript.onload = () => {
+        setTimeout(() => {
+            document.head.append(
+                ...document.querySelectorAll('#theme-style, #custom-style'))
+        })
+        initFunction(initThebelab)
+    }
+    document.head.append(thebeLabScript);
+
     /**
      * Add attributes to Thebelab blocks
      */
-    const initThebelab = () => {
+    function initThebelab() {
         const addThebelabToCodeCells = () => {
             console.log("Adding thebelab to code cells...");
             // If Thebelab hasn't loaded, wait a bit and try again. This
@@ -132,9 +149,6 @@
             return getInputCell(parent);
         }
     }
-
-    // Initialize Thebelab
-    initFunction(initThebelab);
 
 // Helper function to munge the language name
 var detectLanguage = (language) => {
