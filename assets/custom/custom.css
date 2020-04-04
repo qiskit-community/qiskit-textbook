@@ -56,6 +56,10 @@ svg {
 	color: white;
 }
 
+.c-sidebar__entry--active.c-sidebar__entry--active {
+	color: #0077d8;
+}
+
 .c-sidebar__title {
 	color: white;
 }
@@ -106,3 +110,54 @@ img.textbook_logo {
 .jp-RenderedText pre {
 	padding: 1em;
 }
+
+
+.index-cards .column {
+  float: left;
+  width: 25%;
+  padding: 1em;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 98em) {
+	.index-cards .column {
+		width: 33%;
+		display: block;
+  }
+}
+
+@media screen and (max-width: 72em) {
+	.index-cards .column {
+		width: 50%;
+		display: block;
+  }
+}
+
+
+
+.index-cards .card {
+	color: #212121;
+	max-width: 15em;
+	padding: 12px;
+	height: 240px;
+	text-align: center;
+	border: 2px solid #212121;
+	overflow: hidden;
+	background-color: white;
+	transition: background-color .2s linear, color .2s linear;
+}
+
+.index-cards h3 {
+	margin: 1em;
+	pointer-events: none;
+}
+
+.index-cards .anchorjs-link {
+	display: none;
+}
+
+.index-cards .card:hover {
+	background-color: #212121;
+	color: white;
+}
+

@@ -40,7 +40,6 @@
 - title: Prerequisites
   url: /ch-prerequisites/python-and-jupyter-notebooks.html
   external: true
-  expand_sections: true
   sections:
     - title: Python and Jupyter Notebooks
       url: /ch-prerequisites/python-and-jupyter-notebooks
@@ -78,25 +77,6 @@
       url: /ch-gates/proving-universality
     - title: More Circuit Identities
       url: /ch-gates/more-circuit-identities
-
-- title: Problems
-  url: /ch-ex/ex1.html
-  external: true
-  not_numbered: true
-  expand_sections: true
-  sections:
-    - title: Set 1. Classical Logic Gates with Quantum Circuits
-      url: /ch-ex/ex1
-      not_numbered: true
-    - title: Set 2. Basic Synthesis of Single-Qubit Gates
-      url: /ch-ex/ex2
-      not_numbered: true
-    - title: Set 3. Building the Best AND Gate
-      url: /ch-ex/ex3
-      not_numbered: true
-    - title: Hello Qiskit Game
-      url: /ch-ex/hello-qiskit
-      not_numbered: true
 
 - title: Quantum Protocols and Quantum Algorithms
   url: /ch-algorithms/index
@@ -171,10 +151,27 @@
     - title: Accessing Higher Energy States
       url: /ch-quantum-hardware/accessing_higher_energy_states
 
-- title: Demos
-  url: /ch-demos/piday-code.html
-  external: true
+- title: Problem Sets & Exercises
+  url: /ch-ex/index
   expand_sections: true
   sections:
+    - title: Set 1. Classical Logic Gates with Quantum Circuits
+      url: /ch-ex/ex1
+      not_numbered: true
+    - title: Set 2. Basic Synthesis of Single-Qubit Gates
+      url: /ch-ex/ex2
+      not_numbered: true
+    - title: Set 3. Building the Best AND Gate
+      url: /ch-ex/ex3
+      not_numbered: true
+
+- title: Games & Demos
+  url: /ch-demos/index
+  expand_sections: true
+  sections:
+    - title: Hello Qiskit Game
+      url: /ch-ex/hello-qiskit
+      not_numbered: true
     - title: Estimating Pi Using Quantum Phase Estimation Algorithm
       url: /ch-demos/piday-code
+      not_numbered: true
