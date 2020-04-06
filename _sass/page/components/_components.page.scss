@@ -21,7 +21,6 @@
 
 div.jb_cell {
   width: 100%;
-  position: relative;
 
   @include mq($from: laptop) {
     width: $textbook-page-with-sidebar-width;
