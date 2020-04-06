@@ -1,6 +1,4 @@
-## Index of Games & Demos
-
-Here is some text you'll see when accessing the demos and games page
+These games and demos are a fun way to reinforce the concepts you’ll learn throughout your quantum computing journey. We’ll introduce these at appropriate places throughout the textbook, but they’re also all listed here so you can find them easily.
 
 <div class="index-cards">
 <div class="row">

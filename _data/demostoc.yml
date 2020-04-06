@@ -1,6 +1,6 @@
 # Keep your titles and descriptions below 75 characters 
 # Frank wrote the css, so check the page still looks fine
-# at small screen sizes before you commit
+# at different screen sizes before you commit
 
 - title: Hello Qiskit Game
   url: /ch-ex/hello-qiskit.html
@@ -9,7 +9,3 @@
 - title: Estimating Pi Using QPE
   url: /ch-demos/piday-code.html
   description: Use the quantum phase estimation algorithm to estimate π
-
-- title: Another Demo or Game with a long title 
-  url: /broken-url.html
-  description: A nice description goes here with many characters hehe

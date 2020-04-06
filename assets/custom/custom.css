@@ -69,7 +69,7 @@ svg {
 }
 
 img.textbook_logo {
-	margin: 0px 10vw 0px auto;
+	margin: 1em auto 0px auto;
 }
 
 .buttons, .interact-button {
