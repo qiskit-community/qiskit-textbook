@@ -129,7 +129,6 @@
 
 - title: Investigating Quantum Hardware Using Quantum Circuits
   url: /ch-quantum-hardware/index-circuits
-  external: true
   expand_sections: true
   sections:
     - title: Introduction to Quantum Error Correction using Repetition Codes
@@ -143,7 +142,6 @@
 
 - title: Investigating Quantum Hardware Using Microwave Pulses
   url: /ch-quantum-hardware/index-pulses
-  external: true
   expand_sections: true
   sections:
     - title: Calibrating Qubits with OpenPulse
