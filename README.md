@@ -39,7 +39,7 @@ You will need to fork the textbook, make changes in your own branch, then submit
 
 After writing your chapter, you must a few tags to your cells (You can see the tags using `view > tags`).
 
-- If you include a chapter in your notebook, move this to its own cell and add a `remove-cell` tag to avoid duplicate titles on the website.
+- If you include the chapter's title in your notebook, move this to its own cell and add a `remove-cell` tag to avoid duplicate titles on the website. This is only for the title that will appear in the sidebar.
 - If you intentionally raise an exception in a cell, add a `raises-exception` tag to that code cell so our checking script knows this is intentional.
 - Any code cell that uses IBM hardware, or relies on the results from such a cell needs a `uses-hardware` tag to alert the user this cannot be run on the website through thebe lab.
 - Finally, after adding these tags, go to `view > none` and save your notebook to stop the tags from showing automatically when a reader opens the notebook.
