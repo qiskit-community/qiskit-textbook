@@ -78,10 +78,13 @@
     - title: More Circuit Identities
       url: /ch-gates/more-circuit-identities
 
+
 - title: Quantum Protocols and Quantum Algorithms
   url: /ch-algorithms/index
   expand_sections: true
   sections:
+    - title: Defining Quantum Circuits
+      url: /ch-algorithms/defining-quantum-circuits
     - title: Quantum Teleportation
       url: /ch-algorithms/teleportation
     - title: Superdense Coding
