@@ -78,6 +78,14 @@
     - title: More Circuit Identities
       url: /ch-gates/more-circuit-identities
 
+  - title: Quantum Circuits
+  url: /ch-circuits/defining-circuits.html
+  external: true
+  expand_sections: true
+  sections:
+    - title: Quantum Circuits
+      url: /ch-circuits/defining-circuits
+
 - title: Quantum Protocols and Quantum Algorithms
   url: /ch-algorithms/index
   expand_sections: true
