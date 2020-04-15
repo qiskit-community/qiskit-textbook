@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from IPython.display import display, Markdown, Latex
+from IPython.display import display, Markdown, Math
 import numpy as np
 
 def vector2latex(vector, precision=5, pretext="", display_output=True):
@@ -17,7 +17,7 @@ def vector2latex(vector, precision=5, pretext="", display_output=True):
     out_latex = out_latex[:-4] # remove trailing ampersands
     out_latex += "\end{bmatrix} $$"
     if display_output:
-        display(Markdown(out_latex))
+        display(Math(out_latex))
     else:
         return out_latex
 
@@ -38,7 +38,7 @@ def unitary2latex(unitary, precision=5, pretext="", display_output=True):
         out_latex += " \\\\\n"
     out_latex += "\end{bmatrix} $$"
     if display_output:
-        display(Markdown(out_latex))
+        display(Math(out_latex))
     else:
         return out_latex
 
@@ -166,6 +166,6 @@ def array_to_latex(array, precision=5, pretext="", display_output=True):
     else:
         raise ValueError("array_to_latex can only convert numpy ndarrays of dimension 1 or 2")
     if display_output:
-        display(Markdown(output))
+        display(Math(output))
     else:
         return(output)
