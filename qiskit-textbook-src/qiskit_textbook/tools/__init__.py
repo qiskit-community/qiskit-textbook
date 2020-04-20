@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-
 from IPython.display import display, Markdown, Math
 import numpy as np
+import math
+from fractions import Fraction
 
 def vector2latex(vector, precision=5, pretext="", display_output=True):
     """replace with array_to_latex"""
@@ -77,14 +78,34 @@ def num_to_latex(num, precision=5):
     r = np.real(num)
     i = np.imag(num)
     
+    common_terms = {
+        1/math.sqrt(2): '\\tfrac{1}{\\sqrt{2}}',
+        1/math.sqrt(3): '\\tfrac{1}{\\sqrt{3}}',
+        math.sqrt(2/3): '\\sqrt{\\tfrac{2}{3}}',
+        1/math.sqrt(8): '\\tfrac{1}{\\sqrt{8}}'
+    }
     def proc_value(val):
         # See if val is close to an integer
         val_mod = np.mod(val, 1)
         if (np.isclose(val_mod, 0) or np.isclose(val_mod, 1)):
             # If so, return that integer
             return str(int(np.round(val)))
+        # Otherwise, see if it matches one of the common terms
+        for term, latex_str in common_terms.items():
+             if np.isclose(abs(val), term):
+                    if val > 0:
+                        return latex_str
+                    else:
+                        return "-" + latex_str
+        frac = Fraction(val).limit_denominator()
+        num, denom = frac.numerator, frac.denominator
+        if num + denom < 20:
+            if val > 0:
+                return ("\\tfrac{%i}{%i}" % (abs(num), abs(denom)))
+            else:
+                return ("-\\tfrac{%i}{%i}" % (abs(num), abs(denom)))
         else:
-            # Otherwise return val as a decimal
+            # Finally, return val as a decimal
             return "{:.{}f}".format(val, precision).rstrip("0")
     
     realstring = proc_value(r)
