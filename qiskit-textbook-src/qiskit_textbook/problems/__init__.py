@@ -1,6 +1,6 @@
 from qiskit import QuantumCircuit
 
-def dj_problem_oracle(problem):
+def dj_problem_oracle(problem, to_gate=True):
     """Returns a 5-qubit Deutsch-Joza Oracle"""
     qc = QuantumCircuit(5)
     int(problem)
@@ -21,4 +21,7 @@ def dj_problem_oracle(problem):
         qc.cx(2,4)
     else:
         print("There are only currently 4 oracles in this problem set, returning empty (balanced) gate")
-    return qc.to_gate()
+    if to_gate:
+        return qc.to_gate()
+    else:
+        return qc
