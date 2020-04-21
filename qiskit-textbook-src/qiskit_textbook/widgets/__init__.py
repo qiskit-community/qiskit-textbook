@@ -369,3 +369,166 @@ def bv_widget(nqubits, hidden_string, display_ancilla=False, hide_oracle=True):
     display(hbox, html_math, image.widget)
 
 
+def dj_widget(size="small", case="balanced", display_ancilla=False, hide_oracle=True):
+    size, case = size.lower(), case.lower()
+    if case not in ["balanced", "constant"]:
+        print("Error: `case` must be 'balanced' or 'constant'")
+        return
+    if size not in ["small", "large"]:
+        print("Error: `size` must be 'small' or 'large'")
+        return
+    import numpy as np
+    import random
+    from qiskit_textbook.tools import num_to_latex, array_to_latex
+    from qiskit_textbook.problems import dj_problem_oracle
+    from qiskit import QuantumCircuit, Aer, execute
+    if case == 'balanced':
+        problem = random.choice([1,3,4])
+    else:
+        problem = 2
+    backend = Aer.get_backend('statevector_simulator')
+    if size == "small":
+        oracle = QuantumCircuit(3)
+        if case == "balanced":
+            if problem == 1:
+                oracle.cx(0,2)
+                oracle.cx(1,2)
+            elif problem == 3:
+                oracle.cx(0,2)
+            elif problem == 4:
+                oracle.ccx(0,1,2)
+                oracle.x(0)
+                oracle.x(1)
+                oracle.ccx(0,1,2)
+                oracle.x(0)
+                oracle.x(1)
+        else:
+            oracle.i(2)
+    else:
+        oracle = dj_problem_oracle(problem, to_gate=False)
+    if hide_oracle:
+        oracle = oracle.to_gate()
+    if size == "small":
+        nqubits = 3
+    else:
+        nqubits = 5
+    qc = QuantumCircuit(nqubits)
+    qc.h(nqubits-1)
+    qc.z(nqubits-1)
+    class Message():
+        def __init__(self):
+            if display_ancilla:
+                self.ops = "|{-}\\rangle\\otimes|" + "0"*(nqubits-1) + "\\rangle"
+                self.vec = "|{-}\\rangle\\otimes|" + "0"*(nqubits-1) + "\\rangle"
+            else:
+                self.ops = "|" + "0"*(nqubits-1) + "\\rangle"
+                self.vec = "|" + "0"*(nqubits-1) + "\\rangle"
+    
+    msg = Message()
+    def vec_in_braket(vec, nqubits):
+        scalfac = ""
+        tensorfac = ""
+        state = ""
+        # Factor out separable 'output' qubit if possible
+        if nqubits > 1:
+            vfirst = vec[:2**nqubits//2]
+            vlast = vec[2**nqubits//2:]
+            if np.allclose(vfirst, 0):
+                vec = vlast
+                tensorfac += "|1\\rangle"
+                nqubits -= 1
+            elif np.allclose(vlast, 0):
+                vec = vfirst
+                tensorfac += "|0\\rangle"
+                nqubits -= 1
+            elif np.allclose(vfirst, vlast):
+                vec = vfirst*np.sqrt(2)
+                tensorfac += "|{+}\\rangle"
+                nqubits -= 1
+            elif np.allclose(vfirst, -vlast):
+                vec = vfirst*np.sqrt(2)
+                tensorfac += "|{-}\\rangle"
+                nqubits -= 1
+
+        if np.allclose(np.abs(vec), np.abs(vec[0])):
+            scalfac = num_to_latex(vec[0])
+            vec = vec/vec[0]
+
+        for i in range(len(vec)):
+            if not np.isclose(vec[i], 0):
+                basis = format(i, 'b').zfill(nqubits)
+                if not np.isclose(vec[i], 1):
+                    if np.isclose(vec[i], -1):
+                        if state.endswith("+ "):
+                            state = state[:-2]
+                        state += "-"
+                    else:
+                        state += num_to_latex(vec[i])
+                state += "|" + basis +"\\rangle + "
+        state = state.replace("j", "i")
+        state = state[:-2]
+        if len(state) > 5000:
+            return "\\text{(Too large to display)}"
+        if scalfac != "" or (tensorfac != "" and len(state)>(9+nqubits) and display_ancilla):
+            state = ("(%s)" % state)
+        if scalfac != "":
+            state = scalfac + state
+        if tensorfac != "" and display_ancilla:
+            state =  tensorfac + "\otimes" + state
+        return state
+
+
+    def hadamards(qc, nqubits):
+        for q in range(nqubits-1):
+            qc.h(q)
+
+    def apply_oracle(qc, nqubits):
+        if hide_oracle:
+            qc.append(oracle, range(nqubits))
+        else:
+            qc.barrier()
+            qc += oracle
+            qc.barrier()
+    
+    def update_output():
+        statevec = execute(qc, backend).result().get_statevector()
+        msg.vec = vec_in_braket(statevec, nqubits)
+        html_math.value = "$$ %s = %s $$" % (msg.ops, msg.vec)
+        image.value = qc.draw('mpl')
+    
+    def on_hads_click(b):
+        hadamards(qc, nqubits)
+        if display_ancilla:
+            msg.ops = "|{-}\\rangle\\otimes H^{\\otimes n}" + msg.ops[18:]
+        else:
+            msg.ops = "H^{\\otimes n}" + msg.ops            
+        update_output()
+    def on_oracle_click(b):
+        apply_oracle(qc, nqubits)
+        if display_ancilla:
+            msg.ops = "|{-}\\rangle\\otimes U_f" + msg.ops[18:]
+        else:
+            msg.ops = "U_f" + msg.ops
+        update_output()
+    
+    def on_clear_click(b):
+        for i in range(len(qc.data)-2):
+            qc.data.pop()
+        msg.__init__()
+        update_output()
+    
+    hads_btn = widgets.Button(description="H⊗ⁿ")
+    hads_btn.on_click(on_hads_click)
+    oracle_btn = widgets.Button(description="Oracle")
+    oracle_btn.on_click(on_oracle_click)
+    clear_btn = widgets.Button(description="Clear")
+    clear_btn.on_click(on_clear_click)
+        
+    hbox = widgets.HBox([hads_btn, oracle_btn, clear_btn])
+    html_math = widgets.HTMLMath()
+    html_math.value = "$$ %s = %s $$" % (msg.ops, msg.vec)
+    image = _img()
+    image.value = qc.draw('mpl')
+    display(hbox, html_math, image.widget)
+
+
