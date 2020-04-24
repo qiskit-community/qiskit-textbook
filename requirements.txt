@@ -1,5 +1,4 @@
 qiskit
 matplotlib
-torch
-torchvision
+numpy
 -e ./qiskit-textbook-src
