@@ -45,7 +45,7 @@
             const hardwareTag = 'uses-hardware'
             const hardwareQuery = `.jb_cell.tag_${hardwareTag}`
             const noHardwareQuery = `.jb_cell:not(.tag_${hardwareTag})`
-            const codeCells = document.querySelectorAll(`${noHardwareQuery} pre`)
+            const codeCells = document.querySelectorAll(`${noHardwareQuery} pre[id^="codecell"]`)
             codeCells.forEach((codeCell, index) => {
                 const id = codeCellId(index)
 
