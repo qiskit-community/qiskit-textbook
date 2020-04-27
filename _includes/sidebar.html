@@ -19,7 +19,7 @@ Textbook numbering starts in Chapter 0.
 
 <nav id="js-sidebar" class="c-textbook__sidebar">
   {% if site.textbook_logo %}<a href="{{ site.textbook_logo_link }}"><img src="{{ site.textbook_logo | relative_url }}" class="textbook_logo" id="sidebar-logo" alt="textbook logo" data-turbolinks-permanent/></a>{% endif %}
-  <h2 class="c-sidebar__title">{{ site.title }}</h2>
+  <a href="preface.html"><h2 class="c-sidebar__title">{{ site.title }}</h2></a>
   <ul class="c-sidebar__chapters">
     {% for chapter in site.data.toc %}
       {% comment %}
