@@ -23,7 +23,7 @@ class _pre():
 class _img():
 
     def __init__(self, value=None):
-        self.widget = widgets.Image(format='png')
+        self.widget = widgets.Image(format='jpg')
         self.value = value
 
     @property
@@ -37,6 +37,8 @@ class _img():
             return
 
         data = BytesIO()
-        value.savefig(data, format='png', facecolor=self.value.get_facecolor())
+        value.savefig(data, format='jpg', facecolor=self.value.get_facecolor())
         data.seek(0)
         self.widget.value = data.read()
+
+
