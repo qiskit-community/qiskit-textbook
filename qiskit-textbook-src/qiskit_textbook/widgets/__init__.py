@@ -5,7 +5,6 @@ import ipywidgets as widgets
 from IPython.display import display, clear_output, Math
 from qiskit.visualization import plot_bloch_vector
 from numpy import sqrt, cos, sin, pi
-import numpy as np
 
 from qiskit_textbook.widgets._helpers import _pre, _img
 
@@ -531,3 +530,5 @@ def dj_widget(size="small", case="balanced", display_ancilla=False, hide_oracle=
     image = _img()
     image.value = qc.draw('mpl')
     display(hbox, html_math, image.widget)
+
+
