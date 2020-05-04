@@ -3,17 +3,18 @@
  * pages.
  */
 
-$color-nav-links: rgba(0, 140, 255, 0.7);
+$color-nav-links: $color-links;
 
 .c-page__nav__prev,
 .c-page__nav__next {
   flex: 1;
   color: $color-nav-links;
   border: 1px solid $color-nav-links;
-  border-radius: 3px;
   padding: $spacing-unit-small 0;
 }
 
 .c-page__nav__next {
   text-align: right;
+  background-color: $color-nav-links;
+  color: white !important;
 }

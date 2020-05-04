@@ -8,13 +8,13 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    inkscape:version="1.0beta2 (2b71d25, 2019-12-03)"
-   sodipodi:docname="download-solid.svg"
+   sodipodi:docname="copy-button.svg"
    id="svg835"
    version="1.1"
    fill="none"
-   viewBox="0 0 12 14.5"
-   height="14.5"
-   width="12">
+   viewBox="0 0 14 15"
+   height="15"
+   width="14">
   <metadata
      id="metadata841">
     <rdf:RDF>
@@ -33,14 +33,15 @@
      inkscape:current-layer="svg835"
      inkscape:window-maximized="0"
      inkscape:window-y="23"
-     inkscape:window-x="85"
-     inkscape:cy="3.7574659"
-     inkscape:cx="5.0898171"
-     inkscape:zoom="29.908688"
+     inkscape:window-x="64"
+     inkscape:cy="6.6528037"
+     inkscape:cx="1.582277"
+     inkscape:zoom="19.79899"
+     showguides="false"
      showgrid="false"
      id="namedview837"
      inkscape:window-height="1075"
-     inkscape:window-width="1707"
+     inkscape:window-width="1728"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0"
      guidetolerance="10"
@@ -53,16 +54,16 @@
   <path
      inkscape:connector-curvature="0"
      id="path833"
-     fill="#6929C4"
-     d="m 11,11 v 2.125 H 1 V 11 H 0 v 2.125 c 0,0.58437 0.45,1.0625 1,1.0625 h 10 c 0.55,0 1,-0.47813 1,-1.0625 V 11 Z" />
+     fill="black"
+     d="M 12.424366,3.9388966 V 13.501397 H 3.4243661 V 3.9388966 Z m 0,-1.0625 H 3.4243661 c -0.55,0 -1,0.478125 -1,1.0625 v 9.5625004 c 0,0.5844 0.45,1.0625 1,1.0625 h 8.9999999 c 0.55,0 1,-0.4781 1,-1.0625 V 3.9388966 c 0,-0.584375 -0.45,-1.0625 -1,-1.0625 z" />
   <g
-     transform="translate(1,-0.0625)"
-     id="g927"
+     transform="translate(0.05715071,0.01695281)"
+     id="g1026"
      style="fill:none">
     <path
        inkscape:connector-curvature="0"
-       d="M 10,6.96875 9.3,6.22505 5.5,10.2625 v -10.2 h -1 v 10.2 L 0.700001,6.22505 0,6.96875 5,12.2812 Z"
-       fill="#6929C4"
-       id="path916" />
+       d="M 1,8.5625 H 0 V 1.125 C 0,0.540625 0.45,0.0625 1,0.0625 H 8 V 1.125 H 1 Z"
+       fill="black"
+       id="path1015" />
   </g>
 </svg>
