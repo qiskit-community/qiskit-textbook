@@ -28,9 +28,7 @@ aside.sidebar__right {
 
     // Font and look
     color: #7a8288;
-    border-left: 1px solid #c3c3c3;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    border-left: 1px solid $divider-color;
 
     // Icon
     img {
@@ -71,10 +69,7 @@ h4.nav__title {
     color: #7a8288;
     margin: 0;
     padding: 0.5rem 1rem;
-    font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI',
-        'Helvetica Neue', 'Lucida Grande', Arial, sans-serif;
     font-size: 0.8em;
-    font-weight: bold;
 }
 
 ul.toc__menu {
@@ -82,15 +77,14 @@ ul.toc__menu {
     padding: 0;
     width: 100%;
     list-style: none;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 ul.toc__menu a {
     display: block;
-    padding: 0.25rem .75rem;
-    color: #898c8f;
+    padding: 0 .5rem;
+    color: #4D5358;
     font-size: 0.8em;
-    font-weight: bold;
     line-height: 1.5;
 }
 
@@ -106,13 +100,110 @@ ul.toc__menu a {
 
     a {
         font-weight: normal;
-        padding: 0.25rem .5rem;
+        padding: 0 .5rem;
     }
+}
+
+aside.sidebar__right div {
+	display: block;
+	margin: 0px;
+}
+
+aside.sidebar__right button.interact-button {
+	color: white;
+	background-color: $color-buttons;
+	border: 1px solid $color-buttons;
+	padding: 14px;
+	padding-left: 16px;
+	text-align: left;
+	width: 90%;
+	font-size: 0.9rem;
+	margin-top: 1.5rem;
+	margin-bottom: 0.8rem;
+	margin-left: 8px;
+	cursor: pointer;
+}
+
+aside.sidebar__right a.download__link {
+	font-size: 0.8rem;
+	color: $color-buttons;
+	margin-left: 10px;
+	img {
+		margin-left: 6px;
+		height: 1rem;
+	}
+}
+
+aside.sidebar__right header {
+	border-bottom: 1px solid #4D5358;
+	margin-bottom: 0.5rem;
+	text-align: left;
+	width: 90%;
+	margin-right: 10%;
+	& input {
+		width: 80%;
+		margin-left: 2px;
+		margin-top: 5px;
+		font-family: "IBM Plex Sans","Segoe UI","Helvetica Neue","Lucida Grande",Arial,sans-serif;
+		font-size: 1rem;
+		border: none;
+		color: #4D5358;
+	}
+
+	& button {
+		border: none;
+		background-color: white;
+		padding-bottom: 10px;
+	}
+
+	h2 {
+		display: none;
+		margin-top: 0px;
+		font-size: 14px;
+	}
+}
+
+@media only screen and (max-width: 1250px) {
+	aside.sidebar__right {
+		header form {
+			display: none;
+		}
+
+		button {
+			display: none;
+		}
+
+		a.download__link {
+			display: none;
+		}
+
+		header h2 {
+			display: block;
+		}
+	}
+}
+
+@media only screen and (max-width: 1024px) {
+	aside.sidebar__right {
+		border-bottom: 1px solid $divider-color;
+		opacity: 90%;
+		width: 200px;
+		padding-bottom: 0;
+		&:hover{
+			opacity: 100%;
+			padding-bottom: 0.75em;
+		}
+		header {
+			margin-bottom: 0;
+			border-bottom: none;
+		}
+	}
 }
 
 // Active sidebar entries
 nav.onthispage li.active a {
-    color: #0077d8;
+    color: $color-buttons;
+    font-weight: bold;
 }
 
 li.active {

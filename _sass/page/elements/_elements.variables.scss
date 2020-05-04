@@ -3,9 +3,9 @@
  */
 
 $serif: Georgia, Times, serif !default;
-$sans-serif: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI",
+$sans-serif: "IBM Plex Sans", "Segoe UI",
   "Helvetica Neue", "Lucida Grande", Arial, sans-serif !default;
-$monospace: Monaco, Consolas, "Lucida Console", monospace !default;
+$monospace: "IBM Plex Mono", Monaco, Consolas, "Lucida Console", monospace !default;
 
 $global-font-family: $sans-serif !default;
 $header-font-family: $sans-serif !default;
