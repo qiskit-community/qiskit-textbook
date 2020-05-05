@@ -1,163 +1,59 @@
-/* Put your custom CSS here */
+/* This is mostly patching up things I couldn't track down in _sass */
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400&display=swap');
-
-body {
-	font-family: 'IBM Plex Sans', sans-serif;
-}
-
-.left {
-    margin: 5px 2px 2px 0px !important;
-    float: left !important;
-}
-
-details {
-	margin-bottom: 12px;
-	border: 1px solid #ccc;
-	background-color: #f7f7f7;
-	padding: 12px;
-	padding-bottom: 0px;
-}
-
-details > p {
-	padding-bottom: 12px;
-}
-
-summary {
-	margin-bottom: 12px;
-}
-
-
-code {
-	font-size: 0.85em;
-}
-
-pre {
-	font-size: 0.85em;
-	padding: 12px;
-}
-
-svg {
-	max-width: 55vw;
-}
-
-.c-textbook__sidebar {
-	background-color: #212121;
-	scrollbar-color:  #212121 #212121;
-	opacity: 1;
-	transition: scrollbar-color 0.2s ease-in-out;
-}
-
-.c-textbook__sidebar:hover {
-	scrollbar-color: gray #212121;
-}
-
-.c-sidebar__entry, .c-sidebar__entry:visited, .c-sidebar__entry:hover {
-	color: white;
-}
-
-.c-sidebar__entry--active.c-sidebar__entry--active {
-	color: #0077d8;
-}
-
-.c-sidebar__title {
-	color: white;
-}
-
-.sidebar_footer {
-	color: gray;
-}
-
-img.textbook_logo {
-	margin: 1em auto 0px auto;
-}
-
-.buttons, .interact-button {
-	font-family: 'IBM Plex Sans', sans-serif;
-	background-color: white;
-	transition: background-color .2s linear, color .2s linear, fill .2s linear;
-	margin-bottom: 3px;
-}
-
-#dropdown-button-trigger {
-	background-color: #212121;
-}
-
-.thebelab-cell {
-	margin-top: 0px;
-	margin-bottom: 12px;
-	border: 1px solid #ccc;
-	background-color: #f7f7f7;
-	border-radius: 0px;
-}
-
-.jp-OutputArea-child {
-	background-color: white;
+.interact-button {
+	font-family: "IBM Plex Sans","Segoe UI","Helvetica Neue","Lucida Grande",Arial,sans-serif !important;
 }
 
 .thebelab-button {
-	font-family: 'IBM Plex Sans', sans-serif;
-	border-radius: 0px;
-	margin-top: .5em;
-	margin-left: 0px;
-}
-
-.CodeMirror {
-	padding: 7px;
+	font-family: "IBM Plex Sans";
 	font-size: 0.9em;
 }
 
-.jp-RenderedText pre {
-	padding: 1em;
+h2.c-sidebar__title {
+	font-weight: normal;
+	color: #F4F4F4;
 }
 
-
-.index-cards .column {
-  float: left;
-  width: 25%;
-  padding: 1em;
-  margin-bottom: 20px;
+h2.c-sidebar__title:hover{
+	text-decoration: none;
 }
 
-@media screen and (max-width: 98em) {
-	.index-cards .column {
-		width: 33%;
-		display: block;
-  }
+div.jp-OutputArea > :first-child {
+        border-top: 1px solid #DDE1E6 !important;
 }
 
-@media screen and (max-width: 72em) {
-	.index-cards .column {
-		width: 50%;
-		display: block;
-  }
+h2.c-sidebar__title {
+	margin-top: 6px;
 }
 
-
-
-.index-cards .card {
-	color: #212121;
-	max-width: 15em;
-	padding: 12px;
-	height: 240px;
-	text-align: center;
-	border: 2px solid #212121;
-	overflow: hidden;
-	background-color: white;
-	transition: background-color .2s linear, color .2s linear;
+a:hover {
+	text-decoration: underline;
+	color: #BE95FF;
 }
 
-.index-cards h3 {
-	margin: 1em;
-	pointer-events: none;
+a:visited {
+	color: #BE95FF;
 }
 
-.index-cards .anchorjs-link {
-	display: none;
+.c-sidebar__entry:hover {
+	color: #F4F4F4;
 }
 
-.index-cards .card:hover {
-	background-color: #212121;
-	color: white;
+.c-sidebar__entry--active:hover {
+	color: #BE95FF;
 }
 
+details {
+	padding: 18px;
+	background-color: #F2F4F8;
+	border: 1px solid #DDE1E6;
+	margin-bottom: 12px;
+}
+
+svg {
+	max-width: 50vw;
+}
+
+pre {
+	overflow: auto;
+}

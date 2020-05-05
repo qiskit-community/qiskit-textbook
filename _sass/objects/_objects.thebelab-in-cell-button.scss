@@ -1,17 +1,31 @@
 /* in-cell thebelab buttons */
 .thebebtn {
-  position: absolute;
-  top: 0;
-  right: $spacing-unit;
 
-  margin: $spacing-unit-tiny/2 $spacing-unit-tiny;
-  width: $spacing-unit;
-  height: $spacing-unit;
-  padding: 0 4px 2px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border: none;
 
   i {
     font-style: normal;
     color: #777777
+  }
+  
+  button {
+    background-color: #DDE1E6;
+    border: none;
+    padding: 6px 16px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color .2s linear, color .2s linear;
+    &:hover {
+	color: white;
+	background-color: #21272A;
+    }
+    &:active {
+	    background-color: white;
+	    color: #121619;
+    }
   }
 }
 

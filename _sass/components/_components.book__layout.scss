@@ -25,7 +25,7 @@
 
 $left-sidebar-width: 300px;
 $page-max-width: 1600px;
-$right-sidebar-width: 220px;
+$right-sidebar-width: 330px;
 $topbar-height: 60px;
 
 .c-textbook {
@@ -34,12 +34,21 @@ $topbar-height: 60px;
   height: 100vh;
   overflow: hidden;
   margin: 0 0 0 auto;
+  top: 0;
+}
+
+div.qiskit__navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999;
 }
 
 .c-topbar {
-  background-color: $book-background-color;
+  background-color: transparent;
   position: fixed;
-  top: 0;
+  top: $qiskit-navbar-height;
   height: $topbar-height;
   width: 100%;
   left: 0;
@@ -66,8 +75,9 @@ $topbar-height: 60px;
 
 .c-textbook__sidebar {
   width: $left-sidebar-width;
-  top: 0;
+  top: $qiskit-navbar-height;
   left: 0;
+  background-color: $color-dark-gray;
 }
 
 .c-textbook__page {
@@ -93,6 +103,8 @@ $topbar-height: 60px;
   position: relative;
   float: right;
   z-index: 1; // Keep sidebar under page content
+  padding: 0.5em;
+
 
   @include mq($from: tablet) {
     // Show right TOC at laptop size
