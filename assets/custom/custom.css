@@ -57,3 +57,7 @@ svg {
 pre {
 	overflow: auto;
 }
+
+p.sidebar_footer {
+	padding-bottom: 60px;
+}

@@ -38,7 +38,7 @@ $topbar-height: 60px;
 }
 
 div.qiskit__navbar {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -49,7 +49,7 @@ div.qiskit__navbar {
   background-color: transparent;
   position: fixed;
   top: $qiskit-navbar-height;
-  height: $topbar-height;
+  height: 0;
   width: 100%;
   left: 0;
   padding: $spacing-unit-small $spacing-unit-small 0 $spacing-unit-med * 2;
@@ -70,6 +70,7 @@ div.qiskit__navbar {
   height: 100vh;
   overflow: auto;
   position: fixed;
+  top: $qiskit-navbar-height;
   background-color: $book-background-color; /* [3] */
 }
 
@@ -126,12 +127,16 @@ div.qiskit__navbar {
 
 .c-textbook__content {
   clear: both;
-  padding-top: $topbar-height * 1.5;
+  padding-top: 36px;
   width: 95%;
 }
 
 .c-textbook__content, .c-textbook__footer {
   max-width: $page-max-width;
+}
+
+.c-textbook__footer {
+	padding-bottom: $qiskit-navbar-height;
 }
 
 .c-page__nav {
