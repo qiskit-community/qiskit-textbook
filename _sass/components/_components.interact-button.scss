@@ -9,13 +9,13 @@
  *
  */
 
-$color-interact-button: #5a5a5a !default;
+$color-interact-button: #6929C4 !default;
 
 %interact-button {
   @include inuit-font-size(14px);
   background-color: white;
-  border: 2px solid #212121;
-  color: #212121;
+  border: 1px solid $color-interact-button;
+  color:  $color-interact-button;
   cursor: pointer;
   display: inline-block;
   font-weight: 700;
@@ -24,7 +24,7 @@ $color-interact-button: #5a5a5a !default;
   text-decoration: none;
 
   &:hover {
-	  background-color: #212121;
+	  background-color: $color-interact-button;
 	  color: white;
   }
   &:focus {
