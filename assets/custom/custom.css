@@ -50,3 +50,10 @@ details {
 	margin-bottom: 12px;
 }
 
+svg {
+	max-width: 50vw;
+}
+
+pre {
+	overflow: auto;
+}

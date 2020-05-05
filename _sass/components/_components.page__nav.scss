@@ -3,14 +3,19 @@
  * pages.
  */
 
-$color-nav-links: $color-links;
+$color-nav-links: $color-buttons;
 
 .c-page__nav__prev,
 .c-page__nav__next {
   flex: 1;
+  max-width: 380px;
+  margin: auto;
   color: $color-nav-links;
   border: 1px solid $color-nav-links;
   padding: $spacing-unit-small 0;
+  &:hover {
+	  text-decoration: none;
+  }
 }
 
 .c-page__nav__next {
