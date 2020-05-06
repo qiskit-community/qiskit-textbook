@@ -61,3 +61,34 @@ pre {
 p.sidebar_footer {
 	padding-bottom: 60px;
 }
+
+/* Hide contents on bigger screens */
+@media only screen and (min-width: 860px) {
+	.jb_cell.tag_contents {
+		display: none;
+	}
+}
+
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+	empty-cells: show !important;
+}
+
+tbody {
+	border-bottom: 1px solid black !important;
+}
+
+/* Fix strange table striping choice */
+tr:nth-child(even) {background-color: #F2F4F8 !important;}
+
+td {
+	border: 0px !important;
+	border-left: 1px solid black !important;
+	border-right: 1px solid black !important;
+}
+
+thead td {
+	border-bottom: 1px solid black !important;
+}
