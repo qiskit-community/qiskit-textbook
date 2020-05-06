@@ -106,7 +106,8 @@
       url: /ch-algorithms/grover
     - title: Quantum Counting
       url: /ch-algorithms/quantum-counting
-
+    - title: Quantum Key Distribution
+      url: /ch-algorithms/quantum-key-distribution
 
 - title: Quantum Algorithms for Applications
   url: /ch-applications/algs_for_apps_index
