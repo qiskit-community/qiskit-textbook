@@ -18,7 +18,7 @@ install_rclone () {
 main () {
   echo "Updating ${path} to ${TRAVIS_REPO_SLUG}@${TRAVIS_COMMIT}"
   install_rclone
-  rclone sync _site/ IBMCOS:qiskit-org-website/${path}
+  rclone sync _site/ IBMCOS:qiskit-org-web-resources/${path}
 }
 
 main
