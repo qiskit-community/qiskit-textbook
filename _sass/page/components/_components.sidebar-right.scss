@@ -18,6 +18,7 @@
 }
 
 aside.sidebar__right {
+    padding-bottom: 0.75em;
     // Positioning
     overflow-x: hidden;
     background-color: $book-background-color;
@@ -107,6 +108,7 @@ ul.toc__menu a {
 aside.sidebar__right div {
 	display: block;
 	margin: 0px;
+	padding-bottom: 0.25em
 }
 
 aside.sidebar__right button.interact-button {
@@ -191,7 +193,6 @@ aside.sidebar__right header {
 		padding-bottom: 0;
 		&:hover{
 			opacity: 100%;
-			padding-bottom: 0.75em;
 		}
 		header {
 			margin-bottom: 0;
