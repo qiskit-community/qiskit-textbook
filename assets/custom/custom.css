@@ -92,3 +92,13 @@ td {
 thead td {
 	border-bottom: 1px solid black !important;
 }
+
+.MathJax_Display {
+	margin-top: 24px !important;
+	margin-bottom: 24px !important;
+}
+
+div.text_cell_render > p > img, div.text_cell_render > p > a > img {
+	margin-top: 36px;
+	margin-bottom: 36px;
+}
