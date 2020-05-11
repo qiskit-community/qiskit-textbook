@@ -18,6 +18,7 @@
 }
 
 aside.sidebar__right {
+    padding-bottom: 0.75em;
     // Positioning
     overflow-x: hidden;
     background-color: $book-background-color;
@@ -50,7 +51,7 @@ aside.sidebar__right {
             height: auto;
         }
 
-        @include mq($from: laptop) {
+        @media only screen and (min-width: 1050px) {
             &.no_sidebar_content {
               opacity: 100;
               height: auto;
@@ -107,6 +108,7 @@ ul.toc__menu a {
 aside.sidebar__right div {
 	display: block;
 	margin: 0px;
+	padding-bottom: 0.25em
 }
 
 aside.sidebar__right button.interact-button {
@@ -183,7 +185,7 @@ aside.sidebar__right header {
 	}
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1250px) {
 	aside.sidebar__right {
 		border-bottom: 1px solid $divider-color;
 		opacity: 90%;
@@ -191,7 +193,6 @@ aside.sidebar__right header {
 		padding-bottom: 0;
 		&:hover{
 			opacity: 100%;
-			padding-bottom: 0.75em;
 		}
 		header {
 			margin-bottom: 0;
