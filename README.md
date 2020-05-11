@@ -50,4 +50,4 @@ For a list of contributors, see the [.bib](https://github.com/Qiskit/qiskit-text
 The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](http://github.com/Qiskit/qiskit-textbook/blob/master/LICENSE.txt).
 
 # Contact
-For any issues, please contact Abraham Asfaw (abraham.asfaw@ibm.com).
+For any issues, please contact Francis Harkins (francis.harkins@ibm.com) and Abraham Asfaw (abraham.asfaw@ibm.com).
