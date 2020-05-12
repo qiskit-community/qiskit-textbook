@@ -6,7 +6,7 @@ from IPython.display import display, clear_output, Math
 from qiskit.visualization import plot_bloch_vector
 from numpy import sqrt, cos, sin, pi
 
-from qiskit_textbook.widgets._helpers import _pre, _img
+from qiskit_textbook.widgets._helpers import _pre, _img,_img_svg
 
 def binary_widget(nbits=5):
     nbits = max(min(10, nbits), 2) # Keep nbits between 2 and 10
@@ -153,6 +153,7 @@ def scalable_circuit(func):
 
 
 def gate_demo(gates='full'):
+    from time import time
     from qiskit import QuantumCircuit, execute, Aer
     from qiskit.visualization import plot_bloch_multivector
     gate_list = []
@@ -197,8 +198,10 @@ def gate_demo(gates='full'):
             functionmap[b.description](0)
 
     def on_button_click(b):
+        t0 = time()
         apply_gates(b,qc)
         update_output()
+        display(time() - t0)
 
     for button in button_list:
         button.on_click(on_button_click)
@@ -532,3 +535,76 @@ def dj_widget(size="small", case="balanced", display_ancilla=False, hide_oracle=
     display(hbox, html_math, image.widget)
 
 
+def gate_demo_scour(gates='full'):
+    from time import time
+    from qiskit import QuantumCircuit, execute, Aer
+    from qiskit.visualization import plot_bloch_multivector
+    gate_list = []
+    showing_rz = False
+    if 'pauli' in gates:
+        gate_list += ['X','Y','Z']
+    if '+h' in gates:
+        gate_list.append('H')
+    if '+rz' in gates:
+        showing_rz = True
+    if gate_list == [] or gates == 'full':
+        gate_list = ['I','X','Y','Z','H','S','Sdg','T','Tdg']
+        showing_rz = True
+
+    backend = Aer.get_backend('statevector_simulator')
+    qc = QuantumCircuit(1)
+    button_list = [widgets.Button(description=gate, layout=widgets.Layout(width='3em', height='3em')) for gate in gate_list]
+    button_list.append(widgets.Button(description='Reset', layout=widgets.Layout(width='6em', height='3em')))
+    image = _img_svg()
+    def update_output():
+        out_state = execute(qc,backend).result().get_statevector()
+        image.value = plot_bloch_multivector(out_state)
+
+    def apply_gates(b,qc):
+        functionmap = {
+            'X':qc.x,
+            'Y':qc.y,
+            'Z':qc.z,
+            'H':qc.h,
+            'S':qc.s,
+            'T':qc.t,
+            'Sdg':qc.sdg,
+            'Tdg':qc.tdg,
+        }
+        if b.description == 'I':
+            pass
+        elif b.description == 'Reset':
+            qc.data = []
+        elif b.description == 'Rz':
+                qc.rz(zrot_slider.value,0)
+        else:
+            functionmap[b.description](0)
+
+    def on_button_click(b):
+        t0 = time()
+        apply_gates(b,qc)
+        update_output()
+        display(time() - t0)
+
+    for button in button_list:
+        button.on_click(on_button_click)
+    if showing_rz:
+        rz_button = widgets.Button(description='Rz', layout=widgets.Layout(width='3em', height='3em'))
+        rz_button.on_click(on_button_click)
+        zrot_slider = widgets.FloatSlider(value=pi,
+                                         min= -pi,
+                                         max= pi,
+                                         disabled=False,
+                                         readout_format='.2f')
+    qc = QuantumCircuit(1)
+    update_output()
+
+    if showing_rz:
+        top_box = widgets.HBox(button_list)
+        bottom_box = widgets.HBox([rz_button, zrot_slider])
+        main_box = widgets.VBox([top_box, bottom_box])
+    else:
+        main_box = widgets.HBox(button_list)
+
+    display(main_box)
+    display(image.widget)
