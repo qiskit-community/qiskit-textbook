@@ -1,7 +1,7 @@
 /**
  * Set up copy/paste for code blocks
  */
-const copySVG = '<img src="../assets/images/copy-button.svg">'
+const copySVG = '<img src="/textbook/assets/images/copy-button.svg">'
 
 const clipboardButton = id =>
   `<a id="copy-button-${id}" class="btn copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#${id}">
