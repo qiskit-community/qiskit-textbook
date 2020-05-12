@@ -2,5 +2,4 @@ qiskit
 matplotlib
 torch
 torchvision
-scour
 -e ./qiskit-textbook-src
