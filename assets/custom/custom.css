@@ -102,3 +102,97 @@ div.text_cell_render > p > img, div.text_cell_render > p > a > img {
 	margin-top: 36px;
 	margin-bottom: 36px;
 }
+
+/* hack to hide preface in sidebar */
+li.c-sidebar__chapter:first-child {
+	display: none;
+}
+
+
+/* code below is applied only to the preface page, through jupyter tags */
+aside.preface-summary-image {
+	width: 50%;
+	float: right;
+}
+
+div.tag_preface-cell.tag_preface-title {
+	width: 93%;
+	margin-left: 0em;
+}
+
+@media only screen and (min-width: 1250px) and (max-width: 1750px){
+	div.tag_preface-cell.tag_preface-title {
+		width: 83%;
+	}
+}
+		
+
+div.preface-summary-text {
+	padding-top: 3em;
+	color: #21272A;
+}
+
+div.preface-summary-text ol {
+	margin: 3em;
+}
+div.preface-summary-text ol li{
+	margin-top: 1em;
+}
+
+div.tag_preface-cell {
+	margin-left: 1em;
+}
+
+div.tag_preface-cell p {
+	margin: auto auto 3em auto;
+}
+
+
+div.tag_preface-code-cell {
+	margin-left: 1em;
+	margin-bottom: 2em;
+}
+
+button.preface-button {
+	background-color: #6929C4;
+	padding: 19px;
+	color: white;
+	border: none;
+	min-width: 20em;
+	text-align: left;
+	margin: auto;
+	margin-left: 2em;
+	cursor: pointer;
+}
+
+button.preface-button.read-textbook {
+	margin: auto;
+	margin-left: 0em;
+	margin-bottom: 4em;
+}
+
+button span.rangle {
+	float: right;
+	margin-left: 2em;
+}
+
+div.preface-checker-pattern {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 66%;
+	background-size: 60px 60px;
+	background-image: linear-gradient(to right, #DDE1E6 1px, transparent 1px), linear-gradient(to bottom, #DDE1E6 1px, transparent 1px);	
+	z-index: -1;
+}
+
+div.tag_preface-cell h1 {
+	font-size: 2.2em;
+	margin-top: 3em;
+}
+
+div.text_cell_render p img.preface-image {
+	margin-left: 1em;
+}
+
