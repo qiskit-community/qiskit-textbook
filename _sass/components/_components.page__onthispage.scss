@@ -17,7 +17,7 @@ $color-sidebar-divider: #F4F4F4 !default;
 
 .c-textbook__sidebar {
   background-color: $color-sidebar-bg;
-  padding: $spacing-unit-small;
+  padding: $spacing-unit-small $spacing-unit;
   scrollbar-color: $color-dark-gray $color-dark-gray;
   transition: scrollbar-color 0.2s ease-in-out;
   @include inuit-font-size(14px);

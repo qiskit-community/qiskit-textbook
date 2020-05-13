@@ -25,20 +25,9 @@
 # generate a demo book by running `jupyter-book create mybook --demo`
 # ==============================
 
-- title: Preface
+- title: Learn Quantum Computation using Qiskit
   not_numbered: true
   url: /preface
-- title: Using the Textbook
-  not_numbered: true
-  url: /using-the-textbook
-- title: Interactivity Index
-  not_numbered: true
-  url: /widgets-index
-- title: About
-  not_numbered: true
-  url: /about
-
-- divider: true
 
 - title: Prerequisites
   url: /ch-prerequisites/python-and-jupyter-notebooks.html
@@ -180,3 +169,7 @@
     - title: Estimating Pi Using Quantum Phase Estimation Algorithm
       url: /ch-demos/piday-code
       not_numbered: true
+    - title: Interactivity Index
+      url: /widgets-index
+      not_numbered: true
+
