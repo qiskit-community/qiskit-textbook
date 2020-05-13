@@ -37,7 +37,7 @@ You will need to fork the textbook, make changes in your own branch, then submit
 
 ## Tags in Qiskit Textbook Notebooks
 
-After writing your chapter, you must a few tags to your cells (You can see the tags using `view > tags`).
+After writing your chapter, you must add few tags to your cells (You can see the tags using `view > tags`).
 
 - If you include the chapter's title in your notebook, move this to its own cell and add a `remove-cell` tag to avoid duplicate titles on the website. This is only for the title that will appear in the sidebar.
 - If you intentionally raise an exception in a cell, add a `raises-exception` tag to that code cell so our checking script knows this is intentional.
