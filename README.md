@@ -41,7 +41,7 @@ After writing your chapter, you must add a few tags to your cells (You can see t
 
 - If you include the chapter's title in your notebook, move this to its own cell and add a `remove-cell` tag to avoid duplicate titles on the website. This is only for the title that will appear in the sidebar.
 - If you intentionally raise an exception in a cell, add a `raises-exception` tag to that code cell so our checking script knows this is intentional.
-- Any code cell that uses IBM hardware, or relies on the results from such a cell needs a `uses-hardware` tag to alert the user this cannot be run on the website through the lab.
+- Any code cell that uses IBM hardware, or relies on the results from such a cell needs a `uses-hardware` tag to alert the user this cannot be run on the website through [thebelab](https://thebelab.readthedocs.io/en/latest/).
 - Finally, after adding these tags, go to `view > none` and save your notebook to stop the tags from showing automatically when a reader opens the notebook.
 
 For a list of contributors, see the [.bib](https://github.com/Qiskit/qiskit-textbook/blob/master/content/qiskit-textbook.bib) file.
