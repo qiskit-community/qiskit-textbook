@@ -118,6 +118,15 @@ aside.preface-summary-image {
 	float: right;
 }
 
+@media only screen and (max-width: 1350px){
+	aside.preface-summary-image {
+		width: 66%;
+		float: none;
+		margin: auto;
+		margin-bottom: -75px;
+	}
+}
+
 div.tag_preface-cell.tag_preface-title {
 	width: 93%;
 	margin-left: 0em;
