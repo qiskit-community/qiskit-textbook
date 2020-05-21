@@ -28,17 +28,20 @@ h2.c-sidebar__title {
 
 a:hover {
 	text-decoration: underline;
-	color: #BE95FF;
+	color: #6929C4;
 }
 
 a:visited {
-	color: #BE95FF;
+	color: #6929C4;
 }
 
 .c-sidebar__entry:hover {
 	color: #F4F4F4;
 }
 
+.c-sidebar__entry--active {
+	color: #BE95FF !important;
+}
 .c-sidebar__entry--active:hover {
 	color: #BE95FF;
 }
