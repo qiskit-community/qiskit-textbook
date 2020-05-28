@@ -2,4 +2,5 @@ qiskit
 matplotlib
 torch
 torchvision
+tabulate
 -e ./qiskit-textbook-src
