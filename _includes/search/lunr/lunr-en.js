@@ -81,4 +81,6 @@ var initQuery = function() {
   });
 };
 
-initFunction(initQuery);
+loadAsyncScript('https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js')
+.then(() => initFunction(initQuery))
+.catch((err) => console.error('Cannot load lunr search engine:', err))
