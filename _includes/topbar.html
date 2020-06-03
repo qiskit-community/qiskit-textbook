@@ -19,6 +19,8 @@
       <a
         href="https://quantum-computing.ibm.com/jupyter/user/qiskit-textbook/{{ page.interact_link }}"
         target="_blank"
+        rel="noopener"
+        onclick="window.trackCta('Open in IBM Quantum Experience')"
       >
         <button class="interact-button">Open in IBM Quantum Experience</button>
       </a>
@@ -26,6 +28,7 @@
     <div>
       <a
         href="{{ '/' | append: page.interact_link | relative_url }}"
+        rel="noopener"
         class="download__link"
       >
         Download as Jupyter Notebook
