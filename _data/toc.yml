@@ -25,17 +25,9 @@
 # generate a demo book by running `jupyter-book create mybook --demo`
 # ==============================
 
-- title: Using the Textbook
+- title: Learn Quantum Computation using Qiskit
   not_numbered: true
-  url: /using-the-textbook
-- title: Interactivity Index
-  not_numbered: true
-  url: /widgets-index
-- title: About
-  not_numbered: true
-  url: /about
-
-- divider: true
+  url: /preface
 
 - title: Prerequisites
   url: /ch-prerequisites/python-and-jupyter-notebooks.html
@@ -99,11 +91,14 @@
       url: /ch-algorithms/quantum-fourier-transform
     - title: Quantum Phase Estimation
       url: /ch-algorithms/quantum-phase-estimation
+    - title: Shor's Algorithm
+      url: /ch-algorithms/shor
     - title: Grover's Algorithm
       url: /ch-algorithms/grover
     - title: Quantum Counting
       url: /ch-algorithms/quantum-counting
-
+    - title: Quantum Key Distribution
+      url: /ch-algorithms/quantum-key-distribution
 
 - title: Quantum Algorithms for Applications
   url: /ch-applications/algs_for_apps_index
@@ -176,3 +171,7 @@
     - title: Estimating Pi Using Quantum Phase Estimation Algorithm
       url: /ch-demos/piday-code
       not_numbered: true
+    - title: Interactivity Index
+      url: /widgets-index
+      not_numbered: true
+

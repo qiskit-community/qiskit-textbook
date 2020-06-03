@@ -4,7 +4,7 @@
 
 # Qiskit Textbook Source Code
 
-This is the repository for the open-source [Learn Quantum Computation using Qiskit](http://community.qiskit.org/textbook) textbook. The textbook is intended for use as a university quantum algorithms course supplement as well as a guide for self-learners who are interested in learning quantum programming.
+This is the repository for the interactive open-source [Learn Quantum Computation using Qiskit](http://community.qiskit.org/textbook) textbook. The textbook is intended for use as a university quantum algorithms course supplement as well as a guide for self-learners who are interested in learning quantum programming.
 
 The Jupyter notebooks corresponding to each section of the textbook can be found in the [`content` folder](content/). The code in these notebooks will constantly be updated to the latest version of Qiskit.
 
@@ -37,11 +37,11 @@ You will need to fork the textbook, make changes in your own branch, then submit
 
 ## Tags in Qiskit Textbook Notebooks
 
-After writing your chapter, you must a few tags to your cells (You can see the tags using `view > tags`).
+After writing your chapter, you must add a few tags to your cells (You can see the tags using `view > tags`).
 
 - If you include the chapter's title in your notebook, move this to its own cell and add a `remove-cell` tag to avoid duplicate titles on the website. This is only for the title that will appear in the sidebar.
 - If you intentionally raise an exception in a cell, add a `raises-exception` tag to that code cell so our checking script knows this is intentional.
-- Any code cell that uses IBM hardware, or relies on the results from such a cell needs a `uses-hardware` tag to alert the user this cannot be run on the website through thebe lab.
+- Any code cell that uses IBM hardware, or relies on the results from such a cell needs a `uses-hardware` tag to alert the user this cannot be run on the website through [thebelab](https://thebelab.readthedocs.io/en/latest/).
 - Finally, after adding these tags, go to `view > none` and save your notebook to stop the tags from showing automatically when a reader opens the notebook.
 
 For a list of contributors, see the [.bib](https://github.com/Qiskit/qiskit-textbook/blob/master/content/qiskit-textbook.bib) file.
@@ -50,4 +50,4 @@ For a list of contributors, see the [.bib](https://github.com/Qiskit/qiskit-text
 The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](http://github.com/Qiskit/qiskit-textbook/blob/master/LICENSE.txt).
 
 # Contact
-For any issues, please contact Abraham Asfaw (abraham.asfaw@ibm.com).
+For any issues, please contact Francis Harkins (francis.harkins@ibm.com) and Abraham Asfaw (abraham.asfaw@ibm.com).

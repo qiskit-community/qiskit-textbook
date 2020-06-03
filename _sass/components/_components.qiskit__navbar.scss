@@ -1,0 +1,55 @@
+div.qiskit__navbar {
+        height: $qiskit-navbar-height;
+	background-color: $color-dark-gray;
+	color: #E8DAFF;
+	font-size: 14px;
+	ul{
+		padding: 0px;
+		padding-right: 30px;
+	}
+	li {
+        	display: block;
+        	float: right;
+		margin-right: 32px;
+		padding-top: 18px;
+		&.left {
+        		float: left;
+			font-size: 18px;
+			margin-left: 0px;
+			margin-right: 8px;
+			padding-top: 14px;
+			&.navbar__logo {
+				padding-top: 12px;
+			}
+		}
+		&.entry__active {
+			font-weight: bold;
+		}
+		&.qiskit-navbar__icons {
+			display: none;
+			cursor: pointer;
+		}
+
+		a {
+			color: #E8DAFF;
+		}
+	}
+}
+
+@media only screen and (max-width: 1250px) {
+	div.qiskit__navbar li {
+		&.qiskit-navbar__icons {
+			display: block;
+		}
+	}
+}
+@media only screen and (max-width: 860px) {
+	div.qiskit__navbar li {
+		display: none;
+		margin-right: 0px;
+		margin-left: 24px;
+		&.left{
+			display: block;
+		}
+	}
+}
