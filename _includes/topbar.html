@@ -14,14 +14,15 @@
     <nav class="onthispage">
     </nav>
     <!-- Chapter formats -->
+    {% unless page.id contains "preface" %}
     <div>
       <a
         href="https://quantum-computing.ibm.com/jupyter/user/qiskit-textbook/{{ page.interact_link }}"
         target="_blank"
         rel="noopener"
-        onclick="window.trackCta('Open in IBM Quantum Experience')"
+	onclick="window.trackCta('Open in IBM Quantum Experience')"
       >
-        <button class="interact-button">Open in IBM Quantum Experience</button>
+      <button class="interact-button">Open in IBM Quantum Experience</button>
       </a>
     </div>
     <div>
@@ -34,6 +35,7 @@
         <img src="{{ site.images_url | relative_url }}/download-solid.svg" class="download-button">
       </a>
     </div>
+    {% endunless %}
   </aside>
   <!--
   <a href="{{ '/search.html' | relative_url }}" class="topbar-right-button" id="search-button">
