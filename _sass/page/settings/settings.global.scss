@@ -12,14 +12,20 @@ $spacing-unit: $inuit-global-spacing-unit;
 $spacing-unit-large: $inuit-global-spacing-unit-large;
 $spacing-unit-huge: $inuit-global-spacing-unit-huge;
 
-$color-light-gray: #f7f7f7;
-$color-dark-gray: #ccc;
+$color-code-cell: #F2F4F8;
+$color-code-cell-border: #DDE1E6;
+$color-light-gray: #343A3F;
+$color-dark-gray: #21272A;
 
-$color-text: #222;
-$color-links: #0077d8;
+$color-text: #000000;
+$color-links: #6929C4;
+$color-buttons: #6929C4;
+
+$divider-color: #4D5358;
 
 // Text book variables
 $textbook-page-width: 100%;
 $textbook-page-with-sidebar-width: 70%;
 $book-background-color: white;
 
+$qiskit-navbar-height: 60px;

@@ -39,8 +39,9 @@ div.jb_cell {
   }
 }
 
+
 #page-title {
-  font-size: 2.2em;
+  font-size: 3.3em;
   font-weight: lighter;
   line-height: 1em;
 }
@@ -123,12 +124,12 @@ div.highlighter-rouge {
 div.inner_cell > div > div > pre,
 div.inner_cell > div > pre
 div.output_wrapper pre {
-  background-color: $color-light-gray;
+  background-color: $color-code-cell;
+  border: 1px solid $color-code-cell-border;
   font-size: 0.9em;
-  margin-bottom: $spacing-unit-small;
-  padding: $spacing-unit-small;
+  padding: $spacing-unit-med;
+  padding-bottom: 2.5*$spacing-unit-med;
   overflow-x: auto;
-  border: 1px solid $color-dark-gray;
 }
 
 // If we've got intentionally non-highlighted markup, make sure that the lines wrap
@@ -138,12 +139,14 @@ pre code.language-no-highlight {
 
 div.output_wrapper {
   position: relative;
-  margin-bottom: $spacing-unit-small;
+  margin: $spacing-unit-med;
+  margin-bottom: $spacing-unit-large;
 }
 
 div.output_wrapper pre {
-  border: 1px solid $color-light-gray !important;
-  background-color: #fcfcfc !important;
+  border: None !important;
+  background-color: white !important;
+  font-size: 0.9em;
 }
 
 .output_html {
@@ -153,9 +156,9 @@ div.output_wrapper pre {
 
 /* [5] */
 code {
-  padding: 4px;
-  background: #F7F7F7;
-  font-size: inherit;
+  padding: 1px;
+  background: white;
+  font-size: 0.9em;
 }
 
 pre > code {
@@ -203,7 +206,6 @@ h1, h2, h3, h4, h5, h6 {
 .output_png img,
 div.text_cell_render > p > img,
 div.text_cell_render > p > a > img {
-  max-width: 500px;
   display: block;
   margin-left: auto;
   margin-right: auto;

@@ -10,23 +10,21 @@
  * [5]: The logo displayed above the sidebar
  * [6]: The footer at the bottom of the sidebar
  */
-$color-sidebar-bg: rgba(255, 255, 255, 0) !default;
-$color-sidebar-entry: #364149 !default;
-$color-sidebar-entry--active: $color-links !default;
-$color-sidebar-divider: #bbb !default;
+$color-sidebar-bg: $color-dark-gray !default;
+$color-sidebar-entry: #F4F4F4 !default;
+$color-sidebar-entry--active: $color-links;
+$color-sidebar-divider: #F4F4F4 !default;
 
 .c-textbook__sidebar {
   background-color: $color-sidebar-bg;
-  padding: $spacing-unit-small;
-
+  padding: $spacing-unit-small $spacing-unit;
+  scrollbar-color: $color-dark-gray $color-dark-gray;
+  transition: scrollbar-color 0.2s ease-in-out;
   @include inuit-font-size(14px);
   border-right: 1px solid rgba(0, 0, 0, 0.07);
-  opacity: 0.6;
-  -webkit-transition: opacity 0.2s ease-in-out;
-  transition: opacity 0.2s ease-in-out;
 
   &:hover {
-    opacity: 1;
+  	scrollbar-color: #B3B3B3 $color-dark-gray;
   }
 }
 
