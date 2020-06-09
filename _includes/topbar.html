@@ -14,6 +14,7 @@
         <input type="text" id="siderbar-search-input" name="search">
       </form>
     </header>
+    <div class="onthispage__title">On This Page</div>
     <nav class="onthispage">
     </nav>
     <!-- Chapter formats -->
@@ -36,6 +37,15 @@
       >
         Download as Jupyter Notebook
         <img src="{{ site.images_url | relative_url }}/download-solid.svg" class="download-button">
+      </a>
+    </div>
+    <div>
+      <a
+	href="https://github.com/Qiskit/qiskit-textbook/tree/master/{{ page.interact_link }}"
+	class="download__link"
+      >
+      Contribute on Github
+      <img src="{{ site.images_url | relative_url }}/rightarrow_purple.svg" class="download-button">
       </a>
     </div>
     {% endunless %}
