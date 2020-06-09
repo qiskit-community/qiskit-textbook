@@ -54,6 +54,10 @@ details {
 	margin-bottom: 12px;
 }
 
+summary {
+	cursor: pointer;
+}
+
 svg {
 	max-width: 45vw;
 }
