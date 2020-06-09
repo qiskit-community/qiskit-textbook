@@ -79,6 +79,11 @@ div.qiskit__navbar {
   top: $qiskit-navbar-height;
   left: 0;
   background-color: $color-dark-gray;
+  direction: rtl;
+}
+
+.c-sidebar__chapters {
+	direction: ltr;
 }
 
 .c-textbook__page {
@@ -127,7 +132,7 @@ div.qiskit__navbar {
 
 .c-textbook__content {
   clear: both;
-  padding-top: 36px;
+  padding-top: 60px;
   width: 95%;
 }
 
