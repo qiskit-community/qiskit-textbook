@@ -23,19 +23,8 @@
     }
   }
 
-  window._analyticsReady = window._analyticsReady || new Promise((resolve) => {
-    const script = document.createElement('script')
-    script.async = true
-    script.src = 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
-    document.head.appendChild(script)
-    script.onload = resolve
-    script.onerror = (err) => {
-      console.warn('Error loading Bluemix Analytics script:', err)
-      resolve()
-    }
-  })
-
-  window._analyticsReady.then(() => {
+  loadAsyncScript('https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js')
+  .then(() => {
     if (!window.bluemixAnalytics || !window.digitalData) { return }
 
     const category = window.digitalData.page.pageInfo.analytics.category
@@ -47,6 +36,9 @@
       productTitle: productTitle,
       title: document.title
     })
+  })
+  .catch((err) => {
+    console.warn('Error loading Bluemix Analytics script:', err)
   })
 
   window.trackCta = (action) => {
