@@ -111,6 +111,14 @@ div.text_cell_render > p > img, div.text_cell_render > p > a > img {
 	margin-bottom: 36px;
 }
 
+/* display correct image depending on status of sidebar */
+.is-active > img.sidebar_closed_img {
+	display: none;
+}
+
+:not(.is-active) > img.sidebar_open_img {
+	display: none;
+}
 
 
 /* hack to hide preface in sidebar */
