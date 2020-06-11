@@ -195,6 +195,7 @@ button.preface-button.read-textbook {
 	margin: auto;
 	margin-left: 0em;
 	margin-bottom: 4em;
+	padding: 24px;
 }
 
 button span.rangle {
@@ -222,3 +223,6 @@ div.text_cell_render p img.preface-image {
 	margin-left: 1em;
 }
 
+aside.sidebar__right.preface {
+	border-left: none;
+}
