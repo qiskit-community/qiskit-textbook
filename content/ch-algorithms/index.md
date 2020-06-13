@@ -6,9 +6,4 @@ Now we have covered the basics of quantum computing, we are now ready to introdu
 
 The following topics are currently being developed for addition to the textbook:
 
-1. Securing Communications using BB84
-2. Overview of Quantum Algorithms for NISQ Hardware
-
-```python
-
-```
+- Overview of Quantum Algorithms for NISQ Hardware
