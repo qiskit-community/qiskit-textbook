@@ -158,7 +158,6 @@ div.output_wrapper pre {
 code {
   padding: 1px;
   background: white;
-  border: 1px solid $color-code-cell-border;
   font-size: 0.9em;
 }
 
@@ -207,7 +206,6 @@ h1, h2, h3, h4, h5, h6 {
 .output_png img,
 div.text_cell_render > p > img,
 div.text_cell_render > p > a > img {
-  max-width: 500px;
   display: block;
   margin-left: auto;
   margin-right: auto;
