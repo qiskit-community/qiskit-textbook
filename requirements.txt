@@ -3,4 +3,5 @@ matplotlib
 torch
 torchvision
 tabulate
+qutip
 -e ./qiskit-textbook-src
