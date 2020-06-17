@@ -137,11 +137,16 @@ aside.sidebar__right a.download__link {
 }
 
 aside.sidebar__right header {
-	border-bottom: 1px solid #4D5358;
 	margin-bottom: 0.5rem;
 	text-align: left;
 	width: 90%;
 	margin-right: 10%;
+
+	& form {
+		padding: 0 1rem 0.6rem;
+		border-bottom: solid 1px black;
+	}
+
 	& input {
 		width: 80%;
 		margin-left: 2px;
@@ -155,7 +160,7 @@ aside.sidebar__right header {
 	& button {
 		border: none;
 		background-color: white;
-		padding-bottom: 10px;
+		padding: 0;
 	}
 
 	h2 {
