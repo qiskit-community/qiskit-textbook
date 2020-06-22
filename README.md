@@ -1,5 +1,5 @@
 
-| stable: | [![Build Status](https://travis-ci.com/Qiskit/qiskit-textbook.svg?branch=stable)](https://travis-ci.com/Qiskit/qiskit-textbook) | master: | [![Build Status](https://travis-ci.com/Qiskit/qiskit-textbook.svg?branch=master)](https://travis-ci.com/Qiskit/qiskit-textbook) |
+| stable: | [![Build Status](https://travis-ci.com/qiskit-community/qiskit-textbook.svg?branch=stable)](https://travis-ci.com/qiskit-community/qiskit-textbook) | master: | [![Build Status](https://travis-ci.com/qiskit-community/qiskit-textbook.svg?branch=master)](https://travis-ci.com/qiskit-community/qiskit-textbook) |
 |---|---|---|---|
 
 # Qiskit Textbook Source Code
@@ -12,7 +12,7 @@ The notebooks are compiled into html and exported to [the website](http://commun
 
 # Contributors Guide
 
-## General Guidelines 
+## General Guidelines
 
 We love contributions and need them to ensure the textbook is a high-quality resource. If you notice any mistakes and want to fix them, then feel free to go ahead and make a pull request. If you want to contribute original content, there are a few things you can do to make sure your efforts have the biggest impact:
 
@@ -44,10 +44,10 @@ After writing your chapter, you must add a few tags to your cells (You can see t
 - Any code cell that uses IBM hardware, or relies on the results from such a cell needs a `uses-hardware` tag to alert the user this cannot be run on the website through [thebelab](https://thebelab.readthedocs.io/en/latest/).
 - Finally, after adding these tags, go to `view > none` and save your notebook to stop the tags from showing automatically when a reader opens the notebook.
 
-For a list of contributors, see the [.bib](https://github.com/Qiskit/qiskit-textbook/blob/master/content/qiskit-textbook.bib) file.
+For a list of contributors, see the [.bib](https://github.com/qiskit-community/qiskit-textbook/blob/master/content/qiskit-textbook.bib) file.
 
 # License
-The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](http://github.com/Qiskit/qiskit-textbook/blob/master/LICENSE.txt).
+The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](http://github.com/qiskit-community/qiskit-textbook/blob/master/LICENSE.txt).
 
 # Contact
 For any issues, please contact Francis Harkins (francis.harkins@ibm.com) and Abraham Asfaw (abraham.asfaw@ibm.com).
