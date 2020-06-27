@@ -46,6 +46,14 @@ a:visited {
 	color: #BE95FF;
 }
 
+figure {
+	text-align: center;
+}
+
+figcaption {
+	font-size: 0.85em;
+}
+
 details {
 	padding: 18px;
 	background-color: #F2F4F8;
