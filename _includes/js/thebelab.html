@@ -102,8 +102,8 @@
                 button.remove();
             });
 
-            // Remove outputs since they'll be stale
-            const outputs = document.querySelectorAll('.output *, .output')
+            // Remove outputs since they'll be stale (ignore outputs with removed inputs)
+            const outputs = document.querySelectorAll(':not(.tag_remove_input) > .output_wrapper')
             outputs.forEach((output, index) => {
                 output.remove();
             });
