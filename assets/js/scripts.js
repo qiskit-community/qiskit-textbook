@@ -160,7 +160,7 @@ initScrollFunc = function() {
     // This is the function that does all the stuff when scrolling happens
 
     var position = content.scrollTop; // Because we use this differently for sidebar
-
+    /** This is commented out since we want to always show the topbar
     // Decide to show the navbar
     var currentScrollPos = content.scrollTop;
     var delta = 10;
@@ -175,7 +175,7 @@ initScrollFunc = function() {
       // Do nothing because we didn't scroll enough
     }
     prevScrollpos = currentScrollPos;
-
+    **/
     // Highlight the right sidebar section
     position = position + (window.innerHeight / 4);  // + Manual offset
 
