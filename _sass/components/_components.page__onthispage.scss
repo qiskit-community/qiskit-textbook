@@ -11,9 +11,9 @@
  * [6]: The footer at the bottom of the sidebar
  */
 $color-sidebar-bg: $color-dark-gray !default;
-$color-sidebar-entry: #F4F4F4 !default;
+$color-sidebar-entry: #121619 !default;
 $color-sidebar-entry--active: $color-links;
-$color-sidebar-divider: #F4F4F4 !default;
+$color-sidebar-divider: #121619 !default;
 
 .c-textbook__sidebar {
   background-color: $color-sidebar-bg;
@@ -36,7 +36,8 @@ $color-sidebar-divider: #F4F4F4 !default;
 }
 
 li.c-sidebar__chapter > a {
-  font-size: 1.2em;
+  font-size: 1.1em;
+  font-weight: bold;
 }
 
 /* [1] */
@@ -47,6 +48,7 @@ li.c-sidebar__chapter > a {
 
 .c-sidebar__sections {
   margin-left: $spacing-unit-small;
+  margin-bottom: 12px;
 }
 
 .c-sidebar__subsections {
@@ -57,7 +59,7 @@ li.c-sidebar__chapter > a {
 .c-sidebar__entry {
   display: block;
 
-  padding: $spacing-unit-tiny;
+  padding: $spacing-unit-tiny/2;
 
   color: $color-sidebar-entry;
   text-decoration: none;
