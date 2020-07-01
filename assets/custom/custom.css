@@ -234,3 +234,8 @@ div.text_cell_render p img.preface-image {
 aside.sidebar__right.preface {
 	border-left: none;
 }
+
+ul.preface-list {
+	margin-top: -2em;
+	margin-bottom: 2em;
+}
