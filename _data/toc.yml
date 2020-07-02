@@ -53,6 +53,8 @@
       url : /ch-states/representing-qubit-states
     - title: Single Qubit Gates
       url: /ch-states/single-qubit-gates
+    - title: The Case for Quantum
+      url: /ch-states/case-for-quantum
 
 - title: Multiple Qubits and Entanglement
   url: /ch-gates/introduction.html
