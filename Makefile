@@ -16,6 +16,7 @@ install:
 
 book:
 	jupyter-book build ./
+	python3 scripts/process_build.py
 
 runall:
 	jupyter-book run ./content
@@ -28,6 +29,7 @@ serve:
 
 build:
 	jupyter-book build ./ --overwrite
+	python3 scripts/process_build.py
 
 site: build
 	bundle exec jekyll build
