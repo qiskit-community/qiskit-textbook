@@ -63,10 +63,10 @@
       url: /ch-gates/multiple-qubits-entangled-states
     - title: Phase Kickback
       url: /ch-gates/phase-kickback
-    - title: Proving Universality
-      url: /ch-gates/proving-universality
     - title: More Circuit Identities
       url: /ch-gates/more-circuit-identities
+    - title: Proving Universality
+      url: /ch-gates/proving-universality
 
 
 - title: Quantum Protocols and Quantum Algorithms
