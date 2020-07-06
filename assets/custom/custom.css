@@ -109,6 +109,10 @@ thead td {
 	border-bottom: 1px solid black !important;
 }
 
+table th {
+	border: 1px solid black;
+}
+
 .MathJax_Display {
 	margin-top: 24px !important;
 	margin-bottom: 24px !important;
