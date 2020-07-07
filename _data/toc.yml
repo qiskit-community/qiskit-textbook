@@ -29,6 +29,10 @@
   not_numbered: true
   url: /preface
 
+- title: What is Quantum?
+  url: /what-is-quantum
+  not_numbered: true
+
 - title: Prerequisites
   url: /ch-prerequisites/python-and-jupyter-notebooks.html
   external: true
