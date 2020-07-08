@@ -1,7 +1,8 @@
 div.qiskit__navbar {
         height: $qiskit-navbar-height;
 	background-color: $color-dark-gray;
-	color: #E8DAFF;
+	color: $color-links;
+	border-bottom: 1px solid #491D8B;
 	font-size: 14px;
 	ul{
 		padding: 0px;
@@ -31,7 +32,7 @@ div.qiskit__navbar {
 		}
 
 		a {
-			color: #E8DAFF;
+			color: #491D8B;
 		}
 	}
 }
@@ -43,7 +44,7 @@ div.qiskit__navbar {
 		}
 	}
 }
-@media only screen and (max-width: 860px) {
+@media only screen and (max-width: 525px) {
 	div.qiskit__navbar li {
 		display: none;
 		margin-right: 0px;
