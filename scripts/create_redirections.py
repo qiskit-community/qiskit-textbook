@@ -12,7 +12,7 @@ overwrite_option = '--overwrite'
 #   - The key is the old absolute URL. Discard the baseurl and the leading slash.
 #   - The value is the new URL relative to the old one.
 REDIRECTIONS = {
-    'ch-prerequisites/linear_algebra.html': '../../ch-appendix/linear_algebra.html'
+    'ch-prerequisites/linear_algebra.html': '../ch-appendix/linear_algebra.html'
 }
 
 def create_redirection (buildpath, old, new, overwrite=False):
