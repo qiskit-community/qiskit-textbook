@@ -26,7 +26,7 @@ def create_redirection (buildpath, old, new, overwrite=False):
         return
 
     folder = os.path.dirname(redirectionpath)
-    os.makedirs(folder)
+    os.makedirs(folder, exist_ok=True)
     with open(redirectionpath, 'w') as file_:
         print(f'Creating redirection at {redirectionpath} -> {new} ')
         file_.write(redirectioncontent)
