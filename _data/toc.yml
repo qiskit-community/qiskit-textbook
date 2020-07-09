@@ -144,6 +144,10 @@
       url: /ch-quantum-hardware/calibrating-qubits-openpulse
     - title: Accessing Higher Energy States
       url: /ch-quantum-hardware/accessing_higher_energy_states
+    - title: Introduction to Transmon Physics
+      url: /ch-quantum-hardware/transmon-physics
+    - title: Circuit Quantum Electrodynamics
+      url: /ch-quantum-hardware/cQED-JC-SW
 
 - title: Problem Sets & Exercises
   url: /ch-ex/index
