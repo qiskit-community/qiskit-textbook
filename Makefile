@@ -1,6 +1,6 @@
 .PHONY: help book clean serve
 
-BUIILD_DIR := "./_build"
+BUILD_DIR := "./_build"
 
 help:
 	@echo "Please use 'make <target>' where <target> is one of:"
@@ -18,7 +18,7 @@ install:
 
 book:
 	jupyter-book build ./
-	python3 scripts/postprocess_html.py $(BUIILD_DIR)
+	python3 scripts/postprocess_html.py $(BUILD_DIR)
 
 runall:
 	jupyter-book run ./content
@@ -31,7 +31,7 @@ serve:
 
 build:
 	jupyter-book build ./ --overwrite
-	python3 scripts/postprocess_html.py $(BUIILD_DIR)
+	python3 scripts/postprocess_html.py $(BUILD_DIR)
 
 site: build
 	bundle exec jekyll build
