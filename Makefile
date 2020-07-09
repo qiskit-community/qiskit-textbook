@@ -19,6 +19,7 @@ install:
 book:
 	jupyter-book build ./
 	python3 scripts/create_redirections.py $(BUILD_DIR)
+	python3 scripts/postprocess_html.py $(BUILD_DIR)
 
 runall:
 	jupyter-book run ./content
@@ -32,6 +33,7 @@ serve:
 build:
 	jupyter-book build ./ --overwrite
 	python3 scripts/create_redirections.py $(BUILD_DIR)
+	python3 scripts/postprocess_html.py $(BUILD_DIR)
 
 site: build
 	bundle exec jekyll build
