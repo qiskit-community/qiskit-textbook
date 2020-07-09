@@ -1,7 +1,17 @@
 <div class="c-topbar" id="top-navbar">
   <!-- We show the sidebar by default so we use .is-active -->
   <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
+  <aside class="hamburger__left">
+    <span id="js-sidebar-toggle" class="hamburger is-active">
+	    <img class="sidebar_closed_img" src="/textbook/assets/images/rightarrow_purple.svg" title="Show Contents">
+	    <img class="sidebar_open_img" src="/textbook/assets/images/leftarrow_purple.svg" title="Hide Contents">
+    </span>
+  </aside>
+  {% if page.id contains "preface" %}
+  <aside class="sidebar__right preface">
+  {% else %}
   <aside class="sidebar__right">
+  {% endif %}
     <!-- Search form -->
     <header>
       <form action="{{ '/search.html' | relative_url }}" method="GET">
@@ -11,10 +21,12 @@
         <input type="text" id="siderbar-search-input" name="search">
       </form>
     </header>
+
+    {% unless page.id contains "preface" %}
+    <div class="onthispage__title">On This Page</div>
     <nav class="onthispage">
     </nav>
     <!-- Chapter formats -->
-    {% unless page.id contains "preface" %}
     <div>
       <a
         href="https://quantum-computing.ibm.com/jupyter/user/qiskit-textbook/{{ page.interact_link }}"
@@ -35,7 +47,16 @@
         <img src="{{ site.images_url | relative_url }}/download-solid.svg" class="download-button">
       </a>
     </div>
-    {% endunless %}
+    <div>
+      <a
+	href="https://github.com/Qiskit/qiskit-textbook/tree/master/{{ page.interact_link }}"
+	class="download__link"
+      >
+      Contribute on Github
+      <img src="{{ site.images_url | relative_url }}/rightarrow_purple.svg" class="download-button">
+      </a>
+    </div>
+  {% endunless %}
   </aside>
   <!--
   <a href="{{ '/search.html' | relative_url }}" class="topbar-right-button" id="search-button">
