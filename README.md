@@ -10,6 +10,18 @@ The Jupyter notebooks corresponding to each section of the textbook can be found
 
 The notebooks are compiled into html and exported to [the website](http://community.qiskit.org/textbook).
 
+## Installing the `qiskit_textbook` Package
+
+The Qiskit Textbook provides some tools and widgets specific to the Textbook. This is not part of Qiskit and is available through the `qiskit_textbook` package. The quickest way to install this with [Pip](https://pypi.org/project/pip/) and [Git](https://git-scm.com/) is through the command:
+
+```pip install git+https://github.com/qiskit-community/qiskit-textbook.git#subdirectory=qiskit-textbook-src```
+
+Alternatively, you can download the folder [`qiskit-textbook-src`](qiskit-textbook-src) and run:
+
+```pip install ./qiskit-textbook-src``` 
+
+from the directory that contains this folder.
+
 # Contributors Guide
 
 ## General Guidelines

@@ -1,0 +1,9 @@
+# This file defines the persons that will be assigned as reviewers for PRs that
+# modify a particular file in the repo.
+
+# Generic rule for the repository. This pattern is actually the one that will
+# apply unless specialized by a later rule
+* @aasfaw @frankharkins @delapuente @1ucian0
+
+# Individual folders on root directory
+/content         @aasfaw @frankharkins @quantumjim @HwajungKang
