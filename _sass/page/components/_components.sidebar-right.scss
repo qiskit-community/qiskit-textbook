@@ -31,6 +31,13 @@ aside.sidebar__right {
     color: #7a8288;
     border-left: 1px solid $divider-color;
 
+    div.onthispage__title {
+	font-size: 0.9em;
+	padding-left: 0.5em;
+	padding-bottom: 0;
+	display: none;
+    }
+
     // Icon
     img {
         width: 15px;
@@ -137,11 +144,16 @@ aside.sidebar__right a.download__link {
 }
 
 aside.sidebar__right header {
-	border-bottom: 1px solid #4D5358;
 	margin-bottom: 0.5rem;
 	text-align: left;
 	width: 90%;
 	margin-right: 10%;
+
+	& form {
+		padding: 0 0.4rem 0.6rem;
+		border-bottom: solid 1px #4D5358;
+	}
+
 	& input {
 		width: 80%;
 		margin-left: 2px;
@@ -155,7 +167,7 @@ aside.sidebar__right header {
 	& button {
 		border: none;
 		background-color: white;
-		padding-bottom: 10px;
+		padding: 0;
 	}
 
 	h2 {
@@ -165,7 +177,7 @@ aside.sidebar__right header {
 	}
 }
 
-@media only screen and (max-width: 1250px) {
+@media only screen and (max-width: 1310px) {
 	aside.sidebar__right {
 		header form {
 			display: none;
@@ -182,10 +194,13 @@ aside.sidebar__right header {
 		header h2 {
 			display: block;
 		}
+		div.onthispage__title {
+			display: block;
+		}
 	}
 }
 
-@media only screen and (max-width: 1250px) {
+@media only screen and (max-width: 1310px) {
 	aside.sidebar__right {
 		border-bottom: 1px solid $divider-color;
 		opacity: 90%;

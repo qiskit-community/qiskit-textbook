@@ -81,4 +81,33 @@ var initQuery = function() {
   });
 };
 
-initFunction(initQuery);
+// Fills in the search input with the query in the url
+var prepopulateSearchInput = function () {
+  var searchInput = document.getElementById('lunr_search');
+  if (!searchInput) { return }
+
+  var params = new URLSearchParams(window.location.search)
+  var searchValue = params.get('search')
+  if (!searchValue) { return }
+  searchInput.value = searchValue.trim()
+}
+
+// Simulate a 'keyup' event to trigger a search
+var triggerSearch = function () {
+  var searchInput = document.getElementById('lunr_search');
+  if (!searchInput || !searchInput.value.trim()) { return }
+
+  searchInput.focus();
+  var enterEvent = document.createEvent('Event');
+  enterEvent.initEvent('keyup');
+  searchInput.dispatchEvent(enterEvent);
+}
+
+initFunction(prepopulateSearchInput)
+
+loadAsyncScript('https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js')
+.then(() => {
+  initFunction(initQuery)
+  initFunction(triggerSearch)
+})
+.catch((err) => console.error('Cannot load lunr search engine:', err))
