@@ -2,4 +2,7 @@ qiskit
 matplotlib
 torch
 torchvision
+tabulate
+qutip
+sympy
 -e ./qiskit-textbook-src
