@@ -1,4 +1,4 @@
-/* This is mostly patching up things I couldn't track down in _sass */
+/* This is mostly patching up things I couldn't track down in _sass  */
 
 .interact-button {
 	font-family: "IBM Plex Sans","Segoe UI","Helvetica Neue","Lucida Grande",Arial,sans-serif !important;
@@ -49,6 +49,10 @@ a:visited {
 
 figure {
 	text-align: center;
+}
+
+figure > img {
+	margin: 1em;
 }
 
 figcaption {
@@ -107,6 +111,10 @@ td {
 
 thead td {
 	border-bottom: 1px solid black !important;
+}
+
+table th {
+	border: 1px solid black;
 }
 
 .MathJax_Display {
