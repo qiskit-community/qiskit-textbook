@@ -1,6 +1,7 @@
+pip 20.*
 qiskit
 matplotlib
-Cython
+cython
 torch
 torchvision
 tabulate
