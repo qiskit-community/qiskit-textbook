@@ -1,6 +1,6 @@
 qiskit
 matplotlib
-cython
+Cython
 torch
 torchvision
 tabulate
