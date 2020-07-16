@@ -1,4 +1,3 @@
-pip==19.*
 qiskit
 matplotlib
 cython
