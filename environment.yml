@@ -7,8 +7,6 @@ dependencies:
 - cython
 - numpy
 - matplotlib
-- qiskit
-- torch
 - torchvision
 - tabulate
 - qutip
