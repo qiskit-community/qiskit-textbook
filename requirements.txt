@@ -1,4 +1,4 @@
-pip 20.*
+pip==20.*
 qiskit
 matplotlib
 cython
