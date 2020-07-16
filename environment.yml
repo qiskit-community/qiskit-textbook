@@ -11,3 +11,5 @@ dependencies:
 - tabulate
 - qutip
 - sympy
+- pip:
+  - qiskit
