@@ -116,6 +116,16 @@
            url: /ch-applications/satisfiability-grover
          - title: Hybrid quantum-classical Neural Networks with PyTorch and Qiskit
            url: /ch-machine-learning/machine-learning-qiskit-pytorch
+    - title: Quantum Image Processing
+      url: /ch-applications/QIP/qip_index
+      expand_subsections: true
+      subsections:
+        - title: Review of Classical Image Processing
+          url: /ch-applications/QIP/review-classical-image-proc
+        - title: Flexible Representation of Quantum Images
+          url: /ch-applications/QIP/frqi
+        - title: Novel Enhanced Quantum Representation
+          url: /ch-applications/QIP/neqr
     - title: Implementations of Recent Quantum Algorithms
       url: /ch-applications/imp_index
       expand_subsections: true
