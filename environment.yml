@@ -13,4 +13,5 @@ dependencies:
 - sympy
 - pip:
   - qiskit
+  - seaborn
   - -e ./qiskit-textbook-src
