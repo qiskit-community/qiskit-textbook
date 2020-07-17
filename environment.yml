@@ -13,3 +13,4 @@ dependencies:
 - sympy
 - pip:
   - qiskit
+  - -e ./qiskit-textbook-src
