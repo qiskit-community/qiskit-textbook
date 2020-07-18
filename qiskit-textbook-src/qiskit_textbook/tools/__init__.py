@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from IPython.display import display, Markdown, Math
+from qiskit import QuantumCircuit
 import numpy as np
 import math
 from fractions import Fraction
@@ -21,6 +22,24 @@ def vector2latex(vector, precision=5, pretext="", display_output=True):
         display(Math(out_latex))
     else:
         return out_latex
+
+def simon_oracle(b):
+    """returns a Simon oracle for bitstring b"""
+    b = b[::-1] # reverse b for easy iteration
+    n = len(b)
+    qc = QuantumCircuit(n*2)
+    # Do copy; |x>|0> -> |x>|x>
+    for q in range(n):
+        qc.cx(q, q+n)
+    if '1' not in b: 
+        return qc  # 1:1 mapping, so just exit
+    i = b.find('1') # index of first non-zero bit in b
+    # Do |x> -> |s.x> on condition that q_i is 1
+    for q in range(n):
+        if b[q] == '1':
+            qc.cx(i, (q)+n)
+    return qc 
+
 
 def unitary2latex(unitary, precision=5, pretext="", display_output=True):
     "replace with array_to_latex"
