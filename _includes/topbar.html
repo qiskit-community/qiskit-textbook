@@ -28,6 +28,7 @@
     </nav>
     <!-- Chapter formats -->
     <div>
+      {% unless page.title == "What is Quantum?" %}
       <a
         href="https://quantum-computing.ibm.com/jupyter/user/qiskit-textbook/{{ page.interact_link }}"
         target="_blank"
@@ -56,6 +57,7 @@
       <img src="{{ site.images_url | relative_url }}/rightarrow_purple.svg" class="download-button">
       </a>
     </div>
+    {% endunless %}
   {% endunless %}
   </aside>
   <!--
