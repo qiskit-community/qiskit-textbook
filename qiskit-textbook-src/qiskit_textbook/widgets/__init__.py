@@ -39,7 +39,7 @@ def binary_widget(nbits=5):
     display(vbox)
     display(output.widget)
 
-
+#For the vector representation
 def state_vector_exercise(target):
     output = _pre()
     button = widgets.Button(description="Check", layout=widgets.Layout(width='5em'))
@@ -75,7 +75,7 @@ def state_vector_exercise(target):
     display(vbox)
     display(output.widget)
 
-
+#For intractive spherical model"bloch"
 def bloch_calc():
     output = _pre()
     button = widgets.Button(description="Plot", layout=widgets.Layout(width='4em'))
@@ -119,7 +119,7 @@ def bloch_calc():
     display(output.widget)
     display(image.widget)
 
-
+#For plotting the bloch_vector
 def plot_bloch_vector_spherical(coords):
     clear_output()
     theta, phi, r = coords[0], coords[1], coords[2]
@@ -198,10 +198,10 @@ def gate_demo(gates='full',qsphere=True):
                 qc.rz(zrot_slider.value,0)
         else:
             functionmap[b.description](0)
-
-    def on_button_click(b):
-        apply_gates(b,qc)
-        update_output()
+#For interactive button highlight on click
+def on_button_click(b):
+    apply_gates(b,qc)
+    update_output()
 
     for button in button_list:
         button.on_click(on_button_click)
