@@ -198,10 +198,9 @@ def gate_demo(gates='full',qsphere=True):
                 qc.rz(zrot_slider.value,0)
         else:
             functionmap[b.description](0)
-#For interactive button highlight on click
-def on_button_click(b):
-    apply_gates(b,qc)
-    update_output()
+    def on_button_click(b):
+        apply_gates(b,qc)
+        update_output()
 
     for button in button_list:
         button.on_click(on_button_click)
