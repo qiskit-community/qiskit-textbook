@@ -1,8 +1,15 @@
 div.qiskit__navbar {
         height: $qiskit-navbar-height;
-	background-color: $color-dark-gray;
-	color: #E8DAFF;
-	font-size: 14px;
+	background-color: white;
+	border-bottom: 1px solid rgba(0,0,0,0.07);
+	font-size: 1em;
+	li > a {
+		color: #393939;
+	}
+	li.entry__active > a {
+		color: #6929c4;
+	}
+
 	ul{
 		padding: 0px;
 		padding-right: 30px;
@@ -19,19 +26,14 @@ div.qiskit__navbar {
 			margin-right: 8px;
 			padding-top: 14px;
 			&.navbar__logo {
-				padding-top: 12px;
+				padding-top: 15px;
+				width: 4.2em;
+				margin-left: 10px;
 			}
-		}
-		&.entry__active {
-			font-weight: bold;
 		}
 		&.qiskit-navbar__icons {
 			display: none;
 			cursor: pointer;
-		}
-
-		a {
-			color: #E8DAFF;
 		}
 	}
 }
@@ -43,7 +45,7 @@ div.qiskit__navbar {
 		}
 	}
 }
-@media only screen and (max-width: 860px) {
+@media only screen and (max-width: 525px) {
 	div.qiskit__navbar li {
 		display: none;
 		margin-right: 0px;
