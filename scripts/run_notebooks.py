@@ -59,4 +59,4 @@ if __name__ == '__main__':
     running_time = t1-t0
 
     print("Finished in %.2f seconds" % running_time)
-    print("%i files were accessed, %i were updated and %i were not updated due to errors in the code" % (total_files, working_files, total_files - working_files))
+    print("%i files were accessed, %i were updated and %i were not updated due to errors." % (total_files, working_files, total_files - working_files))
