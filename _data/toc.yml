@@ -34,9 +34,11 @@
   not_numbered: true
 
 - title: Prerequisites
-  url: /ch-prerequisites/python-and-jupyter-notebooks.html
+  url: /ch-prerequisites/setting-the-environment.html
   external: true
   sections:
+    - title: Setting Up Your Environment
+      url: /ch-prerequisites/setting-the-environment
     - title: Python and Jupyter Notebooks
       url: /ch-prerequisites/python-and-jupyter-notebooks
 
