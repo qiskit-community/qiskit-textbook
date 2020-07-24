@@ -20,7 +20,6 @@ from datetime import datetime
 filepath = "../content/"
 
 def run_notebook(filename):
-    return 1
     execution_failed = False
     with open(filename) as f:
         nb = nbformat.read(f, as_version=4)
