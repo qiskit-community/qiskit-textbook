@@ -2,7 +2,7 @@
 name: "Software Bug \U0001F41B"
 about: Something is wrong with the website or code examples.
 title: ''
-labels: bug
+labels: code bug
 assignees: ''
 
 ---

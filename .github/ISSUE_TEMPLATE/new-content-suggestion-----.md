@@ -2,7 +2,7 @@
 name: "New Content Suggestion ✒️\U0001F4C4"
 about: Propose new sections or chapters for the textbook
 title: ''
-labels: New Content
+labels: ''
 assignees: ''
 
 ---
