@@ -79,6 +79,11 @@ div.qiskit__navbar {
   top: $qiskit-navbar-height;
   left: 0;
   background-color: $color-dark-gray;
+  direction: rtl;
+}
+
+.c-sidebar__chapters {
+	direction: ltr;
 }
 
 .c-textbook__page {
@@ -86,7 +91,7 @@ div.qiskit__navbar {
   width: $textbook-page-width;
   transition: transform 250ms ease;
   left: 0;
-  padding: 0 $spacing-unit $spacing-unit-small $spacing-unit-small * 3;
+  padding: 0 $spacing-unit $spacing-unit-small $spacing-unit-small * 5;
   overflow-x: visible;
 
   &:focus {
@@ -127,7 +132,7 @@ div.qiskit__navbar {
 
 .c-textbook__content {
   clear: both;
-  padding-top: 36px;
+  padding-top: 60px;
   width: 95%;
 }
 
