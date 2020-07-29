@@ -152,9 +152,9 @@ def scalable_circuit(func):
     display(image.widget)
 
 
-def gate_demo(gates='full'):
+def gate_demo(gates='full',qsphere=True):
     from qiskit import QuantumCircuit, execute, Aer
-    from qiskit.visualization import plot_bloch_multivector
+    from qiskit.visualization import plot_bloch_multivector, plot_state_qsphere
     gate_list = []
     showing_rz = False
     if 'pauli' in gates:
@@ -174,7 +174,10 @@ def gate_demo(gates='full'):
     image = _img()
     def update_output():
         out_state = execute(qc,backend).result().get_statevector()
-        image.value = plot_bloch_multivector(out_state)
+        if qsphere: 
+            image.value = plot_state_qsphere(out_state)
+        else:
+            image.value = plot_bloch_multivector(out_state)
 
     def apply_gates(b,qc):
         functionmap = {
