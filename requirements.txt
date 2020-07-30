@@ -1,6 +1,9 @@
 qiskit
 matplotlib
+cython
+qutip
 torch
 torchvision
 tabulate
+sympy
 -e ./qiskit-textbook-src

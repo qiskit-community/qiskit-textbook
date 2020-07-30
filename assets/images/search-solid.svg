@@ -1,3 +1,58 @@
-<svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M14 14.1938L10.2 10.1562C11 9.14688 11.5 7.81875 11.5 6.4375C11.5 3.19688 9.05 0.59375 6 0.59375C2.95 0.59375 0.5 3.19688 0.5 6.4375C0.5 9.67813 2.95 12.2812 6 12.2812C7.35 12.2812 8.55 11.7499 9.5 10.8999L13.3 14.9375L14 14.1938ZM1.5 6.4375C1.5 3.78125 3.5 1.65625 6 1.65625C8.5 1.65625 10.5 3.78125 10.5 6.4375C10.5 9.09375 8.5 11.2188 6 11.2188C3.5 11.2188 1.5 9.09375 1.5 6.4375Z" fill="black"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="14"
+   height="15"
+   viewBox="0 0 14 15"
+   fill="none"
+   version="1.1"
+   id="svg835"
+   sodipodi:docname="search-solid.svg"
+   inkscape:version="1.0beta2 (2b71d25, 2019-12-03)">
+  <metadata
+     id="metadata841">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs839" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     inkscape:document-rotation="0"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1792"
+     inkscape:window-height="1075"
+     id="namedview837"
+     showgrid="false"
+     inkscape:zoom="44.8"
+     inkscape:cx="7"
+     inkscape:cy="7.5"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg835" />
+  <path
+     d="M14 14.1938L10.2 10.1562C11 9.14688 11.5 7.81875 11.5 6.4375C11.5 3.19688 9.05 0.59375 6 0.59375C2.95 0.59375 0.5 3.19688 0.5 6.4375C0.5 9.67813 2.95 12.2812 6 12.2812C7.35 12.2812 8.55 11.7499 9.5 10.8999L13.3 14.9375L14 14.1938ZM1.5 6.4375C1.5 3.78125 3.5 1.65625 6 1.65625C8.5 1.65625 10.5 3.78125 10.5 6.4375C10.5 9.09375 8.5 11.2188 6 11.2188C3.5 11.2188 1.5 9.09375 1.5 6.4375Z"
+     fill="black"
+     id="path833"
+     style="fill:#000000;fill-opacity:1" />
 </svg>
