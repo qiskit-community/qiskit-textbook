@@ -1,14 +1,12 @@
-<!--- This is a rough template to help make sure 
-      you don't miss anything out, don't worry about
-      adhering strictly to it --->
-## Description of Issue (if Applicable)
+<!--- 
+Your PR title should start with the number of the chapter(s) 
+your PR affects. E.g "4.5, 6.3 Fixed misspelling of 'transform'"
+The exception is if you change a large number of chapters or none
+at all.
+--->
+# Changes made
+<!--- Please state what you did --->
 
-Fixes #your_issue_number_here
-
-## What Changes Were Made?
-
-## How Was This Tested?
-
-Please provide any screenshots if applicable.
-
-## Anything Else We Should Know 
+# Justification
+<!--- Please explain why this change is necessary. If changing technical
+details / equations, do not asssume the justification is obvious --->
