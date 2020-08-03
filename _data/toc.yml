@@ -147,7 +147,7 @@
   expand_sections: true
   sections:
     - title: Calibrating Qubits with Qiskit Pulse
-      url: /ch-quantum-hardware/calibrating-qubits-pulse
+      url: /ch-quantum-hardware/calibrating-qubits-openpulse
     - title: Accessing Higher Energy States
       url: /ch-quantum-hardware/accessing_higher_energy_states
     - title: Introduction to Transmon Physics
