@@ -7,7 +7,7 @@ To avoid duplication of effort and to ensure all discussion happens in the same 
 always check the existing issues and pull requests to see if the problem has already been addressed. 
 It is worth removing the `is:open` filter to search through closed / merged issues too.
 
-- If you notice any spelling / grammar errors and want to fix them, then feel free to go ahead and make a pull request. 
+- If you notice any spelling / grammar erros and want to fix them, then feel free to go ahead and make a pull request. 
 - If you want to correct a scientific / mathematical / code error, make an issue first so we can discuss the changes.
 - Please make one pull request (using separate branches) for each issue.
 
