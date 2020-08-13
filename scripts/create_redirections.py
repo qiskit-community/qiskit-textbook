@@ -14,7 +14,8 @@ overwrite_option = '--overwrite'
 REDIRECTIONS = {
     'ch-prerequisites/linear_algebra.html': '../ch-appendix/linear_algebra.html',
     'ch-algorithms/deutsch-josza.html': '../ch-algorithms/deutsch-jozsa.html',
-    'ch-quantum-hardware/calibrating-qubits-openpulse.html': 'calibrating-qubits-pulse.html'
+    'ch-quantum-hardware/calibrating-qubits-openpulse.html': 'calibrating-qubits-pulse.html',
+    'ch-quantum-hardware/calibrating-qubits-openpulse.ipynb': 'calibrating-qubits-pulse.ipynb'
 }
 
 def create_redirection (buildpath, old, new, overwrite=False):
