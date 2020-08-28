@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  {% include google_analytics.html %}
-  {% include segment.html %}
   {% include head.html %}
   <body>
+    <!-- Include the ThebeLab config so it gets reloaded on each page -->
+    {% include js/thebelab-page-config.html %}
     <!-- .js-show-sidebar shows sidebar by default -->
     <div id="js-textbook" class="c-textbook {% if site.show_sidebar %}js-show-sidebar{% endif %}">
+    <div id="qiskit-navbar" class="qiskit__navbar">
+    {% include qiskit_navbar.html %}
+    </div>
+
       {% include sidebar.html %}
       {% if page.search_page != true %}
       {% endif %}
       {% include topbar.html %}
       <main class="c-textbook__page" tabindex="-1">
-        <div class="c-textbook__content" id="textbook_content">
-          {{ content }}
+            <div class="c-textbook__content" id="textbook_content">
+              {{ content }}
+            </div>
+            <div class="c-textbook__footer" id="textbook_footer">
+              {% include page-nav.html %}
+              {% include footer.html %}
+            </div>
+
         </div>
-        {% include page-nav.html %}
-        {% include footer.html %}
       </main>
     </div>
   </body>

@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0beta2 (2b71d25, 2019-12-03)"
+   sodipodi:docname="logo_qiskit_black.svg"
+   id="svg945"
+   version="1.1"
+   viewBox="0 0 392.5 392.5">
+  <metadata
+     id="metadata949">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>qiskit-logo</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:current-layer="svg945"
+     inkscape:window-maximized="0"
+     inkscape:window-y="23"
+     inkscape:window-x="0"
+     inkscape:cy="235.36156"
+     inkscape:cx="196.25"
+     inkscape:zoom="2.1248408"
+     showgrid="false"
+     id="namedview947"
+     inkscape:window-height="1075"
+     inkscape:window-width="1777"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     inkscape:document-rotation="0"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <defs
+     id="defs921">
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1, 0, 0, -1, 0, 394)"
+       y2="41.54"
+       x2="196.25"
+       y1="7.91"
+       x1="196.25"
+       id="a">
+      <stop
+         id="stop833"
+         stop-color="#fff"
+         offset="0" />
+      <stop
+         id="stop835"
+         stop-opacity="0.99"
+         stop-color="#fff"
+         offset="0.14" />
+      <stop
+         id="stop837"
+         stop-opacity="0.94"
+         stop-color="#fff"
+         offset="0.27" />
+      <stop
+         id="stop839"
+         stop-opacity="0.87"
+         stop-color="#fff"
+         offset="0.39" />
+      <stop
+         id="stop841"
+         stop-opacity="0.77"
+         stop-color="#fff"
+         offset="0.51" />
+      <stop
+         id="stop843"
+         stop-opacity="0.64"
+         stop-color="#fff"
+         offset="0.63" />
+      <stop
+         id="stop845"
+         stop-opacity="0.48"
+         stop-color="#fff"
+         offset="0.74" />
+      <stop
+         id="stop847"
+         stop-opacity="0.29"
+         stop-color="#fff"
+         offset="0.85" />
+      <stop
+         id="stop849"
+         stop-opacity="0.08"
+         stop-color="#fff"
+         offset="0.96" />
+      <stop
+         id="stop851"
+         stop-opacity="0"
+         stop-color="#fff"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1, 0, 0, -1, 0, 394)"
+       y2="156.86"
+       x2="198.57"
+       y1="59.17"
+       x1="198.57"
+       id="b">
+      <stop
+         id="stop854"
+         stop-color="#fff"
+         offset="0" />
+      <stop
+         id="stop856"
+         stop-opacity="0.99"
+         stop-color="#fff"
+         offset="0.19" />
+      <stop
+         id="stop858"
+         stop-opacity="0.95"
+         stop-color="#fff"
+         offset="0.32" />
+      <stop
+         id="stop860"
+         stop-opacity="0.89"
+         stop-color="#fff"
+         offset="0.44" />
+      <stop
+         id="stop862"
+         stop-opacity="0.8"
+         stop-color="#fff"
+         offset="0.54" />
+      <stop
+         id="stop864"
+         stop-opacity="0.69"
+         stop-color="#fff"
+         offset="0.64" />
+      <stop
+         id="stop866"
+         stop-opacity="0.55"
+         stop-color="#fff"
+         offset="0.74" />
+      <stop
+         id="stop868"
+         stop-opacity="0.39"
+         stop-color="#fff"
+         offset="0.83" />
+      <stop
+         id="stop870"
+         stop-opacity="0.21"
+         stop-color="#fff"
+         offset="0.92" />
+      <stop
+         id="stop872"
+         stop-opacity="0"
+         stop-color="#fff"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1, 0, 0, -1, 0, 394)"
+       y2="253"
+       x2="196.25"
+       y1="142.48"
+       x1="196.25"
+       id="c">
+      <stop
+         id="stop875"
+         stop-color="#fff"
+         offset="0" />
+      <stop
+         id="stop877"
+         stop-opacity="0.99"
+         stop-color="#fff"
+         offset="0.19" />
+      <stop
+         id="stop879"
+         stop-opacity="0.95"
+         stop-color="#fff"
+         offset="0.33" />
+      <stop
+         id="stop881"
+         stop-opacity="0.89"
+         stop-color="#fff"
+         offset="0.44" />
+      <stop
+         id="stop883"
+         stop-opacity="0.81"
+         stop-color="#fff"
+         offset="0.55" />
+      <stop
+         id="stop885"
+         stop-opacity="0.7"
+         stop-color="#fff"
+         offset="0.65" />
+      <stop
+         id="stop887"
+         stop-opacity="0.56"
+         stop-color="#fff"
+         offset="0.74" />
+      <stop
+         id="stop889"
+         stop-opacity="0.4"
+         stop-color="#fff"
+         offset="0.83" />
+      <stop
+         id="stop891"
+         stop-opacity="0.22"
+         stop-color="#fff"
+         offset="0.92" />
+      <stop
+         id="stop893"
+         stop-opacity="0.01"
+         stop-color="#fff"
+         offset="1" />
+      <stop
+         id="stop895"
+         stop-opacity="0"
+         stop-color="#fff"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1, 0, 0, -1, 0, 394)"
+       y2="336.33"
+       x2="198.57"
+       y1="238.61"
+       x1="198.57"
+       id="d">
+      <stop
+         id="stop898"
+         stop-color="#fff"
+         offset="0" />
+      <stop
+         id="stop900"
+         stop-opacity="0.99"
+         stop-color="#fff"
+         offset="0.2" />
+      <stop
+         id="stop902"
+         stop-opacity="0.95"
+         stop-color="#fff"
+         offset="0.34" />
+      <stop
+         id="stop904"
+         stop-opacity="0.9"
+         stop-color="#fff"
+         offset="0.45" />
+      <stop
+         id="stop906"
+         stop-opacity="0.81"
+         stop-color="#fff"
+         offset="0.56" />
+      <stop
+         id="stop908"
+         stop-opacity="0.7"
+         stop-color="#fff"
+         offset="0.65" />
+      <stop
+         id="stop910"
+         stop-opacity="0.57"
+         stop-color="#fff"
+         offset="0.74" />
+      <stop
+         id="stop912"
+         stop-opacity="0.41"
+         stop-color="#fff"
+         offset="0.83" />
+      <stop
+         id="stop914"
+         stop-opacity="0.23"
+         stop-color="#fff"
+         offset="0.91" />
+      <stop
+         id="stop916"
+         stop-opacity="0.03"
+         stop-color="#fff"
+         offset="0.99" />
+      <stop
+         id="stop918"
+         stop-opacity="0"
+         stop-color="#fff"
+         offset="1" />
+    </linearGradient>
+    <filter
+       id="filter1075"
+       inkscape:label="Invert"
+       style="color-interpolation-filters:sRGB;">
+      <feColorMatrix
+         id="feColorMatrix1071"
+         result="color1"
+         values="180"
+         type="hueRotate" />
+      <feColorMatrix
+         id="feColorMatrix1073"
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 " />
+      <feColorMatrix
+         id="feColorMatrix1131"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1133" />
+      <feColorMatrix
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1135" />
+      <feColorMatrix
+         id="feColorMatrix1191"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1193" />
+      <feColorMatrix
+         result="color2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1195" />
+    </filter>
+    <filter
+       id="filter1081"
+       inkscape:label="Invert"
+       style="color-interpolation-filters:sRGB;">
+      <feColorMatrix
+         id="feColorMatrix1077"
+         result="color1"
+         values="180"
+         type="hueRotate" />
+      <feColorMatrix
+         id="feColorMatrix1079"
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 " />
+      <feColorMatrix
+         id="feColorMatrix1137"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1139" />
+      <feColorMatrix
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1141" />
+      <feColorMatrix
+         id="feColorMatrix1197"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1199" />
+      <feColorMatrix
+         result="color2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1201" />
+    </filter>
+    <filter
+       id="filter1087"
+       inkscape:label="Invert"
+       style="color-interpolation-filters:sRGB;">
+      <feColorMatrix
+         id="feColorMatrix1083"
+         result="color1"
+         values="180"
+         type="hueRotate" />
+      <feColorMatrix
+         id="feColorMatrix1085"
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 " />
+      <feColorMatrix
+         id="feColorMatrix1143"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1145" />
+      <feColorMatrix
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1147" />
+      <feColorMatrix
+         id="feColorMatrix1203"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1205" />
+      <feColorMatrix
+         result="color2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1207" />
+    </filter>
+    <filter
+       id="filter1093"
+       inkscape:label="Invert"
+       style="color-interpolation-filters:sRGB;">
+      <feColorMatrix
+         id="feColorMatrix1089"
+         result="color1"
+         values="180"
+         type="hueRotate" />
+      <feColorMatrix
+         id="feColorMatrix1091"
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 " />
+      <feColorMatrix
+         id="feColorMatrix1149"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1151" />
+      <feColorMatrix
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1153" />
+      <feColorMatrix
+         id="feColorMatrix1209"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1211" />
+      <feColorMatrix
+         result="color2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1213" />
+    </filter>
+    <filter
+       id="filter1099"
+       inkscape:label="Invert"
+       style="color-interpolation-filters:sRGB;">
+      <feColorMatrix
+         id="feColorMatrix1095"
+         result="color1"
+         values="180"
+         type="hueRotate" />
+      <feColorMatrix
+         id="feColorMatrix1097"
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 " />
+      <feColorMatrix
+         id="feColorMatrix1155"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1157" />
+      <feColorMatrix
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1159" />
+      <feColorMatrix
+         id="feColorMatrix1215"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1217" />
+      <feColorMatrix
+         result="color2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1219" />
+    </filter>
+    <filter
+       id="filter1105"
+       inkscape:label="Invert"
+       style="color-interpolation-filters:sRGB;">
+      <feColorMatrix
+         id="feColorMatrix1101"
+         result="color1"
+         values="180"
+         type="hueRotate" />
+      <feColorMatrix
+         id="feColorMatrix1103"
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 " />
+      <feColorMatrix
+         id="feColorMatrix1161"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1163" />
+      <feColorMatrix
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1165" />
+      <feColorMatrix
+         id="feColorMatrix1221"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1223" />
+      <feColorMatrix
+         result="color2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1225" />
+    </filter>
+    <filter
+       id="filter1111"
+       inkscape:label="Invert"
+       style="color-interpolation-filters:sRGB;">
+      <feColorMatrix
+         id="feColorMatrix1107"
+         result="color1"
+         values="180"
+         type="hueRotate" />
+      <feColorMatrix
+         id="feColorMatrix1109"
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 " />
+      <feColorMatrix
+         id="feColorMatrix1167"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1169" />
+      <feColorMatrix
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1171" />
+      <feColorMatrix
+         id="feColorMatrix1227"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1229" />
+      <feColorMatrix
+         result="color2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1231" />
+    </filter>
+    <filter
+       id="filter1117"
+       inkscape:label="Invert"
+       style="color-interpolation-filters:sRGB;">
+      <feColorMatrix
+         id="feColorMatrix1113"
+         result="color1"
+         values="180"
+         type="hueRotate" />
+      <feColorMatrix
+         id="feColorMatrix1115"
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 " />
+      <feColorMatrix
+         id="feColorMatrix1173"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1175" />
+      <feColorMatrix
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1177" />
+      <feColorMatrix
+         id="feColorMatrix1233"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1235" />
+      <feColorMatrix
+         result="color2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1237" />
+    </filter>
+    <filter
+       id="filter1123"
+       inkscape:label="Invert"
+       style="color-interpolation-filters:sRGB;">
+      <feColorMatrix
+         id="feColorMatrix1119"
+         result="color1"
+         values="180"
+         type="hueRotate" />
+      <feColorMatrix
+         id="feColorMatrix1121"
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 " />
+      <feColorMatrix
+         id="feColorMatrix1179"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1181" />
+      <feColorMatrix
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1183" />
+      <feColorMatrix
+         id="feColorMatrix1239"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1241" />
+      <feColorMatrix
+         result="color2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1243" />
+    </filter>
+    <filter
+       id="filter1129"
+       inkscape:label="Invert"
+       style="color-interpolation-filters:sRGB;">
+      <feColorMatrix
+         id="feColorMatrix1125"
+         result="color1"
+         values="180"
+         type="hueRotate" />
+      <feColorMatrix
+         id="feColorMatrix1127"
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 " />
+      <feColorMatrix
+         id="feColorMatrix1185"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1187" />
+      <feColorMatrix
+         result="fbSourceGraphic"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1189" />
+      <feColorMatrix
+         id="feColorMatrix1245"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         result="color1"
+         values="180"
+         type="hueRotate"
+         id="feColorMatrix1247" />
+      <feColorMatrix
+         result="color2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         id="feColorMatrix1249" />
+    </filter>
+  </defs>
+  <title
+     id="title923">qiskit-logo</title>
+  <path
+     style="filter:url(#filter1075)"
+     id="path925"
+     fill="url(#a)"
+     d="M196.2,386.1c-23.5,0-48.8-5.3-48.8-16.8s25.3-16.8,48.8-16.8,48.9,5.2,48.9,16.8S219.8,386.1,196.2,386.1Zm0-25.6c-26.7,0-40.2,6.4-40.8,8.8s14.1,8.8,40.8,8.8,40.2-6.4,40.9-8.8S222.9,360.5,196.2,360.5Z" />
+  <rect
+     style="filter:url(#filter1081)"
+     id="rect927"
+     fill="#fff"
+     transform="translate(-73.9 144.1) rotate(-33.6)"
+     height="307.03"
+     width="8"
+     y="40.9"
+     x="197.6" />
+  <path
+     style="filter:url(#filter1087)"
+     id="path929"
+     fill="url(#b)"
+     d="M198.6,334.8c-43.7,0-85-4.7-116-13.3C40.8,310,32,295.8,32,286s8.8-24,50.6-35.6c31-8.5,72.2-13.3,116-13.3s85,4.8,116,13.3c41.8,11.6,50.5,25.7,50.5,35.6s-8.7,24-50.5,35.6C283.6,330.1,242.4,334.8,198.6,334.8Zm0-89.7c-43,0-83.5,4.6-113.9,13C56.8,265.8,40,276.2,40,286s16.7,20.1,44.7,27.9c30.4,8.3,70.8,13,113.9,13s83.6-4.7,113.9-13c28-7.8,44.7-18.2,44.7-27.9s-16.7-20.1-44.7-27.9c-30.3-8.4-70.8-13-113.9-13Z" />
+  <rect
+     style="filter:url(#filter1093)"
+     id="rect931"
+     fill="#fff"
+     transform="translate(-35.9 97.5) rotate(-33.4)"
+     height="100.69"
+     width="8"
+     y="58.3"
+     x="140.4" />
+  <path
+     style="filter:url(#filter1099)"
+     id="path933"
+     fill="url(#c)"
+     d="M196.2,251.5c-50,0-97-5.4-132.4-15.1-47.4-13.1-57.4-29-57.4-40.2s10-27,57.4-40.1c35.4-9.7,82.5-15.1,132.4-15.1s97,5.4,132.5,15.2c47.4,13,57.4,29,57.4,40.1s-10,27-57.4,40.1C293.3,246.1,246.2,251.5,196.2,251.5Zm0-102.5c-49.2,0-95.5,5.3-130.3,14.9-32.2,8.9-51.5,21-51.5,32.3s19.3,23.6,51.5,32.4c34.8,9.6,81.1,14.9,130.3,14.9s95.6-5.3,130.4-14.9c32.2-8.8,51.5-21,51.5-32.4s-19.3-23.4-51.5-32.3c-34.8-9.6-81.1-14.9-130.4-14.9Z" />
+  <path
+     style="filter:url(#filter1105)"
+     id="path935"
+     fill="url(#d)"
+     d="M198.6,155.4c-43.7,0-85-4.7-116-13.3C40.8,130.6,32,116.4,32,106.5s8.8-24,50.6-35.5c31-8.6,72.2-13.3,116-13.3s85,4.7,116,13.3c41.8,11.5,50.5,25.7,50.5,35.5s-8.7,24.1-50.5,35.6C283.6,150.7,242.4,155.4,198.6,155.4Zm0-89.7c-43,0-83.5,4.6-113.9,13C56.8,86.4,40,96.8,40,106.5s16.7,20.2,44.7,27.9c30.4,8.4,70.8,13,113.9,13s83.6-4.6,113.9-13c28-7.7,44.7-18.1,44.7-27.9s-16.7-20.1-44.7-27.8C282.2,70.3,241.7,65.7,198.6,65.7Z" />
+  <path
+     style="filter:url(#filter1111)"
+     id="path937"
+     fill="#fff"
+     d="M196.2,40c-23.5,0-48.8-5.3-48.8-16.8S172.7,6.4,196.2,6.4s48.9,5.3,48.9,16.8S219.8,40,196.2,40Zm0-25.6c-26.7,0-40.2,6.4-40.8,8.8S169.5,32,196.2,32s40.2-6.3,40.9-8.8-14.2-8.8-40.9-8.8Z" />
+  <path
+     style="filter:url(#filter1117)"
+     id="path939"
+     fill="#fff"
+     d="M196.2,392.5C88,392.5,0,304.5,0,196.2S88,0,196.2,0,392.5,88,392.5,196.2,304.5,392.5,196.2,392.5ZM196.2,8C92.4,8,8,92.4,8,196.2S92.4,384.5,196.2,384.5,384.5,300,384.5,196.2,300,8,196.2,8Z" />
+  <circle
+     style="filter:url(#filter1123)"
+     id="circle941"
+     fill="#fff"
+     r="19.2"
+     cy="320.9"
+     cx="286.7" />
+  <circle
+     style="filter:url(#filter1129)"
+     id="circle943"
+     fill="#fff"
+     r="19.2"
+     cy="67"
+     cx="115.8" />
+</svg>
