@@ -1,6 +1,249 @@
-/* Put your custom CSS here */
-.left {
-    margin-left: 0px;
-    margin-right: 5px;
-    float: left;
+/* This is mostly patching up things I couldn't track down in _sass  */
+
+.interact-button {
+	font-family: "IBM Plex Sans","Segoe UI","Helvetica Neue","Lucida Grande",Arial,sans-serif !important;
+}
+
+.thebelab-button {
+	font-family: "IBM Plex Sans";
+	font-size: 0.9em;
+}
+
+h2.c-sidebar__title {
+	font-weight: normal;
+	font-size: 1.5em;
+	margin-top: 6px;
+	direction: ltr;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	color: #121619;
+}
+
+nav.c-textbook__sidebar > :first-child:hover {
+	text-decoration: none;
+}
+
+div.jp-OutputArea > :first-child {
+        border-top: 1px solid #DDE1E6 !important;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #6929C4;
+}
+
+a:visited {
+	color: #6929C4;
+}
+
+.c-sidebar__entry:hover {
+	color: #121619;
+}
+
+.c-sidebar__entry--active {
+	color: #6929C4 !important;
+}
+.c-sidebar__entry--active:hover {
+	color: #6929C4;
+}
+
+figure {
+	text-align: center;
+}
+
+figure > img {
+	margin: 1em;
+}
+
+figcaption {
+	font-size: 0.85em;
+}
+
+details {
+	padding: 18px;
+	background-color: #F2F4F8;
+	border: 1px solid #DDE1E6;
+	margin-bottom: 12px;
+}
+
+summary {
+	cursor: pointer;
+}
+
+svg {
+	max-width: 45vw;
+}
+
+pre {
+	overflow: auto;
+}
+
+p.sidebar_footer {
+	padding-bottom: 60px;
+}
+
+/* Hide contents on bigger screens */
+@media only screen and (min-width: 860px) {
+	.jb_cell.tag_contents {
+		display: none;
+	}
+}
+
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+	empty-cells: show !important;
+}
+
+tbody {
+	border-bottom: 1px solid black !important;
+}
+
+/* Fix strange table striping choice */
+tr:nth-child(even) {background-color: #F2F4F8 !important;}
+
+td {
+	border: 0px !important;
+	border-left: 1px solid black !important;
+	border-right: 1px solid black !important;
+}
+
+thead td {
+	border-bottom: 1px solid black !important;
+}
+
+table th {
+	border: 1px solid black;
+}
+
+.MathJax_Display {
+	margin-top: 24px !important;
+	margin-bottom: 24px !important;
+}
+
+div.text_cell_render > p > img, div.text_cell_render > p > a > img {
+	margin-top: 36px;
+	margin-bottom: 36px;
+}
+
+/* display correct image depending on status of sidebar */
+.is-active > img.sidebar_closed_img {
+	display: none;
+}
+
+:not(.is-active) > img.sidebar_open_img {
+	display: none;
+}
+
+
+/* hack to hide preface in sidebar */
+li.c-sidebar__chapter:first-child {
+	display: none;
+}
+
+
+/* code below is applied only to the preface page, through jupyter tags */
+aside.preface-summary-image {
+	width: 50%;
+	float: right;
+}
+
+@media only screen and (max-width: 1350px){
+	aside.preface-summary-image {
+		width: 66%;
+		float: none;
+		margin: auto;
+		margin-bottom: -75px;
+	}
+}
+
+div.tag_preface-cell.tag_preface-title {
+	width: 93%;
+	margin-left: 0em;
+}
+
+@media only screen and (min-width: 1250px) and (max-width: 1750px){
+	div.tag_preface-cell.tag_preface-title {
+		width: 83%;
+	}
+}
+		
+
+div.preface-summary-text {
+	padding-top: 3em;
+	color: #21272A;
+}
+
+div.preface-summary-text ol {
+	margin: 3em;
+}
+div.preface-summary-text ol li{
+	margin-top: 1em;
+}
+
+div.tag_preface-cell {
+	margin-left: 1em;
+}
+
+div.tag_preface-cell p {
+	margin: auto auto 3em auto;
+}
+
+
+div.tag_preface-code-cell {
+	margin-left: 1em;
+	margin-bottom: 2em;
+}
+
+button.preface-button {
+	background-color: #6929C4;
+	padding: 19px;
+	color: white;
+	border: none;
+	min-width: 20em;
+	text-align: left;
+	margin: auto;
+	cursor: pointer;
+}
+
+button.preface-button.read-textbook {
+	margin: auto;
+	margin-left: 0em;
+	margin-bottom: 4em;
+	padding: 24px;
+}
+
+button span.rangle {
+	float: right;
+	margin-left: 2em;
+}
+
+div.preface-checker-pattern {
+	position: absolute;
+	left: -10px;
+	top: -10px;
+	width: 100%;
+	height: 70%;
+	background-size: 60px 60px;
+	background-image: linear-gradient(to right, #DDE1E6 1px, transparent 1px), linear-gradient(to bottom, #DDE1E6 1px, transparent 1px);	
+	z-index: -1;
+}
+
+div.tag_preface-cell h1 {
+	font-size: 2.2em;
+	margin-top: 3em;
+}
+
+div.text_cell_render p img.preface-image {
+	margin-left: 1em;
+}
+
+aside.sidebar__right.preface {
+	border-left: none;
+}
+
+ul.preface-list {
+	margin-top: -2em;
+	margin-bottom: 2em;
 }

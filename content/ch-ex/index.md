@@ -1,0 +1,1 @@
+To fully understand the concepts in this textbook, it’s important to work through as many problem sets as possible. In addition to the quick exercises scattered throughout each chapter, we also provide problem sets that cover the topics we’ve learnt. We’ll link to these at the end of the relevant section, but they’re also listed here so you can find them again easily.

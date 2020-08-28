@@ -1,27 +1,57 @@
 
+.thebelab-cell {
+    // To ensure that thebelab cells are always the top of the Z-stack
+    position: relative;
+    z-index: 999;
+    border: 1px solid #DDE1E6;
+    background-color: #F2F4F8;
+    border-radius: 0px;
+    &:focus-within {
+	border-color: $color-buttons;
+    }
+}
+
+.thebelab-input {
+	padding: 12px;
+	padding-top: 14px;
+}
+
 .thebelab-button {
     z-index: 999;
     display: inline-block;
-    padding: 0.35em 1.2em;
-    margin: 0px 1px;
-    border-radius: 0.12em;
+    padding: 6px 16px; 
+    margin: 0;
+    margin-right: 4px;
     box-sizing:  border-box;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
     font-weight: 300;
     text-align: center;
     transition: all 0.2s;
-    background-color: #dddddd;
-    border: 0.05em solid white;
-    color: #000000;
+    background-color: #DDE1E6;
+    border: none;
+    color: #121619;
 }
 
 .thebelab-button:hover{
-    border: 0.05em solid black;
-    background-color: #fcfcfc;
+    background-color: #21272A;
+    color: white;
 }
 
+.thebelab-button:active{
+	background-color: white;
+	color: #121619;
+}
+
+.CodeMirror {
+	font-family: "IBM Plex Mono";
+	font-size: 0.9em;
+}
 
 div.jp-OutputArea-output {
-    padding: 5px;
+    padding: 18px;
+}
+
+.jp-OutputArea-child {
+	background-color: white;
+	padding: 18px;
 }
