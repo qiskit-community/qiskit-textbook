@@ -6,4 +6,5 @@ torch
 torchvision
 tabulate
 sympy
+numexpr
 -e ./qiskit-textbook-src
