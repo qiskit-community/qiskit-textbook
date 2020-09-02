@@ -34,9 +34,11 @@
   not_numbered: true
 
 - title: Prerequisites
-  url: /ch-prerequisites/python-and-jupyter-notebooks.html
+  url: /ch-prerequisites/setting-the-environment.html
   external: true
   sections:
+    - title: Setting Up Your Environment
+      url: /ch-prerequisites/setting-the-environment
     - title: Python and Jupyter Notebooks
       url: /ch-prerequisites/python-and-jupyter-notebooks
 
@@ -71,6 +73,8 @@
       url: /ch-gates/more-circuit-identities
     - title: Proving Universality
       url: /ch-gates/proving-universality
+    - title: Classical Computation on a Quantum Computer
+      url: /ch-gates/oracles
 
 
 - title: Quantum Protocols and Quantum Algorithms
@@ -83,8 +87,8 @@
       url: /ch-algorithms/teleportation
     - title: Superdense Coding
       url: /ch-algorithms/superdense-coding
-    - title: Deutsch-Josza Algorithm
-      url: /ch-algorithms/deutsch-josza
+    - title: Deutsch-Jozsa Algorithm
+      url: /ch-algorithms/deutsch-jozsa
     - title: Bernstein-Vazirani Algorithm
       url: /ch-algorithms/bernstein-vazirani
     - title: Simon's Algorithm
@@ -145,7 +149,7 @@
   expand_sections: true
   sections:
     - title: Calibrating Qubits with Qiskit Pulse
-      url: /ch-quantum-hardware/calibrating-qubits-openpulse
+      url: /ch-quantum-hardware/calibrating-qubits-pulse
     - title: Accessing Higher Energy States
       url: /ch-quantum-hardware/accessing_higher_energy_states
     - title: Introduction to Transmon Physics
