@@ -7,4 +7,5 @@ torchvision
 tabulate
 sympy
 numexpr
+pylatexenc
 -e ./qiskit-textbook-src
