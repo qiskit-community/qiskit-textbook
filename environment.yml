@@ -11,6 +11,8 @@ dependencies:
 - tabulate
 - qutip
 - sympy
+- pylatexenc
+- numexpr
 - pip:
   - qiskit
   - seaborn
