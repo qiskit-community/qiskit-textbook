@@ -1,6 +1,6 @@
 # Each entry has the following schema:
 #
-# - title: mytitle   # Title of chapter or section
+# - title: mytitle   # Title of chapter or section.
 #   url: /myurl  # URL of section relative to the /content/ folder.
 #   sections:  # Contains a list of more entries that make up the chapter's sections
 #   not_numbered: true  # if the section shouldn't have a number in the sidebar
@@ -25,24 +25,22 @@
 # generate a demo book by running `jupyter-book create mybook --demo`
 # ==============================
 
-- title: Preface
+- title: Learn Quantum Computation using Qiskit
   not_numbered: true
   url: /preface
-- title: Upcoming
+
+- title: What is Quantum?
+  url: /what-is-quantum
   not_numbered: true
-  url: /upcoming
 
 - title: Prerequisites
-  url: /ch-prerequisites/python-and-jupyter-notebooks.html
+  url: /ch-prerequisites/setting-the-environment.html
   external: true
-  expand_sections: true
   sections:
+    - title: Setting Up Your Environment
+      url: /ch-prerequisites/setting-the-environment
     - title: Python and Jupyter Notebooks
       url: /ch-prerequisites/python-and-jupyter-notebooks
-    - title: Qiskit
-      url: /ch-prerequisites/qiskit
-    - title: Linear Algebra
-      url: /ch-prerequisites/linear_algebra
 
 - title: Quantum States and Qubits
   url: /ch-states/introduction.html
@@ -53,37 +51,114 @@
       url: /ch-states/introduction
     - title: The Atoms of Computation
       url: /ch-states/atoms-computation
-    - title: The Unique Properties of Qubits
-      url: /ch-states/unique-properties-qubits
-    - title: Writing Down Qubit States
-      url: /ch-states/writing-down-qubit-states
-    - title: Pauli Matrices and the Bloch Sphere
-      url: /ch-states/pauli-matrices-bloch-sphere
-    - title: States for Many Qubits
-      url: /ch-states/states-many-qubits
+    - title: Representing Qubit States
+      url : /ch-states/representing-qubit-states
+    - title: Single Qubit Gates
+      url: /ch-states/single-qubit-gates
+    - title: The Case for Quantum
+      url: /ch-states/case-for-quantum
 
-- title: Single Qubits and Multi-Qubits gates
+- title: Multiple Qubits and Entanglement
   url: /ch-gates/introduction.html
   external: true
   expand_sections: true
   sections:
     - title: Introduction
       url: /ch-gates/introduction
-    - title: Quantum Gates
-      url: /ch-gates/quantum-gates
-    - title: Fun with Matrices
-      url: /ch-gates/fun-matrices
-    - title: The Standard Gate Set
-      url: /ch-gates/standard-gate-set
+    - title: Multiple Qubits and Entangled States
+      url: /ch-gates/multiple-qubits-entangled-states
+    - title: Phase Kickback
+      url: /ch-gates/phase-kickback
+    - title: More Circuit Identities
+      url: /ch-gates/more-circuit-identities
     - title: Proving Universality
       url: /ch-gates/proving-universality
-    - title: Basic Circuit Identities
-      url: /ch-gates/basic-circuit-identities
+    - title: Classical Computation on a Quantum Computer
+      url: /ch-gates/oracles
 
-- title: Problems
-  url: /ch-ex/ex1.html
-  external: true
-  not_numbered: true
+
+- title: Quantum Protocols and Quantum Algorithms
+  url: /ch-algorithms/index
+  expand_sections: true
+  sections:
+    - title: Defining Quantum Circuits
+      url: /ch-algorithms/defining-quantum-circuits
+    - title: Quantum Teleportation
+      url: /ch-algorithms/teleportation
+    - title: Superdense Coding
+      url: /ch-algorithms/superdense-coding
+    - title: Deutsch-Jozsa Algorithm
+      url: /ch-algorithms/deutsch-jozsa
+    - title: Bernstein-Vazirani Algorithm
+      url: /ch-algorithms/bernstein-vazirani
+    - title: Simon's Algorithm
+      url: /ch-algorithms/simon
+    - title: Quantum Fourier Transform
+      url: /ch-algorithms/quantum-fourier-transform
+    - title: Quantum Phase Estimation
+      url: /ch-algorithms/quantum-phase-estimation
+    - title: Shor's Algorithm
+      url: /ch-algorithms/shor
+    - title: Grover's Algorithm
+      url: /ch-algorithms/grover
+    - title: Quantum Counting
+      url: /ch-algorithms/quantum-counting
+    - title: Quantum Key Distribution
+      url: /ch-algorithms/quantum-key-distribution
+
+- title: Quantum Algorithms for Applications
+  url: /ch-applications/algs_for_apps_index
+  expand_sections: true
+  sections:
+    - title: Applied Quantum Algorithms
+      url: /ch-applications/apps_index
+      expand_subsections: true
+      subsections:
+         - title: Solving Linear Systems of Equations using HHL
+           url: /ch-applications/hhl_tutorial
+         - title: Simulating Molecules using VQE
+           url: /ch-applications/vqe-molecules
+         - title: Solving combinatorial optimization problems using QAOA
+           url: /ch-applications/qaoa
+         - title: Solving Satisfiability Problems using Grover's Algorithm
+           url: /ch-applications/satisfiability-grover
+         - title: Hybrid quantum-classical Neural Networks with PyTorch and Qiskit
+           url: /ch-machine-learning/machine-learning-qiskit-pytorch
+    - title: Implementations of Recent Quantum Algorithms
+      url: /ch-applications/imp_index
+      expand_subsections: true
+      subsections:
+         - title: Variational Quantum Linear Solver
+           url: /ch-paper-implementations/vqls
+
+- title: Investigating Quantum Hardware Using Quantum Circuits
+  url: /ch-quantum-hardware/index-circuits
+  expand_sections: true
+  sections:
+    - title: Introduction to Quantum Error Correction using Repetition Codes
+      url: /ch-quantum-hardware/error-correction-repetition-code
+    - title: Measurement Error Mitigation
+      url: /ch-quantum-hardware/measurement-error-mitigation
+    - title: Randomized Benchmarking
+      url: /ch-quantum-hardware/randomized-benchmarking
+    - title: Measuring Quantum Volume
+      url: /ch-quantum-hardware/measuring-quantum-volume
+
+- title: Investigating Quantum Hardware Using Microwave Pulses
+  url: /ch-quantum-hardware/index-pulses
+  expand_sections: true
+  sections:
+    - title: Calibrating Qubits with Qiskit Pulse
+      url: /ch-quantum-hardware/calibrating-qubits-pulse
+    - title: Accessing Higher Energy States
+      url: /ch-quantum-hardware/accessing_higher_energy_states
+    - title: Introduction to Transmon Physics
+      url: /ch-quantum-hardware/transmon-physics
+    - title: Circuit Quantum Electrodynamics
+      url: /ch-quantum-hardware/cQED-JC-SW
+
+- title: Problem Sets & Exercises
+  url: /ch-ex/index
   expand_sections: true
   sections:
     - title: Set 1. Classical Logic Gates with Quantum Circuits
@@ -96,62 +171,26 @@
       url: /ch-ex/ex3
       not_numbered: true
 
-- title: Quantum Algorithms
-  url: /ch-algorithms/teleportation.html
-  external: true
-  expand_sections: true
+- title: Appendix
+  url: /ch-appendix/index
+  expand_sections: false
   sections:
-    - title: Quantum Teleportation
-      url: /ch-algorithms/teleportation
-    - title: Superdense Coding
-      url: /ch-algorithms/superdense-coding
-    - title: Deutsch-Josza Algorithm
-      url: /ch-algorithms/deutsch-josza
-    - title: Bernstein-Vazirani Algorithm
-      url: /ch-algorithms/bernstein-vazirani
-    - title: Simon's Algorithm
-      url: /ch-algorithms/simon
-    - title: Quantum Fourier Transform
-      url: /ch-algorithms/quantum-fourier-transform
-    - title: Quantum Phase Estimation
-      url: /ch-algorithms/quantum-phase-estimation
-    - title: Grover's Algorithm
-      url: /ch-algorithms/grover
-    - title: Quantum Counting
-      url: /ch-algorithms/quantum-counting
+    - title: Linear Algebra
+      url: /ch-appendix/linear_algebra
+    - title: Qiskit
+      url: /ch-appendix/qiskit
 
-- title: Quantum Algorithms for Applications
-  url: /ch-applications/vqe-molecules.html
-  external: true
+- title: Games & Demos
+  url: /ch-demos/index
   expand_sections: true
   sections:
-    - title: Simulating Molecules using VQE
-      url: /ch-applications/vqe-molecules
-    - title: Solving combinatorial optimization problems using QAOA
-      url: /ch-applications/qaoa
-    - title: Solving Satisfiability Problems using Grover's Algorithm
-      url: /ch-applications/satisfiability-grover
+    - title: Hello Qiskit Game
+      url: /ch-ex/hello-qiskit
+      not_numbered: true
+    - title: Estimating Pi Using Quantum Phase Estimation Algorithm
+      url: /ch-demos/piday-code
+      not_numbered: true
+    - title: Interactivity Index
+      url: /widgets-index
+      not_numbered: true
 
-- title: Investigating Quantum Hardware Using Qiskit
-  url: /ch-quantum-hardware/calibrating-qubits-openpulse.html
-  external: true
-  expand_sections: true
-  sections:
-    - title: Calibrating Qubits with OpenPulse
-      url: /ch-quantum-hardware/calibrating-qubits-openpulse
-    - title: Introduction to Quantum Error Correction using Repetition Codes
-      url: /ch-quantum-hardware/error-correction-repetition-code
-    - title: Measurement Error Mitigation
-      url: /ch-quantum-hardware/measurement-error-mitigation
-    - title: Randomized Benchmarking
-      url: /ch-quantum-hardware/randomized-benchmarking
-    - title: Measuring Quantum Volume
-      url: /ch-quantum-hardware/measuring-quantum-volume
-
-- title: Implementations of Recent Quantum Algorithms
-  url: /ch-paper-implementations/vqls.html
-  external: true
-  expand_sections: true
-  sections:
-    - title: Variational Quantum Linear Solver
-      url: /ch-paper-implementations/vqls
