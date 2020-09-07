@@ -4,28 +4,29 @@
 <!-- Display Thebelab button in each code cell -->
 {% include js/thebelab-cell-button.html %}
 
-<script type="text/x-thebe-config">
-    {
-      requestKernel: true,
-      binderOptions: {
-        repo: '{{ site.binder_repo_org }}/{{ site.binder_repo_name }}',
-        ref: '{{ site.binder_repo_branch }}',
-      },
-      codeMirrorConfig: {
-        theme: "{{ site.codemirror_theme }}"
-      },
-      kernelOptions: {
-        name: '{% if page.kernel_name %}{{ page.kernel_name }}{% else %}python3{% endif %}',
-      }
-    }
-</script>
-<script src="https://unpkg.com/thebelab@0.4.0/lib/index.js" async></script>
 <script>
+    /**
+     * Thebelab loads "reset CSS" after the theme styles load and so,
+     * it invalidates part of the theme rules. To make the theme CSS to take
+     * the correct precedence, we listen for Thebelab to finish loading, then
+     * relocate the theme CSS and start Thebelab.
+     */
+    const thebeLabScript = document.createElement('script');
+    thebeLabScript.src = "{{ site.vendor_url | relative_url }}/thebelab/index.js"
+    thebeLabScript.async = true
+    thebeLabScript.onload = () => {
+        setTimeout(() => {
+            document.head.append(
+                ...document.querySelectorAll('#theme-style, #custom-style'))
+        })
+        initFunction(initThebelab)
+    }
+    document.head.append(thebeLabScript);
+
     /**
      * Add attributes to Thebelab blocks
      */
-
-    const initThebelab = () => {
+    function initThebelab() {
         const addThebelabToCodeCells = () => {
             console.log("Adding thebelab to code cells...");
             // If Thebelab hasn't loaded, wait a bit and try again. This
@@ -40,30 +41,51 @@
                 return;
             }
 
-            // Find all code cells, replace with Thebelab interactive code cells
-            const codeCells = document.querySelectorAll('.input_area pre')
+            // Find all non-hardware, code cells, replace with Thebelab interactive code cells
+            const hardwareTag = 'uses-hardware'
+            const hardwareQuery = `.jb_cell.tag_${hardwareTag}`
+            const noHardwareQuery = `.jb_cell:not(.tag_${hardwareTag})`
+            const codeCells = document.querySelectorAll(`${noHardwareQuery} pre[id^="codecell"]`)
             codeCells.forEach((codeCell, index) => {
                 const id = codeCellId(index)
-                codeCell.setAttribute('data-executable', 'true')
 
-                // Figure out the language it uses and add this too
-                var parentDiv = codeCell.parentElement.parentElement;
-                var arrayLength = parentDiv.classList.length;
-                for (var ii = 0; ii < arrayLength; ii++) {
-                    var parts = parentDiv.classList[ii].split('language-');
-                    if (parts.length === 2) {
-                        // If found, assign dataLanguage and break the loop
-                        var dataLanguage = parts[1];
-                        break;
-                    }
-                }
+                // Clean up the language to make it work w/ CodeMirror and add it to the cell
+                dataLanguage = "{{ kernelName }}"
+                dataLanguage = detectLanguage(dataLanguage);
                 codeCell.setAttribute('data-language', dataLanguage)
+                codeCell.setAttribute('data-executable', 'true')
 
                 // If the code cell is hidden, show it
                 var inputCheckbox = document.querySelector(`input#hidebtn${codeCell.id}`);
                 if (inputCheckbox !== null) {
                     setCodeCellVisibility(inputCheckbox, 'visible');
                 }
+            });
+
+            // Create link to IQX and hardware notice template
+            const currentPath = window.location.pathname
+            const contentPath = currentPath.slice('{{ site.baseurl }}'.length)
+            const notebookPath = contentPath.replace(/\.html$/, '.ipynb')
+            const iqxUrl = `{{ site.iqx_url }}/content${notebookPath}`
+
+            const usesHardwareNotice = document.createElement('template')
+            usesHardwareNotice.innerHTML = `
+            <div class="uses-hardware-notice">
+                {{ site.hardware_warning_message }}
+                <a href="${iqxUrl}" target="_blank">{{ site.hardware_warning_linktxt }}</a>
+            </div>
+            `
+
+            // Add warning and link to IQX on uses-hardware cells
+            const hardwareCells = document.querySelectorAll(hardwareQuery)
+            hardwareCells.forEach((cell) => {
+                cell.prepend(usesHardwareNotice.content.cloneNode(true))
+                cell.querySelector('a').addEventListener('click', (evt) => {
+                    try {
+                        window.trackCta(`Hardware Cell ${getInputCell(evt.target)}`)
+                    } catch {}
+                    return true;
+                })
             });
 
             // Remove the event listener from the page so keyboard press doesn't
@@ -75,15 +97,30 @@
             thebelab.bootstrap();
 
             // Remove copy buttons since they won't work anymore
-            const copyAndThebeButtons = document.querySelectorAll('.copybtn, .thebebtn')
+            const copyAndThebeButtons = document.querySelectorAll(`${noHardwareQuery} .copybtn, .thebebtn`)
             copyAndThebeButtons.forEach((button, index) => {
                 button.remove();
             });
 
-            // Remove outputs since they'll be stale
-            const outputs = document.querySelectorAll('.output *, .output')
+            // Remove outputs since they'll be stale (ignore outputs with removed inputs)
+            const outputs = document.querySelectorAll(':not(.tag_remove_input) > .output_wrapper')
             outputs.forEach((output, index) => {
                 output.remove();
+            });
+
+            // Find any cells with an initialization tag and ask ThebeLab to run them when ready
+            var thebeInitCells = document.querySelectorAll('div.tag_thebelab-init');
+            thebeInitCells.forEach((cell) => {
+                console.log("Initializing ThebeLab with cell: " + cell.id);
+                cell.querySelector('.thebelab-run-button').click();
+            });
+
+            // Add analytics per cell
+            const thebelabRunButtons = document.querySelectorAll('.thebelab-run-button');
+            thebelabRunButtons.forEach((runButton) => {
+                runButton.addEventListener('click', (evt) => {
+                    window.trackCta(`Run ${getInputCell(evt.target)}`)
+                })
             });
         }
 
@@ -95,10 +132,30 @@
                 return
             };
             thebelabButton.addEventListener('click', addThebelabToCodeCells);
+            // Add segment analytics
+            thebelabButton.addEventListener('click', () => {
+                window.trackCta('Make Interactive');
+            });
         });
+
+        function getInputCell(button) {
+            const parent = button.parentElement;
+            if (parent === null) {
+                return 'unknown';
+            }
+            if (parent.id.startsWith('inputcell')) {
+                return parent.id;
+            }
+            return getInputCell(parent);
+        }
     }
 
-    // Initialize Thebelab
-    initFunction(initThebelab);
+// Helper function to munge the language name
+var detectLanguage = (language) => {
+    if (language.indexOf('python') > -1) {
+        language = "python";
+    }
+    return language;
+}
 </script>
 {% endif %}

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0beta2 (2b71d25, 2019-12-03)"
+   sodipodi:docname="hamburger.svg"
+   id="svg835"
+   version="1.1"
+   fill="none"
+   viewBox="0 0 15 15"
+   height="15"
+   width="15">
+  <metadata
+     id="metadata841">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs839" />
+  <sodipodi:namedview
+     inkscape:current-layer="svg835"
+     inkscape:window-maximized="0"
+     inkscape:window-y="23"
+     inkscape:window-x="84"
+     inkscape:cy="10.042816"
+     inkscape:cx="2.2141614"
+     inkscape:zoom="23.217484"
+     showgrid="false"
+     id="namedview837"
+     inkscape:window-height="1064"
+     inkscape:window-width="1708"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     inkscape:document-rotation="0"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <path
+     style="stroke:#e8daff;stroke-opacity:1"
+     inkscape:connector-curvature="0"
+     id="path833"
+     stroke="#491D8B"
+     d="m 7.0012548,6.9999984 7.9999902,0.02007" />
+  <path
+     id="path937"
+     stroke="#491D8B"
+     d="M 8.0266563e-4,1.9999994 15.000803,2.0240794"
+     inkscape:connector-curvature="0"
+     style="fill:#e8daff;fill-opacity:1;stroke:#e8daff;stroke-opacity:1" />
+  <g
+     transform="translate(9.002007,12.260032)"
+     id="g961"
+     style="fill:#e8daff;fill-opacity:1;stroke:#e8daff;stroke-opacity:1">
+    <path
+       style="fill:#e8daff;fill-opacity:1;stroke:#e8daff;stroke-opacity:1"
+       inkscape:connector-curvature="0"
+       d="M 1,0.739964 5.99999,0.760036"
+       stroke="#491D8B"
+       id="path950" />
+  </g>
+</svg>
