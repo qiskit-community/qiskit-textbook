@@ -80,6 +80,10 @@ div.qiskit__navbar {
   left: 0;
   background-color: $color-dark-gray;
   direction: rtl;
+
+  @include mq($until: $left-sidebar-width + $spacing-unit-small * 5) {
+    width: calc(100vw - #{$spacing-unit-small * 5});
+  }
 }
 
 .c-sidebar__chapters {
