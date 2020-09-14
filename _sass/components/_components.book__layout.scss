@@ -123,6 +123,10 @@ div.qiskit__navbar {
     /* [4] */
     transform: translate($left-sidebar-width, 0);
 
+    @include mq($until: $left-sidebar-width + $spacing-unit-small * 5) {
+      transform: translateX(100vw) translateX(-60px);
+    }
+
     @include mq($from: tablet) {
       /* [5] */
       width: calc(100% - #{$left-sidebar-width});
