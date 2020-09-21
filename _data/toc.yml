@@ -73,6 +73,8 @@
       url: /ch-gates/more-circuit-identities
     - title: Proving Universality
       url: /ch-gates/proving-universality
+    - title: Classical Computation on a Quantum Computer
+      url: /ch-gates/oracles
 
 
 - title: Quantum Protocols and Quantum Algorithms
