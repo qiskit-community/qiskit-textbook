@@ -80,6 +80,10 @@ div.qiskit__navbar {
   left: 0;
   background-color: $color-dark-gray;
   direction: rtl;
+
+  @include mq($until: $left-sidebar-width + $spacing-unit-small * 5) {
+    width: calc(100vw - #{$spacing-unit-small * 5});
+  }
 }
 
 .c-sidebar__chapters {
@@ -122,6 +126,10 @@ div.qiskit__navbar {
   .c-textbook__page, .c-topbar {
     /* [4] */
     transform: translate($left-sidebar-width, 0);
+
+    @include mq($until: $left-sidebar-width + $spacing-unit-small * 5) {
+      transform: translateX(100vw) translateX(-$spacing-unit-small * 5);
+    }
 
     @include mq($from: tablet) {
       /* [5] */
