@@ -30,7 +30,7 @@ def num_to_latex(num, precision=5):
     if realstring == "0":
         return imagstring + "i"
     else:
-        return "{} + {}i".format(realstring, outstring)
+        return "{} + {}i".format(realstring, imagstring)
 
 def vector_to_latex(vector, precision=5, pretext=""):
     """Latex representation of a complex numpy array (with dimension 1)
