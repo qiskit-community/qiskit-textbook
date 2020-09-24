@@ -12,6 +12,7 @@ dependencies:
 - qutip
 - sympy
 - pip:
+  - pandas
   - qiskit
   - seaborn
   - -e ./qiskit-textbook-src
