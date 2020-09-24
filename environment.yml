@@ -8,7 +8,6 @@ dependencies:
 - numpy
 - matplotlib
 - torchvision
-- tabulate
 - qutip
 - sympy
 - pip:
