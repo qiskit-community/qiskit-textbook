@@ -1,4 +1,4 @@
-# Copyright IBM Research 2020
+#!/usr/bin/env python3
 
 from ipywidgets import widgets 
 from ipywidgets import Layout, HBox, VBox
