@@ -1,0 +1,17 @@
+name: base
+channels:
+- conda-forge
+dependencies:
+- python==3.7
+- pip==19.*
+- cython
+- numpy
+- matplotlib
+- torchvision
+- qutip
+- sympy
+- pip:
+  - pandas
+  - qiskit
+  - seaborn
+  - -e ./qiskit-textbook-src
