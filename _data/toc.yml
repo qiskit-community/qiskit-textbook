@@ -73,6 +73,8 @@
       url: /ch-gates/more-circuit-identities
     - title: Proving Universality
       url: /ch-gates/proving-universality
+    - title: Classical Computation on a Quantum Computer
+      url: /ch-gates/oracles
 
 
 - title: Quantum Protocols and Quantum Algorithms
@@ -147,7 +149,7 @@
   expand_sections: true
   sections:
     - title: Calibrating Qubits with Qiskit Pulse
-      url: /ch-quantum-hardware/calibrating-qubits-openpulse
+      url: /ch-quantum-hardware/calibrating-qubits-pulse
     - title: Accessing Higher Energy States
       url: /ch-quantum-hardware/accessing_higher_energy_states
     - title: Introduction to Transmon Physics
