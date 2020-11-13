@@ -211,8 +211,6 @@ class run_game():
                         else:
                             command = get_command(q_gate,q01)
                             eval(command[0])
-                            if qubit_names in [{'0':'q[0]', '1':'q[1]'},{'0':'A', '1':'B'}]:
-                                print('    ' + command[1])
                             self.program.append( command[1] )
                         if required_gates[q01][gate.value]>0:
                             required_gates[q01][gate.value] -= 1
