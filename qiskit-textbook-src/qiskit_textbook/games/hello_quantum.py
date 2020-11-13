@@ -158,8 +158,6 @@ class run_game():
 
         boxes = widgets.VBox([gate,qubit,action])
         display(boxes)
-        if qubit_names=={'0':'q[0]', '1':'q[1]'}:
-            print('\nYour quantum program so far:\n\n    q = QuantumRegister(2)\n    b = ClassicalRegister(2)\n    qc = QuantumCircuit(q,b)\n')
         self.program = []
 
         def given_gate(a):
