@@ -6,6 +6,7 @@ from io import BytesIO
 from qiskit import BasicAer as Aer
 from qiskit import ClassicalRegister, QuantumRegister, QuantumCircuit
 from qiskit import execute
+from qiskit.quantum_info import Statevector
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle, Rectangle
@@ -17,7 +18,7 @@ from qiskit_textbook.widgets._helpers import _img
 class run_game():
     # Implements a puzzle, which is defined by the given inputs.
 
-    def __init__(self,initialize, success_condition, allowed_gates, vi, qubit_names, eps=0.1, backend=Aer.get_backend('qasm_simulator'), shots=1024,mode='circle',verbose=False):
+    def __init__(self,initialize, success_condition, allowed_gates, vi, qubit_names, eps=0.1, backend=None, shots=1024,mode='circle',verbose=False):
         """
         initialize
             List of gates applied to the initial 00 state to get the starting state of the puzzle.
@@ -324,12 +325,18 @@ class pauli_grid():
                 elif basis[j]=='Y':
                     temp_qc.sdg(self.qr[j])
                     temp_qc.h(self.qr[j])
-            temp_qc.barrier(self.qr)
-            temp_qc.measure(self.qr,self.cr)
-            job = execute(temp_qc, backend=self.backend, shots=self.shots)
-            results[basis] = job.result().get_counts()
-            for string in results[basis]:
-                results[basis][string] = results[basis][string]/self.shots
+                
+            if self.backend==None:
+                ket = Statevector([1,0,0,0])
+                ket = ket.from_instruction(temp_qc)
+                results[basis] = ket.probabilities_dict()          
+            else:     
+                temp_qc.barrier(self.qr)
+                temp_qc.measure(self.qr,self.cr)
+                job = execute(temp_qc, backend=self.backend, shots=self.shots)
+                results[basis] = job.result().get_counts()
+                for string in results[basis]:
+                    results[basis][string] = results[basis][string]/self.shots
 
         prob = {}
         # prob of expectation value -1 for single qubit observables
