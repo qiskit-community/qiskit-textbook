@@ -126,6 +126,10 @@ defaults:
       toc_label: "  On this page"
       toc_icon: "list-ul"
       excerpt: ''
+  - scope:
+      path: "*/ja"
+    values:
+      locale: "ja"
 
 favicon_path: "images/logo/favicon.ico"
 
