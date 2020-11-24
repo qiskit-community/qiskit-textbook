@@ -1,5 +1,5 @@
 
-| stable: | [![Build Status](https://travis-ci.com/qiskit-community/qiskit-textbook.svg?branch=stable)](https://travis-ci.com/qiskit-community/qiskit-textbook) | master: | [![Build Status](https://travis-ci.com/qiskit-community/qiskit-textbook.svg?branch=master)](https://travis-ci.com/qiskit-community/qiskit-textbook) |
+| stable: | [![Build Status](https://github.com/qiskit-community/qiskit-textbook/workflows/build%20and%20deploy/badge.svg?branch=stable)](https://github.com/qiskit-community/qiskit-textbook/actions) | master: | [![Build Status](https://github.com/qiskit-community/qiskit-textbook/workflows/build%20and%20deploy/badge.svg?branch=master)](https://github.com/qiskit-community/qiskit-textbook/actions) |
 |---|---|---|---|
 
 # Qiskit Textbook Source Code
