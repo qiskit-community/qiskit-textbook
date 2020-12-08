@@ -26,29 +26,40 @@ class Pixel():
         
     def set_text(self,text):
         self._button.description = text
-        
-
-class JupyterWidgetEngine():
     
-    def __init__(self,start,next_frame,L=8):
-        
-        self.next_frame = next_frame
-        self.L = L
-        
-        width = int(50*8/L)
+class Screen():
+    
+    def __init__(self,size,L=8):
+            
+        width = int(size[0]/L)
         wide = str(7*width+24)+'px'
         wider = str(L*width+(L-1)*4)+'px'
         width = str(width)+'px'
-        height = width
+        height = str(int(size[1]/L))+'px'
         width = str(int(50*8/L))+'px'
 
-        layout = Layout(width=width, height=height)
-
-        screen = {}
+        self._layout = Layout(width=width, height=height)
+        self._wide_layout = Layout(width=wide, height=height)
+        self._wider_layout = Layout(width=wider, height=height)
+    
+        self.pixel = {}
         for x in range(L):
             for y in range(L):
-                screen[x,y] = Pixel(layout)
-        screen['text'] = Pixel(Layout(width=wider, height=height))
+                self.pixel[x,y] = Pixel(self._layout)
+        self.pixel['text'] = Pixel(self._wider_layout)
+        
+
+class QiskitGameEngine():
+    
+    def __init__(self,start,next_frame,L=8):
+        
+        self.start = start
+        self.next_frame = next_frame
+        self.L = L
+        
+        self.screen = Screen((400,400),L=L)
+        
+        layout = self.screen._layout
 
         controller = {}
         controller['blank'] = widgets.ToggleButton(description='',button_style='',layout=layout)
@@ -60,7 +71,7 @@ class JupyterWidgetEngine():
         controller['B'] = widgets.ToggleButton(description='B',button_style='',layout=layout)
         controller['X'] = widgets.ToggleButton(description='X',button_style='',layout=layout)
         controller['Y'] = widgets.ToggleButton(description='Y',button_style='',layout=layout)
-        controller['next'] = widgets.ToggleButton(description='Next',button_style='',layout=Layout(width=wide, height=height))
+        controller['next'] = widgets.ToggleButton(description='Next',button_style='',layout=self.screen._wide_layout)
 
         [b,u,d,l,r,A,B,X,Y,c] = [controller['blank'],
                              controller['up'],
@@ -75,15 +86,14 @@ class JupyterWidgetEngine():
 
 
         interface = []
-        interface.append( widgets.HBox([screen[x,0]._button for x in range(L)]+[b,u,b,b,b,X,b]) )
-        interface.append( widgets.HBox([screen[x,1]._button for x in range(L)]+[l,b,r,b,Y,b,A]) )
-        interface.append( widgets.HBox([screen[x,2]._button for x in range(L)]+[b,d,b,b,b,B,b]) )
-        interface.append( widgets.HBox([screen[x,3]._button for x in range(L)]+[c]) )
+        interface.append( widgets.HBox([self.screen.pixel[x,0]._button for x in range(L)]+[b,u,b,b,b,X,b]) )
+        interface.append( widgets.HBox([self.screen.pixel[x,1]._button for x in range(L)]+[l,b,r,b,Y,b,A]) )
+        interface.append( widgets.HBox([self.screen.pixel[x,2]._button for x in range(L)]+[b,d,b,b,b,B,b]) )
+        interface.append( widgets.HBox([self.screen.pixel[x,3]._button for x in range(L)]+[c]) )
         for y in range(4,L):
-            interface.append( widgets.HBox([screen[x,y]._button for x in range(L)]) )
-        interface.append( screen['text']._button )
+            interface.append( widgets.HBox([self.screen.pixel[x,y]._button for x in range(L)]) )
+        interface.append( self.screen.pixel['text']._button )
             
-        self.screen = screen
         self.controller = controller
             
         start(self)
