@@ -2,9 +2,11 @@
 
 path=textbook
 
-if [[ $TRAVIS_BRANCH != "stable" ]] && [[ $TRAVIS_BRANCH != "" ]]
+CURRENT_BRANCH=${GITHUB_BRANCH##*/}
+
+if [[ $CURRENT_BRANCH != "stable" ]] && [[ $CURRENT_BRANCH != "" ]]
 then
-    path="${path}-${TRAVIS_BRANCH}"
+    path="${path}-${CURRENT_BRANCH}"
 fi
 
 install_rclone () {
@@ -16,7 +18,7 @@ install_rclone () {
 }
 
 main () {
-  echo "Updating ${path} to ${TRAVIS_REPO_SLUG}@${TRAVIS_COMMIT}"
+  echo "Updating ${path} to ${GITHUB_REPOSITORY}@${GITHUB_SHA}"
   install_rclone
   rclone sync _site/ IBMCOS:qiskit-org-web-resources/${path}
 }

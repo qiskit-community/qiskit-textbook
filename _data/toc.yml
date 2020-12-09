@@ -156,6 +156,14 @@
       url: /ch-quantum-hardware/transmon-physics
     - title: Circuit Quantum Electrodynamics
       url: /ch-quantum-hardware/cQED-JC-SW
+    - title: Exploring the Jaynes-Cummings Hamiltonian with Qiskit Pulse
+      url: /ch-quantum-hardware/Jaynes-Cummings-model
+    - title: Measuring the Qubit ac-Stark Shift
+      url: /ch-quantum-hardware/ac-Stark-shift
+    - title: Hamiltonian Tomography
+      url: /ch-quantum-hardware/hamiltonian-tomography
+
+
 
 - title: Problem Sets & Exercises
   url: /ch-ex/index
