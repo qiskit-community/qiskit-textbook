@@ -255,3 +255,15 @@ var updateSidebar = () => {
   });
 }
 initFunction(updateSidebar);
+
+const changeLocale = (fromLocale, toLocale) => {
+  if (toLocale != fromLocale) {
+    from = fromLocale && fromLocale != 'en' ? `/${fromLocale}` : ''
+    to = toLocale && toLocale != 'en' ? `/${toLocale}`: ''
+
+    window.location.pathname = window.location.pathname.replace(
+      `/textbook${from}/`,
+      `/textbook${to}/`
+    );
+  }
+}
