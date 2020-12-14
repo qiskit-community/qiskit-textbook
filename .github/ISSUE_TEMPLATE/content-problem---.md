@@ -9,4 +9,4 @@ assignees: ''
 
 **Describe the issue**
 
-**Describe what you expect to see*
+**Describe what you expect to see**
