@@ -199,8 +199,8 @@
     - title: Lab 5. Scalable Shor’s Algorithm
       url: /ch-labs/Lab05_Scalable_Shor_Algorithm
       not_numbered: true
-    - title: Lab 6. Grover’s search with an unknown number of solutions
-      url: /ch-labs/Lab06_Grover’s_search_with_an_unknown_number_of_solutions
+    - title: Lab 6. Grover's search with an unknown number of solutions
+      url: /ch-labs/Lab06_Grover_search_with_an_unknown_number_of_solutions
       not_numbered: true
     - title: Lab 7. Quantum Simulation as a Search Algorithm
       url: /ch-labs/Lab07_QuantumSimulationSearchAlgorithm
