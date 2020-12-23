@@ -1,5 +1,3 @@
-# About This Section
+# このセクションについて
 
-At this point in the textbook, the reader can choose to continue learning about applied quantum algorithms or skip to ‘Investigating Quantum Hardware with Quantum Circuits’.
-In 4.1, we will demonstrate quantum algorithms applied to real world problems. In section 4.2, we will cover more recent quantum algorithms to help bring the reader up to date with more recent developments in the field.
-
+ここで、読者は実用的な量子アルゴリズムについて学習を続けるか、「量子回路による量子ハードウェアの調査」にスキップするかを選ぶことができます。4.1章では、実際の問題で使われる量子アルゴリズムを紹介します。4.2章では、最新の量子アルゴリズムについて説明し、読者がその分野での最新の開発ができるようにします。

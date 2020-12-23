@@ -1,6 +1,6 @@
-# About This Section
+# このセクションについて
 
-It’s important to see the wide range of applications of quantum algorithms, but as we have seen, understanding the problem can be as difficult as understanding the algorithm that solves it. The topics in this chapter range from chemistry to machine learning, these are large and complex topics in their own right and the Qiskit textbook is not able to provide a full introduction for them. While we have tried to include the necessary background to explain the algorithms, these explanations are not rigorous introductions to the fields and the pages will inevitably touch upon concepts that are outside the scope of the textbook. 
+量子アルゴリズムの幅広いアプリケーションを確認することは重要ですが、これまで見てきたように、問題を理解することは、それを解決するアルゴリズムを理解することと同じくらい難しい場合があります。この章のトピックは、化学から機械学習まであり、それぞれが大きくて複雑なトピックで、Qiskitテキストブックではそれらを完全に紹介することはできません。 アルゴリズムの説明のために必要なバックグラウンドを含めるよう努力していますが、それらは、その分野の厳密な紹介ではないこと、また、このテキストブックのスコープ外の概念にも触れていることをご承知おきください。
 
+このセクションでは、これまでに学習したアルゴリズムが実際にどのような問題に適用できるかを紹介しています。あなたが最も興味のあるトピックについてより深く読むことをお勧めします。
 
-It is recommended that you use this section to see how the algorithms we have learnt so far can be applied to real problems, and that you read more deeply on the topics that interest you the most.
