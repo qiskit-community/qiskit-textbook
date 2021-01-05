@@ -38,12 +38,8 @@ def run_notebook(filename):
         ep.preprocess(nb, {'metadata': {'path': './'}})
     except Exception as e:
         print("[" + datetime.now().time().strftime('%H:%M') + "] " + "Error in file '", filename, "': ", str(e).split('\n')[-2])
-        execution_failed = True
-    
-    if not execution_failed:
         return 1
     return 0
-
 
 if __name__ == '__main__':
     import os
@@ -68,10 +64,10 @@ if __name__ == '__main__':
                     filepath = os.path.join(dirpath, name)
                     print("[" + datetime.now().time().strftime('%H:%M') + "] " + filepath)
                     total_files += 1
-                    if run_notebook(filepath) == 1:
-                        working_files += 1
+                    if run_notebook(filepath) is not 0:
+                        sys.exit(os.EX_SOFTWARE)
     t1 = time.time()
     running_time = t1-t0
 
     print("Finished in %.2f seconds" % running_time)
-    print("%i notebooks were read, %i encountered errors." % (total_files, total_files - working_files))
+    sys.exit(os.EX_OK)

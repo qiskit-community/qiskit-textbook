@@ -1,10 +1,9 @@
-# このセクションについて
+# About This Section
 
-さて、既に量子コンピューティングの基本は説明しましたので、次は量子プロトコルとアルゴリズムを紹介します。これらのアルゴリズムを通して、先程の章で学んだ概念を実際に動かし、新しいアイデアや技術を紹介していきます。最初に学ぶアルゴリズムは、有用な問題は解決しない概念実証アルゴリズムです。一見役に立たないように見えますが、これらのアルゴリズムは学習には最適な方法ですし、後に量子コンピューティングの興奮を引き起こす「有用な」アルゴリズムに適応された技術を見せてくれるので、最もシンプルな形でコアとなるアイデアに取り組むことができます。また、概念実証アルゴリズムは、ハードウェアをテストする際のベンチマークとしても有用です。
+Now we have covered the basics of quantum computing, we are now ready to introduce some quantum protocols and algorithms. Through these algorithms we will see the concepts from the last chapter in action, and we will introduce new ideas and techniques. Some of the first algorithms you will learn about will be proof-of-concept algorithms that were developed to demonstrate the advantage of quantum computers. These algorithms are a great place to start; they showcase techniques that were later adapted into the ‘useful’ algorithms that caused excitement about quantum computing, and they will allow us to tackle core ideas in their simplest form. The proof-of-concept algorithms are also useful as a benchmark when testing hardware.
 
-# 今後の予定
+# Upcoming
 
-現在、教科書に追加するために以下のトピックを開発中です。
+The following topics are currently being developed for addition to the textbook:
 
-1. BB84 を使用した通信の確保
-2. NISQハードウェアのための量子アルゴリズムの概要
+- Overview of Quantum Algorithms for NISQ Hardware

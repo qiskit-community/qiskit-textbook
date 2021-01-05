@@ -20,7 +20,14 @@ Textbook numbering starts in Chapter 0.
 <nav id="js-sidebar" class="c-textbook__sidebar">
   <a href="/textbook/preface.html"><h2 class="c-sidebar__title">{{ site.sidebar_title }}</h2></a>
   <ul class="c-sidebar__chapters">
-    {% for chapter in site.data.toc %}
+    {% if site.data[page.locale] %}
+      {% assign toc_data = site.data[page.locale].toc %}
+      {% assign locale_prefix = '/' | append: page.locale %}
+    {% else %}
+      {% assign toc_data = site.data.toc %}
+      {% assign locale_prefix = '' %}
+    {% endif %}
+    {% for chapter in toc_data %}
       {% comment %}
       If the entry is a divider, render a divider and move to next entry.
       {% endcomment %}
@@ -154,5 +161,13 @@ Textbook numbering starts in Chapter 0.
       {% endunless %}
     {% endfor %}
   </ul>
-  <p class="sidebar_footer">{{ site.sidebar_footer_text }}</p>
+  <p class="sidebar_footer">
+    <!-- {{ site.sidebar_footer_text }} -->
+    
+    <select name="preferred_language" onchange="changeLocale('{{ page.locale }}', this.value)">
+      <option value="en" {% if page.locale == "" || page.locale == "en" %}selected{% endif %}>English</option>
+      <option value="ja" {% if page.locale == "ja" %}selected{% endif %}>Japanese</option>
+    </select>
+
+  </p>
 </nav>
