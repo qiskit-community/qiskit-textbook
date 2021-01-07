@@ -5,6 +5,8 @@ import ipywidgets as widgets
 from IPython.display import display, clear_output, Math
 from qiskit.visualization import plot_bloch_vector
 from numpy import sqrt, cos, sin, pi
+import numexpr
+import re
 
 from qiskit_textbook.widgets._helpers import _pre, _img
 
@@ -52,8 +54,8 @@ def state_vector_exercise(target):
 
     def on_button_click(b):
         try:
-            state_vector = eval(text_input.value)
-            c1, c2 = state_vector[0], state_vector[1]
+            state_vector = text_input.value.strip("[]").replace(" ", "").split(",")
+            c1, c2 = numexpr.evaluate(state_vector[0]), numexpr.evaluate(state_vector[1])
         except Exception as e:
             output.value = str(e).split("(")[0]
             return
@@ -91,8 +93,8 @@ def bloch_calc():
     def on_button_click(b):
         from math import pi, sqrt
         try:
-            theta = eval(theta_input.value)
-            phi = eval(phi_input.value)
+            theta = numexpr.evaluate(theta_input.value)
+            phi = numexpr.evaluate(phi_input.value)
         except Exception as e:
             output.value = "Error: " + str(e)
             return
