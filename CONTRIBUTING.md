@@ -11,9 +11,9 @@ It is worth removing the `is:open` filter to search through closed / merged issu
 - If you want to correct a scientific / mathematical / code error, make an issue first so we can discuss the changes.
 - Please make one pull request (using separate branches) for each issue.
 
-If you want to contribute original content, there are a few things you can do to make sure your efforts have the biggest impact:
+If you want to contribute original content:
 
-- Please open an issue explaining your proposed additions. Here we can discuss where your contribution will fit in, as well as making sure it fits the style and format of the rest of the textbook.
+- Please open an issue explaining your proposed additions **before** beginning any writing. Here we can discuss where your contribution will fit in, as well as making sure it fits the style and format of the rest of the textbook.
 - Create a pull request while your chapter is in progress, this way we can review it in the process of writing instead of asking for large changes after you have already written it.
 - Try to follow the formatting and tone of the existing notebooks to ensure everything renders correctly and the textbook is coherent. 
 
