@@ -8,12 +8,12 @@ dependencies:
 - numpy
 - matplotlib
 - torchvision
-- tabulate
 - qutip
 - sympy
 - pylatexenc
 - numexpr
 - pip:
+  - pandas
   - qiskit
   - seaborn
   - -e ./qiskit-textbook-src
