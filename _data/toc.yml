@@ -184,7 +184,7 @@
   url: /ch-labs/index
   expand_sections: true
   sections:
-    - title: Lab 1. Quantum Circuit
+    - title: Lab 1. Quantum Circuits
       url: /ch-labs/Lab01_QuantumCircuits
       not_numbered: true
     - title: Lab 2. Quantum Measurement
