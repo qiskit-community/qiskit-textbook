@@ -83,10 +83,6 @@
   sections:
     - title: Defining Quantum Circuits
       url: /ch-algorithms/defining-quantum-circuits
-    - title: Quantum Teleportation
-      url: /ch-algorithms/teleportation
-    - title: Superdense Coding
-      url: /ch-algorithms/superdense-coding
     - title: Deutsch-Jozsa Algorithm
       url: /ch-algorithms/deutsch-jozsa
     - title: Bernstein-Vazirani Algorithm
@@ -103,6 +99,10 @@
       url: /ch-algorithms/grover
     - title: Quantum Counting
       url: /ch-algorithms/quantum-counting
+    - title: Quantum Teleportation
+      url: /ch-algorithms/teleportation
+    - title: Superdense Coding
+      url: /ch-algorithms/superdense-coding
     - title: Quantum Key Distribution
       url: /ch-algorithms/quantum-key-distribution
 
