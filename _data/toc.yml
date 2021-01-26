@@ -164,22 +164,6 @@
       url: /ch-quantum-hardware/hamiltonian-tomography
 
 
-
-- title: Problem Sets & Exercises
-  url: /ch-ex/index
-  expand_sections: true
-  sections:
-    - title: Set 1. Classical Logic Gates with Quantum Circuits
-      url: /ch-ex/ex1
-      not_numbered: true
-    - title: Set 2. Basic Synthesis of Single-Qubit Gates
-      url: /ch-ex/ex2
-      not_numbered: true
-    - title: Set 3. Building the Best AND Gate
-      url: /ch-ex/ex3
-      not_numbered: true
-
-
 - title: Quantum Computing Labs
   url: /ch-labs/index
   expand_sections: true
