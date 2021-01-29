@@ -1,6 +1,6 @@
-# Upcoming
+# 今後の予定
 
-The following topics are currently being developed for addition to the textbook:
+以下のトピックは、現在、テキストブックに追加するために開発されています：
 
-1. Decoherence and Energy Relaxation: Measuring T2 and T1
-2. Optimizing Microwave Pulses for High-Fidelity Qubit Operations
+1. デコヒーレンスとエネルギー緩和：T2とT1の測定
+2. 高忠実度の量子ビット操作のためのマイクロ波パルスの最適化

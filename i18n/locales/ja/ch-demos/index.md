@@ -1,4 +1,5 @@
-These games and demos are a fun way to reinforce the concepts you’ll learn throughout your quantum computing journey. We’ll introduce these at appropriate places throughout the textbook, but they’re also all listed here so you can find them easily.
+この章のゲームとデモは、量子コンピューティングを楽しく学ぶためのものです。テキストブック内の適切なところで紹介しますが、簡単に見つけられるようにすべてここにリストしています。
+
 
 <div class="index-cards">
 <div class="row">
