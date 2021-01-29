@@ -1,1 +1,1 @@
-To fully understand the concepts in this textbook, it’s important to work through as many problem sets as possible. In addition to the quick exercises scattered throughout each chapter, we also provide problem sets that cover the topics we’ve learnt. We’ll link to these at the end of the relevant section, but they’re also listed here so you can find them again easily.
+このテキストブックの概念を完全に理解するには、できるだけ多くの問題セットに取り組むことが重要です。各章に簡単な練習問題がありましたが、これまでに学んだトピックをカバーする問題セットをここで提供します。関連する章の最後にリンクをおきますが、こちらにあるリストからも、簡単に見つけることができます。
