@@ -1,6 +1,6 @@
-# Upcoming
+# 今後の予定
 
-The following topics are currently being developed for addition to the textbook:
+現在、以下のトピックが執筆中で、今後、テキストブックに追加される予定です：
 
-1. Mapping the Ising Model onto a Superconducting Quantum Computer
-2. State and Process Tomography
+1. イジングモデルの超電導量子コンピューターへのマッピング
+2. 量子状態トモグラフィーと量子プロセストモグラフィー
