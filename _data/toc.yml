@@ -130,6 +130,8 @@
       subsections:
          - title: Variational Quantum Linear Solver
            url: /ch-paper-implementations/vqls
+         - title: Quantum Image Processing - FRQI and NEQR Image Representations
+           url: /ch-applications/image-processing-frqi-neqr
 
 - title: Investigating Quantum Hardware Using Quantum Circuits
   url: /ch-quantum-hardware/index-circuits
