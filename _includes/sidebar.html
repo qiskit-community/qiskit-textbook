@@ -16,9 +16,14 @@ Textbook numbering starts in Chapter 0.
 {% endcomment %}
 
 {% assign chapter_num = 0 %}
+{% if site.data[page.locale] %}
+  {% assign messages = site.data[page.locale].messages %}
+{% else %}
+  {% assign messages = site.data.messages %}
+{% endif %}
 
 <nav id="js-sidebar" class="c-textbook__sidebar">
-  <a href="/textbook/preface.html"><h2 class="c-sidebar__title">{{ site.sidebar_title }}</h2></a>
+  <a href="/textbook/preface.html"><h2 class="c-sidebar__title">{{ messages.sidebar_title }}</h2></a>
   <ul class="c-sidebar__chapters">
     {% if site.data[page.locale] %}
       {% assign toc_data = site.data[page.locale].toc %}
