@@ -83,10 +83,6 @@
   sections:
     - title: Defining Quantum Circuits
       url: /ch-algorithms/defining-quantum-circuits
-    - title: Quantum Teleportation
-      url: /ch-algorithms/teleportation
-    - title: Superdense Coding
-      url: /ch-algorithms/superdense-coding
     - title: Deutsch-Jozsa Algorithm
       url: /ch-algorithms/deutsch-jozsa
     - title: Bernstein-Vazirani Algorithm
@@ -103,6 +99,10 @@
       url: /ch-algorithms/grover
     - title: Quantum Counting
       url: /ch-algorithms/quantum-counting
+    - title: Quantum Teleportation
+      url: /ch-algorithms/teleportation
+    - title: Superdense Coding
+      url: /ch-algorithms/superdense-coding
     - title: Quantum Key Distribution
       url: /ch-algorithms/quantum-key-distribution
 
@@ -130,6 +130,8 @@
       subsections:
          - title: Variational Quantum Linear Solver
            url: /ch-paper-implementations/vqls
+         - title: Quantum Image Processing - FRQI and NEQR Image Representations
+           url: /ch-applications/image-processing-frqi-neqr
 
 - title: Investigating Quantum Hardware Using Quantum Circuits
   url: /ch-quantum-hardware/index-circuits
@@ -156,20 +158,40 @@
       url: /ch-quantum-hardware/transmon-physics
     - title: Circuit Quantum Electrodynamics
       url: /ch-quantum-hardware/cQED-JC-SW
+    - title: Exploring the Jaynes-Cummings Hamiltonian with Qiskit Pulse
+      url: /ch-quantum-hardware/Jaynes-Cummings-model
+    - title: Measuring the Qubit ac-Stark Shift
+      url: /ch-quantum-hardware/ac-Stark-shift
+    - title: Hamiltonian Tomography
+      url: /ch-quantum-hardware/hamiltonian-tomography
 
-- title: Problem Sets & Exercises
-  url: /ch-ex/index
+
+- title: Quantum Computing Labs
+  url: /ch-labs/index
   expand_sections: true
   sections:
-    - title: Set 1. Classical Logic Gates with Quantum Circuits
-      url: /ch-ex/ex1
+    - title: Lab 1. Quantum Circuits
+      url: /ch-labs/Lab01_QuantumCircuits
       not_numbered: true
-    - title: Set 2. Basic Synthesis of Single-Qubit Gates
-      url: /ch-ex/ex2
+    - title: Lab 2. Quantum Measurement
+      url: /ch-labs/Lab02_QuantumMeasurement
       not_numbered: true
-    - title: Set 3. Building the Best AND Gate
-      url: /ch-ex/ex3
+    - title: Lab 3. Accuracy of Quantum Phase Estimation
+      url: /ch-labs/Lab03_AccuracyQPE
       not_numbered: true
+    - title: Lab 4. Iterative Quantum Phase Estimation
+      url: /ch-labs/Lab04_IterativePhaseEstimation
+      not_numbered: true
+    - title: Lab 5. Scalable Shor’s Algorithm
+      url: /ch-labs/Lab05_Scalable_Shor_Algorithm
+      not_numbered: true
+    - title: Lab 6. Grover's search with an unknown number of solutions
+      url: /ch-labs/Lab06_Grover_search_with_an_unknown_number_of_solutions
+      not_numbered: true
+    - title: Lab 7. Quantum Simulation as a Search Algorithm
+      url: /ch-labs/Lab07_QuantumSimulationSearchAlgorithm
+      not_numbered: true
+      
 
 - title: Appendix
   url: /ch-appendix/index
