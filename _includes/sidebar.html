@@ -15,6 +15,12 @@ a 1-level nesting; we will label 1.2, but not 1.2.1.
 Textbook numbering starts in Chapter 0.
 {% endcomment %}
 
+{% if page.locale %}
+  {% assign page_locale = '/' | append: page.locale %}
+{% else %}
+  {% assign page_locale = '' %}
+{% endif %}
+
 {% assign chapter_num = 0 %}
 {% if site.data[page.locale] %}
   {% assign messages = site.data[page.locale].messages %}
@@ -23,7 +29,7 @@ Textbook numbering starts in Chapter 0.
 {% endif %}
 
 <nav id="js-sidebar" class="c-textbook__sidebar">
-  <a href="/textbook/preface.html"><h2 class="c-sidebar__title">{{ messages.sidebar_title }}</h2></a>
+  <a href="/textbook{{ page_locale }}/preface.html"><h2 class="c-sidebar__title">{{ messages.sidebar_title }}</h2></a>
   <ul class="c-sidebar__chapters">
     {% if site.data[page.locale] %}
       {% assign toc_data = site.data[page.locale].toc %}
