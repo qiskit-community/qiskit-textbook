@@ -9,6 +9,17 @@
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url | relative_url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url | relative_url }}">
 
+  {% if page.locale == "" %}
+    {% assign page_url = page.url | replace:'/en','' %}
+  {% else %}
+    {% assign page_locale = '/' | append: page.locale | append: '/' %}
+    {% assign page_url = page.url | replace: page_locale, '/' %}
+  {% endif %}
+
+  <link rel="alternate" hreflang="en" href="{{ page_url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url | relative_url }}" />
+  <link rel="alternate" hreflang="ja" href="{{ page_url | replace:'index.html','' | prepend: '/ja' | prepend: site.baseurl | prepend: site.url | relative_url }}" />
+  <link rel="alternate" hreflang="x-default" href="{{ page_url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url | relative_url }}" />
+
   {% include fb_tags.html %}
 
   <script type="application/ld+json">
