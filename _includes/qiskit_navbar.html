@@ -1,3 +1,10 @@
+
+{% if site.data[page.locale] %}
+    {% assign messages = site.data[page.locale].messages %}
+{% else %}
+    {% assign messages = site.data.messages %}
+{% endif %}
+
 <ul class="qiskit-navbar">
     <li class="left navbar__logo">
 	    <a href="https://qiskit.org/">
@@ -5,9 +12,9 @@
 	    </a>
     </li>
     <li class="qiskit-navbar__icons"><a href="/textbook/search.html"><img src="/textbook/assets/images/search-solid-purple.svg"></a></li>
-    <li><a href="https://qiskit.org/documentation/">Documentation</a></li>
-    <li><a href="https://qiskit.org/events">Community</a></li>
-    <li class="entry__active"><a href="https://qiskit.org/education">Learn</a></li>
+    <li><a href="https://qiskit.org/documentation/">{{ messages.nav_documentation }}</a></li>
+    <li><a href="https://qiskit.org/events">{{ messages.nav_community }}</a></li>
+    <li class="entry__active"><a href="https://qiskit.org/education">{{ messages.nav_learn }}</a></li>
     <li><a href="https://qiskit.org/overview">Overview</a></li>
  </ul>
 
