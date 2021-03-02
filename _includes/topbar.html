@@ -1,3 +1,9 @@
+{% if site.data[page.locale] %}
+{% assign messages = site.data[page.locale].messages %}
+{% else %}
+{% assign messages = site.data.messages %}
+{% endif %}
+
 <div class="c-topbar" id="top-navbar">
   <!-- We show the sidebar by default so we use .is-active -->
   <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
@@ -23,7 +29,7 @@
     </header>
 
     {% unless page.id contains "preface" %}
-    <div class="onthispage__title">On This Page</div>
+    <div class="onthispage__title">{{ messages.on_this_page }}</div>
     <nav class="onthispage">
     </nav>
     <!-- Chapter formats -->
@@ -35,7 +41,7 @@
         rel="noopener"
 	onclick="window.trackCta('Open in IBM Quantum Experience')"
       >
-      <button class="interact-button">Open in IBM Quantum Lab</button>
+      <button class="interact-button">{{ messages.open_quantum }}</button>
       </a>
     </div>
     <div>
@@ -44,7 +50,7 @@
         rel="noopener"
         class="download__link"
       >
-        Download as Jupyter Notebook
+        {{ messages.download_notebook }}
         <img src="{{ site.images_url | relative_url }}/download-solid.svg" class="download-button">
       </a>
     </div>
@@ -53,7 +59,7 @@
 	href="https://github.com/Qiskit/qiskit-textbook/tree/master/{{ page.interact_link }}"
 	class="download__link"
       >
-      Contribute on Github
+      {{ messages.contribute_github }}
       <img src="{{ site.images_url | relative_url }}/rightarrow_purple.svg" class="download-button">
       </a>
     </div>
