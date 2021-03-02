@@ -15,12 +15,30 @@ a 1-level nesting; we will label 1.2, but not 1.2.1.
 Textbook numbering starts in Chapter 0.
 {% endcomment %}
 
+{% if page.locale %}
+  {% assign page_locale = '/' | append: page.locale %}
+{% else %}
+  {% assign page_locale = '' %}
+{% endif %}
+
 {% assign chapter_num = 0 %}
+{% if site.data[page.locale] %}
+  {% assign messages = site.data[page.locale].messages %}
+{% else %}
+  {% assign messages = site.data.messages %}
+{% endif %}
 
 <nav id="js-sidebar" class="c-textbook__sidebar">
-  <a href="/textbook/preface.html"><h2 class="c-sidebar__title">{{ site.sidebar_title }}</h2></a>
+  <a href="/textbook{{ page_locale }}/preface.html"><h2 class="c-sidebar__title">{{ messages.sidebar_title }}</h2></a>
   <ul class="c-sidebar__chapters">
-    {% for chapter in site.data.toc %}
+    {% if site.data[page.locale] %}
+      {% assign toc_data = site.data[page.locale].toc %}
+      {% assign locale_prefix = '/' | append: page.locale %}
+    {% else %}
+      {% assign toc_data = site.data.toc %}
+      {% assign locale_prefix = '' %}
+    {% endif %}
+    {% for chapter in toc_data %}
       {% comment %}
       If the entry is a divider, render a divider and move to next entry.
       {% endcomment %}
@@ -154,5 +172,13 @@ Textbook numbering starts in Chapter 0.
       {% endunless %}
     {% endfor %}
   </ul>
-  <p class="sidebar_footer">{{ site.sidebar_footer_text }}</p>
+  <p class="sidebar_footer">
+    <!-- {{ site.sidebar_footer_text }} -->
+    
+    <select name="preferred_language" onchange="changeLocale('{{ page.locale }}', this.value)">
+      <option value="en" {% if page.locale == "" || page.locale == "en" %}selected{% endif %}>English</option>
+      <option value="ja" {% if page.locale == "ja" %}selected{% endif %}>Japanese</option>
+    </select>
+
+  </p>
 </nav>
