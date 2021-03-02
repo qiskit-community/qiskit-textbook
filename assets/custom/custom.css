@@ -79,7 +79,31 @@ pre {
 }
 
 p.sidebar_footer {
-	padding-bottom: 60px;
+	direction: ltr;
+	padding: 20px 0 60px 0;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+.sidebar_footer select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-color: #fff;
+	border: 0px none;
+	border-top: 1px solid rgba(0,0,0,0.07);
+	color: #121619;
+	cursor: pointer;
+	font-size: 0.875rem;
+	height: 50px;
+	padding: 0 24px;
+	text-align: left;
+	width: 100%;
+}
+
+.sidebar_footer select:hover {
+	background-color: #DDE1E6;
 }
 
 /* Hide contents on bigger screens */
