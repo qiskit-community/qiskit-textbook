@@ -9,4 +9,4 @@ at all.
 
 # Justification
 <!--- Please explain why this change is necessary. If changing technical
-details / equations, do not asssume the justification is obvious --->
+details / equations, do not assume the justification is obvious --->
