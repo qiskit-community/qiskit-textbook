@@ -47,16 +47,11 @@ For a list of contributors, see the [.bib](https://github.com/qiskit-community/q
 ## Translation Guidelines
 The multi-language translation guidelines will be updated later.
 
-### Contributing Guidelines to the Japanese edition of Qiskit Textbook
-#### [日本語翻訳のガイドライン](./i18n/locales/ja/guideline-ja.md)
-#### Contributing New Translations
-- When new content is added to the original textbook, you can contribute to translating it to Japanese by:
-    - Find the corresponding original file under the [`content` folder of the `master` branch](https://github.com/qiskit-community/qiskit-textbook/tree/master/content).
-    - Translate it to Japanese.
-    - Add the translated file under the [`i18n/locales/ja` folder of the `master-ja` branch](https://github.com/qiskit-community/qiskit-textbook/tree/master-ja/i18n/locales/ja) by sending Pull resquest.
+### Contributing Guidelines to the [Japanese edition of Qiskit Textbook](https://qiskit.org/textbook/ja/preface.html)
+ [日本語翻訳のガイドライン](./i18n/locales/ja/guideline-ja.md)
 
-#### Contributing Code or a Chapter
-- For contributing code, new section or a chapter to the existing Japanese textbook, please open an [issue](https://github.com/qiskit-community/qiskit-textbook/issues) using the issue template [`New Content Suggestion`](https://github.com/qiskit-community/qiskit-textbook/issues/new?assignees=&labels=New+Content+Suggestion&template=new-content-suggestion-----.md&title=).
-
-
-For any questions regarding the Japanese edition of the Qiskit Textbook please contact Kifumi Numata (kifumi@jp.ibm.com).
+When new content is added to the original textbook, you can contribute to translating it to Japanese by:
+- Find the corresponding original file under the [`content` folder of the `master` branch](https://github.com/qiskit-community/qiskit-textbook/tree/master/content).
+- Translate it to Japanese.
+- Add the translated file under the [`i18n/locales/ja` folder of the `master-ja` branch](https://github.com/qiskit-community/qiskit-textbook/tree/master-ja/i18n/locales/ja) by sending Pull resquest.
+- For detailed guidelines, please check [here](./i18n/locales/ja/guideline-ja.md).
