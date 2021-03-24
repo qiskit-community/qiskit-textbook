@@ -172,13 +172,15 @@ Textbook numbering starts in Chapter 0.
       {% endunless %}
     {% endfor %}
   </ul>
-  <p class="sidebar_footer">
+  <div class="sidebar_footer">
     <!-- {{ site.sidebar_footer_text }} -->
     
-    <select name="preferred_language" onchange="changeLocale('{{ page.locale }}', this.value)">
-      <option value="en" {% if page.locale == "" || page.locale == "en" %}selected{% endif %}>English</option>
-      <option value="ja" {% if page.locale == "ja" %}selected{% endif %}>Japanese</option>
-    </select>
+    <div class="language_switcher">
+      <select name="preferred_language" onchange="changeLocale('{{ page.locale }}', this.value)">
+        <option value="en" {% if page.locale == "" || page.locale == "en" %}selected{% endif %}>English</option>
+        <option value="ja" {% if page.locale == "ja" %}selected{% endif %}>Japanese</option>
+      </select>
+    </div>
 
-  </p>
+  </div>
 </nav>
