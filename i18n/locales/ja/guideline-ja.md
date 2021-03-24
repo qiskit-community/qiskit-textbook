@@ -19,7 +19,7 @@
 </br>
 </br>
 
-## Contributing Guidelines to the Japanese edition of Qiskit Textbook
+## Contributing Guidelines to the [Japanese edition of Qiskit Textbook](https://qiskit.org/textbook/ja/preface.html)
 
 ### Reporting Bugs and Requesting Enhancements
 - When you encounter a problem, please open an [issue](https://github.com/qiskit-community/qiskit-textbook/issues) using the issue template [`Content Problem`](https://github.com/qiskit-community/qiskit-textbook/issues/new?assignees=&labels=content+bug&template=content-problem---.md&title=). 
