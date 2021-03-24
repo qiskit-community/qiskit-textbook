@@ -22,8 +22,12 @@ Alternatively, you can download the folder [`qiskit-textbook-src`](qiskit-textbo
 
 from the directory that contains this folder.
 
+# Contribution Guidelines
+If you'd like to contribute to Qiskit, please take a look at our [contributors guide](CONTRIBUTING.md).
+
 # License
 The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](http://github.com/qiskit-community/qiskit-textbook/blob/master/LICENSE.txt).
 
 # Contact
 For any issues, please contact Francis Harkins (francis.harkins@ibm.com) and Abraham Asfaw (abraham.asfaw@ibm.com).
+
