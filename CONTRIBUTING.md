@@ -45,7 +45,7 @@ After writing your chapter, you must add a few tags to your cells (You can see t
 For a list of contributors, see the [.bib](https://github.com/qiskit-community/qiskit-textbook/blob/master/content/qiskit-textbook.bib) file.
 
 ## Translation Guidelines
-The multi-language translation guideline will be updated later.
+The multi-language translation guidelines will be updated later.
 
 ### Contributing Guidelines to the Japanese edition of Qiskit Textbook
 #### [日本語翻訳のガイドライン](./i18n/locales/ja/guideline-ja.md)
