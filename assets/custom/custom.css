@@ -78,19 +78,37 @@ pre {
 	overflow: auto;
 }
 
-p.sidebar_footer {
+div.sidebar_footer {
+	border-right: 1px solid rgba(0, 0, 0, 0.07);
+	border-top: 2px solid #8a3ffc;
+	bottom: 0;
 	direction: ltr;
-	padding: 20px 0 60px 0;
-	position: absolute;
 	left: 0;
-	right: 0;
+	margin: 20px 0 0 0;
+	padding: 0;
+	position: fixed;
+	width: inherit;
 }
 
-.sidebar_footer select {
+.language_switcher::before {
+	background-image: url('/textbook/assets/images/chevron--down.svg');
+	background-size: contain;
+	content: '';
+	display: inline-block;
+	height: 24px;
+	opacity: 0.9;
+	pointer-events: none;
+	position: absolute;
+	right: 24px;
+	top: 14px;
+	width: 24px;
+}
+
+.language_switcher select {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	background-color: #fff;
+	background-color: #F2F4F8;
 	border: 0px none;
 	border-top: 1px solid rgba(0,0,0,0.07);
 	color: #121619;
@@ -102,7 +120,7 @@ p.sidebar_footer {
 	width: 100%;
 }
 
-.sidebar_footer select:hover {
+.language_switcher select:hover {
 	background-color: #DDE1E6;
 }
 
