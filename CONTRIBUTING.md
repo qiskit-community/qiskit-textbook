@@ -43,3 +43,15 @@ After writing your chapter, you must add a few tags to your cells (You can see t
 - Finally, after adding these tags, go to `view > none` and save your notebook to stop the tags from showing automatically when a reader opens the notebook.
 
 For a list of contributors, see the [.bib](https://github.com/qiskit-community/qiskit-textbook/blob/master/content/qiskit-textbook.bib) file.
+
+## Translation Guidelines
+The multi-language translation guidelines will be updated later.
+
+### Contributing Guidelines to the [Japanese edition of Qiskit Textbook](https://qiskit.org/textbook/ja/preface.html)
+ [日本語翻訳のガイドライン](./i18n/locales/ja/guideline-ja.md)
+
+When new content is added to the original textbook, you can contribute to translating it to Japanese by:
+- Find the corresponding original file under the [`content` folder of the `master` branch](https://github.com/qiskit-community/qiskit-textbook/tree/master/content).
+- Translate it to Japanese.
+- Add the translated file under the [`i18n/locales/ja` folder of the `master-ja` branch](https://github.com/qiskit-community/qiskit-textbook/tree/master-ja/i18n/locales/ja) by sending Pull resquest.
+- For detailed guidelines, please check [here](./i18n/locales/ja/guideline-ja.md).
