@@ -46,7 +46,7 @@ For a list of contributors, see the [.bib](https://github.com/qiskit-community/q
 
 ## Translation Guidelines
 First of all, thank you for showing your interest in translating (localizing) Qiskit Textbook! This helps make the textbook more accessible and available to our global community.
-If you are interested in contributing to translations, please follow the instructions below. For detailed guidelines, please check [here](./i18n/Guidelines-for-localization.pdf).
+If you are interested in contributing to translations, please follow the instructions below. For detailed guidelines, please check [here](./i18n/Translation-Guidelines.pdf).
 1. If you want to add a new language and become a translation lead, you can open a GitHub issue to start a discussion with the Qiskit community team and recruit translation project members. Please refer to the [criteria](#What-is-the-criteria-for-adding-a-new-language?) below to receive official support from the administrators for new languages.
 2. Open the [LOCALIZATION_CONTRIBUTORS](./i18n/LOCALIZATION_CONTRIBUTORS) file. Look for the language header that you'd like to contribute to and sign up under there. If you do not find the language, please add it by yourself.
 3. Create a pull request (PR) to add your name to the list. Make sure to follow the template to open a Pull Request.
