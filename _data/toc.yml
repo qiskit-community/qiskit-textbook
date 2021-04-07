@@ -212,6 +212,9 @@
     - title: Estimating Pi Using Quantum Phase Estimation Algorithm
       url: /ch-demos/piday-code
       not_numbered: true
+    - title: Local Reality and the CHSH Inequality
+      url: /ch-demos/chsh
+      not_numbered: true
     - title: Interactivity Index
       url: /widgets-index
       not_numbered: true
