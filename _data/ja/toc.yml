@@ -171,6 +171,14 @@
       url: /ja/ch-ex/ex3
       not_numbered: true
 
+- title: 量子計算実験
+  url: /ch-labs/index
+  expand_sections: true
+  sections:
+    - title: 実験 1. 量子回路
+      url: /ja/ch-labs/Lab01_QuantumCircuits
+      not_numbered: true
+
 - title: Appendix（付録）
   url: /ja/ch-appendix/index
   expand_sections: false
