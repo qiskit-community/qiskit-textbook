@@ -172,7 +172,7 @@
       not_numbered: true
 
 - title: 量子計算実験
-  url: /ch-labs/index
+  url: /ja/ch-labs/index
   expand_sections: true
   sections:
     - title: 実験 1. 量子回路
