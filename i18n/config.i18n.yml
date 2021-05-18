@@ -1,0 +1,47 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+
+#######################################################################################
+# Jupyter Book settings
+
+# Controlling page information
+page_titles                    : infer  # Either `None`, `infer`, or `toc`
+page_authors                   : None  # Either `None` or `infer`
+filename_title_split_character : '_'  # If inferring titles based on filename, splt on this character.
+
+#######################################################################################
+# Jupyter book extensions and additional features
+
+# Bibliography and citation settings. See https://github.com/inukshuk/jekyll-scholar#configuration for options
+scholar:
+  style: apa
+
+#######################################################################################
+# Jupyter book settings you probably don't need to change
+
+content_folder_name       : "i18n/locales"  # The folder where your raw content (notebooks/markdown files) are located
+images_url                : "/assets/images" # Path to static image files
+css_url                   : "/assets/css" # Path to static CSS files
+js_url                    : "/assets/js" # Path to JS files
+custom_static_url         : "/assets/custom" # Path to user's custom CSS/JS files
+vendor_url                : "/assets/vendor" # Path to 3rd party libs
+
+
+#######################################################################################
+# Jekyll build settings (only modify if you know what you're doing)
+
+# Jupyter Book version - DO NOT CHANGE THIS. It is generated when a new book is created
+jupyter_book_version: "0.6.4"
