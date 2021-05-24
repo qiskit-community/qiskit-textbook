@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
 import ipywidgets as widgets
 from IPython.display import display, clear_output, Math
 from qiskit.visualization import plot_bloch_vector
@@ -154,7 +153,7 @@ def scalable_circuit(func):
     display(image.widget)
 
 
-def gate_demo(gates='full',qsphere=True):
+def gate_demo(gates='full',qsphere=False):
     from qiskit import QuantumCircuit, execute, Aer
     from qiskit.visualization import plot_bloch_multivector, plot_state_qsphere
     gate_list = []
