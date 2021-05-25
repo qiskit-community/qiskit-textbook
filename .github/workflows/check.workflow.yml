@@ -41,5 +41,5 @@ jobs:
           pip install pyenchant
 
       - run: make check
-        if ${{ !cancelled() }}
+        if: ${{ !cancelled() }}
         shell: bash
