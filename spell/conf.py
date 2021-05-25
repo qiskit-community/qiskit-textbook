@@ -21,24 +21,10 @@
 Sphinx documentation builder
 """
 
-import os
-
 extensions = [
-    'sphinx.ext.napoleon',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.extlinks',
-    'sphinx_tabs.tabs',
-    'jupyter_sphinx',
-    'sphinx_autodoc_typehints',
-    'reno.sphinxext',
-    'sphinx.ext.doctest',
     'nbsphinx'
 ]
 
 nbsphinx_timeout = 180
 nbsphinx_execute = 'never'
-nbsphinx_widgets_path = ''
 exclude_patterns = ['_build', '**.ipynb_checkpoints']
