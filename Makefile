@@ -9,6 +9,7 @@ help:
 	@echo "  install     to install the necessary dependencies for jupyter-book to build"
 	@echo "  book        to convert the content/ folder into Jekyll markdown in _build/"
 	@echo "  clean       to clean out site build files"
+	@echo "  check       to check spelling the content/ folder"
 	@echo "  runall      to run all notebooks in-place, capturing outputs with the notebook"
 	@echo "  serve       to serve the repository locally with Jekyll"
 	@echo "  build       to build the site HTML and store in _site/"
@@ -33,6 +34,9 @@ runall:
 
 clean:
 	python scripts/clean.py
+
+check:
+	make -C spell
 
 serve:
 	bundle exec guard
