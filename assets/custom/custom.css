@@ -78,8 +78,50 @@ pre {
 	overflow: auto;
 }
 
-p.sidebar_footer {
-	padding-bottom: 60px;
+div.sidebar_footer {
+	border-right: 1px solid rgba(0, 0, 0, 0.07);
+	border-top: 2px solid #8a3ffc;
+	bottom: 0;
+	direction: ltr;
+	left: 0;
+	margin: 20px 0 0 0;
+	padding: 0;
+	position: fixed;
+	width: inherit;
+}
+
+.language_switcher::before {
+	background-image: url('/textbook/assets/images/chevron--down.svg');
+	background-size: contain;
+	content: '';
+	display: inline-block;
+	height: 24px;
+	opacity: 0.9;
+	pointer-events: none;
+	position: absolute;
+	right: 24px;
+	top: 14px;
+	width: 24px;
+}
+
+.language_switcher select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-color: #F2F4F8;
+	border: 0px none;
+	border-top: 1px solid rgba(0,0,0,0.07);
+	color: #121619;
+	cursor: pointer;
+	font-size: 0.875rem;
+	height: 50px;
+	padding: 0 24px;
+	text-align: left;
+	width: 100%;
+}
+
+.language_switcher select:hover {
+	background-color: #DDE1E6;
 }
 
 /* Hide contents on bigger screens */
