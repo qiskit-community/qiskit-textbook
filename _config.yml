@@ -126,6 +126,10 @@ defaults:
       toc_label: "  On this page"
       toc_icon: "list-ul"
       excerpt: ''
+  - scope:
+      path: "*/ja"
+    values:
+      locale: "ja"
 
 favicon_path: "images/logo/favicon.ico"
 
@@ -157,6 +161,7 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+  - i18n/
 
 plugins:
   - jekyll-redirect-from
