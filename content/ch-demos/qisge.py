@@ -6,6 +6,9 @@ import numpy as np
 
 from PIL import Image
 
+import sys
+print(sys.path)
+
 FPS = 10
 
 _cell = 32
