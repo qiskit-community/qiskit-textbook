@@ -1,0 +1,60 @@
+name: build and deploy
+
+on:
+  # run when action is manually triggered
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Deploy ?'
+        required: false
+        default: 'false'
+  # run when a pull request is made
+  pull_request:
+  # run on pushes to master or stable branch
+  push:
+    branches: [ master, stable ]
+
+jobs:
+  # job id/key
+  build-and-deploy:
+    # job name
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+        
+      - name: Set up Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7.x
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install scipy
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Install Ruby dependencies
+        run: |
+          gem update --system
+          gem install bundler
+
+      - run: make install
+      - run: make book
+      - run: make site
+
+      - name: Deploy
+        if: ${{ github.event_name == 'push'|| github.event.inputs.deploy == 'true' }}
+        run: ./deploy.sh
+        shell: bash
+        env:
+          encrypted_rclone_iv: ${{ secrets.ENCRYPTED_RCLONE_IV }}
+          encrypted_rclone_key: ${{ secrets.ENCRYPTED_RCLONE_KEY }}
+          GITHUB_BRANCH: ${{ github.ref }}
