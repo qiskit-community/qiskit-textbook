@@ -1,0 +1,196 @@
+# Each entry has the following schema:
+#
+# - title: mytitle   # Title of chapter or section.
+#   url: /myurl  # URL of section relative to the /content/ folder.
+#   sections:  # Contains a list of more entries that make up the chapter's sections
+#   not_numbered: true  # if the section shouldn't have a number in the sidebar
+#     (e.g. Introduction or appendices)
+#   expand_sections: true  # if you'd like the sections of this chapter to always
+#     be expanded in the sidebar.
+#   external: true  # Whether the URL is an external link or points to content in the book
+#
+# Below are some special values that trigger specific behavior:
+# - search: true  # Will provide a link to a search page
+# - divider: true  # Will insert a divider in the sidebar
+# - header: My Header  # Will insert a header with no link in the sidebar
+
+#
+# ==============================
+# AUTOMATICALLY GENERATED TOC FILE.
+# You should review the contents of this file, re-order items as you wish,
+# and nest chapters in sections if you wish. The ======= symbols represent
+# folder breaks.
+#
+# See the demo `toc.yml` for the right structure to follow. You can
+# generate a demo book by running `jupyter-book create mybook --demo`
+# ==============================
+
+- title: Qiskit を使った量子計算の学習
+  not_numbered: true
+  url: /ja/preface
+
+- title: 量子とは？
+  url: /ja/what-is-quantum
+  not_numbered: true
+
+- title: 前提条件
+  url: /ja/ch-prerequisites/setting-the-environment.html
+  external: true
+  sections:
+    - title: Qiskitテキストブックで作業するための環境設定ガイド
+      url: /ja/ch-prerequisites/setting-the-environment
+    - title: Python 及び Jupyter notebook 入門
+      url: /ja/ch-prerequisites/python-and-jupyter-notebooks
+
+- title: 量子状態と量子ビット
+  url: /ja/ch-states/introduction.html
+  external: true
+  expand_sections: true
+  sections:
+    - title: はじめに
+      url: /ja/ch-states/introduction
+    - title: 計算の原子
+      url: /ja/ch-states/atoms-computation
+    - title: 量子ビット状態を表現する
+      url: /ja/ch-states/representing-qubit-states
+    - title: 単一量子ビットゲート 
+      url: /ja/ch-states/single-qubit-gates
+    - title: 量子コンピューターの場合
+      url: /ja/ch-states/case-for-quantum
+
+- title: 複数量子ビットともつれ状態 
+  url: /ja/ch-gates/introduction.html
+  external: true
+  expand_sections: true
+  sections:
+    - title: はじめに
+      url: /ja/ch-gates/introduction
+    - title: 複数量子ビットともつれ状態 
+      url: /ja/ch-gates/multiple-qubits-entangled-states
+    - title: 位相キックバック
+      url: /ja/ch-gates/phase-kickback
+    - title: さらなる回路の等価性
+      url: /ja/ch-gates/more-circuit-identities
+    - title: 普遍性の証明
+      url: /ja/ch-gates/proving-universality
+    - title: 量子コンピューター上の古典計算
+      url: /ja/ch-gates/oracles
+
+
+- title: 量子プロトコルと量子アルゴリズム
+  url: /ja/ch-algorithms/index
+  expand_sections: true
+  sections:
+    - title: 量子回路
+      url: /ja/ch-algorithms/defining-quantum-circuits
+    - title: ドイチ-ジョサのアルゴリズム
+      url: /ja/ch-algorithms/deutsch-jozsa
+    - title: ベルンシュタイン・ヴァジラニ アルゴリズム 
+      url: /ja/ch-algorithms/bernstein-vazirani
+    - title: サイモンのアルゴリズム
+      url: /ja/ch-algorithms/simon
+    - title: 量子フーリエ変換
+      url: /ja/ch-algorithms/quantum-fourier-transform
+    - title: 量子位相推定
+      url: /ja/ch-algorithms/quantum-phase-estimation
+    - title: ショアのアルゴリズム
+      url: /ja/ch-algorithms/shor
+    - title: グローバーのアルゴリズム
+      url: /ja/ch-algorithms/grover
+    - title: 量子数え上げ
+      url: /ja/ch-algorithms/quantum-counting
+    - title: 量子テレポーテーション
+      url: /ja/ch-algorithms/teleportation
+    - title: 超密度符号化
+      url: /ja/ch-algorithms/superdense-coding
+    - title: 量子鍵配送
+      url: /ja/ch-algorithms/quantum-key-distribution
+
+- title: 量子アプリケーションのアルゴリズム
+  url: /ja/ch-applications/algs_for_apps_index
+  expand_sections: true
+  sections:
+    - title: 量子アルゴリズムの応用
+      url: /ja/ch-applications/apps_index
+      expand_subsections: true
+      subsections:
+         - title: HHL を利用して線形方程式系を解きQiskit で実装する
+           url: /ja/ch-applications/hhl_tutorial
+         - title: VQE を利用しての分子シミュレーションを行う
+           url: /ja/ch-applications/vqe-molecules
+         - title: QAOA を利用して、組合せ最適化問題を解く
+           url: /ja/ch-applications/qaoa
+         - title: Groverのアルゴリズムを用いた充足可能性問題の解法
+           url: /ja/ch-applications/satisfiability-grover
+         - title: PyTorchとQiskitを用いた量子古典ハイブリッド・ニューラル・ネットワーク 
+           url: /ja/ch-machine-learning/machine-learning-qiskit-pytorch
+    - title: 最近の量子アルゴリズムの実装
+      url: /ja/ch-applications/imp_index
+      expand_subsections: true
+      subsections:
+         - title: 量子変分線型ソルバー
+           url: /ja/ch-paper-implementations/vqls
+
+- title: 量子回路による量子ハードウェアの探究
+  url: /ja/ch-quantum-hardware/index-circuits
+  expand_sections: true
+  sections:
+    - title: 反復符号による量子エラー訂正の導入
+      url: /ja/ch-quantum-hardware/error-correction-repetition-code
+    - title: 測定エラーの軽減
+      url: /ja/ch-quantum-hardware/measurement-error-mitigation
+    - title: ランダマイズド・ベンチマーキング
+      url: /ja/ch-quantum-hardware/randomized-benchmarking
+    - title: 量子ボリュームの測定
+      url: /ja/ch-quantum-hardware/measuring-quantum-volume
+
+- title: マイクロ波パルスによる量子ハードウェアの探究
+  url: /ja/ch-quantum-hardware/index-pulses
+  expand_sections: true
+  sections:
+    - title: Qiskit Pulseによる量子ビットの較正 
+      url: /ja/ch-quantum-hardware/calibrating-qubits-pulse
+    - title: Qiskit Pulseによる高エネルギー状態へのアクセス
+      url: /ja/ch-quantum-hardware/accessing_higher_energy_states
+    - title: トランズモン物理入門
+      url: /ja/ch-quantum-hardware/transmon-physics
+    - title: 回路量子電磁力学
+      url: /ja/ch-quantum-hardware/cQED-JC-SW
+
+- title: 練習問題
+  url: /ja/ch-ex/index
+  expand_sections: true
+  sections:
+    - title: Set 1. 量子回路による古典論理ゲートの実現
+      url: /ja/ch-ex/ex1
+      not_numbered: true
+    - title: Set 2. 1量子ビットゲートの合成の基礎 
+      url: /ja/ch-ex/ex2
+      not_numbered: true
+    - title: Set 3. ベストなANDゲートの構築 
+      url: /ja/ch-ex/ex3
+      not_numbered: true
+
+- title: Appendix（付録）
+  url: /ja/ch-appendix/index
+  expand_sections: false
+  sections:
+    - title: 線形代数入門
+      url: /ja/ch-appendix/linear_algebra
+    - title: Qiskitの文法の基礎
+      url: /ja/ch-appendix/qiskit
+
+- title: ゲームとデモ
+  url: /ja/ch-demos/index
+  expand_sections: true
+  sections:
+    - title: Hello Qiskitゲーム
+      url: /ja/ch-ex/hello-qiskit
+      not_numbered: true
+    - title: 量子位相推定を使った円周率の推定
+      url: /ja/ch-demos/piday-code
+      not_numbered: true
+    - title: インタラクティブ・ウィジェットのデモ
+      url: /ja/widgets-index
+      not_numbered: true
+

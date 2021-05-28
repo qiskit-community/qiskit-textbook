@@ -1,5 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+
+{% if page.locale %}
+  {% assign page_locale = page.locale %}
+{% else %}
+  {% assign page_locale = 'en' %}
+{% endif %}
+
+<html lang="{{ page_locale }}">
   {% include head.html %}
   <body>
     <!-- Include the ThebeLab config so it gets reloaded on each page -->
