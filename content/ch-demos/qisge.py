@@ -6,9 +6,6 @@ import numpy as np
 
 from PIL import Image
 
-import sys
-print(sys.path)
-
 FPS = 10
 
 _cell = 32
@@ -41,11 +38,11 @@ def key_event(key, action, modifiers):
         button.append(1)
     if key == keys.SPACE:
         button.append(4)
-    if key == keys.NUMBER_1:
+    if key == keys.A:
         button.append(5)
-    if key == keys.NUMBER_2:
+    if key == keys.S:
         button.append(6)
-    if key == keys.NUMBER_3:
+    if key == keys.D:
         button.append(7)
     if key == keys.ESCAPE:
         button.append(-1)
