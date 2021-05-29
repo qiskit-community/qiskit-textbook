@@ -8,4 +8,5 @@ tabulate
 sympy
 numexpr
 pylatexenc
+jupylet
 -e ./qiskit-textbook-src

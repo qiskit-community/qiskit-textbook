@@ -1,8 +1,9 @@
 name: base
 channels:
 - conda-forge
+- aarch64-staging
 dependencies:
-- python==3.7
+- python==3.8
 - pip==19.*
 - cython
 - numpy
@@ -16,4 +17,5 @@ dependencies:
   - pandas
   - qiskit
   - seaborn
+  - jupylet
   - -e ./qiskit-textbook-src
