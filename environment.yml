@@ -1,7 +1,6 @@
 name: base
 channels:
 - conda-forge
-- aarch64-staging
 dependencies:
 - python==3.8
 - pip==19.*
