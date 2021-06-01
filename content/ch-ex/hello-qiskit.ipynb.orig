@@ -220,7 +220,11 @@
     "\n",
     "A slightly more sophisticated gate is called the `CNOT`, which is short for 'controlled-`NOT`'. This is used on pairs of bits.\n",
     "\n",
+    "<<<<<<< local\n",
     "We choose one of the bits to be the 'control'. This gets to decide whether the `CNOT` actually does anything. The other bit is the 'target'. Simply put, the `CNOT` does a `NOT` on the target bit, but only if the control bit is on.\n",
+    "=======\n",
+    "We choose one of the bits to be the 'control'. This gets to describe whether the `CNOT` actually does anything. The other bit is the 'target'. Simply put, the `CNOT` does a `NOT` on the target bit, but only if the control bit is on.\n",
+    ">>>>>>> remote\n",
     "\n",
     "The best way to understand this is to try it out!\n",
     "\n",
@@ -11461,7 +11465,7 @@
    "outputs": [],
    "source": [
     "from qiskit import Aer\n",
-    "device = 'aer_simulator'\n",
+    "device = 'qasm_simulator'\n",
     "backend = Aer.get_backend(device)"
    ]
   },
