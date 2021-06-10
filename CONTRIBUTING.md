@@ -26,7 +26,7 @@ The textbook uses jupyter book to generate the site from jupyter notebooks. To e
 
 If you are unfamiliar with git, you can follow this guide to making contributions:
 
-- [Github Desktop Tutorial](https://github.com/firstcontributions/first-contributions/blob/master/github-desktop-tutorial.md)
+- [Github Desktop Tutorial](https://github.com/firstcontributions/first-contributions/blob/master/gui-tool-tutorials/github-desktop-tutorial.md)
 
 You will need to fork the textbook, make changes in your own branch, then submit a pull request which we will review before merging. You must use jupyter notebook to edit the pages. If you change any code, please re-run the notebook (you can do this using the ⏭  button at the top of the notebook editor) to update the cell outputs.
 
