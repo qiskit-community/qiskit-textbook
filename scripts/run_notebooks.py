@@ -18,6 +18,7 @@ import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
 from datetime import datetime
 filepath = "../content/"
+exclude = ['ch-labs']  # filepaths containing these strings will be skipped
 
 def run_notebook(filename):
     execution_failed = False
@@ -51,6 +52,9 @@ if __name__ == '__main__':
         for name in filenames:
             if name.endswith(".ipynb"):
                 filepath = os.path.join(dirpath, name)
+                if any(e in filepath for e in exclude):
+                    print("[" + datetime.now().time().strftime('%H:%M') + "] SKIPPING:" + name)
+                    continue
                 print("[" + datetime.now().time().strftime('%H:%M') + "] " + filepath)
                 total_files += 1
                 if run_notebook(filepath) == 1:
