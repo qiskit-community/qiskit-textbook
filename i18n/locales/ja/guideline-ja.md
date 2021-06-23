@@ -11,7 +11,7 @@
 
 ### 新コンテンツに対する翻訳
 - 英語版のテキストブックに新しい章が追加された場合、以下の手順で日本語翻訳に貢献いただけます：
-    - [`master` branchの`content`フォルダー](https://github.com/qiskit-community/qiskit-textbook/tree/master/content)に置かれている英語版の該当ファイルを見つけます。
+    - [`main` branchの`content`フォルダー](https://github.com/qiskit-community/qiskit-textbook/tree/main/content)に置かれている英語版の該当ファイルを見つけます。
     - そのファイルを日本語に翻訳します。
     - [`master-ja` branchの`i18n/locales/ja`フォルダー](https://github.com/qiskit-community/qiskit-textbook/tree/master-ja/i18n/locales/ja) に日本語訳されたファイルを追加するPull requestをしてください。
 
@@ -30,7 +30,7 @@
 
 ### Contributing New Translations
 - When new content is added to the original textbook, you can contribute to translating it to Japanese by:
-    - Find the corresponding original file under the [`content` folder of the `master` branch](https://github.com/qiskit-community/qiskit-textbook/tree/master/content).
+    - Find the corresponding original file under the [`content` folder of the `main` branch](https://github.com/qiskit-community/qiskit-textbook/tree/main/content).
     - Translate it to Japanese.
     - Add the translated file under the [`i18n/locales/ja` folder of the `master-ja` branch](https://github.com/qiskit-community/qiskit-textbook/tree/master-ja/i18n/locales/ja) by sending Pull resquest.
 
