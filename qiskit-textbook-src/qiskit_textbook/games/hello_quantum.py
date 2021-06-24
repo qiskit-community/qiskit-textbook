@@ -38,7 +38,7 @@ class run_game():
             The two qubits are always called '0' and '1' from the programming side. But for the player, we can display different names.
         eps=0.1
             How close the expectation values need to be to the targets for success to be declared.
-        backend=Aer.get_backend('qasm_simulator')
+        backend=Aer.get_backend('aer_simulator')
             Backend to be used by Qiskit to calculate expectation values (defaults to local simulator).
         shots=1024
             Number of shots used to to calculate expectation values.
@@ -247,9 +247,9 @@ class run_game():
 class pauli_grid():
     # Allows a quantum circuit to be created, modified and implemented, and visualizes the output in the style of 'Hello Quantum'.
 
-    def __init__(self,backend=Aer.get_backend('qasm_simulator'),shots=1024,mode='circle',y_boxes=False):
+    def __init__(self,backend=Aer.get_backend('aer_simulator'),shots=1024,mode='circle',y_boxes=False):
         """
-        backend=Aer.get_backend('qasm_simulator')
+        backend=Aer.get_backend('aer_simulator')
             Backend to be used by Qiskit to calculate expectation values (defaults to local simulator).
         shots=1024
             Number of shots used to to calculate expectation values.
