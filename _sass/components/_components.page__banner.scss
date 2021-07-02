@@ -1,0 +1,29 @@
+.page__banner {
+    background-color: $background-color-accent;
+    color: #FFFFFF;
+    height: $textbook-banner-height;
+    font-size: 14px;
+    letter-spacing: 0.16px;
+    line-height: 20px;
+    padding-left: $spacing-unit;
+    padding-top: 7px;
+    position: relative;
+    top: $qiskit-navbar-height;
+
+    a {
+        &:visited,
+        &:active,
+        &:hover {
+            color: #FFFFFF;
+        }
+
+        color: #FFFFFF;
+        text-decoration: underline;
+    }
+}
+
+@include mq($until: 400px) {
+	.page__banner {
+		height: $textbook-banner-height-mobile;
+	}
+}
