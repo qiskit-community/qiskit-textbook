@@ -5,10 +5,11 @@
     font-size: 14px;
     letter-spacing: 0.16px;
     line-height: 20px;
+    margin-left: -($spacing-unit-small * 5);
     padding-left: $spacing-unit;
     padding-top: 7px;
     position: relative;
-    top: $qiskit-navbar-height;
+    width: calc(100% + #{$spacing-unit + $spacing-unit-small * 5});
 
     a {
         &:visited,
