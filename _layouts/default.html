@@ -17,12 +17,12 @@
     {% include qiskit_navbar.html %}
     </div>
 
-      {% include banner.html %}
       {% include sidebar.html %}
       {% if page.search_page != true %}
       {% endif %}
       {% include topbar.html %}
       <main class="c-textbook__page" tabindex="-1">
+            {% include banner.html %}
             <div class="c-textbook__content" id="textbook_content">
               {{ content }}
             </div>
