@@ -88,7 +88,9 @@ div.qiskit__navbar {
   .c-sidebar__chapters {
     padding-bottom: 125px;
   }
-}@include mq($until: 400px) {
+}
+
+@include mq($until: 400px) {
 	.c-topbar {
 		top: $qiskit-navbar-height + $textbook-banner-height * 2;
 	}
