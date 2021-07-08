@@ -8,3 +8,4 @@ Lab topics:
 5. Scalable Shor’s Algorithm  
 6. Grover’s search with an unknown number of solutions
 7. Quantum Simulation as a Search Algorithm
+8. Quantum Error Correction
