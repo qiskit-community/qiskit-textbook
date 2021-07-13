@@ -1,0 +1,30 @@
+.page__banner {
+    background-color: $background-color-accent;
+    color: #FFFFFF;
+    height: $textbook-banner-height;
+    font-size: 14px;
+    letter-spacing: 0.16px;
+    line-height: 20px;
+    margin-left: -($spacing-unit-small * 5);
+    padding-left: $spacing-unit;
+    padding-top: 7px;
+    position: relative;
+    width: calc(100% + #{$spacing-unit + $spacing-unit-small * 5});
+
+    a {
+        &:visited,
+        &:active,
+        &:hover {
+            color: #FFFFFF;
+        }
+
+        color: #FFFFFF;
+        text-decoration: underline;
+    }
+}
+
+@include mq($until: 400px) {
+	.page__banner {
+		height: $textbook-banner-height-mobile;
+	}
+}
