@@ -132,6 +132,8 @@
            url: /ch-paper-implementations/vqls
          - title: Quantum Image Processing - FRQI and NEQR Image Representations
            url: /ch-applications/image-processing-frqi-neqr
+         - title: Quantum Edge Detection - QHED Algorithm on Small and Large Images
+           url: /ch-applications/quantum-edge-detection
 
 - title: Investigating Quantum Hardware Using Quantum Circuits
   url: /ch-quantum-hardware/index-circuits
