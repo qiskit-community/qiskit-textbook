@@ -11465,7 +11465,7 @@
    "outputs": [],
    "source": [
     "from qiskit import Aer\n",
-    "device = 'qasm_simulator'\n",
+    "device = 'aer_simulator'\n",
     "backend = Aer.get_backend(device)"
    ]
   },
@@ -11566,8 +11566,8 @@
     }
    ],
    "source": [
-    "import qiskit\n",
-    "qiskit.__qiskit_version__"
+    "import qiskit.tools.jupyter\n",
+    "%qiskit_version_table"
    ]
   }
  ],
