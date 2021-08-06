@@ -10,9 +10,9 @@ on:
         default: 'false'
   # run when a pull request is made
   pull_request:
-  # run on pushes to master or stable branch
+  # run on pushes to main or stable branch
   push:
-    branches: [ master, stable ]
+    branches: [ main, stable ]
 
 jobs:
   # job id/key
