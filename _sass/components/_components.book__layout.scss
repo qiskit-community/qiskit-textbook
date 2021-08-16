@@ -48,7 +48,7 @@ div.qiskit__navbar {
 .c-topbar {
   background-color: transparent;
   position: fixed;
-  top: $qiskit-navbar-height;
+  top: $qiskit-navbar-height + $textbook-banner-height;
   height: 0;
   width: 100%;
   left: 0;
@@ -88,6 +88,12 @@ div.qiskit__navbar {
   .c-sidebar__chapters {
     padding-bottom: 125px;
   }
+}
+
+@include mq($until: 400px) {
+	.c-topbar {
+		top: $qiskit-navbar-height + $textbook-banner-height * 2;
+	}
 }
 
 .c-sidebar__chapters {
