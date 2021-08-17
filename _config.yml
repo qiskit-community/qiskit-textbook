@@ -161,7 +161,6 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
-  - i18n/
 
 plugins:
   - jekyll-redirect-from
