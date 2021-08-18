@@ -10,11 +10,6 @@ tries to preserve the comments from the cells in <target-dir>.
 You will need to check each notebook individually afterwards as this
 doesn't deal with edge cases well (of which there are a few in the
 textbook).
-
-*******************************************************************
-*** Only run sparingly since it WILL send ~20 jobs off to IBMQX ***
-*******************************************************************
-
 """
 
 import time
