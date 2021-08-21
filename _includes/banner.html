@@ -1,0 +1,12 @@
+{% if site.data[page.locale] %}
+{% assign messages = site.data[page.locale].messages %}
+{% else %}
+{% assign messages = site.data.messages %}
+{% endif %}
+
+<div id="textbook-banner" class="page__banner">
+  {{ messages.beta_available }}
+  <a href="https://qiskit.org/textbook-beta" target="_blank">
+    {{ messages.try_now }}
+  </a>
+</div>
