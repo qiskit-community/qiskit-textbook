@@ -64,7 +64,7 @@ if __name__ == '__main__':
                     filepath = os.path.join(dirpath, name)
                     print("[" + datetime.now().time().strftime('%H:%M') + "] " + filepath)
                     total_files += 1
-                    if run_notebook(filepath) is not 0:
+                    if run_notebook(filepath) != 0:
                         sys.exit(os.EX_SOFTWARE)
     t1 = time.time()
     running_time = t1-t0

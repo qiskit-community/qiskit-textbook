@@ -26,7 +26,7 @@ The textbook uses jupyter book to generate the site from jupyter notebooks. To e
 
 If you are unfamiliar with git, you can follow this guide to making contributions:
 
-- [Github Desktop Tutorial](https://github.com/firstcontributions/first-contributions/blob/master/github-desktop-tutorial.md)
+- [Github Desktop Tutorial](https://github.com/firstcontributions/first-contributions/blob/master/gui-tool-tutorials/github-desktop-tutorial.md)
 
 You will need to fork the textbook, make changes in your own branch, then submit a pull request which we will review before merging. You must use jupyter notebook to edit the pages. If you change any code, please re-run the notebook (you can do this using the ⏭  button at the top of the notebook editor) to update the cell outputs.
 
@@ -42,7 +42,7 @@ After writing your chapter, you must add a few tags to your cells (You can see t
 - When creating graphs, you can hide the code that generated your graph on the website using the `remove_input` tag. The code and graph will not be interactive, essentially embedding a static image. The pro is that this enables future editors to modify it.
 - Finally, after adding these tags, go to `view > none` and save your notebook to stop the tags from showing automatically when a reader opens the notebook.
 
-For a list of contributors, see the [.bib](https://github.com/qiskit-community/qiskit-textbook/blob/master/content/qiskit-textbook.bib) file.
+For a list of contributors, see the [.bib](https://github.com/qiskit-community/qiskit-textbook/blob/main/content/qiskit-textbook.bib) file.
 
 ## Translation Guidelines
 First of all, thank you for showing your interest in translating (localizing) Qiskit Textbook! This helps make the textbook more accessible and available to our global community.
@@ -56,7 +56,7 @@ If you are interested in contributing to translations, please follow the instruc
 5. After you meet the criteria below, the administrator will make a new branch for the new language so that you can start translation.
     - The documents in the [`content` folder of `stable` branch](https://github.com/qiskit-community/qiskit-textbook/tree/stable/content) are the latest original English documents. Please translate the latest documents and save them in the [`i18n/locales/xx` folder](./i18n/locales/) of your language branch with the same directory structure. 
     - Please also translate `messages.yml` and `toc.yml` in the `_data/xx` folder.
-6. When 80% of the translation is completed on your language branch, you can send a merge Pull Request to the master branch.
+6. When 80% of the translation is completed on your language branch, you can send a merge Pull Request to the `main` branch.
 
 ### What is the criteria for adding a new language?
 
@@ -71,7 +71,7 @@ If you have further questions, please feel free to contact Kifumi Numata. Thank 
  [日本語翻訳のガイドライン](./i18n/locales/ja/guideline-ja.md)
 
 When new content is added to the original textbook, you can contribute to translating it to Japanese by:
-- Find the corresponding original file under the [`content` folder of the `master` branch](https://github.com/qiskit-community/qiskit-textbook/tree/master/content).
+- Find the corresponding original file under the [`content` folder of the `main` branch](https://github.com/qiskit-community/qiskit-textbook/tree/main/content).
 - Translate it to Japanese.
 - Add the translated file under the [`i18n/locales/ja` folder of the `master-ja` branch](https://github.com/qiskit-community/qiskit-textbook/tree/master-ja/i18n/locales/ja) by sending Pull resquest.
 - For detailed guidelines, please check [here](./i18n/locales/ja/guideline-ja.md).

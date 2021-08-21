@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3 
 # -*- coding: utf-8 -*-
 import ipywidgets as widgets
 from IPython.display import display, clear_output, Math
@@ -153,20 +153,21 @@ def scalable_circuit(func):
     display(image.widget)
 
 
-def gate_demo(gates='full',qsphere=False):
+def gate_demo(gates='full', qsphere=False):
     from qiskit import QuantumCircuit, execute, Aer
     from qiskit.visualization import plot_bloch_multivector, plot_state_qsphere
     gate_list = []
-    showing_rz = False
+    showing_p = False
+    gates = gates.split('+')
     if 'pauli' in gates:
         gate_list += ['X','Y','Z']
-    if '+h' in gates:
+    if 'h' in gates:
         gate_list.append('H')
-    if '+rz' in gates:
-        showing_rz = True
+    if 'p' in gates:
+        showing_p = True
     if gate_list == [] or gates == 'full':
         gate_list = ['I','X','Y','Z','H','S','Sdg','T','Tdg']
-        showing_rz = True
+        showing_p = True
 
     backend = Aer.get_backend('statevector_simulator')
     qc = QuantumCircuit(1)
@@ -195,8 +196,8 @@ def gate_demo(gates='full',qsphere=False):
             pass
         elif b.description == 'Reset':
             qc.data = []
-        elif b.description == 'Rz':
-                qc.rz(zrot_slider.value,0)
+        elif b.description == 'P':
+                qc.p(zrot_slider.value,0)
         else:
             functionmap[b.description](0)
 
@@ -206,9 +207,9 @@ def gate_demo(gates='full',qsphere=False):
 
     for button in button_list:
         button.on_click(on_button_click)
-    if showing_rz:
-        rz_button = widgets.Button(description='Rz', layout=widgets.Layout(width='3em', height='3em'))
-        rz_button.on_click(on_button_click)
+    if showing_p:
+        p_button = widgets.Button(description='P', layout=widgets.Layout(width='3em', height='3em'))
+        p_button.on_click(on_button_click)
         zrot_slider = widgets.FloatSlider(value=pi,
                                          min= -pi,
                                          max= pi,
@@ -217,9 +218,9 @@ def gate_demo(gates='full',qsphere=False):
     qc = QuantumCircuit(1)
     update_output()
 
-    if showing_rz:
+    if showing_p:
         top_box = widgets.HBox(button_list)
-        bottom_box = widgets.HBox([rz_button, zrot_slider])
+        bottom_box = widgets.HBox([p_button, zrot_slider])
         main_box = widgets.VBox([top_box, bottom_box])
     else:
         main_box = widgets.HBox(button_list)
