@@ -198,7 +198,7 @@
       url: /ch-labs/Lab07_QuantumSimulationSearchAlgorithm
       not_numbered: true
     - title: Lab 8. Quantum Error Correction 
-      url: /ch-labs/Lab08_QEC1
+      url: /ch-labs/Lab08_QEC
       not_numbered: true
       
       
@@ -224,6 +224,9 @@
       not_numbered: true
     - title: Local Reality and the CHSH Inequality
       url: /ch-demos/chsh
+      not_numbered: true
+    - title: Variational Quantum Regression
+      url: /ch-demos/variational-quantum-regression
       not_numbered: true
     - title: Interactivity Index
       url: /widgets-index
