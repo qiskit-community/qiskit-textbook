@@ -3,7 +3,7 @@
 import copy
 from io import BytesIO
 
-from qiskit import BasicAer as Aer
+from qiskit import Aer
 from qiskit import ClassicalRegister, QuantumRegister, QuantumCircuit
 from qiskit import execute
 from qiskit.quantum_info import Statevector
