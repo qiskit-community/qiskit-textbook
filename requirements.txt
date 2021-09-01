@@ -2,6 +2,7 @@ qiskit
 matplotlib
 cython
 qutip
+tweedledum
 torch
 torchvision
 tabulate
