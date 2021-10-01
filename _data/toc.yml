@@ -223,6 +223,9 @@
     - title: Local Reality and the CHSH Inequality
       url: /ch-demos/chsh
       not_numbered: true
+    - title: Quantum Coin Game
+      url: /ch-demos/coin-game
+      not_numbered: true
     - title: Variational Quantum Regression
       url: /ch-demos/variational-quantum-regression
       not_numbered: true
