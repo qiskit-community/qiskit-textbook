@@ -2,11 +2,11 @@ name: base
 channels:
 - conda-forge
 dependencies:
-- python==3.7
+- python==3.7.*
 - pip==19.*
 - cython
 - numpy
-- matplotlib
+- matplotlib-base
 - torchvision
 - qutip
 - sympy
