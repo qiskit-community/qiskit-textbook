@@ -99,6 +99,8 @@
       url: /ch-algorithms/grover
     - title: Quantum Counting
       url: /ch-algorithms/quantum-counting
+    - title: Quantum Walk Search Algorithm
+      url: /ch-algorithms/quantum-walk-search-algorithm
     - title: Quantum Teleportation
       url: /ch-algorithms/teleportation
     - title: Superdense Coding
@@ -222,6 +224,9 @@
       not_numbered: true
     - title: Local Reality and the CHSH Inequality
       url: /ch-demos/chsh
+      not_numbered: true
+    - title: Quantum Coin Game
+      url: /ch-demos/coin-game
       not_numbered: true
     - title: Variational Quantum Regression
       url: /ch-demos/variational-quantum-regression
