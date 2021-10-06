@@ -99,6 +99,8 @@
       url: /ch-algorithms/grover
     - title: Quantum Counting
       url: /ch-algorithms/quantum-counting
+    - title: Quantum Walk Search Algorithm
+      url: /ch-algorithms/quantum-walk-search-algorithm
     - title: Quantum Teleportation
       url: /ch-algorithms/teleportation
     - title: Superdense Coding
