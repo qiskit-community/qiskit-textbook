@@ -1,6 +1,6 @@
 name: Content Problem \U0001F62E
 description: There is an inaccuracy / inconsistency with the content of the textbook.
-title: ''
+title: '[BUG]'
 labels:
   - content bug
 body:
