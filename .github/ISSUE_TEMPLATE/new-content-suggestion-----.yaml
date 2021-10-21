@@ -1,8 +1,8 @@
-name: New Content Suggestion
+name: New Content Suggestion ✒️ 📄
 description: Propose new sections or chapters for the textbook
 title: '[]'
 labels:
-  - New Content Suggestion ✒️ 📄
+  - New Content Suggestion 
 body:
   - type: textarea
     attributes:
