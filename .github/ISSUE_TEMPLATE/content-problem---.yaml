@@ -11,6 +11,6 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: Describe what you expect to see
+      label: Describe what you expect to se
     validations:
       required: true
