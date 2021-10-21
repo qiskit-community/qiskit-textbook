@@ -1,6 +1,6 @@
 name: Content Problem 😮
 description: There is an inaccuracy / inconsistency with the content of the textbook.
-title: '[Chapter-num]'
+title: '[Chapter-number]'
 labels:
   - content bug
 body:
