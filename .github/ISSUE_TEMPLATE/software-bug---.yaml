@@ -1,6 +1,6 @@
 name: Software Bug 🐛
 description: Something is wrong with the website or code examples.
-title: '[Chapte number]'
+title: '[Chapter number]'
 labels:
   - code bug
 body:
