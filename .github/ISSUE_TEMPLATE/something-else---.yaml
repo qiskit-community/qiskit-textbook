@@ -1,0 +1,14 @@
+name: Something else
+description: The issue does not fall into any of the above categories.
+title: '[]'
+body:
+  - type: textarea
+    attributes:
+      label: Describe the problem
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Describe the expected solution
+    validations:
+      required: true
