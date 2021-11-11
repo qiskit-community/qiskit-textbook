@@ -1,0 +1,26 @@
+name: New Content Suggestion ✒️ 📄
+description: Propose new sections or chapters for the textbook
+title: '[]'
+labels:
+  - New Content Suggestion 
+body:
+  - type: textarea
+    attributes:
+      label: What should the reader gain from this new content?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Where do you expect this new content to fit in with the current content?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What material should this new content be based on?
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Are you proposing to write this new content? (y/n)
+    validations:
+      required: true

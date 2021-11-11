@@ -1,0 +1,16 @@
+name: Content Problem 😮
+description: There is an inaccuracy / inconsistency with the content of the textbook.
+title: '[Chapter-number]'
+labels:
+  - content bug
+body:
+  - type: textarea
+    attributes:
+      label: Describe the issue
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Describe what you expect to see
+    validations:
+      required: true
