@@ -18,6 +18,12 @@ The Qiskit Textbook provides some tools and widgets specific to the Textbook. Th
 pip install git+https://github.com/qiskit-community/qiskit-textbook.git#subdirectory=qiskit-textbook-src
 ```
 
+Or, if you prefer using [pipenv](https://pypi.org/project/pipenv/):
+
+```
+pipenv install "git+https://github.com/qiskit-community/qiskit-textbook.git#subdirectory=qiskit-textbook-src&egg=qiskit_textbook"
+```
+
 Alternatively, you can download the folder [`qiskit-textbook-src`](qiskit-textbook-src) and run:
 
 ```
