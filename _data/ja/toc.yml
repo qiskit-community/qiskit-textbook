@@ -130,6 +130,8 @@
       subsections:
          - title: 量子変分線型ソルバー
            url: /ja/ch-paper-implementations/vqls
+         - title: 量子画像処理 - FRQIとNEQRによる画像表現
+           url: /ja/ch-applications/image-processing-frqi-neqr
 
 - title: 量子回路による量子ハードウェアの探究
   url: /ja/ch-quantum-hardware/index-circuits
