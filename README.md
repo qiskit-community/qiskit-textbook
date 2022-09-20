@@ -4,6 +4,8 @@
 
 # Qiskit Textbook Source Code
 
+> :warning: This repo is for pages at `https://qiskit.org/textbook/**`. This is an old version of the textbook and will soon be deprecated. If your issue is about the latest version of the textbook (i.e. any page on `https://learn.qiskit.org/**`), please make your issue / PR at https://github.com/Qiskit/platypus.
+
 This is the repository for the interactive open-source [Learn Quantum Computation using Qiskit](https://qiskit.org/textbook/preface.html) textbook. The textbook is intended for use as a university quantum algorithms course supplement as well as a guide for self-learners who are interested in learning quantum programming.
 
 The Jupyter notebooks corresponding to each section of the textbook can be found in the [`content` folder](content/). The code in these notebooks will constantly be updated to the latest version of Qiskit.
