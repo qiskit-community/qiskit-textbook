@@ -2,5 +2,6 @@ jinja2==2.11.3
 nbconvert==5.6.1
 jupyter-book==0.6.5
 markupsafe==2.0.1
+ipython_genutils
 beautifulsoup4
 
