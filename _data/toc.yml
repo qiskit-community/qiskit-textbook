@@ -99,6 +99,8 @@
       url: /ch-algorithms/grover
     - title: Quantum Counting
       url: /ch-algorithms/quantum-counting
+    - title: Quantum Walk Search Algorithm
+      url: /ch-algorithms/quantum-walk-search-algorithm
     - title: Quantum Teleportation
       url: /ch-algorithms/teleportation
     - title: Superdense Coding
@@ -132,6 +134,10 @@
            url: /ch-paper-implementations/vqls
          - title: Quantum Image Processing - FRQI and NEQR Image Representations
            url: /ch-applications/image-processing-frqi-neqr
+         - title: Quantum Edge Detection - QHED Algorithm on Small and Large Images
+           url: /ch-applications/quantum-edge-detection
+         - title: Solving the Travelling Salesman Problem using Phase Estimation
+           url: /ch-paper-implementations/tsp
 
 - title: Investigating Quantum Hardware Using Quantum Circuits
   url: /ch-quantum-hardware/index-circuits
@@ -193,8 +199,8 @@
     - title: Lab 7. Quantum Simulation as a Search Algorithm
       url: /ch-labs/Lab07_QuantumSimulationSearchAlgorithm
       not_numbered: true
-    - title: Lab 8. Quantum Error Correction - I
-      url: /ch-labs/Lab08_QEC1
+    - title: Lab 8. Quantum Error Correction 
+      url: /ch-labs/Lab08_QEC
       not_numbered: true
       
       
@@ -220,6 +226,12 @@
       not_numbered: true
     - title: Local Reality and the CHSH Inequality
       url: /ch-demos/chsh
+      not_numbered: true
+    - title: Quantum Coin Game
+      url: /ch-demos/coin-game
+      not_numbered: true
+    - title: Variational Quantum Regression
+      url: /ch-demos/variational-quantum-regression
       not_numbered: true
     - title: Interactivity Index
       url: /widgets-index
