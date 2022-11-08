@@ -13,10 +13,7 @@ It is worth removing the `is:open` filter to search through closed / merged issu
 
 ### If you want to contribute original content:
 
-- Please open an issue explaining your proposed additions **before** beginning any writing. Here we can discuss where your contribution will fit in, as well as making sure it fits the style and format of the rest of the textbook. **If you do not do this, there is no guarantee your work will be merged**.
-- Read the [Qiskit Textbook Styleguide](https://github.com/frankharkins/qiskit-textbook-styleguide)
-- Create a pull request while your chapter is in progress, this way we can review it in the process of writing instead of asking for large changes after you have already written it.
-- Try to follow the formatting of the existing notebooks to ensure everything renders correctly and the textbook is consistent. 
+We appreciate offers to contribute to the textbook, but unfortunately we can't accept new content at this time. We still think community-driven content is really valuable, and we're working to create an appropriate place for it within the textbook platform. Until then, we highly encourage you to continue to share your work through other channels.
 
 ## How to Edit the Textbook
 

@@ -16,6 +16,7 @@ setup(
     'ipython',
     'ipywidgets',
     'numpy',
-    'matplotlib'
+    'matplotlib',
+    'numexpr'
   ]
 )
