@@ -99,6 +99,8 @@
       url: /ja/ch-algorithms/grover
     - title: 量子数え上げ
       url: /ja/ch-algorithms/quantum-counting
+    - title: 量子ウォークによる探索アルゴリズム
+      url: /ja/ch-algorithms/quantum-walk-search-algorithm
     - title: 量子テレポーテーション
       url: /ja/ch-algorithms/teleportation
     - title: 超密度符号化
@@ -130,6 +132,8 @@
       subsections:
          - title: 量子変分線型ソルバー
            url: /ja/ch-paper-implementations/vqls
+         - title: 量子画像処理 - FRQIとNEQRによる画像表現
+           url: /ja/ch-applications/image-processing-frqi-neqr
 
 - title: 量子回路による量子ハードウェアの探究
   url: /ja/ch-quantum-hardware/index-circuits
@@ -169,6 +173,17 @@
       not_numbered: true
     - title: Set 3. ベストなANDゲートの構築 
       url: /ja/ch-ex/ex3
+      not_numbered: true
+
+- title: 量子計算実験
+  url: /ja/ch-labs/index
+  expand_sections: true
+  sections:
+    - title: 実験 1. 量子回路
+      url: /ja/ch-labs/Lab01_QuantumCircuits
+      not_numbered: true
+    - title: 実験 2. 量子測定
+      url: /ja/ch-labs/Lab02_QuantumMeasurement
       not_numbered: true
 
 - title: Appendix（付録）

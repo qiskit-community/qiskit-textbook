@@ -3,7 +3,7 @@
 import copy
 from io import BytesIO
 
-from qiskit import BasicAer as Aer
+from qiskit import Aer
 from qiskit import ClassicalRegister, QuantumRegister, QuantumCircuit
 from qiskit import execute
 from qiskit.quantum_info import Statevector
@@ -85,7 +85,7 @@ class run_game():
             gates = get_total_gate_list
 
         def get_command(gate,qubit):
-            # For a given gate and qubit, return the string describing the corresoinding Qiskit string.
+            # For a given gate and qubit, return the string describing the corresponding Qiskit string.
 
             if qubit=='both':
                 qubit = '1'
