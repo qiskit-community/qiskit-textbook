@@ -249,7 +249,7 @@ GEM
     multipart-post (2.1.1)
     namae (1.0.1)
     nenv (0.3.0)
-    nokogiri (1.13.8)
+    nokogiri (1.13.9)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     notiffany (0.1.3)
