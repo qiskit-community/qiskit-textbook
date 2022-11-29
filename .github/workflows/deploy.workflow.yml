@@ -30,9 +30,9 @@ jobs:
           python-version: 3.7
         
       - name: Set up Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.x
+          ruby-version: 2.7.7
 
       - name: Install Python dependencies
         run: |
