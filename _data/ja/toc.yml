@@ -147,6 +147,8 @@
       url: /ja/ch-quantum-hardware/randomized-benchmarking
     - title: 量子ボリュームの測定
       url: /ja/ch-quantum-hardware/measuring-quantum-volume
+    - title: 密度行列と混合状態
+      url: /ch-quantum-hardware/density-matrix
 
 - title: マイクロ波パルスによる量子ハードウェアの探究
   url: /ja/ch-quantum-hardware/index-pulses
