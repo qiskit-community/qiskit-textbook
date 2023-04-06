@@ -13,5 +13,7 @@ nav_community: Community
 nav_learn: Learn
 
 beta_testing: Try the new textbook beta
-beta_available: The new Qiskit Textbook beta is now available.
-try_now: Try it out now
+
+deprecation_warning_1: On April 11, this site will be replaced with the new
+deprecation_warning_link_text: Qiskit Textbook
+deprecation_warning_2: You will still be able to access these pages through the new platform.
