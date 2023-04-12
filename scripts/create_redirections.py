@@ -5,6 +5,7 @@ variable REDIRECTIONS.
 
 import os
 import sys
+import json
 
 overwrite_option = '--overwrite'
 
@@ -22,7 +23,10 @@ def create_redirection (buildpath, old, new, overwrite=False):
     Creates a HTML redirection.
     '''
     redirectionpath = os.path.join(buildpath, old)
-    redirectioncontent = f'<head><meta http-equiv="Refresh" content="0; URL={new}"></head>'
+    redirectioncontent = f"""<html>
+  <head><meta http-equiv="refresh" content="0; URL={new}"></head>
+  <body><p>This page has moved to <a href="{new}">.</p></body>
+</html>"""
     if os.path.exists(redirectionpath) and not overwrite:
         print(f'File `{redirectionpath}` already exists. Pass {overwrite_option} to force overwritting.')
         return
@@ -40,5 +44,7 @@ if __name__ == '__main__':
 
     overwrite = sys.argv[1] == overwrite_option
     base_dir = sys.argv[1] if not overwrite else sys.argv[2]
-    for (old, new) in REDIRECTIONS.items():
+
+    LEARN_REDIRECTIONS= json.load(open('learn_redirections.json', 'r'))
+    for (old, new) in LEARN_REDIRECTIONS.items():
         create_redirection(base_dir, old, new, overwrite=overwrite)
