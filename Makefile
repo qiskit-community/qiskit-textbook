@@ -39,7 +39,7 @@ serve:
 
 build:
 	jupyter-book build ./ --overwrite
-	python3 scripts/create_redirections.py $(BUILD_DIR)
+	python3 scripts/create_redirections.py --overwrite $(BUILD_DIR)
 	python3 scripts/postprocess_html.py $(BUILD_DIR)
 
 	for l in $(LOCALES); \
