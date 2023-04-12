@@ -45,6 +45,6 @@ if __name__ == '__main__':
     overwrite = sys.argv[1] == overwrite_option
     base_dir = sys.argv[1] if not overwrite else sys.argv[2]
 
-    LEARN_REDIRECTIONS= json.load(open('learn_redirections.json', 'r'))
+    LEARN_REDIRECTIONS= json.load(open('./learn_redirections.json', 'r'))
     for (old, new) in LEARN_REDIRECTIONS.items():
         create_redirection(base_dir, old, new, overwrite=overwrite)
